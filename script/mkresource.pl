@@ -559,7 +559,8 @@ sub make_metadata($$)
         my $_shot = normalize_space($shot_head->{$lang_en_key});
         $readme .= "\n## $_shot\n\n";
         for my $img (@img) {
-            $readme .= "!($img)\n";
+            (my $name = $img) =~ s(^.*/)()g;
+            $readme .= "![image $name]($img)\n";
         }
     }
 
