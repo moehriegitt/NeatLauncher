@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="myTitleTextColor" format="reference" />
+    <attr name="myHeadingTextColor" format="reference"/>
+    <attr name="myHintTextColor" format="reference"/>
+</resources>

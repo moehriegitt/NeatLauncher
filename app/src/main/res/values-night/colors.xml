@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mainBackground">#FF000000</color>
+    <color name="mainForeground">#FFFFFFFF</color>
+    <color name="titleColor">#80FFFFFF</color>
+    <color name="headingColor">#80FFFFFF</color>
+    <color name="dimColor">#80FFFFFF</color>
+    <color name="veryDimColor">#30FFFFFF</color>
+
+    <color name="accentColorAchromic">#FFFFFF</color>
+    <color name="accentColorAmber">#FFC000</color>
+    <color name="accentColorPumpkin">#FF8000</color>
+    <color name="accentColorRed">#CF0000</color>
+    <color name="accentColorLilac">#6000CF</color>
+    <color name="accentColorBlue">#6060FF</color>
+    <color name="accentColorCyan">#00F0FF</color>
+</resources>

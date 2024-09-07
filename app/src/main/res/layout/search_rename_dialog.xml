@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/popupLayoutPadding"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:text="@string/search_opt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.PopupTitle"
+            />
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:hint="@string/search_name_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="none|textNoSuggestions|textCapWords"
+            android:lines="1"
+            android:ems="15"
+            style="@style/AppTheme.PopupItem"
+            tools:ignore="Autofill,LabelFor"
+            />
+
+        <EditText
+            android:id="@+id/edit_url"
+            android:hint="@string/search_url_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="none|textNoSuggestions|textCapWords"
+            android:lines="1"
+            android:ems="15"
+            style="@style/AppTheme.PopupItem"
+            tools:ignore="Autofill,LabelFor"
+            />
+
+        <CheckBox
+            android:id="@+id/edit_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_make_default"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <RadioButton
+                android:id="@+id/edit_keep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/search_keep"
+                style="@style/AppTheme.PopupSwitch"
+                />
+
+            <RadioButton
+                android:id="@+id/edit_copy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/search_copy"
+                style="@style/AppTheme.PopupSwitch"
+                />
+
+            <RadioButton
+                android:id="@+id/edit_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/search_delete"
+                style="@style/AppTheme.PopupSwitch"
+                />
+        </RadioGroup>
+    </LinearLayout>
+</FrameLayout>

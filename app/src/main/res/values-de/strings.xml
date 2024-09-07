@@ -1,0 +1,206 @@
+<resources>
+    <string name="app_name">NeatLauncher</string>
+
+    <string name="readme_short_description">
+    Ein aufgeräumter und praktischer Launcher ohne Icons.
+    </string>
+
+    <string name="readme_description">Beschreibung</string>
+
+    <string name="readme_full_description">
+    Die neue Start-App (der Launcher) Deines Android-Geräts ersetzt
+    hässliche Start-Apps, die zu bunt, grell, ablenkend, verwirrend,
+    ineffizient und voller unsinniger Icons sind.
+
+    Sorgt für Übersichtlichkeit durch minimalistisches, effizientes
+    und elegantes Design auf Textbasis. Ermöglicht die Konfiguration
+    des Schnellzugriffs auf Apps, Verknüpfungen oder Kontakte auf
+    verschiedene Weise (einschließlich Gesten), und entfernt
+    verwirrende Dinge vom Startbildschirm.
+
+    Unterstützt Verknüpfungen, integriert die Kontaktliste (falls
+    gewünscht) und die Suchfunktion enthält eine konfigurierbare
+    Websuche.
+
+    Für Benutzer, die Übersichtlichkeit und geradliniges Design
+    schätzen.
+
+    Bietet genug Konfigurierbarkeit, aber ohne das Testen von
+    Sonderfällen mühsam zu machen, um Funktionalität und Robustheit zu
+    gewährleisten.
+
+    Neue App von Grund auf neu entwickelt.
+
+    Inspiriert von Unlauncher (einem Fork von Slimlauncher) und
+    Nolauncher sowie von Benutzerfeedback.
+    </string>
+
+    <string name="readme_features">Features</string>
+
+    <string name="readme_feature_list">
+    - konfigurierbare Schnellzugriffslinks und Gesten auf dem Startbildschirm
+    - Unterstützung für Verknüpfungen (standardmäßig langer Klick auf App)
+    - Apps ausblenden/anzeigen (bleiben aber durchsuchbar)
+    - Apps können umbenannt werden (im Launcher)
+    - Kontaktliste in Suche integriert
+    - integrierte, konfigurierbare Websuche
+    - mehrere Uhroptionen
+    - Datumsformatoptionen
+    - konfigurierbares Farbschema
+    - freie Open-Source-Software
+    - keine Unterstützung für Icon-Sets (nicht erforderlich: es gibt keine Symbole)
+    - keine Widget-Unterstützung
+    </string>
+
+    <string name="readme_screenshots">Screenshots</string>
+
+    <string name="main_search_hint">Suche</string>
+
+    <string name="item_nothing">Nichts</string>
+    <string name="item_camera_photo">Kamera: Foto</string>
+    <string name="item_camera_video">Kamera: Video</string>
+    <string name="item_settings_home">Einstellungen: Start</string>
+    <string name="item_phone_dial">Telefon: Wählen</string>
+
+    <string name="item_info">Info</string>
+    <string name="item_rename">Umbenennen</string>
+    <string name="item_pin">Schnellzugriff</string>
+    <string name="item_rid">kein Schnellzugriff</string>
+    <string name="item_hide">Verstecken</string>
+    <string name="item_show">Anzeigen</string>
+    <string name="item_remove">Entfernen</string>
+
+    <string name="item_title_shortcuts">Verknüpfung</string>
+
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Abbrechen</string>
+
+    <string name="rename_title">Unbenennen</string>
+    <string name="edit_order_title">Sortieren nach</string>
+    <string name="edit_order_hint">Name</string>
+
+    <string name="pin_heading">Schnellzugriff über</string>
+    <string name="pin_home">Liste</string>
+    <string name="pin_left">Wisch nach links</string>
+    <string name="pin_right">Wisch nach rechts</string>
+    <string name="pin_down">Wisch nach unten</string>
+    <string name="pin_time">Klick auf Uhr</string>
+    <string name="pin_date">Klick auf Datum</string>
+
+    <string name="error_starting">Fehler beim Starten: %s</string>
+    <string name="error_removing">Fehler beim Entfernen: %s</string>
+
+    <string name="ok_remove_shortcut">%s: Kürzel entfernen</string>
+
+    <string name="search_opt_title">Suchmaschine</string>
+    <string name="search_name_hint">Name</string>
+    <string name="search_url_hint">URL</string>
+    <string name="search_make_default">Standardsuchmaschine</string>
+    <string name="search_keep">Behalten</string>
+    <string name="search_copy">Neuanlegen</string>
+    <string name="search_delete">Löschen</string>
+
+    <string name="main_opt_title">Einstellungen</string>
+
+    <string name="read_contacts_no_perm">Keine Zugriffsrechte auf Kontaktlist</string>
+    <string name="read_contact_list">Kontaktliste auslesen</string>
+    <string name="do_hide">%s: verstecken (bei Suche noch anzeigen)</string>
+    <string name="do_show">%s: anzeigen</string>
+
+    <string name="date_choice_title">Datum</string>
+    <string-array name="date_choice">
+        <item>Voreinstellung</item>
+        <item>kein Datum</item>
+        <item>2024-01-01</item>
+        <item>Mon 2024-01-01</item>
+        <item>Montag</item>
+    </string-array>
+
+    <string name="time_choice_title">Uhr</string>
+    <string-array name="time_choice">
+        <item>Voreinstellung</item>
+        <item>keine Uhr</item>
+        <item>8:30</item>
+        <item>08:30</item>
+        <item>8:30 am</item>
+        <item>08:30 am</item>
+        <item>Analog</item>
+        <item>Wörter</item>
+        <item>Kreuzwort</item>
+    </string-array>
+
+    <string name="color_choice_title">Farbe</string>
+    <string-array name="color_choice">
+        <item>Schwarzweiß</item>
+        <item>Bernstein</item>
+        <item>Kürbis</item>
+        <item>Rot</item>
+        <item>Veilchen</item>
+        <item>Blau</item>
+        <item>Türkis</item>
+    </string-array>
+
+    <string name="font_choice_title">Font</string>
+    <string-array name="font_choice">
+        <item>Sans Serif</item>
+        <item>Serif</item>
+        <item>Monospace</item>
+        <item>Handschrift</item>
+        <item>Ubuntu</item>
+    </string-array>
+
+    <string name="time_grid_base">
+        abkurzinull
+        dreiviertel
+        nachtvorrat
+        halbadreins
+        siebenvacht
+        elfzweizehn
+        zwölfuefünf
+        sechsnrfuhr
+    </string>
+
+    <string-array name="time_grid_except">
+        <item>01:00 ein uhr</item>
+        <item>13:00 ein uhr</item>
+        <item>00:00 null uhr</item>
+    </string-array>
+
+    <string-array name="time_grid_min">
+        <item>= uhr</item>
+        <item>kurz nach =</item>
+        <item>viertel nach =</item>
+        <item>kurz vor halb +</item>
+        <item>halb +</item>
+        <item>kurz nach halb +</item>
+        <item>viertel vor +</item>
+        <item>kurz vor +</item>
+    </string-array>
+
+    <string-array name="time_grid_hour">
+        <item>zwölf</item>
+        <item>eins</item>
+        <item>zwei</item>
+        <item>2 drei</item>
+        <item>2 vier</item>
+        <item>fünf</item>
+        <item>sechs</item>
+        <item>sieben</item>
+        <item>2 acht</item>
+        <item>neun</item>
+        <item>zehn</item>
+        <item>elf</item>
+    </string-array>
+
+    <string-array name="time_word_except">
+        <item></item>
+    </string-array>
+
+    <string-array name="time_word_min">
+        <item>=</item>
+    </string-array>
+
+    <string-array name="time_word_hour">
+    </string-array>
+    <string name="do_unpin">%s: Schnellzgriff entfernen</string>
+</resources>

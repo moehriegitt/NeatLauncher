@@ -1,0 +1,29 @@
+Die neue Start-App (der Launcher) Deines Android-Geräts ersetzt hässliche Start-Apps, die zu bunt, grell, ablenkend, verwirrend, ineffizient und voller unsinniger Icons sind.
+
+Sorgt für Übersichtlichkeit durch minimalistisches, effizientes und elegantes Design auf Textbasis. Ermöglicht die Konfiguration des Schnellzugriffs auf Apps, Verknüpfungen oder Kontakte auf verschiedene Weise (einschließlich Gesten), und entfernt verwirrende Dinge vom Startbildschirm.
+
+Unterstützt Verknüpfungen, integriert die Kontaktliste (falls gewünscht) und die Suchfunktion enthält eine konfigurierbare Websuche.
+
+Für Benutzer, die Übersichtlichkeit und geradliniges Design schätzen.
+
+Bietet genug Konfigurierbarkeit, aber ohne das Testen von Sonderfällen mühsam zu machen, um Funktionalität und Robustheit zu gewährleisten.
+
+Neue App von Grund auf neu entwickelt.
+
+Inspiriert von Unlauncher (einem Fork von Slimlauncher) und Nolauncher sowie von Benutzerfeedback.
+
+Features:
+
+  - konfigurierbare Schnellzugriffslinks und Gesten auf dem Startbildschirm
+  - Unterstützung für Verknüpfungen (standardmäßig langer Klick auf App)
+  - Apps ausblenden/anzeigen (bleiben aber durchsuchbar)
+  - Apps können umbenannt werden (im Launcher)
+  - Kontaktliste in Suche integriert
+  - integrierte, konfigurierbare Websuche
+  - mehrere Uhroptionen
+  - Datumsformatoptionen
+  - konfigurierbares Farbschema
+  - freie Open-Source-Software
+  - keine Unterstützung für Icon-Sets (nicht erforderlich: es gibt keine Symbole)
+  - keine Widget-Unterstützung
+

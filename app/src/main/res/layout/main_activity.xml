@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true"
+    >
+
+    <LinearLayout
+        android:id="@+id/main_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <View
+            android:id="@+id/main_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mainPaddingTop"
+            />
+
+        <LinearLayout
+            android:id="@+id/main_clock_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical"
+            >
+
+            <de.theiling.neatlauncher.NeatAnalogClock
+                android:id="@+id/main_clock_analog"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                />
+
+            <de.theiling.neatlauncher.NeatWordClock
+                android:id="@+id/main_clock_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/AppTheme.WordClock"
+                />
+
+            <de.theiling.neatlauncher.NeatGridClock
+                android:id="@+id/main_clock_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/AppTheme.GridClock"
+                />
+
+            <TextView
+                android:id="@+id/main_clock_digital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clock"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/mainClock"
+                style="@style/AppTheme.NormalDatetime"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/main_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/mainDate"
+            style="@style/AppTheme.NormalDatetime"
+            />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginVertical="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        app:layout_constraintTop_toBottomOf="@+id/main_head"
+        app:layout_constraintBottom_toTopOf="@+id/drawer_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/drawer_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        app:visibilityMode="ignore"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/home_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/main_search"
+        />
+
+    <EditText
+        android:id="@+id/main_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/main_search_hint"
+        android:imeOptions="actionDone"
+        android:textSize="@dimen/mainSearch"
+        android:inputType="none|textNoSuggestions|textCapWords"
+        android:lines="1"
+        android:ems="10"
+        android:paddingStart="@dimen/drawerItemPadding"
+        style="@style/AppTheme.NormalEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_search_opt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="Autofill,LabelFor"
+        />
+
+    <TextView
+        android:id="@+id/main_search_opt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⋮"
+        android:textSize="@dimen/mainSearch"
+        android:paddingHorizontal="@dimen/paddingSearchOptH"
+        android:paddingVertical="@dimen/paddingSearchOptV"
+        android:paddingEnd="@dimen/drawerItemPadding"
+        style="@style/AppTheme.NormalText"
+        app:layout_constraintTop_toTopOf="@+id/main_search"
+        app:layout_constraintBottom_toBottomOf="@+id/main_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mainBackground">#FFFFFFFF</color>
+    <color name="mainForeground">#FF000000</color>
+    <color name="titleColor">#FF000000</color>
+    <color name="headingColor">#80000000</color>
+    <color name="dimColor">#80000000</color>
+    <color name="veryDimColor">#30000000</color>
+
+    <color name="accentColorAchromic">#FF8000</color>
+    <color name="accentColorAmber">#EFB000</color>
+    <color name="accentColorPumpkin">#FF8000</color>
+    <color name="accentColorRed">#FF3030</color>
+    <color name="accentColorLilac">#8020EF</color>
+    <color name="accentColorBlue">#2020BF</color>
+    <color name="accentColorCyan">#00D0DF</color>
+</resources>

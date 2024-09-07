@@ -1,0 +1,44 @@
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/ubuntu</item>
+    </array>
+
+    <!-- To allow reordering, no indices in Prefs, but use keys instead -->
+    <string-array name="date_choice_key" translatable="false">
+        <item>syst</item>
+        <item>none</item>
+        <item>yyyy</item>
+        <item>EEEy</item>
+        <item>EEEE</item>
+    </string-array>
+
+    <string-array name="time_choice_key" translatable="false">
+        <item>syst</item>
+        <item>none</item>
+        <item>Hmmx</item>
+        <item>HHmm</item>
+        <item>hmma</item>
+        <item>hhma</item>
+        <item>anlg</item>
+        <item>word</item>
+        <item>grid</item>
+    </string-array>
+
+    <string-array name="color_choice_key" translatable="false">
+        <item>achr</item>
+        <item>ambr</item>
+        <item>pump</item>
+        <item>redx</item>
+        <item>lila</item>
+        <item>blue</item>
+        <item>cyan</item>
+    </string-array>
+
+    <string-array name="font_choice_key" translatable="false">
+        <item>sans</item>
+        <item>seri</item>
+        <item>mono</item>
+        <item>curs</item>
+        <item>ubun</item>
+    </string-array>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+        android:id="@+id/pre_sep"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dimColor"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/initial_letter"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.DrawerInitial"
+            />
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.DrawerItem"
+            />
+    </LinearLayout>
+</FrameLayout>

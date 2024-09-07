@@ -1,0 +1,227 @@
+<resources>
+    <string name="app_name">NeatLauncher</string>
+
+    <string name="readme_short_description">
+    A neat and convenient launcher without icons.
+    </string>
+
+    <string name="readme_description">Description</string>
+
+    <string name="readme_full_description">
+    The new home app (the launcher) of your Android device to replace
+    ugly home apps that are too colourful, bright, distracting,
+    confusing, inefficient, and full of non-sensical icons.
+
+    Provides clarity by minimal, efficient, and elegant design based
+    on text.  It allows to configure quick access to apps, shortcuts,
+    or contacts in different ways (including gestures), and it removes
+    confusing stuff from the home screen.
+
+    Supports shortcuts, integrates the contact list (if you want to),
+    and its search function includes a configurable web search.
+
+    For users who value clarity and straight design.
+
+    Tries to have enough configurability without making testing corner
+    cases tedious, to ensure functionality and robustness.
+
+    New app developed from scratch.
+
+    Takes inspiration from Unlauncher (a fork of Slimlauncher), and
+    Nolauncher, and also feedback of users.
+    </string>
+
+    <string name="readme_features">Features</string>
+
+    <string name="readme_feature_list">
+    - configurable quick access links and gestures on home screen
+    - shortcut support (long click on app by default)
+    - hide/show apps (but keep searchable)
+    - apps can be renamed (in the launcher)
+    - integrated contact list into search
+    - integrated, configurable web search
+    - multiple clock options
+    - date format options
+    - configurable colour scheme
+    - free open source software
+    - no icon set support (not needed: no icons at all)
+    - no widget support
+    </string>
+
+    <string name="readme_screenshots">Screenshots</string>
+
+    <string name="main_search_hint">Search</string>
+
+    <string name="item_nothing">Nothing</string>
+    <string name="item_camera_photo">Camera: Photo</string>
+    <string name="item_camera_video">Camera: Video</string>
+    <string name="item_settings_home">Settings: Home</string>
+    <string name="item_phone_dial">Phone: Dial</string>
+
+    <string name="item_info">Info</string>
+    <string name="item_rename">Rename</string>
+    <string name="item_pin">Pin</string>
+    <string name="item_rid">Unpin</string>
+    <string name="item_hide">Hide</string>
+    <string name="item_show">Unhide</string>
+    <string name="item_remove">Remove</string>
+
+    <string name="item_title_shortcuts">Shortcuts</string>
+
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+
+    <string name="rename_title">Rename</string>
+    <string name="edit_order_title">Sort like</string>
+    <string name="edit_order_hint">label</string>
+
+    <string name="pin_heading">Pin to Home</string>
+    <string name="pin_home">List</string>
+    <string name="pin_left">Swipe Left</string>
+    <string name="pin_right">Swipe Right</string>
+    <string name="pin_down">Swipe Down</string>
+    <string name="pin_time">Click Time</string>
+    <string name="pin_date">Click Date</string>
+
+    <string name="error_starting">Error starting %s</string>
+    <string name="error_removing">Error removing %s</string>
+
+    <string name="ok_remove_shortcut">%s: remove shortcut</string>
+
+    <string name="search_opt_title">Search Engine</string>
+    <string name="search_name_hint">Name</string>
+    <string name="search_url_hint">URL</string>
+    <string name="search_make_default">Default search engine</string>
+    <string name="search_keep">Keep</string>
+    <string name="search_copy">Make New</string>
+    <string name="search_delete">Delete</string>
+
+    <string name="main_opt_title">Options</string>
+
+    <string name="read_contacts_no_perm">No permission to read contact list</string>
+
+    <string name="read_contact_list">Read Contact List</string>
+
+    <string name="do_hide">%s: hide (still shown in search)</string>
+    <string name="do_show">%s: show</string>
+    <string name="do_unpin">%s: unpin</string>
+
+    <string name="date_choice_title">Date</string>
+    <string-array name="date_choice">
+        <item>System settings</item>
+        <item>No date</item>
+        <item>2024-01-01</item>
+        <item>Mon 2024-01-01</item>
+        <item>Monday</item>
+    </string-array>
+
+    <string name="time_choice_title">Time</string>
+    <string-array name="time_choice">
+        <item>System settings</item>
+        <item>No time</item>
+        <item>8:30</item>
+        <item>08:30</item>
+        <item>8:30 am</item>
+        <item>08:30 am</item>
+        <item>Analog</item>
+        <item>Words</item>
+        <item>Grid</item>
+    </string-array>
+
+    <string name="color_choice_title">Colour</string>
+    <string-array name="color_choice">
+        <item>Achromic</item>
+        <item>Amber</item>
+        <item>Pumpkin</item>
+        <item>Red</item>
+        <item>Lilac</item>
+        <item>Blue</item>
+        <item>Cyan</item>
+    </string-array>
+
+    <string name="font_choice_title">Font</string>
+    <string-array name="font_choice">
+        <item>Sans Serif</item>
+        <item>Serif</item>
+        <item>Monospace</item>
+        <item>Cursive</item>
+        <item>Ubuntu</item>
+    </string-array>
+
+    <string name="time_grid_base">
+        twentyafive
+        quarterhalf
+        tenspastoho
+        twelveleven
+        teninethree
+        twosevenoon
+        fiveightsix
+        fournoclock
+    </string>
+
+    <!--
+      Full time lookups: starts with a 24h time (rounded to 60/time_grid_min.length) minutes),
+      then the full sequence of words.
+      E.g., "00:05 zero five" will use "zero five" at 00h05.
+      If nothing is found, time_grid_min is used as a pattern, and time_grid_hour is inserted.
+      Empty strings are ignored (may be needed to make arrays non-empty).
+      NeatGridClock uses this if the array is not empty, otherwise, time_word_except is used.
+    -->
+    <string-array name="time_grid_except">
+        <item>12:00 noon</item>
+    </string-array>
+
+    <!--
+      Minutes: this is indexed with a minutes: ((min * time_grid_min.length) / 60).
+      Numbers 1, 2, 3, ..., 9 in the item string define which word in the grid
+      farthest from the top-left corner will be highlighted, if there are multiple
+      possibilities.  NeatWordClock ignores these annotations.
+      NeatGridclock queries this first, then time_word_min
+    -->
+    <string-array name="time_grid_min">
+        <item>= oclock</item>
+        <item>five past =</item>
+        <item>ten past =</item>
+        <item>a quarter past =</item>
+        <item>twenty past =</item>
+        <item>twenty five past =</item>
+        <item>half past =</item>
+        <item>twenty five to +</item>
+        <item>twenty to +</item>
+        <item>a quarter to +</item>
+        <item>ten to +</item>
+        <item>five to +</item>
+    </string-array>
+
+    <!--
+      Hours: indexed with (hour % 12), inserted by =, +, or - from the min array
+      NeatGridclock queries this first, then time_word_hour.
+    -->
+    <string-array name="time_grid_hour">
+        <item>twelve</item>
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>2 five</item>
+        <item>six</item>
+        <item>seven</item>
+        <item>eight</item>
+        <item>nine</item>
+        <item>2 ten</item>
+        <item>eleven</item>
+    </string-array>
+
+    <!-- NeatWordClock queries this first, then time_grid_except -->
+    <string-array name="time_word_except">
+    </string-array>
+
+    <!-- NeatWordClock queries this first, then time_grid_min -->
+    <string-array name="time_word_min">
+        <item>= o\'clock</item>
+    </string-array>
+
+    <!-- NeatWordClock queries this first, then time_grid_hour -->
+    <string-array name="time_word_hour">
+    </string-array>
+</resources>

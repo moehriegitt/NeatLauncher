@@ -1,0 +1,12 @@
+.gradle
+local.properties
+.idea
+.git
+.DS_Store
+build
+captures
+gradle/wrapper
+gradlew.bat
+.externalNativeBuild
+.cxx
+local.properties

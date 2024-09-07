@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/popupLayoutPadding"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.PopupTitle"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_heading"
+            style="@style/AppTheme.PopupHeading"
+            />
+
+        <CheckBox
+            android:id="@+id/pin_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_home"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+        <CheckBox
+            android:id="@+id/pin_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_left"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+        <CheckBox
+            android:id="@+id/pin_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_right"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+        <CheckBox
+            android:id="@+id/pin_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_down"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+        <CheckBox
+            android:id="@+id/pin_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_time"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+        <CheckBox
+            android:id="@+id/pin_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_date"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+    </LinearLayout>
+</FrameLayout>

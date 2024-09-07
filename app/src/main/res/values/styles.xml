@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- themes -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/mainBackground</item>
+        <item name="android:colorBackground">@color/mainBackground</item>
+        <item name="android:colorForeground">@color/mainForeground</item>
+        <item name="android:textColor">@color/mainForeground</item>
+        <item name="android:textColorHint">@color/dimColor</item>
+        <item name="colorPrimary">@color/mainBackground</item>
+        <item name="titleTextColor">@color/titleColor</item>
+        <item name="myTitleTextColor">@color/titleColor</item>
+        <item name="myHeadingTextColor">@color/headingColor</item>
+        <item name="myHintTextColor">@color/dimColor</item>
+        <item name="colorAccent">@color/accentColorAchromic</item>
+    </style>
+
+    <!-- Ubuntu -->
+    <style name="AppTheme.Ubuntu">
+        <item name="android:fontFamily">@font/ubuntu</item>
+    </style>
+
+    <style name="AppTheme.Ubuntu.Achromic">
+    </style>
+
+    <style name="AppTheme.Ubuntu.Amber">
+        <item name="colorAccent">@color/accentColorAmber</item>
+    </style>
+
+    <style name="AppTheme.Ubuntu.Pumpkin">
+        <item name="colorAccent">@color/accentColorPumpkin</item>
+    </style>
+
+    <style name="AppTheme.Ubuntu.Red">
+        <item name="colorAccent">@color/accentColorRed</item>
+    </style>
+
+    <style name="AppTheme.Ubuntu.Lilac">
+        <item name="colorAccent">@color/accentColorLilac</item>
+    </style>
+
+    <style name="AppTheme.Ubuntu.Blue">
+        <item name="colorAccent">@color/accentColorBlue</item>
+    </style>
+
+    <style name="AppTheme.Ubuntu.Cyan">
+        <item name="colorAccent">@color/accentColorCyan</item>
+    </style>
+
+    <!-- Sans -->
+    <style name="AppTheme.Sans">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppTheme.Sans.Achromic">
+    </style>
+
+    <style name="AppTheme.Sans.Amber">
+        <item name="colorAccent">@color/accentColorAmber</item>
+    </style>
+
+    <style name="AppTheme.Sans.Pumpkin">
+        <item name="colorAccent">@color/accentColorPumpkin</item>
+    </style>
+
+    <style name="AppTheme.Sans.Red">
+        <item name="colorAccent">@color/accentColorRed</item>
+    </style>
+
+    <style name="AppTheme.Sans.Lilac">
+        <item name="colorAccent">@color/accentColorLilac</item>
+    </style>
+
+    <style name="AppTheme.Sans.Blue">
+        <item name="colorAccent">@color/accentColorBlue</item>
+    </style>
+
+    <style name="AppTheme.Sans.Cyan">
+        <item name="colorAccent">@color/accentColorCyan</item>
+    </style>
+
+    <!-- Serif -->
+    <style name="AppTheme.Serif">
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="AppTheme.Serif.Achromic">
+    </style>
+
+    <style name="AppTheme.Serif.Amber">
+        <item name="colorAccent">@color/accentColorAmber</item>
+    </style>
+
+    <style name="AppTheme.Serif.Pumpkin">
+        <item name="colorAccent">@color/accentColorPumpkin</item>
+    </style>
+
+    <style name="AppTheme.Serif.Red">
+        <item name="colorAccent">@color/accentColorRed</item>
+    </style>
+
+    <style name="AppTheme.Serif.Lilac">
+        <item name="colorAccent">@color/accentColorLilac</item>
+    </style>
+
+    <style name="AppTheme.Serif.Blue">
+        <item name="colorAccent">@color/accentColorBlue</item>
+    </style>
+
+    <style name="AppTheme.Serif.Cyan">
+        <item name="colorAccent">@color/accentColorCyan</item>
+    </style>
+
+    <!-- Cursive -->
+    <style name="AppTheme.Cursive">
+        <item name="android:fontFamily">cursive</item>
+    </style>
+
+    <style name="AppTheme.Cursive.Achromic">
+    </style>
+
+    <style name="AppTheme.Cursive.Amber">
+        <item name="colorAccent">@color/accentColorAmber</item>
+    </style>
+
+    <style name="AppTheme.Cursive.Pumpkin">
+        <item name="colorAccent">@color/accentColorPumpkin</item>
+    </style>
+
+    <style name="AppTheme.Cursive.Red">
+        <item name="colorAccent">@color/accentColorRed</item>
+    </style>
+
+    <style name="AppTheme.Cursive.Lilac">
+        <item name="colorAccent">@color/accentColorLilac</item>
+    </style>
+
+    <style name="AppTheme.Cursive.Blue">
+        <item name="colorAccent">@color/accentColorBlue</item>
+    </style>
+
+    <style name="AppTheme.Cursive.Cyan">
+        <item name="colorAccent">@color/accentColorCyan</item>
+    </style>
+
+    <!-- Mono -->
+    <style name="AppTheme.Mono">
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="AppTheme.Mono.Achromic">
+    </style>
+
+    <style name="AppTheme.Mono.Amber">
+        <item name="colorAccent">@color/accentColorAmber</item>
+    </style>
+
+    <style name="AppTheme.Mono.Pumpkin">
+        <item name="colorAccent">@color/accentColorPumpkin</item>
+    </style>
+
+    <style name="AppTheme.Mono.Red">
+        <item name="colorAccent">@color/accentColorRed</item>
+    </style>
+
+    <style name="AppTheme.Mono.Lilac">
+        <item name="colorAccent">@color/accentColorLilac</item>
+    </style>
+
+    <style name="AppTheme.Mono.Blue">
+        <item name="colorAccent">@color/accentColorBlue</item>
+    </style>
+
+    <style name="AppTheme.Mono.Cyan">
+        <item name="colorAccent">@color/accentColorCyan</item>
+    </style>
+
+    <!-- element styles -->
+    <style name="AppTheme.NormalDatetime">
+    </style>
+
+    <style name="AppTheme.NormalText">
+    </style>
+
+    <style name="AppTheme.NormalEdit">
+    </style>
+
+    <style name="AppTheme.WordClock">
+        <!-- size equals that of date -->
+        <item name="android:textSize">@dimen/mainDate</item>
+    </style>
+
+    <style name="AppTheme.GridClock">
+        <item name="android:textSize">@dimen/mainWordClock</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:lineSpacingExtra">-6sp</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <style name="AppTheme.HomeNormal">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/homeItem</item>
+        <item name="android:padding">@dimen/homeItemPadding</item>
+        <item name="android:paddingStart">@dimen/homeItemPaddingStart</item>
+    </style>
+
+    <style name="AppTheme.HomeItem">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textColor">?colorAccent</item>
+        <item name="android:textSize">@dimen/homeItem</item>
+        <item name="android:padding">@dimen/homeItemPadding</item>
+        <item name="android:paddingStart">@dimen/homeItemPaddingStart</item>
+    </style>
+
+    <style name="AppTheme.DrawerItem">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/drawerItem</item>
+        <item name="android:padding">@dimen/drawerItemPadding</item>
+        <item name="android:paddingStart">@dimen/drawerItemPaddingStart</item>
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="AppTheme.DrawerInitial">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/drawerItem</item>
+        <item name="android:paddingVertical">@dimen/drawerItemPadding</item>
+        <item name="android:paddingStart">@dimen/drawerInitialPaddingStart</item>
+        <item name="android:textColor">@color/dimColor</item>
+    </style>
+
+    <style name="AppTheme.PopupItem">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/popupItem</item>
+        <item name="android:paddingVertical">@dimen/popupItemPaddingV</item>
+        <item name="android:paddingHorizontal">@dimen/popupItemPaddingH</item>
+    </style>
+
+    <style name="AppTheme.PopupSwitch" parent="AppTheme.PopupItem">
+    </style>
+
+    <style name="AppTheme.PopupAction" parent="AppTheme.PopupItem">
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="AppTheme.PopupTitle">
+        <item name="android:textSize">@dimen/popupTitle</item>
+        <item name="android:textColor">?myTitleTextColor</item>
+        <item name="android:paddingVertical">@dimen/popupTitlePaddingV</item>
+        <item name="android:paddingHorizontal">@dimen/popupTitlePaddingH</item>
+    </style>
+
+    <style name="AppTheme.PopupHeading">
+        <item name="android:textSize">@dimen/popupHeading</item>
+        <item name="android:textColor">?myHeadingTextColor</item>
+        <item name="android:paddingVertical">@dimen/popupHeadingPaddingV</item>
+        <item name="android:paddingHorizontal">@dimen/popupHeadingPaddingH</item>
+    </style>
+</resources>

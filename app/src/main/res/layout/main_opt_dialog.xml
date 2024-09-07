@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/popupLayoutPadding"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:text="@string/main_opt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.PopupTitle"
+        />
+
+    <ScrollView
+        android:id="@+id/app_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="@dimen/popupScrollPadding"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/color_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/color_choice_title"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/font_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/font_choice_title"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/time_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/time_choice_title"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/date_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date_choice_title"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <CheckBox
+                android:id="@+id/read_contact_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/read_contact_list"
+                style="@style/AppTheme.PopupItem"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

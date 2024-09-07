@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mainTitle">40sp</dimen>
+
+    <dimen name="mainPaddingTop">30dp</dimen>
+
+    <dimen name="mainClock">50sp</dimen>
+    <dimen name="mainWordClock">24sp</dimen>
+    <dimen name="mainDate">24sp</dimen>
+
+    <dimen name="mainSearch">24sp</dimen>
+
+    <dimen name="homeItem">36sp</dimen>
+    <dimen name="homeItemPadding">15dp</dimen>
+    <dimen name="homeItemPaddingStart">30dp</dimen>
+
+    <dimen name="drawerItem">24sp</dimen>
+    <dimen name="drawerItemPadding">10dp</dimen>
+    <dimen name="drawerItemPaddingStart">10dp</dimen>
+    <dimen name="drawerInitialPaddingStart">10dp</dimen>
+
+    <dimen name="paddingSearchOptV">10dp</dimen>
+    <dimen name="paddingSearchOptH">20dp</dimen>
+
+    <dimen name="popupLayoutPadding">10dp</dimen>
+    <dimen name="popupScrollPadding">10dp</dimen>
+
+    <dimen name="popupItem">20sp</dimen>
+    <dimen name="popupItemPaddingV">12dp</dimen>
+    <dimen name="popupItemPaddingH">8dp</dimen>
+
+    <dimen name="popupHeading">18sp</dimen>
+    <dimen name="popupHeadingPaddingV">16dp</dimen>
+    <dimen name="popupHeadingPaddingH">8dp</dimen>
+
+    <dimen name="popupTitle">24sp</dimen>
+    <dimen name="popupTitlePaddingV">20dp</dimen>
+    <dimen name="popupTitlePaddingH">8dp</dimen>
+
+</resources>

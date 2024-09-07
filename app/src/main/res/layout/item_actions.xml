@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/popupLayoutPadding"
+    >
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.PopupTitle"
+        />
+
+    <ScrollView
+        android:id="@+id/item_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="@dimen/popupScrollPadding"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/item_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_info"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/item_rename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_rename"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/item_pin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_pin"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/item_rid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_rid"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/item_hide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_hide"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/item_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_show"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/item_remove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_remove"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <LinearLayout
+                android:id="@+id/item_shortcuts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_title_shortcuts"
+                    style="@style/AppTheme.PopupHeading"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/shortcut_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
