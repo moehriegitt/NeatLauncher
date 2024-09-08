@@ -13,7 +13,6 @@
         >
 
         <TextView
-            android:id="@+id/dialog_title"
             android:text="@string/search_opt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +46,7 @@
             />
 
         <CheckBox
-            android:id="@+id/edit_default"
+            android:id="@+id/edit_def"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/search_make_default"
@@ -61,7 +60,6 @@
             >
 
             <RadioButton
-                android:id="@+id/edit_keep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -70,7 +68,7 @@
                 />
 
             <RadioButton
-                android:id="@+id/edit_copy"
+                android:id="@+id/edit_new"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/search_copy"
@@ -78,7 +76,7 @@
                 />
 
             <RadioButton
-                android:id="@+id/edit_delete"
+                android:id="@+id/edit_del"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/search_delete"

@@ -14,6 +14,8 @@ use Data::Dumper;
 use XML::LibXML;
 use open qw(:std :utf8);
 
+use constant IND => '    ';
+
 $Data::Dumper::Indent = 1;
 $Data::Dumper::Sortkeys = 1;
 
@@ -51,6 +53,46 @@ sub mkdir_p($)
     }
     print STDERR "D $s\n";
     mkdir $s, 0777;
+}
+
+sub the_one_or_null(@)
+{
+    confess "multiple nodes" if @_ > 1;
+    my ($x) = @_;
+    return $x;
+}
+
+sub the_one(@)
+{
+    return &the_one_or_null // confess "no node";
+}
+
+sub snake_case($)
+{
+    my ($x) = @_;
+    confess unless defined $x;
+    $x =~ s/([a-z])([A-Z])/${1}_${2}/g;
+    return lc($x);
+}
+
+sub SNAKE_CASE($)
+{
+    my ($x) = @_;
+    confess unless defined $x;
+    return uc(snake_case($x));
+}
+
+sub CamelCase($)
+{
+    my ($x) = @_;
+    confess unless defined $x;
+    return join('', map { ucfirst($_) } split /_/, $x);
+}
+
+sub camelCase($)
+{
+    my ($x) = @_;
+    return lcfirst(CamelCase($x));
 }
 
 ######################################################################
@@ -105,6 +147,8 @@ sub init_dirs($)
         die "ERROR: No subdir for Java/Kotlin files in '$C->{top_java_dir}'\n";
     ($C->{pack} = $subdir) =~ s(/)(.)g;
 }
+
+######################################################################
 
 sub learn_res_node($$$$$)
 {
@@ -184,10 +228,58 @@ sub learn_res_node($$$$$)
     }
 }
 
+# Android does not seem to really care about namespaces, so we'll just ignore them.
+sub parse_attr($$)
+{
+    my ($n, $d) = @_;
+    for my $a ($d->attributes) {
+        my $k = $a->nodeName;
+        my $v = $a->value;
+        if ($k eq 'xmlns') {
+        }
+        elsif ($k =~ m(^xmlns:(.+)$)) {
+        }
+        elsif ($k =~ m(^(.+):(.+)$)) {
+            croak "ERROR: duplicate attribute '$2'" if defined $n->{attr}{$2};
+            $n->{attr}{$2} = $v;
+        }
+        else {
+            croak "ERROR: duplicate attribute '$k'" if defined $n->{attr}{$k};
+            $n->{attr}{$k} = $v;
+        }
+    }
+}
+
+sub learn_res_layout_rec($$);
+sub learn_res_layout_rec($$)
+{
+    my ($L, $d) = @_;
+    return unless $d->nodeType == XML_ELEMENT_NODE;
+
+    my $n = { type => $d->nodeName };
+    parse_attr($n, $d);
+
+    if ($n->{attr}{id} && ($n->{attr}{id} =~ m(^\@\+id/(.+)$))) {
+        my $id = $1;
+        $n->{id} = $id;
+        croak "ERROR: duplicate id '$id'" if defined $L->{node}{$id};
+        $L->{node}{$id} = $n;
+    }
+
+    for my $child ($d->childNodes) {
+        if (my $u = learn_res_layout_rec($L, $child)) {
+            push @{ $n->{child} }, $u;
+        }
+    }
+
+    return $n;
+}
+
 sub learn_res_layout($$$$)
 {
     my ($C, $fn, $name, $dom) = @_;
-    # print STDERR "LAYOUT '$name'\n";
+    my $L = ($C->{resource}{layout}{$name} //= { name => $name, dom => $dom });
+    $L->{root} = learn_res_layout_rec($L, the_one($dom->childNodes));
 }
 
 sub learn_res_xml($$)
@@ -246,9 +338,10 @@ sub has_value($$)
    return (grep { $_ eq $k } values %$m) > 0;
 }
 
-sub make_enums($$)
+sub make_enums($)
 {
-    my ($C, $M) = @_;
+    my ($C) = @_;
+    my $M = {};
     my $R = $C->{resource};
     for my $k (
         sort
@@ -273,6 +366,7 @@ sub make_enums($$)
             };
         }
     }
+    return $M;
 }
 
 ######################################################################
@@ -297,7 +391,7 @@ sub lexnum_cmp($$)
     return @x <=> @y;
 }
 
-sub make_kotlin($$)
+sub make_enum_kotlin($$)
 {
     my ($C, $M) = @_;
 
@@ -479,9 +573,9 @@ sub get_string($$)
     return $S->{$k}{text} // die "ERROR: README/Metadata: Missing string: '$k'\n";
 }
 
-sub make_metadata($$)
+sub make_metadata($)
 {
-    my ($C, $R) = @_;
+    my ($C) = @_;
 
     # read doc strings
     my $title = get_string($C, 'app_name');
@@ -570,6 +664,102 @@ sub make_metadata($$)
 
 ######################################################################
 
+my %pack_of = (
+    View => 'android.view',
+    ViewGroup => 'android.view',
+);
+
+sub make_binding($$)
+{
+    my ($C, $pack) = @_;
+
+    my %class = ();
+    my %import = map { ($_ => 1) } qw (
+        android.view.LayoutInflater
+        android.view.View
+        android.view.ViewGroup
+    );
+
+    $class{ViewBinding} =
+        "interface ViewBinding {\n".
+        "\tval root: View\n".
+        "}\n";
+
+    for my $n (values %{ $C->{resource}{layout} // {} }) {
+        next unless ($n->{root}{attr}{viewBindingIgnore} // 'false') eq 'false';
+        my $ccname = CamelCase($n->{name});
+        my $class = "${ccname}Binding";
+
+        my %node = %{ $n->{node} // {} };
+        my $root = $n->{root};
+        unless ($root->{id}) {
+            $root->{id} = 'root_view';
+            $node{rootView} = $root;
+        }
+
+        for my $n (values %node) {
+            $n->{ltype} = $n->{type};
+            if ($n->{type} =~ m(^(.+)[.]([^.]+)$)) {
+                $n->{pack} = $1;
+                $n->{ltype} = $2;
+            }
+            $n->{pack} //= $pack_of{$n->{ltype}} // 'android.widget';
+            $n->{qtype} = "$n->{pack}.$n->{ltype}";
+            if ($n->{pack} ne $pack) {
+                $import{$n->{qtype}} = 1;
+            }
+            $n->{name} = camelCase($n->{id});
+        }
+        my @node = ($root,
+            (grep { $_ != $root } sort { $a->{id} cmp $a->{id} } values %node));
+
+        my $param_str = join(',', map { "\n\tval $_->{name}: $_->{ltype}" } @node);
+
+        my $get_str = join(',',
+            map {
+                my $e = $_;
+                my $g = ($e == $root) ? "rootView as $e->{ltype}" :
+                    "rootView.findViewById(R.id.$e->{id})!!";
+                "\n\t\t\t$g"
+            } @node);
+        my $kt = '';
+        $kt .= "class $class($param_str):\n\tViewBinding\n{\n";
+        $kt .= "\toverride val root = $root->{name}\n";
+        $kt .= "\tcompanion object {\n";
+
+        $kt .= "\t\tfun bind(rootView: View) = $class($get_str)\n\n";
+
+        $kt .= "\t\tfun inflate(\n";
+        $kt .= "\t\t\tinflater: LayoutInflater,\n";
+        $kt .= "\t\t\tparent: ViewGroup?,\n";
+        $kt .= "\t\t\tattachToParent: Boolean): $class\n";
+        $kt .= "\t\t{\n";
+        $kt .= "\t\t\tval root = inflater.inflate(R.layout.$n->{name}, parent, false)\n";
+        $kt .= "\t\t\tif (attachToParent) parent?.addView(root)\n";
+        $kt .= "\t\t\treturn bind(root)\n";
+        $kt .= "\t\t}\n\n";
+
+        $kt .= "\t\t\@Suppress(\"unused\")\n";
+        $kt .= "\t\tfun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)\n";
+
+        $kt .= "\t}\n";
+        $kt .= "}\n";
+        $kt =~ s(\t)(IND)eg;
+        $class{$class} = $kt;
+    }
+
+    my $kt =
+        "\@file:Suppress(\"MemberVisibilityCanBePrivate\")\n".
+        "\n".
+        "package $pack\n\n".
+        join("\n", map { "import $_" } sort keys %import)."\n\n".
+        join("\n", map { $class{$_} } sort keys %class);
+
+   return $kt;
+}
+
+######################################################################
+
 my $C = {};
 init_dirs($C);
 
@@ -582,13 +772,30 @@ learn_resources($C);
 #make_grid($C, $G);
 
 # Enums
-my $M = {};
-make_enums($C, $M);
-my $t = make_kotlin($C, $M);
-write_file(
-    "$C->{java_dir}/AutoResource.kt",
-    "// Autogenerated by mkresource.pl, do not edit\n".$t);
+{
+    my $M = make_enums($C);
+    my $t = make_enum_kotlin($C, $M);
+    write_file(
+        "$C->{java_dir}/AutoResource.kt",
+        "// Autogenerated by mkresource.pl, do not edit\n".$t);
+}
+
+# View bindings, because the bindView feature did not reliably work
+# for me, and it is obscure what goes wrong (I just get an 'unresolved
+# reference' from Kotlin, but the generated .java file exists, right
+# next to the other binding .java files.  Kotlin seems to see about
+# 2/3s of my files, with no indication why the others are not shown.
+# Source XML looks very similar, maybe it doesn't like the name?
+# It is also very badly documented as usual => just implement it in Perl
+# (and generate Kotlin, not Java).
+# Currently, we'll dump everything into one file into the main package to
+# minimise hassle to use.
+{
+    my $t = make_binding($C, $C->{pack});
+    write_file(
+        "$C->{java_dir}/AutoBinding.kt",
+        "// Autogenerated by mkresource.pl, do not edit\n".$t);
+}
 
 # Metadata description and Readme
-my $R = {};
-make_metadata($C, $R)
+make_metadata($C);

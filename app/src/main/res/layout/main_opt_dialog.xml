@@ -8,7 +8,6 @@
     >
 
     <TextView
-        android:id="@+id/dialog_title"
         android:text="@string/main_opt_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +15,6 @@
         />
 
     <ScrollView
-        android:id="@+id/app_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingVertical="@dimen/popupScrollPadding"
