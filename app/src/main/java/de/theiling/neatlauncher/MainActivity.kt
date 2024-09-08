@@ -298,11 +298,11 @@ class MainActivity:
         }
 
         z.mainTopMargin.visibility = when {
-            fmt.isNotEmpty() -> View.VISIBLE
-            dat.isNotEmpty() -> View.VISIBLE
+            anlg -> View.GONE
             word -> View.VISIBLE
             grid -> View.GONE
-            anlg -> View.GONE
+            fmt.isNotEmpty() -> View.VISIBLE
+            dat.isNotEmpty() -> View.VISIBLE
             else -> View.GONE
         }
     }
