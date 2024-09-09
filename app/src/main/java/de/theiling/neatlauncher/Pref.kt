@@ -18,16 +18,6 @@ fun prefPutBool(c: Context, key: String, v: Boolean, def: Boolean) =
         apply()
     }
 
-fun prefPutInt(c: Context, key: String, v: Int, def: Int) =
-    with (pref(c).edit()) {
-        if (v == def) {
-            remove(key)
-        } else {
-            putInt(key, v)
-        }
-        apply()
-    }
-
 fun prefPutString(c: Context, key: String, v: String, def: String) =
     with (pref(c).edit()) {
         if (v == def) {
@@ -37,11 +27,6 @@ fun prefPutString(c: Context, key: String, v: String, def: String) =
         }
         apply()
     }
-
-fun prefPutEnum(c: Context, arrId: Int, key: String, i: Int) =
-    prefPutString(c, key,
-        (try { c.resources.getTextArray(arrId)[i].toString() } catch (e: Exception) { "" }),
-        "")
 
 fun prefPutEnum(c: Context, arrId: Int, key: String, i: Int, def: Int) =
     prefPutString(c, key,
@@ -73,21 +58,6 @@ fun setItemInfo(c: Context, type: String, pack: String, klass: String, v: String
 fun getSearchEngine(c: Context) = pref(c).getString("searchEngine", "")!!
 fun setSearchEngine(c: Context, s: String) = prefPutString(c, "searchEngine", s, "")
 
-fun getDateChoice(c: Context) = prefGetEnum(c, R.array.date_choice_key, "dateChoice", date_yyyy)
-fun setDateChoice(c: Context, i: Int) = prefPutEnum(c, R.array.date_choice_key, "dateChoice", i)
-
-fun getTimeChoice(c: Context) = prefGetEnum(c, R.array.time_choice_key, "timeChoice", time_Hmmx)
-fun setTimeChoice(c: Context, i: Int) = prefPutEnum(c, R.array.time_choice_key, "timeChoice", i)
-
-fun getBackChoice(c: Context) = prefGetEnum(c, R.array.back_choice_key, "backChoice", back_opaq)
-fun setBackChoice(c: Context, i: Int) = prefPutEnum(c, R.array.back_choice_key, "backChoice", i)
-
-fun getFontChoice(c: Context) = prefGetEnum(c, R.array.font_choice_key, "fontChoice", font_ubun)
-fun setFontChoice(c: Context, i: Int) = prefPutEnum(c, R.array.font_choice_key, "fontChoice", i)
-
-fun getColorChoice(c: Context) = prefGetEnum(c, R.array.color_choice_key, "colorChoice",color_ambr)
-fun setColorChoice(c: Context, i: Int) = prefPutEnum(c, R.array.color_choice_key, "colorChoice", i)
-
 fun getReadContacts(c: Context) = pref(c).getBoolean("readContacts", true)
 fun setReadContacts(c: Context, i: Boolean) = prefPutBool(c, "readContacts", i, true)
 
@@ -96,16 +66,16 @@ interface PrefInt {
 }
 
 abstract class PrefEnum(
-    val c: Context,
+    private val c: Context,
     val titleId: Int,
     val nameArrId: Int,
-    val keyArrId: Int,
-    val prefKey: String,
-    val defVal: Int,
+    private val keyArrId: Int,
+    private val prefKey: String,
+    private val defVal: Int,
     val onChange: (Int) -> Unit): PrefInt
 {
     override var x = prefGetEnum(c, keyArrId, prefKey, defVal)
-        set(new: Int) {
+        set(new) {
             if (field != new) {
                 field = new
                 prefPutEnum(c, keyArrId, prefKey, field, defVal)
