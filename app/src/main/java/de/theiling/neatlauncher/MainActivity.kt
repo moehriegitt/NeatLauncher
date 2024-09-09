@@ -64,13 +64,6 @@ class MainActivity:
     private val homeAdapter = ItemAdapter(homeItems, R.layout.home_item, { true }, this)
     private val drawerAdapter = ItemAdapter(items, R.layout.drawer_item, { !it.hidden }, this)
 
-    private var searchStr: String = ""
-    private var dateChoice = 0
-    private var timeChoice = 0
-    private var backChoice = 0
-    private var colorChoice = 0
-    private var fontChoice = 0
-
     // Having both Fling events on the main view and Click events on an item view
     // seems to sometimes generate both a fling and a click event from one gesture.
     // The click always comes second, and despite onFling returning true.  To fix this,
@@ -116,8 +109,15 @@ class MainActivity:
 
     // for getting added/removed packages, we need the sequence counter:
     private var bootSeq = 0
+
+    private var searchStr: String = ""
     private lateinit var z: MainActivityBinding
     private lateinit var searchEngine: SearchEngine
+    private lateinit var dateChoice: EnumDate
+    private lateinit var timeChoice: EnumTime
+    private lateinit var backChoice: EnumBack
+    private lateinit var colorChoice: EnumColor
+    private lateinit var fontChoice: EnumFont
 
     // override on....()
     override fun onCreate(
@@ -126,13 +126,13 @@ class MainActivity:
         super.onCreate(savedInstanceState)
 
         searchEngine = SearchEngine(c)
-        dateChoice = getDateChoice(c)
-        timeChoice = getTimeChoice(c)
-        backChoice = getBackChoice(c)
-        colorChoice = getColorChoice(c)
-        fontChoice = getFontChoice(c)
+        dateChoice = EnumDate(c) { onMinuteTick() }
+        timeChoice = EnumTime(c) { onMinuteTick() }
+        backChoice = EnumBack(c) { restart() }  // recreate() is not reset enough (bug?)
+        colorChoice = EnumColor(c) { recreate() }
+        fontChoice = EnumFont(c) { recreate() }
 
-        setTheme(selectTheme(backChoice, fontChoice, colorChoice))
+        setTheme(selectTheme(backChoice.x, fontChoice.x, colorChoice.x))
         enableEdgeToEdge()
         if (Build.VERSION.SDK_INT >= 29) {
             // avoid translucent navibar in 3-button edge2edge.
@@ -186,7 +186,7 @@ class MainActivity:
                 startActivity(packageIntent(Intent(AlarmClock.ACTION_SHOW_ALARMS)))
         }
         z.mainClockBox.setOnLongClickListener {
-            timeDialog(getViewGroup())
+            choiceDialog(getViewGroup(), timeChoice)
             true
         }
 
@@ -194,7 +194,7 @@ class MainActivity:
             dateItem?.let { itemLaunch(it) } ?: startCalendar()
         }
         z.mainDate.setOnLongClickListener {
-            dateDialog(getViewGroup())
+            choiceDialog(getViewGroup(), dateChoice)
             true
         }
     }
@@ -285,19 +285,19 @@ class MainActivity:
         z.mainDate.text = dat
         z.mainDate.visibility = visibleIf(dat.isNotEmpty())
 
-        val anlg = timeChoice == time_anlg
+        val anlg = timeChoice.x == time_anlg
         z.mainClockAnalog.visibility = visibleIf(anlg)
         if (anlg) {
             z.mainClockAnalog.updateTime()
         }
 
-        val word = timeChoice == time_word
+        val word = timeChoice.x == time_word
         z.mainClockWord.visibility = visibleIf(word)
         if (word) {
             z.mainClockWord.updateTime()
         }
 
-        val grid = timeChoice == time_grid
+        val grid = timeChoice.x == time_grid
         z.mainClockGrid.visibility = visibleIf(grid)
         if (grid) {
             z.mainClockGrid.updateTime()
@@ -494,7 +494,7 @@ class MainActivity:
         })
 
     private fun formatDate(now: Date) =
-        when (dateChoice) {
+        when (dateChoice.x) {
             date_syst -> DateFormat.getDateFormat(c).format(now)
             date_yyyy -> simpleFormatDate(now, "yyyy-MM-dd")
             date_EEEy -> simpleFormatDate(now, "EEE yyyy-MM-dd")
@@ -503,7 +503,7 @@ class MainActivity:
         }
 
     private fun formatTime(now: Date) =
-        when (timeChoice) {
+        when (timeChoice.x) {
             time_syst -> DateFormat.getTimeFormat(c).format(now)
             time_Hmmx -> simpleFormatDate(now, "H:mm")
             time_HHmm -> simpleFormatDate(now, "HH:mm")
@@ -589,6 +589,27 @@ class MainActivity:
     }
 
     // dialogs
+    private fun dialogInit(
+        view: View, content: View?, title: String, onOK: () -> Unit = {}): AlertDialog.Builder
+    {
+        val b = AlertDialog.Builder(view.context)
+        if (content != null) b.setView(content)
+        b.setTitle(title)
+        b.setNegativeButton(getString(R.string.button_cancel)) { _, _ -> }
+        b.setPositiveButton(getString(R.string.button_ok)) { _, _ -> onOK() }
+        return b
+    }
+
+    private fun choiceDialog(v: View, e: PrefEnum)
+    {
+        val b = dialogInit(v, null, getString(e.titleId))
+        b.setSingleChoiceItems(e.nameArrId, e.x) { d, i ->
+            d.dismiss()
+            e.x = i
+        }
+        b.create().show()
+    }
+
     private fun itemSetupButton(
         view: View, list: LinearLayout, d: AlertDialog, prefix: String, item: Item)
     {
@@ -606,23 +627,6 @@ class MainActivity:
             true
         }
     }
-
-    private fun dialogInit(
-        view: View,
-        content: View?,
-        title: String,
-        onOK: DialogInterface.OnClickListener): AlertDialog.Builder
-    {
-        val b = AlertDialog.Builder(view.context)
-        if (content != null) b.setView(content)
-        b.setTitle(title)
-        b.setNegativeButton(getString(R.string.button_cancel)) { _, _ -> }
-        b.setPositiveButton(getString(R.string.button_ok), onOK)
-        return b
-    }
-
-    private fun dialogInit(view: View, content: View?, title: String) =
-        dialogInit(view, content, title) { _, _ -> }
 
     private fun setOnDoneClickOk(edit: EditText, d: AlertDialog)
     {
@@ -708,7 +712,7 @@ class MainActivity:
     private fun renameDialog(view: View, item: Item)
     {
         val z = RenameDialogBinding.inflate(LayoutInflater.from(view.context))
-        val d = dialogInit(view, z.root, getString(R.string.rename_title)) { _, _ ->
+        val d = dialogInit(view, z.root, getString(R.string.rename_title)) {
             item.label = z.editLabel.text.toString()
             item.order = z.editOrder.text.toString()
             itemsNotifyChange()
@@ -726,7 +730,7 @@ class MainActivity:
     private fun searchRenameDialog(view: View, e: SearchUrl)
     {
         val z = SearchRenameDialogBinding.inflate(LayoutInflater.from(view.context))
-        val d = dialogInit(view, z.root, getString(R.string.search_opt_title)) { _, _ ->
+        val d = dialogInit(view, z.root, getString(R.string.search_opt_title)) {
             when {
                 z.editNew.isChecked -> {
                     searchEngine.add(
@@ -764,7 +768,7 @@ class MainActivity:
     private fun pinDialog(view: View, item: Item)
     {
         val z = PinDialogBinding.inflate(LayoutInflater.from(view.context))
-        val d = dialogInit(view, z.root, item.label) { _, _ ->
+        val d = dialogInit(view, z.root, item.label) {
             item.pinned =
                 (if (z.pinHome.isChecked)  ITEM_PIN_HOME else 0) +
                 (if (z.pinLeft.isChecked)  pinUnset(leftItem,  ITEM_PIN_LEFT)  else 0) +
@@ -831,85 +835,25 @@ class MainActivity:
 
         z.backChoice.setOnClickListener {
             d.dismiss()
-            backDialog(view)
+            choiceDialog(view, backChoice)
         }
         z.colorChoice.setOnClickListener {
             d.dismiss()
-            colorDialog(view)
+            choiceDialog(view, colorChoice)
         }
         z.fontChoice.setOnClickListener {
             d.dismiss()
-            fontDialog(view)
+            choiceDialog(view, fontChoice)
         }
         z.timeChoice.setOnClickListener {
             d.dismiss()
-            timeDialog(view)
+            choiceDialog(view, timeChoice)
         }
         z.dateChoice.setOnClickListener {
             d.dismiss()
-            dateDialog(view)
+            choiceDialog(view, dateChoice)
         }
 
         d.show()
-    }
-
-    private fun dateDialog(view: View)
-    {
-        val b = dialogInit(view, null, getString(R.string.date_choice_title))
-        b.setSingleChoiceItems(R.array.date_choice, dateChoice) { d, which ->
-            d.dismiss()
-            dateChoice = which
-            setDateChoice(c, dateChoice)
-            onMinuteTick()
-        }
-        b.create().show()
-    }
-
-    private fun timeDialog(view: View)
-    {
-        val b = dialogInit(view, null, getString(R.string.time_choice_title))
-        b.setSingleChoiceItems(R.array.time_choice, timeChoice) { d, which ->
-            d.dismiss()
-            timeChoice = which
-            setTimeChoice(c, timeChoice)
-            onMinuteTick()
-        }
-        b.create().show()
-    }
-
-    private fun backDialog(view: View)
-    {
-        val b = dialogInit(view, null, getString(R.string.back_choice_title))
-        b.setSingleChoiceItems(R.array.back_choice, backChoice) { d, which ->
-            d.dismiss()
-            backChoice = which
-            setBackChoice(c, backChoice)
-            restart()  // recreate() is not enough when switching from opaque to trans* (bug?)
-        }
-        b.create().show()
-    }
-
-    private fun colorDialog(view: View)
-    {
-        val b = dialogInit(view, null, getString(R.string.color_choice_title))
-        b.setSingleChoiceItems(R.array.color_choice, colorChoice) { d, which ->
-            d.dismiss()
-            colorChoice = which
-            setColorChoice(c, colorChoice)
-            recreate()
-        }
-        b.create().show()
-    }
-
-    private fun fontDialog(view: View)
-    {
-        val b = dialogInit(view, null, getString(R.string.font_choice_title))
-        b.setSingleChoiceItems(R.array.font_choice, fontChoice) { d, which ->
-            d.dismiss()
-            fontChoice = which
-            setFontChoice(c, fontChoice)
-            recreate()
-        }
-        b.create().show()
     }
 }

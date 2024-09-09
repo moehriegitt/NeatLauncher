@@ -43,6 +43,13 @@ fun prefPutEnum(c: Context, arrId: Int, key: String, i: Int) =
         (try { c.resources.getTextArray(arrId)[i].toString() } catch (e: Exception) { "" }),
         "")
 
+fun prefPutEnum(c: Context, arrId: Int, key: String, i: Int, def: Int) =
+    prefPutString(c, key,
+        (try {
+            if (i == def) "" else c.resources.getTextArray(arrId)[i].toString()
+        } catch (_: Exception) { "" }),
+        "")
+
 fun prefGetEnum(c: Context, arrId: Int, key: String, def: Int): Int {
     try {
         val s = pref(c).getString(key, null)!!
@@ -51,7 +58,7 @@ fun prefGetEnum(c: Context, arrId: Int, key: String, def: Int): Int {
                 return i
             }
         }
-    } catch (e: Exception) { /* nothing */}
+    } catch (_: Exception) { /* nothing */}
     return def
 }
 
@@ -83,3 +90,41 @@ fun setColorChoice(c: Context, i: Int) = prefPutEnum(c, R.array.color_choice_key
 
 fun getReadContacts(c: Context) = pref(c).getBoolean("readContacts", true)
 fun setReadContacts(c: Context, i: Boolean) = prefPutBool(c, "readContacts", i, true)
+
+interface PrefInt {
+    var x: Int
+}
+
+abstract class PrefEnum(
+    val c: Context,
+    val titleId: Int,
+    val nameArrId: Int,
+    val keyArrId: Int,
+    val prefKey: String,
+    val defVal: Int,
+    val onChange: (Int) -> Unit): PrefInt
+{
+    override var x = prefGetEnum(c, keyArrId, prefKey, defVal)
+        set(new: Int) {
+            if (field != new) {
+                field = new
+                prefPutEnum(c, keyArrId, prefKey, field, defVal)
+                onChange(field)
+            }
+        }
+}
+
+class EnumDate(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.date_choice_title,
+    R.array.date_choice, R.array.date_choice_key, "dateChoice", date_yyyy, onChange)
+
+class EnumTime(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.time_choice_title,
+    R.array.time_choice, R.array.time_choice_key, "timeChoice", time_Hmmx, onChange)
+
+class EnumBack(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.back_choice_title,
+    R.array.back_choice, R.array.back_choice_key, "backChoice", back_opaq, onChange)
+
+class EnumFont(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.font_choice_title,
+    R.array.font_choice, R.array.font_choice_key, "fontChoice", font_ubun, onChange)
+
+class EnumColor(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.color_choice_title,
+    R.array.color_choice, R.array.color_choice_key, "colorChoice", color_ambr, onChange)
