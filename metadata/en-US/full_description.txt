@@ -14,16 +14,18 @@ Takes inspiration from Unlauncher (a fork of Slimlauncher), and Nolauncher, and 
 
 Features:
 
+  - uniform and elegant text-based design
   - configurable quick access links and gestures on home screen
   - shortcut support (long click on app by default)
   - hide/show apps (but keep searchable)
-  - apps can be renamed (in the launcher)
-  - integrated contact list into search
+  - apps can be renamed and reordered
+  - integrated contact list search
   - integrated, configurable web search
-  - multiple clock options
+  - clock options
   - date format options
   - configurable colour scheme
+  - can use home background image
   - free open source software
-  - no icon set support (not needed: no icons at all)
+  - no icon set support (no need: no icons at all)
   - no widget support
 

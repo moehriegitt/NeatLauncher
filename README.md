@@ -28,37 +28,33 @@ Nolauncher, and also feedback of users.
 
 ## Features
 
+  - uniform and elegant text-based design
   - configurable quick access links and gestures on home screen
   - shortcut support (long click on app by default)
   - hide/show apps (but keep searchable)
-  - apps can be renamed (in the launcher)
-  - integrated contact list into search
+  - apps can be renamed and reordered
+  - integrated contact list search
   - integrated, configurable web search
-  - multiple clock options
+  - clock options
   - date format options
   - configurable colour scheme
+  - can use home background image
   - free open source software
-  - no icon set support (not needed: no icons at all)
+  - no icon set support (no need: no icons at all)
   - no widget support
 
 ## Screenshots
 
-![image color001.png](metadata/en-US/images/phoneScreenshots/color001.png)
-![image color006.png](metadata/en-US/images/phoneScreenshots/color006.png)
-![image options001.png](metadata/en-US/images/phoneScreenshots/options001.png)
-![image pin016.png](metadata/en-US/images/phoneScreenshots/pin016.png)
-![image rename017.png](metadata/en-US/images/phoneScreenshots/rename017.png)
-![image search002.png](metadata/en-US/images/phoneScreenshots/search002.png)
-![image search003.png](metadata/en-US/images/phoneScreenshots/search003.png)
-![image search004.png](metadata/en-US/images/phoneScreenshots/search004.png)
-![image search005.png](metadata/en-US/images/phoneScreenshots/search005.png)
-![image shortcut011.png](metadata/en-US/images/phoneScreenshots/shortcut011.png)
-![image shortcut018.png](metadata/en-US/images/phoneScreenshots/shortcut018.png)
-![image theme012.png](metadata/en-US/images/phoneScreenshots/theme012.png)
-![image theme013.png](metadata/en-US/images/phoneScreenshots/theme013.png)
-![image uhr001.png](metadata/en-US/images/phoneScreenshots/uhr001.png)
-![image uhr007.png](metadata/en-US/images/phoneScreenshots/uhr007.png)
-![image uhr009.png](metadata/en-US/images/phoneScreenshots/uhr009.png)
-![image uhr010.png](metadata/en-US/images/phoneScreenshots/uhr010.png)
-![image uhr014.png](metadata/en-US/images/phoneScreenshots/uhr014.png)
-![image uhr015.png](metadata/en-US/images/phoneScreenshots/uhr015.png)
+![image clock02.png](metadata/en-US/images/phoneScreenshots/clock02.png)
+![image clock03.png](metadata/en-US/images/phoneScreenshots/clock03.png)
+![image clock04.png](metadata/en-US/images/phoneScreenshots/clock04.png)
+![image clock05.png](metadata/en-US/images/phoneScreenshots/clock05.png)
+![image clock06.jpg](metadata/en-US/images/phoneScreenshots/clock06.jpg)
+![image drawer01.png](metadata/en-US/images/phoneScreenshots/drawer01.png)
+![image drawer02.png](metadata/en-US/images/phoneScreenshots/drawer02.png)
+![image drawer03.png](metadata/en-US/images/phoneScreenshots/drawer03.png)
+![image drawer04.png](metadata/en-US/images/phoneScreenshots/drawer04.png)
+![image drawer05.png](metadata/en-US/images/phoneScreenshots/drawer05.png)
+![image options01.png](metadata/en-US/images/phoneScreenshots/options01.png)
+![image websearch01.png](metadata/en-US/images/phoneScreenshots/websearch01.png)
+![image websearch02.png](metadata/en-US/images/phoneScreenshots/websearch02.png)
