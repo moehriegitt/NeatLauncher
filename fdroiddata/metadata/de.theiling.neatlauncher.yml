@@ -1,0 +1,28 @@
+Categories:
+  - System
+  - Theming
+License: BSD-2-Clause
+AuthorName: Henrik Theiling
+AuthorWebSite: http://www.theiling.de/
+SourceCode: https://github.com/moehriegitt/NeatLauncher/
+IssueTracker: https://github.com/moehriegitt/NeatLauncher/issues
+AutoName: NeatLauncher
+RepoType: git
+Repo: https://github.com/moehriegitt/NeatLauncher.git
+Binaries: https://github.com/moehriegitt/NeatLauncher/releases/download/v%v/neatlauncher-release-%v.apk
+Builds:
+  - versionName: '1.0'
+    versionCode: 1
+    commit: a0c577088b22804ded4b31390d96a83d2aa19c34
+    subdir: app
+    sudo:
+      - apt-get update
+      - apt-get install -y openjdk-17-jdk-headless
+      - update-alternatives --auto java
+    gradle:
+      - yes
+AllowedAPKSigningKeys: 33b4182a20c0cc896db8c25c949b72ae966cbed57b08ecc1a463d2c4f5d22238
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: '1.0'
+CurrentVersionCode: 1
