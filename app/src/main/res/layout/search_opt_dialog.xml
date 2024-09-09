@@ -6,32 +6,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:paddingVertical="@dimen/popupScrollPadding"
         >
 
-        <TextView
-            android:text="@string/search_opt_title"
+        <LinearLayout
+            android:id="@+id/dialog_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/AppTheme.PopupTitle"
-            />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/popupScrollPadding"
+            android:orientation="vertical"
             >
-
-            <LinearLayout
-                android:id="@+id/dialog_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

@@ -90,21 +90,21 @@ class ItemAdapter(
         override fun onClick(view: View) {
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
-                clicky.onClick(view, partial[pos].item)
+                clicky.onClickItem(view, partial[pos].item)
             }
         }
 
         override fun onLongClick(view: View): Boolean {
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
-                clicky.onLongClick(view, partial[pos].item)
+                clicky.onLongClickItem(view, partial[pos].item)
             }
             return true
         }
     }
 
     interface ClickListener {
-        fun onClick(view: View, item: Item)
-        fun onLongClick(view: View, item: Item)
+        fun onClickItem(view: View, item: Item)
+        fun onLongClickItem(view: View, item: Item)
     }
 }

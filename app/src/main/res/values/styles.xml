@@ -2,180 +2,115 @@
 <resources>
     <!-- themes -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+
+        <item name="android:statusBarColor">@color/mainBackground</item>
+        <item name="android:navigationBarColor">@color/mainBackground</item>
         <item name="android:windowBackground">@color/mainBackground</item>
         <item name="android:colorBackground">@color/mainBackground</item>
+        <item name="colorPrimary">@color/mainBackground</item>
+
         <item name="android:colorForeground">@color/mainForeground</item>
         <item name="android:textColor">@color/mainForeground</item>
+
+        <item name="myHintTextColor">@color/dimColor</item>
         <item name="android:textColorHint">@color/dimColor</item>
-        <item name="colorPrimary">@color/mainBackground</item>
+
         <item name="titleTextColor">@color/titleColor</item>
         <item name="myTitleTextColor">@color/titleColor</item>
         <item name="myHeadingTextColor">@color/headingColor</item>
-        <item name="myHintTextColor">@color/dimColor</item>
+
         <item name="colorAccent">@color/accentColorAchromic</item>
+
+        <item name="android:alertDialogTheme">@style/AppAlertDialog</item>
     </style>
 
-    <!-- Ubuntu -->
-    <style name="AppTheme.Ubuntu">
+    <!-- Opaque/Transparent -->
+    <style name="AppTheme.opaq">
+        <item name="android:windowShowWallpaper">false</item>
+    </style>
+
+    <style name="AppTheme.tpar">
+        <item name="android:windowShowWallpaper">true</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.tluc">
+        <item name="android:windowShowWallpaper">true</item>
+
+        <item name="android:statusBarColor">@color/dimBackground</item>
+        <item name="android:navigationBarColor">@color/dimBackground</item>
+        <item name="android:windowBackground">@color/dimBackground</item>
+        <item name="android:colorBackground">@color/dimBackground</item>
+        <item name="colorPrimary">@color/dimBackground</item>
+    </style>
+
+    <!-- Fonts -->
+    <style name="AppTheme.ubun">
         <item name="android:fontFamily">@font/ubuntu</item>
     </style>
 
-    <style name="AppTheme.Ubuntu.Achromic">
-    </style>
-
-    <style name="AppTheme.Ubuntu.Amber">
-        <item name="colorAccent">@color/accentColorAmber</item>
-    </style>
-
-    <style name="AppTheme.Ubuntu.Pumpkin">
-        <item name="colorAccent">@color/accentColorPumpkin</item>
-    </style>
-
-    <style name="AppTheme.Ubuntu.Red">
-        <item name="colorAccent">@color/accentColorRed</item>
-    </style>
-
-    <style name="AppTheme.Ubuntu.Lilac">
-        <item name="colorAccent">@color/accentColorLilac</item>
-    </style>
-
-    <style name="AppTheme.Ubuntu.Blue">
-        <item name="colorAccent">@color/accentColorBlue</item>
-    </style>
-
-    <style name="AppTheme.Ubuntu.Cyan">
-        <item name="colorAccent">@color/accentColorCyan</item>
-    </style>
-
-    <!-- Sans -->
-    <style name="AppTheme.Sans">
+    <style name="AppTheme.sans">
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="AppTheme.Sans.Achromic">
-    </style>
-
-    <style name="AppTheme.Sans.Amber">
-        <item name="colorAccent">@color/accentColorAmber</item>
-    </style>
-
-    <style name="AppTheme.Sans.Pumpkin">
-        <item name="colorAccent">@color/accentColorPumpkin</item>
-    </style>
-
-    <style name="AppTheme.Sans.Red">
-        <item name="colorAccent">@color/accentColorRed</item>
-    </style>
-
-    <style name="AppTheme.Sans.Lilac">
-        <item name="colorAccent">@color/accentColorLilac</item>
-    </style>
-
-    <style name="AppTheme.Sans.Blue">
-        <item name="colorAccent">@color/accentColorBlue</item>
-    </style>
-
-    <style name="AppTheme.Sans.Cyan">
-        <item name="colorAccent">@color/accentColorCyan</item>
-    </style>
-
-    <!-- Serif -->
-    <style name="AppTheme.Serif">
+    <style name="AppTheme.seri">
         <item name="android:fontFamily">serif</item>
     </style>
 
-    <style name="AppTheme.Serif.Achromic">
-    </style>
-
-    <style name="AppTheme.Serif.Amber">
-        <item name="colorAccent">@color/accentColorAmber</item>
-    </style>
-
-    <style name="AppTheme.Serif.Pumpkin">
-        <item name="colorAccent">@color/accentColorPumpkin</item>
-    </style>
-
-    <style name="AppTheme.Serif.Red">
-        <item name="colorAccent">@color/accentColorRed</item>
-    </style>
-
-    <style name="AppTheme.Serif.Lilac">
-        <item name="colorAccent">@color/accentColorLilac</item>
-    </style>
-
-    <style name="AppTheme.Serif.Blue">
-        <item name="colorAccent">@color/accentColorBlue</item>
-    </style>
-
-    <style name="AppTheme.Serif.Cyan">
-        <item name="colorAccent">@color/accentColorCyan</item>
-    </style>
-
-    <!-- Cursive -->
-    <style name="AppTheme.Cursive">
+    <style name="AppTheme.curs">
         <item name="android:fontFamily">cursive</item>
     </style>
 
-    <style name="AppTheme.Cursive.Achromic">
-    </style>
-
-    <style name="AppTheme.Cursive.Amber">
-        <item name="colorAccent">@color/accentColorAmber</item>
-    </style>
-
-    <style name="AppTheme.Cursive.Pumpkin">
-        <item name="colorAccent">@color/accentColorPumpkin</item>
-    </style>
-
-    <style name="AppTheme.Cursive.Red">
-        <item name="colorAccent">@color/accentColorRed</item>
-    </style>
-
-    <style name="AppTheme.Cursive.Lilac">
-        <item name="colorAccent">@color/accentColorLilac</item>
-    </style>
-
-    <style name="AppTheme.Cursive.Blue">
-        <item name="colorAccent">@color/accentColorBlue</item>
-    </style>
-
-    <style name="AppTheme.Cursive.Cyan">
-        <item name="colorAccent">@color/accentColorCyan</item>
-    </style>
-
-    <!-- Mono -->
-    <style name="AppTheme.Mono">
+    <style name="AppTheme.mono">
         <item name="android:fontFamily">monospace</item>
     </style>
 
-    <style name="AppTheme.Mono.Achromic">
+    <!-- Color -->
+    <style name="AppTheme.achr">
     </style>
 
-    <style name="AppTheme.Mono.Amber">
+    <style name="AppTheme.ambr">
         <item name="colorAccent">@color/accentColorAmber</item>
     </style>
 
-    <style name="AppTheme.Mono.Pumpkin">
+    <style name="AppTheme.pump">
         <item name="colorAccent">@color/accentColorPumpkin</item>
     </style>
 
-    <style name="AppTheme.Mono.Red">
+    <style name="AppTheme.redx">
         <item name="colorAccent">@color/accentColorRed</item>
     </style>
 
-    <style name="AppTheme.Mono.Lilac">
+    <style name="AppTheme.lila">
         <item name="colorAccent">@color/accentColorLilac</item>
     </style>
 
-    <style name="AppTheme.Mono.Blue">
+    <style name="AppTheme.blue">
         <item name="colorAccent">@color/accentColorBlue</item>
     </style>
 
-    <style name="AppTheme.Mono.Cyan">
+    <style name="AppTheme.cyan">
         <item name="colorAccent">@color/accentColorCyan</item>
     </style>
 
     <!-- element styles -->
+    <style name="AppAlertDialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@color/mainBackground</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowTitleStyle">@style/AppTheme.PopupTitle</item>
+    </style>
+
     <style name="AppTheme.NormalDatetime">
     </style>
 
@@ -195,6 +130,10 @@
         <item name="android:fontFamily">monospace</item>
         <item name="android:lineSpacingExtra">-6sp</item>
         <item name="android:letterSpacing">0.05</item>
+        <item name="android:background">@color/dimBackground</item>
+        <item name="android:paddingHorizontal">@dimen/gridClockHPadding</item>
+        <item name="android:paddingVertical">@dimen/gridClockVPadding</item>
+        <item name="android:layout_marginTop">@dimen/gridClockTopMargin</item>
     </style>
 
     <style name="AppTheme.HomeNormal">

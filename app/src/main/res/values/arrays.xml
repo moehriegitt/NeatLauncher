@@ -41,4 +41,10 @@
         <item>curs</item>
         <item>ubun</item>
     </string-array>
+
+    <string-array name="back_choice_key" translatable="false">
+        <item>opaq</item>
+        <item>tluc</item>
+        <item>tpar</item>
+    </string-array>
 </resources>

@@ -19,6 +19,10 @@
     <dimen name="drawerItemPaddingStart">10dp</dimen>
     <dimen name="drawerInitialPaddingStart">10dp</dimen>
 
+    <dimen name="gridClockHPadding">10dp</dimen>
+    <dimen name="gridClockVPadding">5dp</dimen>
+    <dimen name="gridClockTopMargin">5dp</dimen>
+
     <dimen name="paddingSearchOptV">10dp</dimen>
     <dimen name="paddingSearchOptH">20dp</dimen>
 

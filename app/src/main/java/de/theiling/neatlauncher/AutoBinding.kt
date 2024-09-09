@@ -16,33 +16,31 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
 class ItemActionsBinding(
-    val rootView: LinearLayout,
-    val itemRename: TextView,
-    val itemShortcuts: LinearLayout,
-    val shortcutList: LinearLayout,
-    val itemShow: TextView,
+    rootView: LinearLayout,
     val itemHide: TextView,
-    val itemPin: TextView,
-    val dialogTitle: TextView,
-    val itemRemove: TextView,
     val itemInfo: TextView,
-    val itemRid: TextView):
+    val itemPin: TextView,
+    val itemRemove: TextView,
+    val itemRename: TextView,
+    val itemRid: TextView,
+    val itemShortcuts: LinearLayout,
+    val itemShow: TextView,
+    val shortcutList: LinearLayout):
     ViewBinding
 {
     override val root = rootView
     companion object {
         fun bind(rootView: View) = ItemActionsBinding(
             rootView as LinearLayout,
-            rootView.findViewById(R.id.item_rename)!!,
-            rootView.findViewById(R.id.item_shortcuts)!!,
-            rootView.findViewById(R.id.shortcut_list)!!,
-            rootView.findViewById(R.id.item_show)!!,
             rootView.findViewById(R.id.item_hide)!!,
-            rootView.findViewById(R.id.item_pin)!!,
-            rootView.findViewById(R.id.dialog_title)!!,
-            rootView.findViewById(R.id.item_remove)!!,
             rootView.findViewById(R.id.item_info)!!,
-            rootView.findViewById(R.id.item_rid)!!)
+            rootView.findViewById(R.id.item_pin)!!,
+            rootView.findViewById(R.id.item_remove)!!,
+            rootView.findViewById(R.id.item_rename)!!,
+            rootView.findViewById(R.id.item_rid)!!,
+            rootView.findViewById(R.id.item_shortcuts)!!,
+            rootView.findViewById(R.id.item_show)!!,
+            rootView.findViewById(R.id.shortcut_list)!!)
 
         fun inflate(
             inflater: LayoutInflater,
@@ -62,17 +60,17 @@ class ItemActionsBinding(
 class MainActivityBinding(
     val content: ConstraintLayout,
     val drawerRecycler: RecyclerView,
-    val mainSearch: EditText,
-    val mainHead: LinearLayout,
-    val mainClockDigital: TextView,
-    val mainTopMargin: View,
+    val homeRecycler: RecyclerView,
     val mainClockAnalog: NeatAnalogClock,
+    val mainClockBox: LinearLayout,
+    val mainClockDigital: TextView,
     val mainClockGrid: NeatGridClock,
     val mainClockWord: NeatWordClock,
-    val homeRecycler: RecyclerView,
+    val mainDate: TextView,
+    val mainHead: LinearLayout,
+    val mainSearch: EditText,
     val mainSearchOpt: TextView,
-    val mainClockBox: LinearLayout,
-    val mainDate: TextView):
+    val mainTopMargin: View):
     ViewBinding
 {
     override val root = content
@@ -80,17 +78,17 @@ class MainActivityBinding(
         fun bind(rootView: View) = MainActivityBinding(
             rootView as ConstraintLayout,
             rootView.findViewById(R.id.drawer_recycler)!!,
-            rootView.findViewById(R.id.main_search)!!,
-            rootView.findViewById(R.id.main_head)!!,
-            rootView.findViewById(R.id.main_clock_digital)!!,
-            rootView.findViewById(R.id.main_top_margin)!!,
+            rootView.findViewById(R.id.home_recycler)!!,
             rootView.findViewById(R.id.main_clock_analog)!!,
+            rootView.findViewById(R.id.main_clock_box)!!,
+            rootView.findViewById(R.id.main_clock_digital)!!,
             rootView.findViewById(R.id.main_clock_grid)!!,
             rootView.findViewById(R.id.main_clock_word)!!,
-            rootView.findViewById(R.id.home_recycler)!!,
+            rootView.findViewById(R.id.main_date)!!,
+            rootView.findViewById(R.id.main_head)!!,
+            rootView.findViewById(R.id.main_search)!!,
             rootView.findViewById(R.id.main_search_opt)!!,
-            rootView.findViewById(R.id.main_clock_box)!!,
-            rootView.findViewById(R.id.main_date)!!)
+            rootView.findViewById(R.id.main_top_margin)!!)
 
         fun inflate(
             inflater: LayoutInflater,
@@ -108,23 +106,25 @@ class MainActivityBinding(
 }
 
 class MainOptDialogBinding(
-    val rootView: LinearLayout,
+    rootView: LinearLayout,
+    val backChoice: TextView,
     val colorChoice: TextView,
-    val readContactList: CheckBox,
-    val timeChoice: TextView,
     val dateChoice: TextView,
-    val fontChoice: TextView):
+    val fontChoice: TextView,
+    val readContactList: CheckBox,
+    val timeChoice: TextView):
     ViewBinding
 {
     override val root = rootView
     companion object {
         fun bind(rootView: View) = MainOptDialogBinding(
             rootView as LinearLayout,
+            rootView.findViewById(R.id.back_choice)!!,
             rootView.findViewById(R.id.color_choice)!!,
-            rootView.findViewById(R.id.read_contact_list)!!,
-            rootView.findViewById(R.id.time_choice)!!,
             rootView.findViewById(R.id.date_choice)!!,
-            rootView.findViewById(R.id.font_choice)!!)
+            rootView.findViewById(R.id.font_choice)!!,
+            rootView.findViewById(R.id.read_contact_list)!!,
+            rootView.findViewById(R.id.time_choice)!!)
 
         fun inflate(
             inflater: LayoutInflater,
@@ -142,27 +142,25 @@ class MainOptDialogBinding(
 }
 
 class PinDialogBinding(
-    val rootView: FrameLayout,
-    val pinHome: CheckBox,
-    val dialogTitle: TextView,
-    val pinTime: CheckBox,
+    rootView: FrameLayout,
+    val pinDate: CheckBox,
     val pinDown: CheckBox,
-    val pinRight: CheckBox,
+    val pinHome: CheckBox,
     val pinLeft: CheckBox,
-    val pinDate: CheckBox):
+    val pinRight: CheckBox,
+    val pinTime: CheckBox):
     ViewBinding
 {
     override val root = rootView
     companion object {
         fun bind(rootView: View) = PinDialogBinding(
             rootView as FrameLayout,
-            rootView.findViewById(R.id.pin_home)!!,
-            rootView.findViewById(R.id.dialog_title)!!,
-            rootView.findViewById(R.id.pin_time)!!,
+            rootView.findViewById(R.id.pin_date)!!,
             rootView.findViewById(R.id.pin_down)!!,
-            rootView.findViewById(R.id.pin_right)!!,
+            rootView.findViewById(R.id.pin_home)!!,
             rootView.findViewById(R.id.pin_left)!!,
-            rootView.findViewById(R.id.pin_date)!!)
+            rootView.findViewById(R.id.pin_right)!!,
+            rootView.findViewById(R.id.pin_time)!!)
 
         fun inflate(
             inflater: LayoutInflater,
@@ -180,7 +178,7 @@ class PinDialogBinding(
 }
 
 class PopupItemBinding(
-    val rootView: FrameLayout,
+    rootView: FrameLayout,
     val itemName: TextView):
     ViewBinding
 {
@@ -206,17 +204,17 @@ class PopupItemBinding(
 }
 
 class RenameDialogBinding(
-    val rootView: FrameLayout,
-    val editOrder: EditText,
-    val editLabel: EditText):
+    rootView: FrameLayout,
+    val editLabel: EditText,
+    val editOrder: EditText):
     ViewBinding
 {
     override val root = rootView
     companion object {
         fun bind(rootView: View) = RenameDialogBinding(
             rootView as FrameLayout,
-            rootView.findViewById(R.id.edit_order)!!,
-            rootView.findViewById(R.id.edit_label)!!)
+            rootView.findViewById(R.id.edit_label)!!,
+            rootView.findViewById(R.id.edit_order)!!)
 
         fun inflate(
             inflater: LayoutInflater,
@@ -234,7 +232,7 @@ class RenameDialogBinding(
 }
 
 class SearchOptDialogBinding(
-    val rootView: FrameLayout,
+    rootView: FrameLayout,
     val dialogList: LinearLayout):
     ViewBinding
 {
@@ -260,23 +258,25 @@ class SearchOptDialogBinding(
 }
 
 class SearchRenameDialogBinding(
-    val rootView: FrameLayout,
-    val editNew: RadioButton,
-    val editName: EditText,
-    val editUrl: EditText,
+    rootView: FrameLayout,
     val editDef: CheckBox,
-    val editDel: RadioButton):
+    val editDel: RadioButton,
+    val editKeep: RadioButton,
+    val editName: EditText,
+    val editNew: RadioButton,
+    val editUrl: EditText):
     ViewBinding
 {
     override val root = rootView
     companion object {
         fun bind(rootView: View) = SearchRenameDialogBinding(
             rootView as FrameLayout,
-            rootView.findViewById(R.id.edit_new)!!,
-            rootView.findViewById(R.id.edit_name)!!,
-            rootView.findViewById(R.id.edit_url)!!,
             rootView.findViewById(R.id.edit_def)!!,
-            rootView.findViewById(R.id.edit_del)!!)
+            rootView.findViewById(R.id.edit_del)!!,
+            rootView.findViewById(R.id.edit_keep)!!,
+            rootView.findViewById(R.id.edit_name)!!,
+            rootView.findViewById(R.id.edit_new)!!,
+            rootView.findViewById(R.id.edit_url)!!)
 
         fun inflate(
             inflater: LayoutInflater,

@@ -16,7 +16,7 @@
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.Ubuntu.Achromic"
+        android:theme="@style/AppTheme.opaq.ubun.achr"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"

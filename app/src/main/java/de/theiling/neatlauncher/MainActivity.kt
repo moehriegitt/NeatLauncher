@@ -43,7 +43,8 @@ import java.util.Locale
 import kotlin.math.abs
 
 class MainActivity:
-    AppCompatActivity()
+    AppCompatActivity(),
+    ItemAdapter.ClickListener
 {
     enum class Mode {
         INIT,
@@ -60,21 +61,13 @@ class MainActivity:
     private var timeItem : Item? = null
     private var dateItem : Item? = null
 
-    private val clicky = object: ItemAdapter.ClickListener {
-        override fun onClick(view: View, item: Item) {
-            if (allowClick) {
-                itemLaunch(item)
-            }
-        }
-        override fun onLongClick(view: View, item: Item) = itemDialog(view, item)
-    }
-
-    private val homeAdapter = ItemAdapter(homeItems, R.layout.home_item, { true }, clicky)
-    private val drawerAdapter = ItemAdapter(items, R.layout.drawer_item, { !it.hidden }, clicky)
+    private val homeAdapter = ItemAdapter(homeItems, R.layout.home_item, { true }, this)
+    private val drawerAdapter = ItemAdapter(items, R.layout.drawer_item, { !it.hidden }, this)
 
     private var searchStr: String = ""
     private var dateChoice = 0
     private var timeChoice = 0
+    private var backChoice = 0
     private var colorChoice = 0
     private var fontChoice = 0
 
@@ -135,16 +128,21 @@ class MainActivity:
         searchEngine = SearchEngine(c)
         dateChoice = getDateChoice(c)
         timeChoice = getTimeChoice(c)
+        backChoice = getBackChoice(c)
         colorChoice = getColorChoice(c)
         fontChoice = getFontChoice(c)
 
-        setTheme(selectTheme(fontChoice, colorChoice))
-
+        setTheme(selectTheme(backChoice, fontChoice, colorChoice))
         enableEdgeToEdge()
+        if (Build.VERSION.SDK_INT >= 29) {
+            // avoid translucent navibar in 3-button edge2edge.
+            // Alternatively, but for fewer configs, we could:
+            //    window.navigationBarColor = getColor(R.color.mainBackground)
+            window.isNavigationBarContrastEnforced = false
+        }
+
         z = MainActivityBinding.inflate(layoutInflater)
         setContentView(z.root)
-
-        window.navigationBarColor = getColor(R.color.mainBackground)
 
         z.homeRecycler.setAdapter(homeAdapter)
         z.drawerRecycler.setAdapter(drawerAdapter)
@@ -254,6 +252,14 @@ class MainActivity:
             setMode(modeSecondary())
         }
     }
+
+    override fun onClickItem(view: View, item: Item) {
+        if (allowClick) {
+            itemLaunch(item)
+        }
+    }
+
+    override fun onLongClickItem(view: View, item: Item) = itemDialog(view, item)
 
     private fun onFlingDown() {
         when (getMode()) {
@@ -562,11 +568,17 @@ class MainActivity:
         }
     }
 
-    private fun itemInfoLaunch(pack: String)
-    {
+    private fun itemInfoLaunch(pack: String) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         intent.addCategory(Intent.CATEGORY_DEFAULT)
         intent.data = Uri.parse("package:$pack")
+        startActivity(intent)
+    }
+
+    private fun restart() {
+        val i = intent
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        finish()
         startActivity(intent)
     }
 
@@ -595,12 +607,22 @@ class MainActivity:
         }
     }
 
-    private fun dialogInit(view: View, content: View): AlertDialog.Builder {
+    private fun dialogInit(
+        view: View,
+        content: View?,
+        title: String,
+        onOK: DialogInterface.OnClickListener): AlertDialog.Builder
+    {
         val b = AlertDialog.Builder(view.context)
-        b.setView(content)
+        if (content != null) b.setView(content)
+        b.setTitle(title)
         b.setNegativeButton(getString(R.string.button_cancel)) { _, _ -> }
+        b.setPositiveButton(getString(R.string.button_ok), onOK)
         return b
     }
+
+    private fun dialogInit(view: View, content: View?, title: String) =
+        dialogInit(view, content, title) { _, _ -> }
 
     private fun setOnDoneClickOk(edit: EditText, d: AlertDialog)
     {
@@ -616,8 +638,7 @@ class MainActivity:
     private fun itemDialog(view: View, item: Item)
     {
         val z = ItemActionsBinding.inflate(LayoutInflater.from(view.context))
-        z.dialogTitle.text = item.label
-        val d = dialogInit(view, z.root).create()
+        val d = dialogInit(view, z.root, item.label).create()
 
         // Info
         z.itemInfo.visibility = visibleIf(item.pack != "")
@@ -687,20 +708,16 @@ class MainActivity:
     private fun renameDialog(view: View, item: Item)
     {
         val z = RenameDialogBinding.inflate(LayoutInflater.from(view.context))
-        val b = dialogInit(view, z.root)
-
-        z.editLabel.setText(item.label)
-        z.editLabel.hint = item.origLabel
-
-        z.editOrder.setText(item.pref.order)
-
-        b.setPositiveButton(getString(R.string.button_ok)) { _, _ ->
+        val d = dialogInit(view, z.root, getString(R.string.rename_title)) { _, _ ->
             item.label = z.editLabel.text.toString()
             item.order = z.editOrder.text.toString()
             itemsNotifyChange()
-        }
+        }.create()
 
-        val d = b.create()
+        z.editLabel.setText(item.label)
+        z.editLabel.hint = item.origLabel
+        z.editOrder.setText(item.pref.order)
+
         setOnDoneClickOk(z.editLabel, d)
         setOnDoneClickOk(z.editOrder, d)
         d.show()
@@ -709,14 +726,7 @@ class MainActivity:
     private fun searchRenameDialog(view: View, e: SearchUrl)
     {
         val z = SearchRenameDialogBinding.inflate(LayoutInflater.from(view.context))
-        val b = dialogInit(view, z.root)
-
-        z.editName.setText(e.name)
-        z.editUrl.setText(e.url)
-        z.editDef.isChecked = e.isDefault
-        z.editDef.visibility = visibleIf(!e.isDefault)
-
-        b.setPositiveButton(getString(R.string.button_ok)) { _, _ ->
+        val d = dialogInit(view, z.root, getString(R.string.search_opt_title)) { _, _ ->
             when {
                 z.editNew.isChecked -> {
                     searchEngine.add(
@@ -734,9 +744,13 @@ class MainActivity:
                 }
             }
             searchEngine.savePref()
-        }
+        }.create()
 
-        val d = b.create()
+        z.editName.setText(e.name)
+        z.editUrl.setText(e.url)
+        z.editDef.isChecked = e.isDefault
+        z.editDef.visibility = visibleIf(!e.isDefault)
+
         setOnDoneClickOk(z.editName, d)
         setOnDoneClickOk(z.editUrl, d)
         d.show()
@@ -750,17 +764,7 @@ class MainActivity:
     private fun pinDialog(view: View, item: Item)
     {
         val z = PinDialogBinding.inflate(LayoutInflater.from(view.context))
-        val b = dialogInit(view, z.root)
-        z.dialogTitle.text = item.label
-
-        z.pinHome.isChecked = (item.pinned and ITEM_PIN_HOME) == 0
-        z.pinLeft.isChecked = (item.pinned and ITEM_PIN_LEFT) != 0
-        z.pinRight.isChecked = (item.pinned and ITEM_PIN_RIGHT) != 0
-        z.pinDown.isChecked = (item.pinned and ITEM_PIN_DOWN) != 0
-        z.pinTime.isChecked = (item.pinned and ITEM_PIN_TIME) != 0
-        z.pinDate.isChecked = (item.pinned and ITEM_PIN_DATE) != 0
-
-        b.setPositiveButton(getString(R.string.button_ok)) { _, _ ->
+        val d = dialogInit(view, z.root, item.label) { _, _ ->
             item.pinned =
                 (if (z.pinHome.isChecked)  ITEM_PIN_HOME else 0) +
                 (if (z.pinLeft.isChecked)  pinUnset(leftItem,  ITEM_PIN_LEFT)  else 0) +
@@ -769,9 +773,16 @@ class MainActivity:
                 (if (z.pinTime.isChecked)  pinUnset(timeItem,  ITEM_PIN_TIME)  else 0) +
                 (if (z.pinDate.isChecked)  pinUnset(dateItem,  ITEM_PIN_DATE)  else 0)
             homeNotifyChange()
-        }
+        }.create()
 
-        b.create().show()
+        z.pinHome.isChecked = (item.pinned and ITEM_PIN_HOME) == 0
+        z.pinLeft.isChecked = (item.pinned and ITEM_PIN_LEFT) != 0
+        z.pinRight.isChecked = (item.pinned and ITEM_PIN_RIGHT) != 0
+        z.pinDown.isChecked = (item.pinned and ITEM_PIN_DOWN) != 0
+        z.pinTime.isChecked = (item.pinned and ITEM_PIN_TIME) != 0
+        z.pinDate.isChecked = (item.pinned and ITEM_PIN_DATE) != 0
+
+        d.show()
     }
 
     private fun searchSetupButton(
@@ -794,7 +805,7 @@ class MainActivity:
     private fun searchOptDialog(view: View)
     {
         val z = SearchOptDialogBinding.inflate(LayoutInflater.from(view.context))
-        val d = dialogInit(view, z.root).create()
+        val d = dialogInit(view, z.root, getString(R.string.search_opt_title)).create()
         val them = searchEngine.them
         them.sortWith { x, y -> x.name.compareTo(y.name) }
         for (e in them) {
@@ -806,7 +817,7 @@ class MainActivity:
     private fun mainOptDialog(view: View)
     {
         val z = MainOptDialogBinding.inflate(LayoutInflater.from(view.context))
-        val b = dialogInit(view, z.root)
+        val d = dialogInit(view, z.root, getString(R.string.main_opt_title)).create()
 
         z.readContactList.isChecked = getReadContacts(c)
         z.readContactList.setOnCheckedChangeListener { _, checked ->
@@ -818,10 +829,10 @@ class MainActivity:
             }
         }
 
-        b.setPositiveButton(getString(R.string.button_ok)) { _, _ -> }
-
-        val d = b.create()
-
+        z.backChoice.setOnClickListener {
+            d.dismiss()
+            backDialog(view)
+        }
         z.colorChoice.setOnClickListener {
             d.dismiss()
             colorDialog(view)
@@ -844,7 +855,7 @@ class MainActivity:
 
     private fun dateDialog(view: View)
     {
-        val b = AlertDialog.Builder(view.context)
+        val b = dialogInit(view, null, getString(R.string.date_choice_title))
         b.setSingleChoiceItems(R.array.date_choice, dateChoice) { d, which ->
             d.dismiss()
             dateChoice = which
@@ -856,7 +867,7 @@ class MainActivity:
 
     private fun timeDialog(view: View)
     {
-        val b = AlertDialog.Builder(view.context)
+        val b = dialogInit(view, null, getString(R.string.time_choice_title))
         b.setSingleChoiceItems(R.array.time_choice, timeChoice) { d, which ->
             d.dismiss()
             timeChoice = which
@@ -866,9 +877,21 @@ class MainActivity:
         b.create().show()
     }
 
+    private fun backDialog(view: View)
+    {
+        val b = dialogInit(view, null, getString(R.string.back_choice_title))
+        b.setSingleChoiceItems(R.array.back_choice, backChoice) { d, which ->
+            d.dismiss()
+            backChoice = which
+            setBackChoice(c, backChoice)
+            restart()  // recreate() is not enough when switching from opaque to trans* (bug?)
+        }
+        b.create().show()
+    }
+
     private fun colorDialog(view: View)
     {
-        val b = AlertDialog.Builder(view.context)
+        val b = dialogInit(view, null, getString(R.string.color_choice_title))
         b.setSingleChoiceItems(R.array.color_choice, colorChoice) { d, which ->
             d.dismiss()
             colorChoice = which
@@ -880,7 +903,7 @@ class MainActivity:
 
     private fun fontDialog(view: View)
     {
-        val b = AlertDialog.Builder(view.context)
+        val b = dialogInit(view, null, getString(R.string.font_choice_title))
         b.setSingleChoiceItems(R.array.font_choice, fontChoice) { d, which ->
             d.dismiss()
             fontChoice = which

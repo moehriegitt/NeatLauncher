@@ -12,13 +12,6 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:text="@string/rename_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.PopupTitle"
-            />
-
         <EditText
             android:id="@+id/edit_label"
             android:layout_width="match_parent"

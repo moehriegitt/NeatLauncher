@@ -112,7 +112,7 @@
         <item>Voreinstellung</item>
         <item>kein Datum</item>
         <item>2024-01-01</item>
-        <item>Mon 2024-01-01</item>
+        <item>Mo. 2024-01-01</item>
         <item>Montag</item>
     </string-array>
 
@@ -131,7 +131,7 @@
 
     <string name="color_choice_title">Farbe</string>
     <string-array name="color_choice">
-        <item>Schwarzweiß</item>
+        <item>Farblos</item>
         <item>Bernstein</item>
         <item>Kürbis</item>
         <item>Rot</item>
@@ -147,6 +147,13 @@
         <item>Monospace</item>
         <item>Handschrift</item>
         <item>Ubuntu</item>
+    </string-array>
+
+    <string name="back_choice_title">Hintergrund</string>
+    <string-array name="back_choice">
+        <item>Einfarbig</item>
+        <item>Durchscheinend</item>
+        <item>Durchsichtig</item>
     </string-array>
 
     <string name="time_grid_base">

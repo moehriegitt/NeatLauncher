@@ -148,6 +148,13 @@
         <item>Ubuntu</item>
     </string-array>
 
+    <string name="back_choice_title">Background</string>
+    <string-array name="back_choice">
+        <item>Opaque</item>
+        <item>Translucent</item>
+        <item>Transparent</item>
+    </string-array>
+
     <string name="time_grid_base">
         twentyafive
         quarterhalf

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="mainBackground">#FF000000</color>
+    <color name="dimBackground">#80000000</color>
+
     <color name="mainForeground">#FFFFFFFF</color>
     <color name="titleColor">#80FFFFFF</color>
     <color name="headingColor">#80FFFFFF</color>

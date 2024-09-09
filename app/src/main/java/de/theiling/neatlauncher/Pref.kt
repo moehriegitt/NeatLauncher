@@ -72,11 +72,14 @@ fun setDateChoice(c: Context, i: Int) = prefPutEnum(c, R.array.date_choice_key, 
 fun getTimeChoice(c: Context) = prefGetEnum(c, R.array.time_choice_key, "timeChoice", time_Hmmx)
 fun setTimeChoice(c: Context, i: Int) = prefPutEnum(c, R.array.time_choice_key, "timeChoice", i)
 
-fun getColorChoice(c: Context) = prefGetEnum(c, R.array.color_choice_key, "colorChoice",color_ambr)
-fun setColorChoice(c: Context, i: Int) = prefPutEnum(c, R.array.color_choice_key, "colorChoice", i)
+fun getBackChoice(c: Context) = prefGetEnum(c, R.array.back_choice_key, "backChoice", back_opaq)
+fun setBackChoice(c: Context, i: Int) = prefPutEnum(c, R.array.back_choice_key, "backChoice", i)
 
 fun getFontChoice(c: Context) = prefGetEnum(c, R.array.font_choice_key, "fontChoice", font_ubun)
 fun setFontChoice(c: Context, i: Int) = prefPutEnum(c, R.array.font_choice_key, "fontChoice", i)
+
+fun getColorChoice(c: Context) = prefGetEnum(c, R.array.color_choice_key, "colorChoice",color_ambr)
+fun setColorChoice(c: Context, i: Int) = prefPutEnum(c, R.array.color_choice_key, "colorChoice", i)
 
 fun getReadContacts(c: Context) = pref(c).getBoolean("readContacts", true)
 fun setReadContacts(c: Context, i: Boolean) = prefPutBool(c, "readContacts", i, true)

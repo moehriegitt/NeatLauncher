@@ -12,13 +12,6 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:text="@string/search_opt_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.PopupTitle"
-            />
-
         <EditText
             android:id="@+id/edit_name"
             android:hint="@string/search_name_hint"
@@ -59,7 +52,9 @@
             android:orientation="vertical"
             >
 
+            <!-- Despite unused, this needs an :id, otherwise the RadioGroup ignores it -->
             <RadioButton
+                android:id="@+id/edit_keep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
