@@ -11,8 +11,8 @@ android {
         applicationId = "de.theiling.neatlauncher"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
     }
     buildTypes {
         release {
@@ -29,6 +29,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    dependenciesInfo {
+        // Seems like I have the DependencyInfoBlock thing.  Fix according to F-Droid forum hints:
+        includeInApk = false
+        includeInBundle = false
     }
 }
 
