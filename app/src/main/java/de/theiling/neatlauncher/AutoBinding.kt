@@ -25,6 +25,7 @@ class ItemActionsBinding(
     val itemRid: TextView,
     val itemShortcuts: LinearLayout,
     val itemShow: TextView,
+    val itemStart: TextView,
     val shortcutList: LinearLayout):
     ViewBinding
 {
@@ -40,6 +41,7 @@ class ItemActionsBinding(
             rootView.findViewById(R.id.item_rid)!!,
             rootView.findViewById(R.id.item_shortcuts)!!,
             rootView.findViewById(R.id.item_show)!!,
+            rootView.findViewById(R.id.item_start)!!,
             rootView.findViewById(R.id.shortcut_list)!!)
 
         fun inflate(
@@ -111,6 +113,7 @@ class MainOptDialogBinding(
     val colorChoice: TextView,
     val dateChoice: TextView,
     val fontChoice: TextView,
+    val mainInfo: TextView,
     val readContactList: CheckBox,
     val timeChoice: TextView):
     ViewBinding
@@ -123,6 +126,7 @@ class MainOptDialogBinding(
             rootView.findViewById(R.id.color_choice)!!,
             rootView.findViewById(R.id.date_choice)!!,
             rootView.findViewById(R.id.font_choice)!!,
+            rootView.findViewById(R.id.main_info)!!,
             rootView.findViewById(R.id.read_contact_list)!!,
             rootView.findViewById(R.id.time_choice)!!)
 

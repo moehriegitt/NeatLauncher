@@ -19,11 +19,11 @@
             >
 
             <TextView
-                android:id="@+id/item_info"
+                android:id="@+id/item_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/item_info"
-                style="@style/AppTheme.PopupItem"
+                android:text="@string/item_start"
+                style="@style/AppTheme.PopupAction"
                 />
 
             <TextView
@@ -71,6 +71,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/item_remove"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/item_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_info"
                 style="@style/AppTheme.PopupItem"
                 />
 

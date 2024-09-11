@@ -104,7 +104,7 @@
     <!-- element styles -->
     <style name="AppAlertDialog">
         <item name="android:windowIsFloating">true</item>
-        <item name="android:windowBackground">@color/mainBackground</item>
+        <item name="android:windowBackground">@color/weakBackground</item>
         <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>

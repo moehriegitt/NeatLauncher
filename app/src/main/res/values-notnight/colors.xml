@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="mainBackground">#FFFFFFFF</color>
+    <color name="mainBackground">#FFFFFF</color>
+    <color name="weakBackground">#CCCCCC</color>
     <color name="dimBackground">#80FFFFFF</color>
 
-    <color name="mainForeground">#FF000000</color>
-    <color name="titleColor">#FF000000</color>
+    <color name="mainForeground">#000000</color>
+    <color name="titleColor">#80000000</color>
     <color name="headingColor">#80000000</color>
     <color name="dimColor">#80000000</color>
     <color name="veryDimColor">#30000000</color>
 
-    <color name="accentColorAchromic">#FF8000</color>
+    <color name="accentColorAchromic">#000000</color>
     <color name="accentColorAmber">#EFB000</color>
     <color name="accentColorPumpkin">#FF8000</color>
     <color name="accentColorRed">#FF3030</color>

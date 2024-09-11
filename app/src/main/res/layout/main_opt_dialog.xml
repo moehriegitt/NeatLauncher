@@ -67,6 +67,16 @@
                 style="@style/AppTheme.PopupItem"
                 />
 
+            <TextView
+                android:id="@+id/main_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_info"
+                style="@style/AppTheme.PopupItem"
+                />
+
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

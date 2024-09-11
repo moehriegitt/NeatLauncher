@@ -64,6 +64,7 @@
     <string name="item_settings_home">Einstellungen: Start</string>
     <string name="item_phone_dial">Telefon: Wählen</string>
 
+    <string name="item_start">Starten</string>
     <string name="item_info">Info</string>
     <string name="item_rename">Umbenennen</string>
     <string name="item_pin">Schnellzugriff</string>
@@ -106,8 +107,11 @@
 
     <string name="read_contacts_no_perm">Keine Zugriffsrechte auf Kontaktlist</string>
     <string name="read_contact_list">Kontaktliste auslesen</string>
+    <string name="main_info">Info</string>
+
     <string name="do_hide">%s: verstecken (bei Suche noch anzeigen)</string>
     <string name="do_show">%s: anzeigen</string>
+    <string name="do_unpin">%s: Schnellzgriff entfernen</string>
 
     <string name="date_choice_title">Datum</string>
     <string-array name="date_choice">
@@ -211,5 +215,4 @@
 
     <string-array name="time_word_hour">
     </string-array>
-    <string name="do_unpin">%s: Schnellzgriff entfernen</string>
 </resources>

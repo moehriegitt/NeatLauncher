@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="mainBackground">#FF000000</color>
+    <color name="mainBackground">#000000</color>
+    <color name="weakBackground">#222222</color>
     <color name="dimBackground">#80000000</color>
 
-    <color name="mainForeground">#FFFFFFFF</color>
+    <color name="mainForeground">#FFFFFF</color>
     <color name="titleColor">#80FFFFFF</color>
     <color name="headingColor">#80FFFFFF</color>
     <color name="dimColor">#80FFFFFF</color>

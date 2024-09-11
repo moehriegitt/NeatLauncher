@@ -590,13 +590,15 @@ class MainActivity:
 
     // dialogs
     private fun dialogInit(
-        view: View, content: View?, title: String, onOK: () -> Unit = {}): AlertDialog.Builder
+        view: View, content: View?, title: String, onOK: (() -> Unit)? = null): AlertDialog.Builder
     {
         val b = AlertDialog.Builder(view.context)
         if (content != null) b.setView(content)
         b.setTitle(title)
-        b.setNegativeButton(getString(R.string.button_cancel)) { _, _ -> }
-        b.setPositiveButton(getString(R.string.button_ok)) { _, _ -> onOK() }
+        if (onOK != null) {
+            b.setNegativeButton(getString(R.string.button_cancel)) { _, _ -> }
+            b.setPositiveButton(getString(R.string.button_ok)) { _, _ -> onOK() }
+        }
         return b
     }
 
@@ -644,11 +646,10 @@ class MainActivity:
         val z = ItemActionsBinding.inflate(LayoutInflater.from(view.context))
         val d = dialogInit(view, z.root, item.label).create()
 
-        // Info
-        z.itemInfo.visibility = visibleIf(item.pack != "")
-        z.itemInfo.setOnClickListener {
+        // start
+        z.itemStart.setOnClickListener {
             d.dismiss()
-            itemInfoLaunch(item.pack)
+            itemLaunch(item)
         }
 
         // rename
@@ -696,6 +697,13 @@ class MainActivity:
             item.pinned = 0
             homeNotifyChange()
             shortToast(getString(R.string.do_unpin, item.label))
+        }
+
+        // info
+        z.itemInfo.visibility = visibleIf(item.pack != "")
+        z.itemInfo.setOnClickListener {
+            d.dismiss()
+            itemInfoLaunch(item.pack)
         }
 
         // Shortcuts
@@ -852,6 +860,10 @@ class MainActivity:
         z.dateChoice.setOnClickListener {
             d.dismiss()
             choiceDialog(view, dateChoice)
+        }
+        z.mainInfo.setOnClickListener {
+            d.dismiss()
+            itemInfoLaunch(c.packageName)
         }
 
         d.show()
