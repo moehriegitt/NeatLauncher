@@ -619,15 +619,8 @@ class MainActivity:
         list.addView(v)
         val t = v.findViewById<TextView>(R.id.item_name)
         t.text = item.label.removePrefix(prefix)
-        t.setOnClickListener {
-            d.dismiss()
-            itemLaunch(item)
-        }
-        t.setOnLongClickListener {
-            d.dismiss()
-            itemDialog(view, item)
-            true
-        }
+        t.setOnClickDismiss(d) { itemLaunch(item) }
+        t.setOnLongClickDismiss(d) { itemDialog(view, item) }
     }
 
     private fun setOnDoneClickOk(edit: EditText, d: AlertDialog)
@@ -647,27 +640,19 @@ class MainActivity:
         val d = dialogInit(view, z.root, item.label).create()
 
         // start
-        z.itemStart.setOnClickListener {
-            d.dismiss()
-            itemLaunch(item)
-        }
+        z.itemStart.setOnClickDismiss(d) { itemLaunch(item) }
 
         // rename
-        z.itemRename.setOnClickListener {
-            d.dismiss()
-            renameDialog(view, item)
-        }
+        z.itemRename.setOnClickDismiss(d) { renameDialog(view, item) }
 
         // hide/show
         (if (item.hidden) z.itemHide else z.itemShow).visibility = View.GONE
-        z.itemHide.setOnClickListener {
-            d.dismiss()
+        z.itemHide.setOnClickDismiss(d) {
             shortToast(getString(R.string.do_hide, item.label))
             item.hidden = true
             if (searchStr == "") drawerNotifyChange()
         }
-        z.itemShow.setOnClickListener {
-            d.dismiss()
+        z.itemShow.setOnClickDismiss(d) {
             shortToast(getString(R.string.do_show, item.label))
             item.hidden = false
             if (searchStr == "") drawerNotifyChange()
@@ -675,8 +660,7 @@ class MainActivity:
 
         // remove
         z.itemRemove.visibility = visibleIf(item.type == ITEM_TYPE_PIN)
-        z.itemRemove.setOnClickListener {
-            d.dismiss()
+        z.itemRemove.setOnClickDismiss(d) {
             val ok = removeShortcut(item)
             shortToast(
                 getString(
@@ -688,12 +672,8 @@ class MainActivity:
 
         // pin/rid
         (if (item.pinned != 0) z.itemPin else z.itemRid).visibility = View.GONE
-        z.itemPin.setOnClickListener {
-            d.dismiss()
-            pinDialog(view, item)
-        }
-        z.itemRid.setOnClickListener {
-            d.dismiss()
+        z.itemPin.setOnClickDismiss(d) { pinDialog(view, item) }
+        z.itemRid.setOnClickDismiss(d) {
             item.pinned = 0
             homeNotifyChange()
             shortToast(getString(R.string.do_unpin, item.label))
@@ -701,10 +681,7 @@ class MainActivity:
 
         // info
         z.itemInfo.visibility = visibleIf(item.pack != "")
-        z.itemInfo.setOnClickListener {
-            d.dismiss()
-            itemInfoLaunch(item.pack)
-        }
+        z.itemInfo.setOnClickDismiss(d) { itemInfoLaunch(item.pack) }
 
         // Shortcuts
         val prefix = item.label + ": "
@@ -803,15 +780,8 @@ class MainActivity:
         val z = PopupItemBinding.inflate(LayoutInflater.from(view.context), list, false)
         list.addView(z.root)
         z.itemName.text = e.name
-        z.itemName.setOnClickListener {
-            d.dismiss()
-            searchWith(e)
-        }
-        z.itemName.setOnLongClickListener {
-            d.dismiss()
-            searchRenameDialog(view, e)
-            true
-        }
+        z.itemName.setOnClickDismiss(d) { searchWith(e) }
+        z.itemName.setOnLongClickDismiss(d) { searchRenameDialog(view, e) }
     }
 
     private fun searchOptDialog(view: View)
@@ -830,7 +800,6 @@ class MainActivity:
     {
         val z = MainOptDialogBinding.inflate(LayoutInflater.from(view.context))
         val d = dialogInit(view, z.root, getString(R.string.main_opt_title)).create()
-
         z.readContactList.isChecked = getReadContacts(c)
         z.readContactList.setOnCheckedChangeListener { _, checked ->
             setReadContacts(c, checked)
@@ -840,32 +809,12 @@ class MainActivity:
                 itemInfoLaunch(c.packageName)
             }
         }
-
-        z.backChoice.setOnClickListener {
-            d.dismiss()
-            choiceDialog(view, backChoice)
-        }
-        z.colorChoice.setOnClickListener {
-            d.dismiss()
-            choiceDialog(view, colorChoice)
-        }
-        z.fontChoice.setOnClickListener {
-            d.dismiss()
-            choiceDialog(view, fontChoice)
-        }
-        z.timeChoice.setOnClickListener {
-            d.dismiss()
-            choiceDialog(view, timeChoice)
-        }
-        z.dateChoice.setOnClickListener {
-            d.dismiss()
-            choiceDialog(view, dateChoice)
-        }
-        z.mainInfo.setOnClickListener {
-            d.dismiss()
-            itemInfoLaunch(c.packageName)
-        }
-
+        z.backChoice. setOnClickDismiss(d) { choiceDialog(view, backChoice) }
+        z.colorChoice.setOnClickDismiss(d) { choiceDialog(view, colorChoice) }
+        z.fontChoice. setOnClickDismiss(d) { choiceDialog(view, fontChoice) }
+        z.timeChoice. setOnClickDismiss(d) { choiceDialog(view, timeChoice) }
+        z.dateChoice. setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
+        z.mainInfo.   setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
         d.show()
     }
 }
