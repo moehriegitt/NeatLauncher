@@ -1,6 +1,9 @@
 package de.theiling.neatlauncher
 
 import android.icu.lang.UCharacter.foldCase
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +13,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Locale
 
-data class ItemViewInfo(val item: Item, var initial: String = "", var preSep: Boolean = false)
+data class ItemViewInfo(
+    val item: Item,
+    val match: MatchWords? = null)
+{
+    var initial: String = ""
+    var preSep: Boolean = false
+
+    fun displayCompareToMatch(other: ItemViewInfo): Int {
+        val t = this.match?.rank ?: 9
+        val o = other.match?.rank ?: 9
+        val i = t.compareTo(o)
+        if (i != 0) return i
+        return this.item.displayCompareToMatch(other.item)
+    }
+}
 
 class ItemAdapter(
     val them: MutableSet<Item>,
@@ -29,7 +46,18 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ItemAdapter.ViewHolder, pos: Int) {
         val a = partial[pos]
         holder.preSep?.visibility = if (a.preSep) View.VISIBLE else View.GONE
-        holder.nameView.text = a.item.label
+
+        if (a.match != null) {
+            val t = SpannableStringBuilder(a.match.haystack)
+            for (s in a.match.spans) {
+                t.setSpan(UnderlineSpan(), s.start, s.end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            holder.nameView.text = t
+        }
+        else {
+            holder.nameView.text = a.item.label
+        }
+
         holder.nameView.setTextColor(a.item.color)
         holder.initial?.text = a.initial
     }
@@ -37,16 +65,18 @@ class ItemAdapter(
     override fun getItemCount(): Int = partial.size
 
     override fun getFilter(): Filter = object: Filter() {
-        override fun performFiltering(hay_: CharSequence): FilterResults
+        override fun performFiltering(hay: CharSequence): FilterResults
         {
             val f = mutableListOf<ItemViewInfo>()
-            if (hay_ == "") {
+            if (hay == "") {
                 them.forEach { if (whenEmpty(it)) f.add(ItemViewInfo(it)) }
                 f.sortWith { a, b -> a.item.displayCompareTo(b.item) }
             } else {
-                val hay = hay_.toString().trim()
-                them.forEach { if (it.label.contains(hay, true)) f.add(ItemViewInfo(it)) }
-                f.sortWith { a, b -> a.item.displayCompareToSearch(b.item, hay) }
+                them.forEach {
+                    val m = it.label.containsWords(hay)
+                    if (m != null) f.add(ItemViewInfo(it, m))
+                }
+                f.sortWith { a, b -> a.displayCompareToMatch(b) }
             }
             var i = ""
             for (a in f) {

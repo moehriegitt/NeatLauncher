@@ -19,13 +19,6 @@ fun itemDefaultHidden(type: String) =
     (type == ITEM_TYPE_SHORT) ||
     (type == ITEM_TYPE_CONTACT)
 
-fun searchRank(s: String, search: String): Int
-{
-    if (s.startsWith(search, true)) return 0
-    if (s.contains(" $search", true)) return 1
-    return 9
-}
-
 fun typeRank(type: String): Int
 {
     if (type == ITEM_TYPE_CONTACT) return 1
@@ -89,7 +82,7 @@ class Item(
     private val parentLabelPrefix: String = parent?.let { it.label + ": " } ?: ""
     private val parentOrderPrefix: String = parent?.let { it.order + ": " } ?: ""
 
-    val origLabelSuffix = if (origLabelSuffixRaw == "") pack else origLabelSuffixRaw
+    private val origLabelSuffix = if (origLabelSuffixRaw == "") pack else origLabelSuffixRaw
 
     val origLabel: String = parentLabelPrefix + origLabelSuffix
     private val origOrder: String = parentOrderPrefix + origLabelSuffix
@@ -172,13 +165,8 @@ class Item(
         return this.displayCompareTo(other)
     }
 
-    fun displayCompareToSearch(other: Item, search: String): Int
+    fun displayCompareToMatch(other: Item): Int
     {
-        val t = searchRank(this.label, search)
-        val o = searchRank(other.label, search)
-        val i = t.compareTo(o)
-        if (i != 0) return i
-
         val u = typeRank(this.type)
         val v = typeRank(other.type)
         val j = u.compareTo(v)
