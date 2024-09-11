@@ -6,9 +6,13 @@
 /build
 /captures
 /gradle/wrapper/gradle-wrapper.jar
+/app/release
 gradlew.bat
 .externalNativeBuild
 .cxx
 local.properties
 *~
 .desktop.el*
+/nobackup
+/stuff
+app/src/main/mkresource.pl

@@ -10,3 +10,6 @@ gradlew.bat
 .externalNativeBuild
 .cxx
 local.properties
+app/release
+nobackup
+app/src/main/mkresource.pl
