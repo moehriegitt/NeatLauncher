@@ -331,7 +331,6 @@ class MainActivity:
         getUserManager().getUserForSerialNumber(uid)
 
     private fun packageIntent(s: String) = packageManager.getLaunchIntentForPackage(s)
-    private fun clearSearch() = z.mainSearch.text.clear()
     private fun modePrimary() = if (homeItems.size > 0) Mode.HOME1 else Mode.DRAWER1
     private fun modeSecondary() = Mode.DRAWER2
     private fun drawerNotifyChange() = drawerAdapter.getFilter().filter(searchStr)
@@ -339,6 +338,13 @@ class MainActivity:
     private fun <T>theSingle(v: List<T>) = if (v.isEmpty()) null else v[0]
 
     // functionality
+    private fun clearSearch() {
+        if (z.mainSearch.text.isNotEmpty()) {
+            z.mainSearch.text.clear()
+            drawerNotifyChange()
+        }
+    }
+
     private fun homeNotifyChange() {
         val pinitems = items.filter { (it.pinned != 0) }
         leftItem  = theSingle(pinitems.filter { (it.pinned and ITEM_PIN_LEFT) != 0 })

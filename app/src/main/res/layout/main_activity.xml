@@ -114,7 +114,7 @@
         android:hint="@string/main_search_hint"
         android:imeOptions="actionDone"
         android:textSize="@dimen/mainSearch"
-        android:inputType="none|textNoSuggestions|textCapWords"
+        android:inputType="textFilter|textNoSuggestions|textCapWords"
         android:lines="1"
         android:ems="10"
         android:paddingStart="@dimen/drawerItemPadding"

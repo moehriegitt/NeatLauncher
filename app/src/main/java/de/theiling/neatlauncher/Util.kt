@@ -47,34 +47,42 @@ data class MatchWords(
     }
 }
 
+fun CharSequence.isWordStartBoundary(pos: Int): Boolean {
+    if (pos == 0) return true
+    if (pos == length) return false
+    val a = this[pos-1]
+    if (!a.isLetter()) return true
+    val b = this[pos]
+    if (!b.isLetter()) return false
+    return (a.lowercase() == a.toString()) && (b.uppercase() == b.toString())
+}
+
+fun CharSequence.indexOfWord(
+    needle: String, start: Int, ignoreCase: Boolean): Pair<Int,Boolean>
+{
+    val a = indexOf(needle, start, ignoreCase)
+    if (a < 0) return Pair(-1,false)
+    var b = a
+    while (true) {
+        if (isWordStartBoundary(b)) return Pair(b, true)
+        b = indexOf(needle, b + 1, ignoreCase)
+        if (b < 0) return Pair(a, false)
+    }
+}
+
 fun String.containsWords(needle: CharSequence): MatchWords? {
     val haystack = this
     val r = mutableListOf<Span>()
     val words = needle.split(" ").filter { it != "" }
     if (words.isEmpty()) return MatchWords(haystack)
 
-    // first step: try to match at all
-    var pos = 0
+    var wordMatch = true
     for (word in words) {
-        val nextPos = haystack.indexOf(word, pos, true)
-        if (nextPos < 0) return null
-        r.add(Span(nextPos, word.length))
-        pos = nextPos + 1
+        val (idx, beginWord) = haystack.indexOfWord(word, 0, true)
+        if (idx < 0) return null
+        if (!beginWord) wordMatch = false
+        r.add(Span(idx, word.length))
     }
 
-    // ok, matches.  Second step: find better match at starts of words:
-    val s = mutableListOf<Span>()
-    pos = 0
-    for (word in words) {
-        val match = Regex(
-            // \b is not Unicode, so:
-            // either no letter precedes, or we're at a lowercaseUppercase boundary.
-            "((?<!\\p{L})|(?<=\\p{Ll})(?=\\p{Lu}))" + Regex.escape(word), RegexOption.IGNORE_CASE)
-            .find(haystack, pos) ?: return MatchWords(haystack, false, r)
-        val nextPos = match.range.first
-        s.add(Span(nextPos, word.length))
-        pos = nextPos + 1
-    }
-
-    return MatchWords(haystack, true, s)
+    return MatchWords(haystack, wordMatch, r)
 }
