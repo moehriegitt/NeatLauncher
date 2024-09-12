@@ -21,10 +21,10 @@ data class ItemViewInfo(
     var preSep: Boolean = false
 
     fun displayCompareToMatch(other: ItemViewInfo): Int {
-        val t = this.match?.rank ?: 9
-        val o = other.match?.rank ?: 9
+        val t = this.match?.rank ?: 0
+        val o = other.match?.rank ?: 0
         val i = t.compareTo(o)
-        if (i != 0) return i
+        if (i != 0) return -i
         return this.item.displayCompareToMatch(other.item)
     }
 }
@@ -73,7 +73,7 @@ class ItemAdapter(
                 f.sortWith { a, b -> a.item.displayCompareTo(b.item) }
             } else {
                 them.forEach {
-                    val m = it.label.containsWords(hay)
+                    val m = it.label.containsWords(hay, true)
                     if (m != null) f.add(ItemViewInfo(it, m))
                 }
                 f.sortWith { a, b -> a.displayCompareToMatch(b) }

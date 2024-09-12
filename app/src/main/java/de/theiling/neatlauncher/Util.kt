@@ -36,16 +36,8 @@ data class Span(
 
 data class MatchWords(
     val haystack: String,
-    val wordMatch: Boolean = false,
-    val spans: List<Span> = listOf())
-{
-    val rank get() = when {
-        spans.isEmpty() -> 0
-        !wordMatch -> 2
-        spans[0].start > 0 -> 1
-        else -> 0
-    }
-}
+    val rank: Int,
+    val spans: List<Span>)
 
 fun CharSequence.isWordStartBoundary(pos: Int): Boolean {
     if (pos == 0) return true
@@ -57,32 +49,29 @@ fun CharSequence.isWordStartBoundary(pos: Int): Boolean {
     return (a.lowercase() == a.toString()) && (b.uppercase() == b.toString())
 }
 
-fun CharSequence.indexOfWord(
-    needle: String, start: Int, ignoreCase: Boolean): Pair<Int,Boolean>
-{
-    val a = indexOf(needle, start, ignoreCase)
-    if (a < 0) return Pair(-1,false)
-    var b = a
-    while (true) {
-        if (isWordStartBoundary(b)) return Pair(b, true)
-        b = indexOf(needle, b + 1, ignoreCase)
-        if (b < 0) return Pair(a, false)
-    }
-}
-
-fun String.containsWords(needle: CharSequence): MatchWords? {
-    val haystack = this
-    val r = mutableListOf<Span>()
-    val words = needle.split(" ").filter { it != "" }
-    if (words.isEmpty()) return MatchWords(haystack)
-
-    var wordMatch = true
-    for (word in words) {
-        val (idx, beginWord) = haystack.indexOfWord(word, 0, true)
+fun String.containsWords(needle: CharSequence, ignoreCase: Boolean): MatchWords? {
+    val s = mutableListOf<Span>()
+    var sumRank = 0
+    var pos = 0
+    for (word in needle.split(" ")) {
+        if (word == "") continue
+        var idx = -1
+        var rank = -1
+        var p = 0
+        while (true) {
+            val i = indexOf(word, p, ignoreCase)
+            if (i < 0) break
+            val r = (if (isWordStartBoundary(i)) 100 else 0) + (if (i >= pos) 10 else 0)
+            if (r > rank) {
+                idx = i
+                rank = r
+            }
+            p = i + 1
+        }
         if (idx < 0) return null
-        if (!beginWord) wordMatch = false
-        r.add(Span(idx, word.length))
+        s.add(Span(idx, word.length))
+        sumRank += rank
+        pos = idx + word.length
     }
-
-    return MatchWords(haystack, wordMatch, r)
+    return MatchWords(this, sumRank, s)
 }
