@@ -33,6 +33,14 @@
     <dimen name="popupItemPaddingV">12dp</dimen>
     <dimen name="popupItemPaddingH">8dp</dimen>
 
+    <dimen name="popupShort">17sp</dimen>
+    <dimen name="popupShortPaddingV">8dp</dimen>
+    <dimen name="popupShortPaddingH">8dp</dimen>
+
+    <dimen name="popupLong">14sp</dimen>
+    <dimen name="popupLongPaddingV">8dp</dimen>
+    <dimen name="popupLongPaddingH">8dp</dimen>
+
     <dimen name="popupHeading">18sp</dimen>
     <dimen name="popupHeadingPaddingV">16dp</dimen>
     <dimen name="popupHeadingPaddingH">8dp</dimen>

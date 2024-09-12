@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">NeatLauncher</string>
+    <string name="package_name">Paket: %s</string>
+    <string name="version_name">Version: %s</string>
+    <string name="author_name">Urheber: %s</string>
+    <string name="license_name">Lizenz: %s</string>
+    <string name="source_link">Quellcode bei Github</string>
+    <string name="package_link">Packet bei F-Droid</string>
 
     <string name="readme_short_description">
     Ein aufgeräumter und praktischer Launcher ohne Icons.
@@ -104,10 +110,12 @@
     <string name="search_delete">Löschen</string>
 
     <string name="main_opt_title">Einstellungen</string>
+    <string name="about_title">Infos über NeatLauncher</string>
 
     <string name="read_contacts_no_perm">Keine Zugriffsrechte auf Kontaktlist</string>
     <string name="read_contact_list">Kontaktliste auslesen</string>
-    <string name="main_info">Info</string>
+    <string name="main_info">Verwaltung</string>
+    <string name="main_about">Infos</string>
 
     <string name="do_hide">%s: verstecken (bei Suche noch anzeigen)</string>
     <string name="do_show">%s: anzeigen</string>

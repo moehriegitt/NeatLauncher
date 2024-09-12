@@ -15,6 +15,42 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
+class AboutDialogBinding(
+    rootView: LinearLayout,
+    val author: TextView,
+    val license: TextView,
+    val packageLink: TextView,
+    val packageName: TextView,
+    val sourceLink: TextView,
+    val version: TextView):
+    ViewBinding
+{
+    override val root = rootView
+    companion object {
+        fun bind(rootView: View) = AboutDialogBinding(
+            rootView as LinearLayout,
+            rootView.findViewById(R.id.author)!!,
+            rootView.findViewById(R.id.license)!!,
+            rootView.findViewById(R.id.package_link)!!,
+            rootView.findViewById(R.id.package_name)!!,
+            rootView.findViewById(R.id.source_link)!!,
+            rootView.findViewById(R.id.version)!!)
+
+        fun inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            attachToParent: Boolean): AboutDialogBinding
+        {
+            val root = inflater.inflate(R.layout.about_dialog, parent, false)
+            if (attachToParent) parent?.addView(root)
+            return bind(root)
+        }
+
+        @Suppress("unused")
+        fun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)
+    }
+}
+
 class ItemActionsBinding(
     rootView: LinearLayout,
     val itemHide: TextView,
@@ -113,6 +149,7 @@ class MainOptDialogBinding(
     val colorChoice: TextView,
     val dateChoice: TextView,
     val fontChoice: TextView,
+    val mainAbout: TextView,
     val mainInfo: TextView,
     val readContactList: CheckBox,
     val timeChoice: TextView):
@@ -126,6 +163,7 @@ class MainOptDialogBinding(
             rootView.findViewById(R.id.color_choice)!!,
             rootView.findViewById(R.id.date_choice)!!,
             rootView.findViewById(R.id.font_choice)!!,
+            rootView.findViewById(R.id.main_about)!!,
             rootView.findViewById(R.id.main_info)!!,
             rootView.findViewById(R.id.read_contact_list)!!,
             rootView.findViewById(R.id.time_choice)!!)

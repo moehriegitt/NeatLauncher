@@ -588,11 +588,13 @@ class MainActivity:
         startActivity(intent)
     }
 
-    private fun searchWith(e: SearchUrl) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(e.url.
+    private fun startUrl(uri: String) =
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
+
+    private fun searchWith(e: SearchUrl) =
+        startUrl(e.url.
             replace("%s", searchStr).
-            replace("%L", searchStr.lowercase(Locale.getDefault())))))
-    }
+            replace("%L", searchStr.lowercase(Locale.getDefault())))
 
     // dialogs
     private fun dialogInit(
@@ -821,6 +823,23 @@ class MainActivity:
         z.timeChoice. setOnClickDismiss(d) { choiceDialog(view, timeChoice) }
         z.dateChoice. setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
         z.mainInfo.   setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
+        z.mainAbout.  setOnClickDismiss(d) { aboutDialog(view) }
+        d.show()
+    }
+
+    private fun aboutDialog(view: View)
+    {
+        val z = AboutDialogBinding.inflate(LayoutInflater.from(view.context))
+        val d = dialogInit(view, z.root, getString(R.string.about_title)).create()
+        val i = packageManager.getPackageInfo(packageName, 0)
+        z.packageName.text = getString(R.string.package_name, packageName)
+        z.version.text = getString(R.string.version_name, i.versionName)
+        z.author.text = getString(R.string.author_name, getString(R.string.author))
+        z.license.text = getString(R.string.license_name, getString(R.string.license))
+        z.author.     setOnClickDismiss(d) { startUrl(getString(R.string.url_author)) }
+        z.license.    setOnClickDismiss(d) { startUrl(getString(R.string.url_license)) }
+        z.sourceLink. setOnClickDismiss(d) { startUrl(getString(R.string.url_source)) }
+        z.packageLink.setOnClickDismiss(d) { startUrl(getString(R.string.url_package)) }
         d.show()
     }
 }
