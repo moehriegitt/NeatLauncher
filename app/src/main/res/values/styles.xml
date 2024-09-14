@@ -181,6 +181,15 @@
         <item name="android:paddingHorizontal">@dimen/popupShortPaddingH</item>
     </style>
 
+    <style name="AppTheme.PopupTiny">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textColor">?myHeadingTextColor</item>
+        <item name="android:textSize">@dimen/popupTiny</item>
+        <item name="android:paddingTop">@dimen/popupTinyPaddingTop</item>
+        <item name="android:paddingBottom">@dimen/popupTinyPaddingBottom</item>
+        <item name="android:paddingHorizontal">@dimen/popupTinyPaddingH</item>
+    </style>
+
     <style name="AppTheme.PopupLong">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
         <item name="android:textSize">@dimen/popupLong</item>
@@ -207,5 +216,12 @@
         <item name="android:textColor">?myHeadingTextColor</item>
         <item name="android:paddingVertical">@dimen/popupHeadingPaddingV</item>
         <item name="android:paddingHorizontal">@dimen/popupHeadingPaddingH</item>
+    </style>
+
+    <style name="AppTheme.PopupTinyHeading">
+        <item name="android:textSize">@dimen/popupTinyHeading</item>
+        <item name="android:paddingTop">@dimen/popupTinyHeadingPaddingTop</item>
+        <item name="android:paddingBottom">@dimen/popupTinyHeadingPaddingBottom</item>
+        <item name="android:paddingHorizontal">@dimen/popupTinyHeadingPaddingH</item>
     </style>
 </resources>

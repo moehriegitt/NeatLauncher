@@ -26,6 +26,7 @@ import android.text.format.DateFormat
 import android.view.Display
 import android.view.GestureDetector
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -175,8 +176,8 @@ class MainActivity:
 
         z.mainSearchOpt.setOnClickListener {
             when (z.mainSearch.hasFocus() || z.mainSearch.text.isNotEmpty()) {
-                true -> searchOptDialog(getViewGroup())
-                else -> mainOptDialog(getViewGroup())
+                true -> searchOptDialog(viewGroup)
+                else -> mainOptDialog(viewGroup)
             }
         }
 
@@ -190,7 +191,7 @@ class MainActivity:
                 startActivity(packageIntent(Intent(AlarmClock.ACTION_SHOW_ALARMS)))
         }
         z.mainClockBox.setOnLongClickListener {
-            choiceDialog(getViewGroup(), timeChoice)
+            choiceDialog(viewGroup, timeChoice)
             true
         }
 
@@ -198,9 +199,16 @@ class MainActivity:
             dateItem?.let { itemLaunch(it) } ?: startCalendar()
         }
         z.mainDate.setOnLongClickListener {
-            choiceDialog(getViewGroup(), dateChoice)
+            choiceDialog(viewGroup, dateChoice)
             true
         }
+    }
+
+    override fun onCreateOptionsMenu(m: Menu): Boolean {
+        m.add(getString(R.string.main_opt_title)).  setOnClick { mainOptDialog(viewGroup) }
+        m.add(getString(R.string.search_opt_title)).setOnClick { searchOptDialog(viewGroup) }
+        m.add(getString(R.string.about_title)).     setOnClick { aboutDialog(viewGroup) }
+        return true
     }
 
     override fun onStart() {
@@ -322,17 +330,17 @@ class MainActivity:
 
     private fun shortToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
 
-    private fun getViewGroup(): ViewGroup = findViewById(android.R.id.content)
-    private fun getUserManager() = c.getSystemService(USER_SERVICE) as UserManager
-    private fun getDisplayManager() = c.getSystemService(DISPLAY_SERVICE) as DisplayManager
-    private fun getDefaultDisplay() = getDisplayManager().getDisplay(Display.DEFAULT_DISPLAY)
-    private fun getLauncher() = c.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+    private val viewGroup: ViewGroup get() = findViewById(android.R.id.content)
+    private val userManager get() = c.getSystemService(USER_SERVICE) as UserManager
+    private val displayManager get() = c.getSystemService(DISPLAY_SERVICE) as DisplayManager
+    private val defaultDisplay get() = displayManager.getDisplay(Display.DEFAULT_DISPLAY)
+    private val launcher get() = c.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
-    private fun getInputMethodManager() =
+    private val inputMethodManager get() =
         c.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
     private fun getUserHandle(uid: Long): UserHandle =
-        getUserManager().getUserForSerialNumber(uid)
+        userManager.getUserForSerialNumber(uid)
 
     private fun packageIntent(s: String) = packageManager.getLaunchIntentForPackage(s)
     private fun modePrimary() = if (homeItems.size > 0) Mode.HOME1 else Mode.DRAWER1
@@ -364,8 +372,8 @@ class MainActivity:
 
     private fun learnItems() {
         val c: Context = this
-        val um = getUserManager()
-        val la = getLauncher()
+        val um = userManager
+        val la = launcher
         val myUha = Process.myUserHandle()
         val myUid = um.getSerialNumberForUser(myUha)
         items.clear()
@@ -458,7 +466,7 @@ class MainActivity:
         // of them.  We need to set all of them except `sht`.
         if (Build.VERSION.SDK_INT >= 25) {
             val myUha = Process.myUserHandle()
-            val la = getLauncher()
+            val la = launcher
             val q = LauncherApps.ShortcutQuery().setPackage(sht.pack).setQueryFlags(
                 LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
             la.pinShortcuts(sht.pack,
@@ -471,11 +479,11 @@ class MainActivity:
     }
 
     private fun resetView(clear: Boolean) {
-        if (clear || (getDefaultDisplay().state != Display.STATE_ON)) {
+        if (clear || (defaultDisplay.state != Display.STATE_ON)) {
             clearSearch()
         }
         z.mainSearch.clearFocus()
-        getInputMethodManager().hideSoftInputFromWindow(getViewGroup().windowToken, 0)
+        inputMethodManager.hideSoftInputFromWindow(viewGroup.windowToken, 0)
         z.drawerRecycler.scrollToPosition(0)
         setMode(modePrimary())
     }
@@ -565,10 +573,9 @@ class MainActivity:
                 ITEM_TYPE_INT -> if (item.act != "") startActivity(Intent(item.act))
                 ITEM_TYPE_SHORT,
                 ITEM_TYPE_PIN -> {
-                    val la = getLauncher()
                     val uha = getUserHandle(item.uid)
                     if (Build.VERSION.SDK_INT >= 25) {
-                        la.startShortcut(item.pack, item.act, null, null, uha)
+                        launcher.startShortcut(item.pack, item.act, null, null, uha)
                     }
                 }
                 ITEM_TYPE_CONTACT -> openContact(item)
@@ -836,14 +843,17 @@ class MainActivity:
         val z = AboutDialogBinding.inflate(LayoutInflater.from(view.context))
         val d = dialogInit(view, z.root, getString(R.string.about_title)).create()
         val i = packageManager.getPackageInfo(packageName, 0)
-        z.packageName.text = getString(R.string.package_name, packageName)
-        z.version.text = getString(R.string.version_name, i.versionName)
+        z.versionName.text = getString(R.string.package_version_code,
+            packageName, i.versionName, i.versionCode)
         z.author.text = getString(R.string.author_name, getString(R.string.author))
         z.license.text = getString(R.string.license_name, getString(R.string.license))
-        z.author.     setOnClickDismiss(d) { startUrl(getString(R.string.url_author)) }
-        z.license.    setOnClickDismiss(d) { startUrl(getString(R.string.url_license)) }
-        z.sourceLink. setOnClickDismiss(d) { startUrl(getString(R.string.url_source)) }
-        z.packageLink.setOnClickDismiss(d) { startUrl(getString(R.string.url_package)) }
+        z.sourceLink.text = getString(R.string.source_link, getString(R.string.source_repo))
+        z.packageLink.text = getString(R.string.package_link, getString(R.string.package_repo))
+        z.authorBox. setOnClickDismiss(d) { startUrl(getString(R.string.author_url)) }
+        z.licenseBox.setOnClickDismiss(d) { startUrl(getString(R.string.license_url)) }
+        z.sourceBox. setOnClickDismiss(d) { startUrl(getString(R.string.source_url)) }
+        z.packageBox.setOnClickDismiss(d) { startUrl(getString(R.string.package_url)) }
+        z.ubuntuBox. setOnClickDismiss(d) { startUrl(getString(R.string.ubuntu_url)) }
         d.show()
     }
 }

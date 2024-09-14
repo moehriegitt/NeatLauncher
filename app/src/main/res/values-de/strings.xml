@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">NeatLauncher</string>
-    <string name="package_name">Paket: %s</string>
-    <string name="version_name">Version: %s</string>
+
+    <string name="package_n_version">Paket &amp; Version</string>
     <string name="author_name">Urheber: %s</string>
     <string name="license_name">Lizenz: %s</string>
-    <string name="source_link">Quellcode bei Github</string>
-    <string name="package_link">Packet bei F-Droid</string>
+    <string name="source_link">Quellcode: %s</string>
+    <string name="package_link">Paketdepot: %s</string>
+    <string name="about_fonts">Schriftartlizenzen</string>
+    <string name="package_version_code">%s v%s (Versionscode %d)</string>
 
     <string name="readme_short_description">
     Ein aufgeräumter und praktischer Launcher ohne Icons.

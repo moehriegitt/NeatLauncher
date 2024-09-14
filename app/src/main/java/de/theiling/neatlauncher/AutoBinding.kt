@@ -18,11 +18,16 @@ import androidx.recyclerview.widget.RecyclerView
 class AboutDialogBinding(
     rootView: LinearLayout,
     val author: TextView,
+    val authorBox: LinearLayout,
     val license: TextView,
+    val licenseBox: LinearLayout,
+    val packageBox: LinearLayout,
     val packageLink: TextView,
-    val packageName: TextView,
+    val sourceBox: LinearLayout,
     val sourceLink: TextView,
-    val version: TextView):
+    val ubuntuBox: LinearLayout,
+    val versionBox: LinearLayout,
+    val versionName: TextView):
     ViewBinding
 {
     override val root = rootView
@@ -30,11 +35,16 @@ class AboutDialogBinding(
         fun bind(rootView: View) = AboutDialogBinding(
             rootView as LinearLayout,
             rootView.findViewById(R.id.author)!!,
+            rootView.findViewById(R.id.author_box)!!,
             rootView.findViewById(R.id.license)!!,
+            rootView.findViewById(R.id.license_box)!!,
+            rootView.findViewById(R.id.package_box)!!,
             rootView.findViewById(R.id.package_link)!!,
-            rootView.findViewById(R.id.package_name)!!,
+            rootView.findViewById(R.id.source_box)!!,
             rootView.findViewById(R.id.source_link)!!,
-            rootView.findViewById(R.id.version)!!)
+            rootView.findViewById(R.id.ubuntu_box)!!,
+            rootView.findViewById(R.id.version_box)!!,
+            rootView.findViewById(R.id.version_name)!!)
 
         fun inflate(
             inflater: LayoutInflater,

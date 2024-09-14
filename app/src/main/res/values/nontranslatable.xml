@@ -1,0 +1,26 @@
+<resources>
+    <string name="author" translatable="false">Henrik Theiling</string>
+    <string name="license" translatable="false">BSD-2-Clause</string>
+    <string name="source_repo" translatable="false">Github</string>
+    <string name="package_repo" translatable="false">F-Droid</string>
+
+    <string name="author_url" translatable="false">
+    http://www.theiling.de/
+    </string>
+
+    <string name="source_url" translatable="false">
+    https://github.com/moehriegitt/NeatLauncher
+    </string>
+
+    <string name="package_url" translatable="false">
+    https://f-droid.org/en/packages/de.theiling.neatlauncher/
+    </string>
+
+    <string name="license_url" translatable="false">
+    https://raw.githubusercontent.com/moehriegitt/NeatLauncher/master/LICENSE
+    </string>
+
+    <string name="ubuntu_url" translatable="false">
+    https://ubuntu.com/legal/font-licence
+    </string>
+</resources>

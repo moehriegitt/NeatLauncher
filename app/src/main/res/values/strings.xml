@@ -1,31 +1,13 @@
 <resources>
     <string name="app_name">NeatLauncher</string>
 
-    <string name="author" translatable="false">Henrik Theiling</string>
-    <string name="license" translatable="false">BSD-2-Clause</string>
-
-    <string name="url_author" translatable="false">
-    http://www.theiling.de/
-    </string>
-
-    <string name="url_source" translatable="false">
-    https://github.com/moehriegitt/NeatLauncher
-    </string>
-
-    <string name="url_package" translatable="false">
-    https://f-droid.org/en/packages/de.theiling.neatlauncher/
-    </string>
-
-    <string name="url_license" translatable="false">
-    https://raw.githubusercontent.com/moehriegitt/NeatLauncher/master/LICENSE
-    </string>
-
-    <string name="package_name">Package: %s</string>
-    <string name="version_name">Version: %s</string>
+    <string name="package_n_version">Package &amp; Version</string>
     <string name="author_name">Author: %s</string>
     <string name="license_name">License: %s</string>
-    <string name="source_link">Source code on Github</string>
-    <string name="package_link">Package on F-Droid</string>
+    <string name="source_link">Source code: %s</string>
+    <string name="package_link">App repository: %s</string>
+    <string name="about_fonts">Font Licences</string>
+    <string name="package_version_code">%s v%s (version code %d)</string>
 
     <string name="readme_short_description">
     A neat and convenient launcher without icons.
@@ -125,7 +107,7 @@
     <string name="search_copy">Make New</string>
     <string name="search_delete">Delete</string>
 
-    <string name="main_opt_title">Options</string>
+    <string name="main_opt_title">Settings</string>
     <string name="about_title">About NeatLauncher</string>
 
     <string name="read_contacts_no_perm">No permission to read contact list</string>

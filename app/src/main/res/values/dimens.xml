@@ -49,4 +49,14 @@
     <dimen name="popupTitlePaddingV">20dp</dimen>
     <dimen name="popupTitlePaddingH">8dp</dimen>
 
+    <dimen name="popupTinyHeading">18sp</dimen>
+    <dimen name="popupTinyHeadingPaddingTop">16dp</dimen>
+    <dimen name="popupTinyHeadingPaddingBottom">0dp</dimen>
+    <dimen name="popupTinyHeadingPaddingH">8dp</dimen>
+
+    <dimen name="popupTiny">14sp</dimen>
+    <dimen name="popupTinyPaddingTop">0dp</dimen>
+    <dimen name="popupTinyPaddingBottom">8dp</dimen>
+    <dimen name="popupTinyPaddingH">8dp</dimen>
+
 </resources>
