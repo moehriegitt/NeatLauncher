@@ -205,9 +205,8 @@ class MainActivity:
     }
 
     override fun onCreateOptionsMenu(m: Menu): Boolean {
-        m.add(getString(R.string.main_opt_title)).  setOnClick { mainOptDialog(viewGroup) }
-        m.add(getString(R.string.search_opt_title)).setOnClick { searchOptDialog(viewGroup) }
-        m.add(getString(R.string.about_title)).     setOnClick { aboutDialog(viewGroup) }
+        m.add(getString(R.string.main_opt_title)).setOnClick { mainOptDialog(viewGroup) }
+        /* FIXME: dunno how to immediately launch it.  And we use no menus... */
         return true
     }
 

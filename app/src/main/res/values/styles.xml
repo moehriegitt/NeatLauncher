@@ -25,6 +25,8 @@
         <item name="colorAccent">@color/accentColorAchromic</item>
 
         <item name="android:alertDialogTheme">@style/AppAlertDialog</item>
+
+        <item name="android:itemBackground">@color/weakBackground</item>
     </style>
 
     <!-- Opaque/Transparent -->
