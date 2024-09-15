@@ -205,8 +205,12 @@ class MainActivity:
     }
 
     override fun onCreateOptionsMenu(m: Menu): Boolean {
-        m.add(getString(R.string.main_opt_title)).setOnClick { mainOptDialog(viewGroup) }
-        /* FIXME: dunno how to immediately launch it.  And we use no menus... */
+        m.add(getString(R.string.main_opt_title)).setOnMenuItemClickListener {
+            // FIXME: dunno how to immediately launch it.  This is the creation callback,
+            // not the click callback.
+            mainOptDialog(viewGroup)
+            true
+        }
         return true
     }
 

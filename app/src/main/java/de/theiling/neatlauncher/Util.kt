@@ -3,7 +3,6 @@ package de.theiling.neatlauncher
 import android.content.Context
 import android.content.DialogInterface
 import android.util.TypedValue
-import android.view.MenuItem
 import android.view.View
 
 val Context.accentColor: Int get() {
@@ -76,9 +75,3 @@ fun String.containsWords(needle: CharSequence, ignoreCase: Boolean): MatchWords?
     }
     return MatchWords(this, sumRank, s)
 }
-
-fun MenuItem.setOnClick(callback: ()->Unit) =
-    setOnMenuItemClickListener {
-        callback()
-        true
-    }
