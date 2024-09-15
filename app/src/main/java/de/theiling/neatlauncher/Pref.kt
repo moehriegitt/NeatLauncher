@@ -58,21 +58,20 @@ fun setItemInfo(c: Context, type: String, pack: String, klass: String, v: String
 fun getSearchEngine(c: Context) = pref(c).getString("searchEngine", "")!!
 fun setSearchEngine(c: Context, s: String) = prefPutString(c, "searchEngine", s, "")
 
-fun getReadContacts(c: Context) = pref(c).getBoolean("readContacts", true)
-fun setReadContacts(c: Context, i: Boolean) = prefPutBool(c, "readContacts", i, true)
-
-interface PrefInt {
-    var x: Int
+abstract class PrefChoice(
+    val titleId: Int,
+    val nameArrId: Int) {
+    abstract var x: Int
 }
 
 abstract class PrefEnum(
     private val c: Context,
-    val titleId: Int,
-    val nameArrId: Int,
+    titleId: Int,
+    nameArrId: Int,
     private val keyArrId: Int,
     private val prefKey: String,
     private val defVal: Int,
-    val onChange: (Int) -> Unit): PrefInt
+    val onChange: (Int) -> Unit): PrefChoice(titleId, nameArrId)
 {
     override var x = prefGetEnum(c, keyArrId, prefKey, defVal)
         set(new) {
@@ -80,6 +79,25 @@ abstract class PrefEnum(
                 field = new
                 prefPutEnum(c, keyArrId, prefKey, field, defVal)
                 onChange(field)
+            }
+        }
+}
+
+abstract class PrefBool(
+    private val c: Context,
+    titleId: Int,
+    nameArrId: Int,
+    private val prefKey: String,
+    private val defVal: Boolean,
+    val onChange: (Int) -> Unit = {}): PrefChoice(titleId, nameArrId)
+{
+    override var x = if (pref(c).getBoolean(prefKey, defVal)) 1 else 0
+        set(new) {
+            val newI = if (new > 0) 1 else 0
+            if (field != newI) {
+                field = newI
+                prefPutBool(c, prefKey, field > 0, defVal)
+                onChange(new) // pass exact int value
             }
         }
 }
@@ -98,3 +116,6 @@ class EnumFont(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.font_c
 
 class EnumColor(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.color_choice_title,
     R.array.color_choice, R.array.color_choice_key, "colorChoice", color_ambr, onChange)
+
+class BoolContact(c: Context, onChange: (Int) -> Unit): PrefBool(c,
+    R.string.contact_choice_title, R.array.contact_choice, "readContacts", true, onChange)

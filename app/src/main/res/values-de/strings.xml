@@ -115,13 +115,18 @@
     <string name="about_title">Infos über NeatLauncher</string>
 
     <string name="read_contacts_no_perm">Keine Zugriffsrechte auf Kontaktlist</string>
-    <string name="read_contact_list">Kontaktliste auslesen</string>
     <string name="main_info">Verwaltung</string>
     <string name="main_about">Infos</string>
 
     <string name="do_hide">%s: verstecken (bei Suche noch anzeigen)</string>
     <string name="do_show">%s: anzeigen</string>
     <string name="do_unpin">%s: Schnellzgriff entfernen</string>
+
+    <string name="contact_choice_title">Kontakte</string>
+    <string-array name="contact_choice">
+        <item>Liste nicht auslesen</item>
+        <item>Liste auslesen und mitdurchsuchen</item>
+    </string-array>
 
     <string name="date_choice_title">Datum</string>
     <string-array name="date_choice">

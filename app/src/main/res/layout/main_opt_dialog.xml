@@ -59,11 +59,11 @@
                 style="@style/AppTheme.PopupItem"
                 />
 
-            <CheckBox
-                android:id="@+id/read_contact_list"
+            <TextView
+                android:id="@+id/contact_choice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/read_contact_list"
+                android:text="@string/contact_choice_title"
                 style="@style/AppTheme.PopupItem"
                 />
 

@@ -9,7 +9,9 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.LauncherApps
+import android.content.pm.PackageManager
 import android.hardware.display.DisplayManager
+import android.Manifest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -39,6 +41,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -46,7 +50,8 @@ import kotlin.math.abs
 
 class MainActivity:
     AppCompatActivity(),
-    ItemAdapter.ClickListener
+    ItemAdapter.ClickListener,
+    ActivityCompat.OnRequestPermissionsResultCallback
 {
     enum class Mode {
         INIT,
@@ -120,6 +125,7 @@ class MainActivity:
     private lateinit var backChoice: EnumBack
     private lateinit var colorChoice: EnumColor
     private lateinit var fontChoice: EnumFont
+    private lateinit var contactChoice: BoolContact
 
     // override on....()
     override fun onCreate(
@@ -136,6 +142,13 @@ class MainActivity:
         backChoice = EnumBack(c) { restart() }  // recreate() is not reset enough (bug?)
         colorChoice = EnumColor(c) { recreate() }
         fontChoice = EnumFont(c) { recreate() }
+        contactChoice = BoolContact(c) {
+            if (it >= 0) { // -1 resets but does not trigger itemsNotifyChange()
+                if (it == 0 || checkRequestPerm(Manifest.permission.READ_CONTACTS, 1717)) {
+                    itemsNotifyChange(2)
+                }
+            }
+        }
 
         setTheme(selectTheme(backChoice.x, fontChoice.x, colorChoice.x))
         enableEdgeToEdge()
@@ -219,8 +232,7 @@ class MainActivity:
         registerReceiver(minuteTick, IntentFilter(Intent.ACTION_TIME_TICK))
         onMinuteTick()
         searchEngine.loadPref()
-        learnItems()
-        itemsNotifyChange()
+        itemsNotifyChange(2)
     }
 
     override fun onStop() {
@@ -231,7 +243,7 @@ class MainActivity:
 
     override fun onResume() {
         super.onResume()
-        itemsNotifyChange()
+        itemsNotifyChange(0)
         onMinuteTick()
     }
 
@@ -239,6 +251,19 @@ class MainActivity:
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         resetView(true)
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        val granted = grantResults.isNotEmpty() &&
+            (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        when (requestCode) {
+           1717 -> if (granted) itemsNotifyChange(2) else {
+               shortToast(getString(R.string.read_contacts_no_perm))
+               contactChoice.x = -1  // don't try again
+           }
+        }
     }
 
     @Suppress("OVERRIDE_DEPRECATION")
@@ -373,6 +398,13 @@ class MainActivity:
         resetMode()
     }
 
+    private fun checkRequestPerm(perm: String, code: Int): Boolean {
+        if (ContextCompat.checkSelfPermission(c, perm) == PackageManager.PERMISSION_GRANTED)
+            return true
+        requestPermissions(arrayOf(perm), code)
+        return false
+    }
+
     private fun learnItems() {
         val c: Context = this
         val um = userManager
@@ -426,7 +458,7 @@ class MainActivity:
         }
 
         // Contact list:
-        if (getReadContacts(c)) {
+        if (contactChoice.x > 0) {
             try {
                 contentResolver.query(
                     ContactsContract.Contacts.CONTENT_URI,
@@ -442,26 +474,37 @@ class MainActivity:
                 }
             } catch (e: SecurityException) {
                 shortToast(getString(R.string.read_contacts_no_perm))
-                setReadContacts(c, false)
+                contactChoice.x = -1   // don't try again
             }
         }
     }
 
-    private fun refreshitems() {
+    private fun refreshItems(forceRead: Boolean): Boolean {
+        var doRead = forceRead
         if (Build.VERSION.SDK_INT >= 26) {
-            val cp = packageManager.getChangedPackages(bootSeq) ?: return
-            bootSeq = cp.sequenceNumber
-            if (cp.packageNames.size > 0) {
-                learnItems()
+            packageManager.getChangedPackages(bootSeq)?.let {
+                bootSeq = it.sequenceNumber
+                if (it.packageNames.size > 0) {
+                    doRead = true
+                }
             }
         }
+        if (doRead) {
+            learnItems()
+        }
+        return doRead
     }
 
-    private fun itemsNotifyChange() {
-        refreshitems()
-        homeNotifyChange()
-        drawerNotifyChange()
-        resetMode()
+    private fun itemsNotifyChange(forceLevel: Int) {
+        var doRedraw = forceLevel >= 1
+        if (refreshItems(forceLevel >= 2)) {
+            doRedraw = true
+        }
+        if (doRedraw) {
+            homeNotifyChange()
+            drawerNotifyChange()
+            resetMode()
+        }
     }
 
     private fun removeShortcut(sht: Item) = try {
@@ -624,7 +667,7 @@ class MainActivity:
         return b
     }
 
-    private fun choiceDialog(v: View, e: PrefEnum)
+    private fun choiceDialog(v: View, e: PrefChoice)
     {
         val b = dialogInit(v, null, getString(e.titleId))
         b.setSingleChoiceItems(e.nameArrId, e.x) { d, i ->
@@ -688,8 +731,7 @@ class MainActivity:
                 getString(
                     (if (ok) R.string.ok_remove_shortcut else R.string.error_removing),
                     item.label))
-            learnItems()
-            itemsNotifyChange()
+            itemsNotifyChange(2)
         }
 
         // pin/rid
@@ -722,7 +764,7 @@ class MainActivity:
         val d = dialogInit(view, z.root, getString(R.string.rename_title)) {
             item.label = z.editLabel.text.toString()
             item.order = z.editOrder.text.toString()
-            itemsNotifyChange()
+            itemsNotifyChange(1)
         }.create()
 
         z.editLabel.setText(item.label)
@@ -822,22 +864,14 @@ class MainActivity:
     {
         val z = MainOptDialogBinding.inflate(LayoutInflater.from(view.context))
         val d = dialogInit(view, z.root, getString(R.string.main_opt_title)).create()
-        z.readContactList.isChecked = getReadContacts(c)
-        z.readContactList.setOnCheckedChangeListener { _, checked ->
-            setReadContacts(c, checked)
-            learnItems()
-            if (checked && !getReadContacts(c)) {
-                z.readContactList.isChecked = false
-                itemInfoLaunch(c.packageName)
-            }
-        }
-        z.backChoice. setOnClickDismiss(d) { choiceDialog(view, backChoice) }
-        z.colorChoice.setOnClickDismiss(d) { choiceDialog(view, colorChoice) }
-        z.fontChoice. setOnClickDismiss(d) { choiceDialog(view, fontChoice) }
-        z.timeChoice. setOnClickDismiss(d) { choiceDialog(view, timeChoice) }
-        z.dateChoice. setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
-        z.mainInfo.   setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
-        z.mainAbout.  setOnClickDismiss(d) { aboutDialog(view) }
+        z.backChoice.   setOnClickDismiss(d) { choiceDialog(view, backChoice) }
+        z.colorChoice.  setOnClickDismiss(d) { choiceDialog(view, colorChoice) }
+        z.fontChoice.   setOnClickDismiss(d) { choiceDialog(view, fontChoice) }
+        z.timeChoice.   setOnClickDismiss(d) { choiceDialog(view, timeChoice) }
+        z.dateChoice.   setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
+        z.contactChoice.setOnClickDismiss(d) { choiceDialog(view, contactChoice) }
+        z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
+        z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
         d.show()
     }
 

@@ -112,13 +112,18 @@
 
     <string name="read_contacts_no_perm">No permission to read contact list</string>
 
-    <string name="read_contact_list">Read Contact List</string>
     <string name="main_info">Info</string>
     <string name="main_about">About</string>
 
     <string name="do_hide">%s: hide (still shown in search)</string>
     <string name="do_show">%s: show</string>
     <string name="do_unpin">%s: unpin</string>
+
+    <string name="contact_choice_title">Contacts</string>
+    <string-array name="contact_choice">
+        <item>Do not read list</item>
+        <item>Read list for searching</item>
+    </string-array>
 
     <string name="date_choice_title">Date</string>
     <string-array name="date_choice">

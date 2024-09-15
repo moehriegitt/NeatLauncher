@@ -157,11 +157,11 @@ class MainOptDialogBinding(
     rootView: LinearLayout,
     val backChoice: TextView,
     val colorChoice: TextView,
+    val contactChoice: TextView,
     val dateChoice: TextView,
     val fontChoice: TextView,
     val mainAbout: TextView,
     val mainInfo: TextView,
-    val readContactList: CheckBox,
     val timeChoice: TextView):
     ViewBinding
 {
@@ -171,11 +171,11 @@ class MainOptDialogBinding(
             rootView as LinearLayout,
             rootView.findViewById(R.id.back_choice)!!,
             rootView.findViewById(R.id.color_choice)!!,
+            rootView.findViewById(R.id.contact_choice)!!,
             rootView.findViewById(R.id.date_choice)!!,
             rootView.findViewById(R.id.font_choice)!!,
             rootView.findViewById(R.id.main_about)!!,
             rootView.findViewById(R.id.main_info)!!,
-            rootView.findViewById(R.id.read_contact_list)!!,
             rootView.findViewById(R.id.time_choice)!!)
 
         fun inflate(
