@@ -3,7 +3,7 @@ package de.theiling.neatlauncher
 import android.content.Context
 
 class SearchUrl(
-    val container: SearchEngine,
+    private val container: SearchEngine,
     var name: String,
     var url: String,
     isDefault: Boolean)
@@ -17,17 +17,17 @@ class SearchUrl(
         }
 }
 
-class SearchEngine(val c: Context)
+class SearchEngine(private val c: Context)
 {
     val them = mutableListOf<SearchUrl>()
-    private var defaultMaybe: SearchUrl? = null
 
+    private var defaultMaybe: SearchUrl? = null
     val default get() = defaultMaybe ?: them[0]
 
     fun add(name: String, url: String, isDefault: Boolean = false) {
         val e = SearchUrl(this, name, url, false)
         them.add(e)
-        if (isDefault) { e.isDefault = isDefault }
+        if (isDefault) { e.isDefault = true }
     }
 
     fun delete(e: SearchUrl) {
@@ -52,11 +52,23 @@ class SearchEngine(val c: Context)
         }
     }
 
+    fun savePref() {
+        val s = buildString {
+            for (a in them) {
+                append("nam\n${a.name}\nurl\n${a.url}\n")
+                if (a.isDefault) {
+                    append("def\n\n")
+                }
+            }
+        }
+        setSearchEngine(c, s)
+    }
+
     fun loadPref() {
         them.clear()
         defaultMaybe = null
         var k: String? = null
-        var name: String = ""
+        var name = ""
         for (v in getSearchEngine(c).split("\n")) {
             if (k == null) { k = v }
             else {
@@ -73,19 +85,7 @@ class SearchEngine(val c: Context)
         }
     }
 
-    fun savePref() {
-        val s = buildString {
-            for (a in them) {
-                append("nam\n${a.name}\nurl\n${a.url}\n")
-                if (a.isDefault) {
-                    append("def\n\n")
-                }
-            }
-        }
-        setSearchEngine(c, s)
-    }
-
-    fun addPredefined() {
+    private fun addPredefined() {
         add("Startpage",  "https://www.startpage.com/sp/search?pl=opensearch&query=%s")
         add("Duckduckgo", "https://duckduckgo.com/?q=%s")
         add("Spot",       "https://spot.murena.io/?q=%s")

@@ -56,7 +56,7 @@
                     android:id="@+id/author"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.PopupTinyHeading"
+                    style="@style/AppTheme.PopupTinyHeading.Action"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     android:id="@+id/license"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.PopupTinyHeading"
+                    style="@style/AppTheme.PopupTinyHeading.Action"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                     android:id="@+id/source_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.PopupTinyHeading"
+                    style="@style/AppTheme.PopupTinyHeading.Action"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                     android:id="@+id/package_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.PopupTinyHeading"
+                    style="@style/AppTheme.PopupTinyHeading.Action"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -129,7 +129,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/about_fonts"
+                android:text="@string/license_other"
                 style="@style/AppTheme.PopupHeading"
                 />
 
@@ -142,13 +142,33 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ubuntu"
-                    style="@style/AppTheme.PopupTinyHeading"
+                    android:text="@string/font_ubuntu"
+                    style="@style/AppTheme.PopupTinyHeading.Action"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ubuntu_url"
+                    style="@style/AppTheme.PopupTiny"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/o_meteo_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/service_open_meteo"
+                    style="@style/AppTheme.PopupTinyHeading.Action"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lic_open_meteo_url"
                     style="@style/AppTheme.PopupTiny"
                     />
             </LinearLayout>

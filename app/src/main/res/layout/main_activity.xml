@@ -21,62 +21,133 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
-        <View
-            android:id="@+id/main_top_margin"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/mainPaddingTop"
-            />
-
         <LinearLayout
-            android:id="@+id/main_clock_box"
+            android:id="@+id/widget_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             >
-
-            <de.theiling.neatlauncher.NeatAnalogClock
-                android:id="@+id/main_clock_analog"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                />
-
-            <de.theiling.neatlauncher.NeatWordClock
-                android:id="@+id/main_clock_word"
+            <HorizontalScrollView
+                android:id="@+id/weather_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                style="@style/AppTheme.WordClock"
-                />
+                android:fillViewport="false"
+                android:layout_weight="1"
+                android:scrollbars="none"
+                >
+                <GridLayout
+                    android:id="@+id/weather_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:columnCount="15"
+                    android:rowCount="5"
+                    >
+                    <TextView
+                        android:id="@+id/weather_loc"
+                        android:layout_columnSpan="15"
+                        style="@style/AppTheme.WeatherTitle"
+                        />
 
-            <de.theiling.neatlauncher.NeatGridClock
-                android:id="@+id/main_clock_grid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="@style/AppTheme.GridClock"
-                />
+                    <View     android:id="@+id/gridS0" style="@style/AppTheme.WeatherSep"  />
+                    <TextView android:id="@+id/gridE0" style="@style/AppTheme.WeatherCode" />
+                    <View     android:id="@+id/gridS1" style="@style/AppTheme.WeatherSep"  />
+                    <TextView android:id="@+id/gridE1" style="@style/AppTheme.WeatherCode" />
+                    <View     android:id="@+id/gridS2" style="@style/AppTheme.WeatherSep"  />
+                    <TextView android:id="@+id/gridE2" style="@style/AppTheme.WeatherCode" />
+                    <View     android:id="@+id/gridS3" style="@style/AppTheme.WeatherSep"  />
+                    <TextView android:id="@+id/gridE3" style="@style/AppTheme.WeatherCode" />
+                    <View     android:id="@+id/gridS4" style="@style/AppTheme.WeatherSep"  />
+                    <TextView android:id="@+id/gridE4" style="@style/AppTheme.WeatherCode" />
+                    <View     android:id="@+id/gridS5" style="@style/AppTheme.WeatherSep"  />
+                    <TextView android:id="@+id/gridE5" style="@style/AppTheme.WeatherCode" />
+                    <View     android:id="@+id/gridS6" style="@style/AppTheme.WeatherSep"  />
+                    <TextView android:id="@+id/gridE6" style="@style/AppTheme.WeatherCode" />
+                    <TextView android:id="@+id/gridEu" style="@style/AppTheme.WeatherUnit" />
 
-            <TextView
-                android:id="@+id/main_clock_digital"
+                    <TextView android:id="@+id/gridB0" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridB1" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridB2" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridB3" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridB4" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridB5" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridB6" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridBu" style="@style/AppTheme.WeatherUnit" />
+
+                    <TextView android:id="@+id/gridC0" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridC1" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridC2" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridC3" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridC4" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridC5" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridC6" style="@style/AppTheme.WeatherGrid" />
+                    <TextView android:id="@+id/gridCu" style="@style/AppTheme.WeatherUnit" />
+                </GridLayout>
+            </HorizontalScrollView>
+
+
+            <!-- date and time -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Clock"
-                android:gravity="center_horizontal"
-                android:textSize="@dimen/mainClock"
-                style="@style/AppTheme.NormalDatetime"
-                />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <View
+                    android:id="@+id/datetime_top_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/mainPaddingTop"
+                    />
+                <LinearLayout
+                    android:id="@+id/clock_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    >
+
+                    <de.theiling.neatlauncher.NeatAnalogClock
+                        android:id="@+id/clock_analog"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        />
+
+                    <de.theiling.neatlauncher.NeatWordClock
+                        android:id="@+id/clock_word"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        style="@style/AppTheme.WordClock"
+                        />
+
+                    <de.theiling.neatlauncher.NeatGridClock
+                        android:id="@+id/clock_grid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        style="@style/AppTheme.GridClock"
+                        />
+
+                    <TextView
+                        android:id="@+id/clock_digital"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textSize="@dimen/mainClock"
+                        style="@style/AppTheme.NormalDatetime"
+                        />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/main_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textSize="@dimen/mainDate"
+                    style="@style/AppTheme.NormalDatetime"
+                    />
+            </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/main_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:gravity="center_horizontal"
-            android:textSize="@dimen/mainDate"
-            style="@style/AppTheme.NormalDatetime"
-            />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

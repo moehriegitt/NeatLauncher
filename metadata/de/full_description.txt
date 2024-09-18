@@ -19,10 +19,12 @@ Features:
   - Unterstützung für Verknüpfungen (standardmäßig langer Klick auf App)
   - Apps ausblenden/anzeigen (bleiben aber durchsuchbar)
   - Apps können umbenannt werden (im Launcher)
+  - gute Suchfunktion for Apps
   - Kontaktliste in Suche integriert
   - integrierte, konfigurierbare Websuche
   - mehrere Uhroptionen
   - Datumsformatoptionen
+  - Wettervorhersageoptionen
   - konfigurierbares Farbschema
   - kann Standardhintergrundbild benutzen
   - freie Open-Source-Software

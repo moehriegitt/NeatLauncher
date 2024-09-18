@@ -19,12 +19,14 @@ Features:
   - shortcut support (long click on app by default)
   - hide/show apps (but keep searchable)
   - apps can be renamed and reordered
+  - good search function for apps
   - integrated contact list search
   - integrated, configurable web search
   - clock options
   - date format options
+  - weather forecast options (via open-meteo.com)
   - configurable colour scheme
-  - can use home background image
+  - can use system wallpaper as background
   - free open source software
   - no icon set support (no need: no icons at all)
   - no widget support

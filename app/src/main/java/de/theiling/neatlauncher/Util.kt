@@ -4,6 +4,14 @@ import android.content.Context
 import android.content.DialogInterface
 import android.util.TypedValue
 import android.view.View
+import android.widget.CompoundButton
+import java.net.URLEncoder
+import java.text.DateFormatSymbols
+import java.util.Calendar
+import java.util.Date
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.abs
 
 val Context.accentColor: Int get() {
     val tv = TypedValue()
@@ -25,6 +33,12 @@ fun View.setOnLongClickDismiss(d: DialogInterface, andDo: ()->Unit) =
         d.dismiss()
         andDo()
         true
+    }
+
+fun CompoundButton.setOnClickDismiss(d: DialogInterface, andDo: ()->Unit) =
+    setOnClickListener {
+        d.dismiss()
+        if (isChecked) andDo()   // theoretically, always isChecked(), but who knows
     }
 
 data class Span(
@@ -75,3 +89,29 @@ fun String.containsWords(needle: CharSequence, ignoreCase: Boolean): MatchWords?
     }
     return MatchWords(this, sumRank, s)
 }
+
+fun Any.toUrl(): String = URLEncoder.encode(toString(), "UTF-8")
+
+// For numbers smaller than 10, round to 1 sign. digits, otherwise round to Int
+fun Double.ceilString(): String  = ceil(this).toInt().toString()
+fun Double.floorString(): String = floor(this).toInt().toString()
+
+fun Double.ceilString1(): String {
+    val a = abs(this)
+    if (a <= 0.01) return ""
+    if (a > 9) return ceilString()
+    return (ceil(this * 10.0) / 10.0).toString().removeSuffix(".0")
+}
+
+// We use Mon=0 (i.e., ISO8601 minus 1), so the array can be indexed directly.
+fun getWeekdayNames() =
+    DateFormatSymbols.getInstance().getWeekdays().let {
+        arrayOf<String>(
+            it[Calendar.MONDAY].toString(),
+            it[Calendar.TUESDAY].toString(),
+            it[Calendar.WEDNESDAY].toString(),
+            it[Calendar.THURSDAY].toString(),
+            it[Calendar.FRIDAY].toString(),
+            it[Calendar.SATURDAY].toString(),
+            it[Calendar.SUNDAY].toString())
+   }

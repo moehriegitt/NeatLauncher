@@ -6,6 +6,6 @@
         android:id="@+id/item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AppTheme.PopupItem"
+        style="@style/AppTheme.PopupAction"
         />
 </FrameLayout>

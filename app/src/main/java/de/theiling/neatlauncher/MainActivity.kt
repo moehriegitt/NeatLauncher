@@ -32,10 +32,13 @@ import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -43,10 +46,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import kotlin.math.abs
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import org.json.JSONArray
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.UnknownHostException
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import kotlin.math.abs
+import kotlin.math.roundToInt
 
 class MainActivity:
     AppCompatActivity(),
@@ -66,6 +79,7 @@ class MainActivity:
     private var rightItem : Item? = null
     private var downItem : Item? = null
     private var timeItem : Item? = null
+    private var weathItem : Item? = null
     private var dateItem : Item? = null
 
     private val homeAdapter = ItemAdapter(homeItems, R.layout.home_item, { true }, this)
@@ -76,7 +90,7 @@ class MainActivity:
     // The click always comes second, and despite onFling returning true.  To fix this,
     // we use another guard 'allowClick' to prevent the click if a Fling was seen.
     // It is set to true on Down and to false on confirmed Fling, preventing Click from
-    // the same Down.
+    // the same Down.  This is hacky -- dunno why it is needed.
     private var allowClick = false
 
     private val minuteTick = object: BroadcastReceiver() {
@@ -116,16 +130,21 @@ class MainActivity:
 
     // for getting added/removed packages, we need the sequence counter:
     private var bootSeq = 0
-
     private var searchStr: String = ""
+    private var weatherData: WeatherData? = null
+    private var weatherUpdateMin = 15 // currently non-configurable
     private lateinit var z: MainActivityBinding
     private lateinit var searchEngine: SearchEngine
+    private lateinit var weather: WeatherEngine
     private lateinit var dateChoice: EnumDate
     private lateinit var timeChoice: EnumTime
     private lateinit var backChoice: EnumBack
     private lateinit var colorChoice: EnumColor
     private lateinit var fontChoice: EnumFont
+    private lateinit var ttypeChoice: EnumTtype
+    private lateinit var tempChoice: EnumTemp
     private lateinit var contactChoice: BoolContact
+    private lateinit var weekStart: EnumWstart
 
     // override on....()
     override fun onCreate(
@@ -137,11 +156,16 @@ class MainActivity:
         }
 
         searchEngine = SearchEngine(c)
+        weather = WeatherEngine(c)
         dateChoice = EnumDate(c) { onMinuteTick() }
         timeChoice = EnumTime(c) { onMinuteTick() }
         backChoice = EnumBack(c) { restart() }  // recreate() is not reset enough (bug?)
         colorChoice = EnumColor(c) { recreate() }
         fontChoice = EnumFont(c) { recreate() }
+        tempChoice = EnumTemp(c) { onWeatherData() }
+        ttypeChoice = EnumTtype(c) { onWeatherData() }
+        weekStart = EnumWstart(c) { onWeatherData() }
+
         contactChoice = BoolContact(c) {
             if (it >= 0) { // -1 resets but does not trigger itemsNotifyChange()
                 if (it == 0 || checkRequestPerm(Manifest.permission.READ_CONTACTS, 1717)) {
@@ -149,6 +173,11 @@ class MainActivity:
                 }
             }
         }
+
+        // Maybe we have no weather data, then this will fail:
+        try {
+            weatherData = WeatherData.loadPref(c)
+        } catch (_: Exception) {}
 
         setTheme(selectTheme(backChoice.x, fontChoice.x, colorChoice.x))
         enableEdgeToEdge()
@@ -198,12 +227,12 @@ class MainActivity:
             bootSeq = packageManager.getChangedPackages(0)?.sequenceNumber ?: 0
         }
 
-        z.mainClockBox.setOnClickListener {
+        z.clockBox.setOnClickListener {
             // SHOW_ALARMS requires special permissions, so we'll just start the item instead.
             timeItem?.let { itemLaunch(it) } ?:
                 startActivity(packageIntent(Intent(AlarmClock.ACTION_SHOW_ALARMS)))
         }
-        z.mainClockBox.setOnLongClickListener {
+        z.clockBox.setOnLongClickListener {
             choiceDialog(viewGroup, timeChoice)
             true
         }
@@ -213,6 +242,14 @@ class MainActivity:
         }
         z.mainDate.setOnLongClickListener {
             choiceDialog(viewGroup, dateChoice)
+            true
+        }
+
+        z.weatherGrid.setOnClickListener {
+            weathItem?.let { itemLaunch(it) } ?: startUrl(getString(R.string.open_meteo_url))
+        }
+        z.weatherGrid.setOnLongClickListener {
+            weatherDialog(viewGroup)
             true
         }
     }
@@ -232,6 +269,7 @@ class MainActivity:
         registerReceiver(minuteTick, IntentFilter(Intent.ACTION_TIME_TICK))
         onMinuteTick()
         searchEngine.loadPref()
+        weather.loadPref()
         itemsNotifyChange(2)
     }
 
@@ -244,6 +282,7 @@ class MainActivity:
     override fun onResume() {
         super.onResume()
         itemsNotifyChange(0)
+        onWeatherData()
         onMinuteTick()
     }
 
@@ -317,33 +356,41 @@ class MainActivity:
     private fun onMinuteTick() {
         val now = Date()
 
+        // every now and then, update weather info
+        weatherData?.let {
+            if ((now.time - it.timeStamp.time) >= (weatherUpdateMin * 60L * 1000L)) {
+                weatherLoad(false)
+            }
+        }
+
+        // update clock and date
         val fmt = formatTime(now)
-        z.mainClockDigital.text = fmt
-        z.mainClockDigital.visibility = visibleIf(fmt.isNotEmpty())
+        z.clockDigital.text = fmt
+        z.clockDigital.visibility = visibleIf(fmt.isNotEmpty())
 
         val dat = formatDate(now)
         z.mainDate.text = dat
         z.mainDate.visibility = visibleIf(dat.isNotEmpty())
 
         val anlg = timeChoice.x == time_anlg
-        z.mainClockAnalog.visibility = visibleIf(anlg)
+        z.clockAnalog.visibility = visibleIf(anlg)
         if (anlg) {
-            z.mainClockAnalog.updateTime()
+            z.clockAnalog.updateTime()
         }
 
         val word = timeChoice.x == time_word
-        z.mainClockWord.visibility = visibleIf(word)
+        z.clockWord.visibility = visibleIf(word)
         if (word) {
-            z.mainClockWord.updateTime()
+            z.clockWord.updateTime()
         }
 
         val grid = timeChoice.x == time_grid
-        z.mainClockGrid.visibility = visibleIf(grid)
+        z.clockGrid.visibility = visibleIf(grid)
         if (grid) {
-            z.mainClockGrid.updateTime()
+            z.clockGrid.updateTime()
         }
 
-        z.mainTopMargin.visibility = when {
+        z.datetimeTopMargin.visibility = when {
             anlg -> View.GONE
             word -> View.VISIBLE
             grid -> View.GONE
@@ -353,22 +400,24 @@ class MainActivity:
         }
     }
 
+    private fun onWeatherData() {
+        z.weatherBox.visibility = visibleIf(renderWeather())
+    }
+
     // auxiliary oneliners
     private val c get() = applicationContext
-
     private fun shortToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
-
+    private fun longToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+    private val langCode get() = Locale.getDefault().language
     private val viewGroup: ViewGroup get() = findViewById(android.R.id.content)
+    private val defaultDisplay get() = displayManager.getDisplay(Display.DEFAULT_DISPLAY)
+    private fun getUserHandle(uid: Long): UserHandle = userManager.getUserForSerialNumber(uid)
     private val userManager get() = c.getSystemService(USER_SERVICE) as UserManager
     private val displayManager get() = c.getSystemService(DISPLAY_SERVICE) as DisplayManager
-    private val defaultDisplay get() = displayManager.getDisplay(Display.DEFAULT_DISPLAY)
     private val launcher get() = c.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
     private val inputMethodManager get() =
         c.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-
-    private fun getUserHandle(uid: Long): UserHandle =
-        userManager.getUserForSerialNumber(uid)
 
     private fun packageIntent(s: String) = packageManager.getLaunchIntentForPackage(s)
     private fun modePrimary() = if (homeItems.size > 0) Mode.HOME1 else Mode.DRAWER1
@@ -376,6 +425,9 @@ class MainActivity:
     private fun drawerNotifyChange() = drawerAdapter.getFilter().filter(searchStr)
     private fun visibleIf(b: Boolean) = if (b) View.VISIBLE else View.GONE
     private fun <T>theSingle(v: List<T>) = if (v.isEmpty()) null else v[0]
+
+    private fun urlText(url: String): String =
+        (URL(url).openConnection() as HttpURLConnection).inputStream.bufferedReader().readText()
 
     // functionality
     private fun clearSearch() {
@@ -386,14 +438,15 @@ class MainActivity:
     }
 
     private fun homeNotifyChange() {
-        val pinitems = items.filter { (it.pinned != 0) }
-        leftItem  = theSingle(pinitems.filter { (it.pinned and ITEM_PIN_LEFT) != 0 })
-        rightItem = theSingle(pinitems.filter { (it.pinned and ITEM_PIN_RIGHT) != 0 })
-        downItem  = theSingle(pinitems.filter { (it.pinned and ITEM_PIN_DOWN) != 0 })
-        timeItem  = theSingle(pinitems.filter { (it.pinned and ITEM_PIN_TIME) != 0 })
-        dateItem  = theSingle(pinitems.filter { (it.pinned and ITEM_PIN_DATE) != 0 })
+        val pinItems = items.filter { (it.pinned != 0) }
+        leftItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_LEFT) != 0 })
+        rightItem = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_RIGHT) != 0 })
+        downItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_DOWN) != 0 })
+        timeItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_TIME) != 0 })
+        dateItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_DATE) != 0 })
+        weathItem = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_WEATH) != 0 })
         homeItems.clear()
-        pinitems.filterTo(homeItems) { (it.pinned and ITEM_PIN_HOME) != 0 }
+        pinItems.filterTo(homeItems) { (it.pinned and ITEM_PIN_HOME) != 0 }
         homeAdapter.getFilter().filter("")
         resetMode()
     }
@@ -627,7 +680,7 @@ class MainActivity:
                 ITEM_TYPE_CONTACT -> openContact(item)
             }
         } catch (e: Exception) {
-            shortToast(getString(R.string.error_starting).replace("%s", item.label))
+            shortToast(getString(R.string.error_starting, item.label))
         }
     }
 
@@ -650,8 +703,8 @@ class MainActivity:
 
     private fun searchWith(e: SearchUrl) =
         startUrl(e.url.
-            replace("%s", searchStr).
-            replace("%L", searchStr.lowercase(Locale.getDefault())))
+            replace("%s", searchStr.toUrl()).
+            replace("%L", searchStr.lowercase(Locale.getDefault()).toUrl()))
 
     // dialogs
     private fun dialogInit(
@@ -670,7 +723,7 @@ class MainActivity:
     private fun choiceDialog(v: View, e: PrefChoice)
     {
         val b = dialogInit(v, null, getString(e.titleId))
-        b.setSingleChoiceItems(e.nameArrId, e.x) { d, i ->
+        b.setSingleChoiceItems(e.names(), e.x) { d, i ->
             d.dismiss()
             e.x = i
         }
@@ -704,13 +757,10 @@ class MainActivity:
         val z = ItemActionsBinding.inflate(LayoutInflater.from(view.context))
         val d = dialogInit(view, z.root, item.label).create()
 
-        // start
         z.itemStart.setOnClickDismiss(d) { itemLaunch(item) }
 
-        // rename
         z.itemRename.setOnClickDismiss(d) { renameDialog(view, item) }
 
-        // hide/show
         (if (item.hidden) z.itemHide else z.itemShow).visibility = View.GONE
         z.itemHide.setOnClickDismiss(d) {
             shortToast(getString(R.string.do_hide, item.label))
@@ -723,7 +773,6 @@ class MainActivity:
             if (searchStr == "") drawerNotifyChange()
         }
 
-        // remove
         z.itemRemove.visibility = visibleIf(item.type == ITEM_TYPE_PIN)
         z.itemRemove.setOnClickDismiss(d) {
             val ok = removeShortcut(item)
@@ -734,7 +783,6 @@ class MainActivity:
             itemsNotifyChange(2)
         }
 
-        // pin/rid
         (if (item.pinned != 0) z.itemPin else z.itemRid).visibility = View.GONE
         z.itemPin.setOnClickDismiss(d) { pinDialog(view, item) }
         z.itemRid.setOnClickDismiss(d) {
@@ -743,11 +791,9 @@ class MainActivity:
             shortToast(getString(R.string.do_unpin, item.label))
         }
 
-        // info
         z.itemInfo.visibility = visibleIf(item.pack != "")
         z.itemInfo.setOnClickDismiss(d) { itemInfoLaunch(item.pack) }
 
-        // Shortcuts
         val prefix = item.label + ": "
         item.shortcuts.sortWith { x, y -> x.displayCompareToPrep(y) { it.removePrefix(prefix) } }
         for (sub in item.shortcuts) {
@@ -824,16 +870,18 @@ class MainActivity:
                 (if (z.pinRight.isChecked) pinUnset(rightItem, ITEM_PIN_RIGHT) else 0) +
                 (if (z.pinDown.isChecked)  pinUnset(downItem,  ITEM_PIN_DOWN)  else 0) +
                 (if (z.pinTime.isChecked)  pinUnset(timeItem,  ITEM_PIN_TIME)  else 0) +
-                (if (z.pinDate.isChecked)  pinUnset(dateItem,  ITEM_PIN_DATE)  else 0)
+                (if (z.pinDate.isChecked)  pinUnset(dateItem,  ITEM_PIN_DATE)  else 0) +
+                (if (z.pinWeath.isChecked) pinUnset(weathItem, ITEM_PIN_WEATH) else 0)
             homeNotifyChange()
         }.create()
 
-        z.pinHome.isChecked = (item.pinned and ITEM_PIN_HOME) == 0
-        z.pinLeft.isChecked = (item.pinned and ITEM_PIN_LEFT) != 0
+        z.pinHome.isChecked  = (item.pinned and ITEM_PIN_HOME) == 0
+        z.pinLeft.isChecked  = (item.pinned and ITEM_PIN_LEFT) != 0
         z.pinRight.isChecked = (item.pinned and ITEM_PIN_RIGHT) != 0
-        z.pinDown.isChecked = (item.pinned and ITEM_PIN_DOWN) != 0
-        z.pinTime.isChecked = (item.pinned and ITEM_PIN_TIME) != 0
-        z.pinDate.isChecked = (item.pinned and ITEM_PIN_DATE) != 0
+        z.pinDown.isChecked  = (item.pinned and ITEM_PIN_DOWN) != 0
+        z.pinTime.isChecked  = (item.pinned and ITEM_PIN_TIME) != 0
+        z.pinDate.isChecked  = (item.pinned and ITEM_PIN_DATE) != 0
+        z.pinWeath.isChecked = (item.pinned and ITEM_PIN_WEATH) != 0
 
         d.show()
     }
@@ -841,7 +889,7 @@ class MainActivity:
     private fun searchSetupButton(
         view: View, list: LinearLayout, d: AlertDialog, e: SearchUrl)
     {
-        val z = PopupItemBinding.inflate(LayoutInflater.from(view.context), list, false)
+        val z = PopupActionBinding.inflate(LayoutInflater.from(view.context), list, false)
         list.addView(z.root)
         z.itemName.text = e.name
         z.itemName.setOnClickDismiss(d) { searchWith(e) }
@@ -857,21 +905,6 @@ class MainActivity:
         for (e in them) {
             searchSetupButton(view, z.dialogList, d, e)
         }
-        d.show()
-    }
-
-    private fun mainOptDialog(view: View)
-    {
-        val z = MainOptDialogBinding.inflate(LayoutInflater.from(view.context))
-        val d = dialogInit(view, z.root, getString(R.string.main_opt_title)).create()
-        z.backChoice.   setOnClickDismiss(d) { choiceDialog(view, backChoice) }
-        z.colorChoice.  setOnClickDismiss(d) { choiceDialog(view, colorChoice) }
-        z.fontChoice.   setOnClickDismiss(d) { choiceDialog(view, fontChoice) }
-        z.timeChoice.   setOnClickDismiss(d) { choiceDialog(view, timeChoice) }
-        z.dateChoice.   setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
-        z.contactChoice.setOnClickDismiss(d) { choiceDialog(view, contactChoice) }
-        z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
-        z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
         d.show()
     }
 
@@ -891,6 +924,232 @@ class MainActivity:
         z.sourceBox. setOnClickDismiss(d) { startUrl(getString(R.string.source_url)) }
         z.packageBox.setOnClickDismiss(d) { startUrl(getString(R.string.package_url)) }
         z.ubuntuBox. setOnClickDismiss(d) { startUrl(getString(R.string.ubuntu_url)) }
+        z.oMeteoBox. setOnClickDismiss(d) { startUrl(getString(R.string.lic_open_meteo_url)) }
         d.show()
+    }
+
+    private fun mainOptDialog(view: View)
+    {
+        val z = MainOptDialogBinding.inflate(LayoutInflater.from(view.context))
+        val d = dialogInit(view, z.root, getString(R.string.main_opt_title)).create()
+        z.backChoice.   setOnClickDismiss(d) { choiceDialog(view, backChoice) }
+        z.colorChoice.  setOnClickDismiss(d) { choiceDialog(view, colorChoice) }
+        z.fontChoice.   setOnClickDismiss(d) { choiceDialog(view, fontChoice) }
+        z.timeChoice.   setOnClickDismiss(d) { choiceDialog(view, timeChoice) }
+        z.dateChoice.   setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
+        z.contactChoice.setOnClickDismiss(d) { choiceDialog(view, contactChoice) }
+        z.weatherMenu.  setOnClickDismiss(d) { weatherDialog(view) }
+        z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
+        z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
+        d.show()
+    }
+
+    // Weather
+    private fun renderWeather(): Boolean {
+        val act = weather.active ?: return false
+        val dat = weatherData ?: return false
+
+        // process 'now'
+        val cal = Calendar.getInstance()
+        val day = dat.day.filter { it.last >= cal.time }
+        if (day.isEmpty()) return false
+
+        // title
+        z.weatherLoc.text = if (act.isCurrent) getString(R.string.current_loc_title) else act.name
+
+        // headline
+        val wd = (cal[Calendar.DAY_OF_WEEK] + 7 - Calendar.MONDAY) % 7  // day of week w/ 0=Mon
+
+        // rows min/max temp
+        z.gridBu.text = "${tempChoice}"
+        z.gridCu.text = "${tempChoice}"
+        for (i in 0..6) {
+            val wdi = (i + wd) % 7
+            val ci = (cal.clone() as Calendar).apply { add(Calendar.DAY_OF_MONTH, i) }
+            val d = day.filter { (ci.time >= it.start) && (ci.time <= it.last) }.firstOrNull()
+            z.gridS[i].visibility = visibleIf(wdi == weekStart.x)
+            z.gridB[i].text = if (d == null) "" else d.tMax(ttypeChoice)[tempChoice].ceilString()
+            z.gridC[i].text = if (d == null) "" else d.tMin(ttypeChoice)[tempChoice].floorString()
+            z.gridE[i].text = if (d == null) "" else d.code.toString()
+        }
+
+        return true
+    }
+
+    private fun weatherClear()
+    {
+        weatherData?.clearPref()
+        weatherData = null
+    }
+
+    private fun weatherLoad(clear: Boolean)
+    {
+        val loc = weather.active
+        if (loc == null) {
+            onWeatherData() // make sure weatherData is removed from display
+            return
+        }
+
+        // if the location switched, remove weather data until we have fresh data
+        if (clear) {
+            weatherClear()
+            onWeatherData()
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val url = String.format(WEATHER_FORECAST_URL, loc.lat.toUrl(), loc.lon.toUrl())
+            try {
+                val j = JSONObject(urlText(url))
+                val w = WeatherData.fromOpenMeteo(c, j)
+                weatherData = w
+                w.savePref()
+                runOnUiThread {
+                    onWeatherData()
+                }
+            } catch (e: UnknownHostException) {
+                /* ignore: we have no internet access */
+            } catch (e: Exception) {
+                runOnUiThread {
+                    longToast(getString(R.string.error_msg, "$e"))
+                }
+            }
+        }
+    }
+
+    private fun weatherNotify()
+    {
+        if (weather.modified) {
+            if (weather.activeModified) {
+                weather.active.let { longToast(when (it) {
+                    null -> getString(R.string.switched_off_weather)
+                    weather.current -> getString(R.string.switched_to_current_location)
+                    else -> getString(R.string.switched_to_location, it.name)
+                })}
+                weatherLoad(true)
+            }
+            weather.savePref()
+        }
+    }
+
+    private fun locDialog(view: View, e: WeatherLoc)
+    {
+        val z = LocDialogBinding.inflate(LayoutInflater.from(view.context))
+        val d = dialogInit(view, z.root, getString(R.string.location_title)) {
+            if (z.editDel.isChecked) {
+                weather.delete(e)
+            }
+            else {
+                e.name = z.editLabel.text.toString()
+                e.order = z.editOrder.text.toString()
+            }
+            weatherNotify()
+        }.create()
+
+        z.geoLink.setOnClickDismiss(d) {
+            startUrl("geo:${e.lat},${e.lon}")
+        }
+
+        z.editLabel.setText(e.name)
+        z.editOrder.setText(e.orderOrEmpty)
+
+        setOnDoneClickOk(z.editLabel, d)
+        setOnDoneClickOk(z.editOrder, d)
+        d.show()
+    }
+
+    private fun weatherDialog(view: View)
+    {
+        val z = WeatherDialogBinding.inflate(LayoutInflater.from(view.context))
+        val b = dialogInit(view, z.root, getString(R.string.weather_title))
+        b.setOnDismissListener { weatherNotify() }
+
+        val p = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+        val l = mutableListOf<Pair<RadioButton, WeatherLoc>>()
+        for (loc in weather.them) {
+            if (loc.isCurrent) continue
+            val r = RadioButtonBinding.inflate(LayoutInflater.from(view.context)).root
+            r.layoutParams = p   // for some reasons, these are not taken from layout
+            z.locationChoice.addView(r)
+            r.text = loc.name
+            l.add(Pair(r, loc))
+        }
+
+        val d = b.create()
+        z.noWeather.isChecked = weather.active == null
+        z.noWeather.setOnClickDismiss(d) { weather.active?.isActive = false }
+
+        z.currentLocation.isChecked = (weather.current == weather.active)
+        z.currentLocation.setOnClickDismiss(d) {
+            weather.current.isActive = true
+            weather.touch(weather.current) // reload loc even if active not changed
+        }
+
+        for (e in l) {
+            val (r,loc) = e
+            r.isChecked = loc.isActive
+            r.setOnClickDismiss(d) { loc.isActive = true }
+            r.setOnLongClickDismiss(d) { locDialog(view, loc) }
+        }
+
+        z.newLocation.setOnEditorActionListener { _, aid, _ ->
+            val done = (aid == EditorInfo.IME_ACTION_DONE)
+            val str = z.newLocation.text.toString()
+            if (done && (str != "")) {
+                d.dismiss()
+                searchLocationDialog(view, str)
+            }
+            done
+        }
+
+        z.ttypeChoice. setOnClickDismiss(d) { choiceDialog(view, ttypeChoice) }
+        z.weekStart.   setOnClickDismiss(d) { choiceDialog(view, weekStart) }
+        z.tempChoice.  setOnClickDismiss(d) { choiceDialog(view, tempChoice) }
+        z.oMeteoLink.  setOnClickDismiss(d) { startUrl(getString(R.string.open_meteo_url)) }
+        d.show()
+    }
+
+    private fun searchLocationDialog(view: View, search: String)
+    {
+        val z = SearchLocationBinding.inflate(LayoutInflater.from(view.context))
+        val d = dialogInit(view, z.root, getString(R.string.search_location_title)).create()
+        val l = mutableListOf<ListItem>()
+        val a = ListAdapter(l, R.layout.popup_item)
+        z.list.setAdapter(a)
+        d.show()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val url = String.format(SEARCH_LOC_URL, langCode.toUrl(), 100.toUrl(), search.toUrl())
+            try {
+                val res = JSONObject(urlText(url)).optJSONArray("results") ?: JSONArray()
+                for (i in 0 until res.length()) {
+                    val o = res.getJSONObject(i)
+                    val short = o.getString("name")
+                    val name = StringBuilder().apply {
+                        append(short)
+                        for (key in listOf("admin4", "admin3", "admin2", "admin1", "country")) {
+                            o.optString(key).let { if (it != "") append(", $it") }
+                        }
+                    }.toString()
+                    val lat = o.getDouble("latitude")
+                    val lon = o.getDouble("longitude")
+                    val item = ListItem(name) {
+                        d.dismiss()
+                        weather.add(name, lat, lon, true)
+                        weatherNotify()
+                    }
+                    l.add(item)
+                }
+                l.sortWith { a,b -> a.text.compareTo(b.text) }
+                runOnUiThread {
+                    z.statusMsg.text = getString(R.string.search_empty)
+                    if (l.isNotEmpty()) {
+                        a.notifyDataSetChanged()
+                        z.statusMsg.visibility = View.GONE
+                    }
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    z.statusMsg.text = getString(R.string.error_msg, "$e")
+                }
+            }
+        }
     }
 }

@@ -226,4 +226,64 @@
         <item name="android:paddingBottom">@dimen/popupTinyHeadingPaddingBottom</item>
         <item name="android:paddingHorizontal">@dimen/popupTinyHeadingPaddingH</item>
     </style>
+
+    <style name="AppTheme.PopupTinyHeading.Action">
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="AppTheme.WeatherTitle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/weatherTitle</item>
+        <item name="android:textColor">?myTitleTextColor</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">@dimen/weatherTitlePadV</item>
+        <item name="android:paddingHorizontal">@dimen/weatherTitlePadH</item>
+        <item name="android:layout_gravity">left</item>
+    </style>
+    <style name="AppTheme.WeatherHead">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/weatherHead</item>
+        <item name="android:textColor">?myHeadingTextColor</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">@dimen/weatherHeadPadV</item>
+        <item name="android:paddingHorizontal">@dimen/weatherHeadPadH</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    <style name="AppTheme.WeatherSep">
+        <item name="android:layout_width">2dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">fill_vertical</item>
+        <item name="android:background">@color/dimColor</item>
+        <item name="android:layout_rowSpan">4</item>
+    </style>
+    <style name="AppTheme.WeatherCode">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/weatherCode</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">@dimen/weatherCodePadV</item>
+        <item name="android:paddingHorizontal">@dimen/weatherCodePadH</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    <style name="AppTheme.WeatherGrid">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/weatherGrid</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">@dimen/weatherGridPadV</item>
+        <item name="android:paddingHorizontal">@dimen/weatherGridPadH</item>
+        <item name="android:layout_gravity">right</item>
+    </style>
+    <style name="AppTheme.WeatherUnit">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/weatherUnit</item>
+        <item name="android:textColor">?myHeadingTextColor</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">@dimen/weatherUnitPadV</item>
+        <item name="android:paddingHorizontal">@dimen/weatherUnitPadH</item>
+        <item name="android:layout_gravity">left</item>
+    </style>
 </resources>

@@ -23,4 +23,12 @@
     <string name="ubuntu_url" translatable="false">
     https://ubuntu.com/legal/font-licence
     </string>
+
+    <string name="open_meteo_url" translatable="false">
+    https://open-meteo.com/
+    </string>
+
+    <string name="lic_open_meteo_url" translatable="false">
+    https://open-meteo.com/en/license
+    </string>
 </resources>

@@ -67,5 +67,13 @@
             style="@style/AppTheme.PopupSwitch"
             />
 
+        <CheckBox
+            android:id="@+id/pin_weath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_weath"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
     </LinearLayout>
 </FrameLayout>

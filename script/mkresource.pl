@@ -734,6 +734,34 @@ sub make_binding($$)
         my $kt = '';
         $kt .= "class $class($param_str):\n\tViewBinding\n{\n";
         $kt .= "\toverride val root = $root->{name}\n";
+
+        # arrays:
+        my %arr = ();
+        for my $e (@node) {
+            if ($e->{name} =~ m(^(.+)(\d)$)) {
+                my ($base, $idx) = ($1,$2);
+                my $a = ($arr{$base} //= { base => $base, idx_cnt => 0 });
+                $a->{idx}{$idx} = $e;
+                $a->{idx_cnt}++;
+                $a->{idx_min} = $idx if $idx <= ($a->{idx_min} // $idx);
+                $a->{idx_max} = $idx if $idx >= ($a->{idx_max} // $idx);
+                $a->{ltype}{$e->{ltype}} = 1;
+            }
+        }
+        for my $base (sort keys %arr) {
+            my $a = $arr{$base};
+            next if $a->{idx_cnt} < 2;
+            next if $a->{idx_min} != 0;
+            next if $a->{idx_max} != ($a->{idx_cnt} - 1);
+            my @ltype = keys %{ $a->{ltype} };
+            next if scalar(@ltype) != 1;
+            my ($ltype) = @ltype;
+            my @them = map { $a->{idx}{$_}{name} } 0..$a->{idx_max};
+            my $them = join(", ", @them);
+            $kt .= "\tval $base = arrayOf($them)\n";
+        }
+
+        # construction:
         $kt .= "\tcompanion object {\n";
 
         $kt .= "\t\tfun bind(rootView: View) = $class($get_str)\n\n";

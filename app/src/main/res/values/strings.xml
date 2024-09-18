@@ -2,12 +2,15 @@
     <string name="app_name">NeatLauncher</string>
 
     <string name="package_n_version">Package &amp; Version</string>
+    <string name="package_version_code">%s v%s (version code %d)</string>
     <string name="author_name">Author: %s</string>
     <string name="license_name">License: %s</string>
     <string name="source_link">Source code: %s</string>
     <string name="package_link">App repository: %s</string>
-    <string name="about_fonts">Font Licences</string>
-    <string name="package_version_code">%s v%s (version code %d)</string>
+    <string name="license_other">Other Licences</string>
+    <string name="font_ubuntu">Ubuntu Font</string>
+    <string name="service_open_meteo">Open-Meteo Service</string>
+    <string name="open_meteo_link">Weather data by Open-Meteo.com</string>
 
     <string name="readme_short_description">
     A neat and convenient launcher without icons.
@@ -47,12 +50,14 @@
     - shortcut support (long click on app by default)
     - hide/show apps (but keep searchable)
     - apps can be renamed and reordered
+    - good search function for apps
     - integrated contact list search
     - integrated, configurable web search
     - clock options
     - date format options
+    - weather forecast options (via open-meteo.com)
     - configurable colour scheme
-    - can use home background image
+    - can use system wallpaper as background
     - free open source software
     - no icon set support (no need: no icons at all)
     - no widget support
@@ -93,6 +98,7 @@
     <string name="pin_down">Swipe Down</string>
     <string name="pin_time">Click Time</string>
     <string name="pin_date">Click Date</string>
+    <string name="pin_weath">Click Weather</string>
 
     <string name="error_starting">Error starting %s</string>
     <string name="error_removing">Error removing %s</string>
@@ -118,6 +124,37 @@
     <string name="do_hide">%s: hide (still shown in search)</string>
     <string name="do_show">%s: show</string>
     <string name="do_unpin">%s: unpin</string>
+
+    <string name="weather_title">Weather</string>
+    <string name="no_weather">No weather</string>
+    <string name="current_location">Current location</string>
+    <string name="search_location_hint">Search for new location</string>
+    <string name="search_location_title">Search Location</string>
+    <string name="geo_link">Show on Map</string>
+
+    <string name="error_msg">Error: %s</string>
+    <string name="searching_msg">Searching...</string>
+    <string name="search_empty">Nothing was found.</string>
+    <string name="switched_to_location">Weather location is %s</string>
+    <string name="switched_to_current_location">Weather location is here</string>
+    <string name="switched_off_weather">Weather is off</string>
+    <string name="location_title">Location Settings</string>
+    <string name="current_loc_title">Here</string>
+    <string name="wstart_choice_title">First Day of Week</string>
+
+    <string name="temp_choice_title">Temperature Unit</string>
+    <!-- typically needs no translation -->
+    <string-array name="temp_choice">
+        <item>K</item>
+        <item>°C</item>
+        <item>°F</item>
+    </string-array>
+
+    <string name="ttype_choice_title">Temperature Measure</string>
+    <string-array name="ttype_choice">
+        <item>actual</item>
+        <item>apparent</item>
+    </string-array>
 
     <string name="contact_choice_title">Contacts</string>
     <string-array name="contact_choice">

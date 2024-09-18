@@ -47,4 +47,25 @@
         <item>tluc</item>
         <item>tpar</item>
     </string-array>
+
+    <string-array name="temp_choice_key" translatable="false">
+        <item>K</item>
+        <item>C</item>
+        <item>F</item>
+    </string-array>
+
+    <string-array name="ttype_choice_key" translatable="false">
+        <item>actu</item>
+        <item>appa</item>
+    </string-array>
+
+    <string-array name="weekday_choice_key" translatable="false">
+        <item>mon</item>
+        <item>tue</item>
+        <item>wed</item>
+        <item>thu</item>
+        <item>fri</item>
+        <item>sat</item>
+        <item>sun</item>
+    </string-array>
 </resources>

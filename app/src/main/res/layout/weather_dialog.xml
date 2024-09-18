@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/popupLayoutPadding"
@@ -19,76 +20,71 @@
             android:orientation="vertical"
             >
 
-            <TextView
-                android:id="@+id/back_choice"
+            <RadioGroup
+                android:id="@+id/location_choice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/back_choice_title"
+                style="@style/AppTheme.PopupItem"
+                >
+                <RadioButton
+                    android:id="@+id/no_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_weather"
+                    style="@style/AppTheme.PopupSwitch"
+                    />
+                <RadioButton
+                    android:id="@+id/current_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/current_location"
+                    style="@style/AppTheme.PopupSwitch"
+                    />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/new_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_location_hint"
+                android:imeOptions="actionDone"
+                android:inputType="none|textNoSuggestions|textCapWords"
+                android:lines="1"
+                android:ems="10"
+                style="@style/AppTheme.PopupItem"
+                tools:ignore="Autofill,LabelFor"
+                />
+
+            <TextView
+                android:id="@+id/week_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wstart_choice_title"
                 style="@style/AppTheme.PopupItem"
                 />
 
             <TextView
-                android:id="@+id/color_choice"
+                android:id="@+id/ttype_choice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/color_choice_title"
+                android:text="@string/ttype_choice_title"
                 style="@style/AppTheme.PopupItem"
                 />
 
             <TextView
-                android:id="@+id/font_choice"
+                android:id="@+id/temp_choice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/font_choice_title"
+                android:text="@string/temp_choice_title"
                 style="@style/AppTheme.PopupItem"
                 />
 
             <TextView
-                android:id="@+id/time_choice"
+                android:id="@+id/o_meteo_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/time_choice_title"
-                style="@style/AppTheme.PopupItem"
-                />
-
-            <TextView
-                android:id="@+id/date_choice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/date_choice_title"
-                style="@style/AppTheme.PopupItem"
-                />
-
-            <TextView
-                android:id="@+id/contact_choice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/contact_choice_title"
-                style="@style/AppTheme.PopupItem"
-                />
-
-            <TextView
-                android:id="@+id/weather_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weather_title"
-                style="@style/AppTheme.PopupItem"
-                />
-
-            <TextView
-                android:id="@+id/main_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/main_info"
-                style="@style/AppTheme.PopupItem"
-                />
-
-            <TextView
-                android:id="@+id/main_about"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/main_about"
-                style="@style/AppTheme.PopupItem"
+                android:text="@string/open_meteo_link"
+                style="@style/AppTheme.PopupAction"
                 />
 
         </LinearLayout>

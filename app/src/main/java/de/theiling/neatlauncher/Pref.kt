@@ -58,21 +58,37 @@ fun setItemInfo(c: Context, type: String, pack: String, klass: String, v: String
 fun getSearchEngine(c: Context) = pref(c).getString("searchEngine", "")!!
 fun setSearchEngine(c: Context, s: String) = prefPutString(c, "searchEngine", s, "")
 
+fun getWeatherLoc(c: Context) = pref(c).getString("weatherLoc", "")!!
+fun setWeatherLoc(c: Context, s: String) = prefPutString(c, "weatherLoc", s, "")
+
+fun getWeatherData(c: Context) = pref(c).getString("weatherData", "")!!
+fun setWeatherData(c: Context, s: String) = prefPutString(c, "weatherData", s, "")
+
 abstract class PrefChoice(
+    val c: Context,
     val titleId: Int,
-    val nameArrId: Int) {
+    val names: () -> Array<String>)
+{
+    constructor(c: Context, titleId: Int, nameArrId: Int):
+        this (c, titleId, { c.resources.getStringArray(nameArrId) })
+
     abstract var x: Int
+    override fun toString(): String = names()[x]
 }
 
 abstract class PrefEnum(
-    private val c: Context,
+    c: Context,
     titleId: Int,
-    nameArrId: Int,
+    names: () -> Array<String>,
     private val keyArrId: Int,
     private val prefKey: String,
     private val defVal: Int,
-    val onChange: (Int) -> Unit): PrefChoice(titleId, nameArrId)
+    val onChange: (Int) -> Unit): PrefChoice(c, titleId, names)
 {
+    constructor(c: Context, titleId: Int, nameArrId: Int, keyArrId: Int,
+        prefKey: String, defVal: Int, onChange: (Int) -> Unit): this (
+        c, titleId, { c.resources.getStringArray(nameArrId) }, keyArrId, prefKey, defVal, onChange)
+
     override var x = prefGetEnum(c, keyArrId, prefKey, defVal)
         set(new) {
             if (field != new) {
@@ -83,13 +99,21 @@ abstract class PrefEnum(
         }
 }
 
+abstract class PrefWeekday(
+    c: Context,
+    titleId: Int,
+    prefKey: String,
+    defVal: Int,
+    onChange: (Int) -> Unit): PrefEnum(c, titleId, { getWeekdayNames() },
+        R.array.weekday_choice_key, prefKey, defVal, onChange)
+
 abstract class PrefBool(
-    private val c: Context,
+    c: Context,
     titleId: Int,
     nameArrId: Int,
     private val prefKey: String,
     private val defVal: Boolean,
-    val onChange: (Int) -> Unit = {}): PrefChoice(titleId, nameArrId)
+    val onChange: (Int) -> Unit = {}): PrefChoice(c, titleId, nameArrId)
 {
     override var x = if (pref(c).getBoolean(prefKey, defVal)) 1 else 0
         set(new) {
@@ -117,5 +141,14 @@ class EnumFont(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.font_c
 class EnumColor(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.color_choice_title,
     R.array.color_choice, R.array.color_choice_key, "colorChoice", color_ambr, onChange)
 
+class EnumTemp(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.temp_choice_title,
+    R.array.temp_choice, R.array.temp_choice_key, "tempChoice", temp_C, onChange)
+
+class EnumTtype(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.ttype_choice_title,
+    R.array.ttype_choice, R.array.ttype_choice_key, "tempTypeChoice", ttype_actu, onChange)
+
 class BoolContact(c: Context, onChange: (Int) -> Unit): PrefBool(c,
     R.string.contact_choice_title, R.array.contact_choice, "readContacts", true, onChange)
+
+class EnumWstart(c: Context, onChange: (Int) -> Unit): PrefWeekday(c,
+    R.string.wstart_choice_title, "weekStart", weekday_mon, onChange)

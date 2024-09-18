@@ -59,4 +59,23 @@
     <dimen name="popupTinyPaddingBottom">8dp</dimen>
     <dimen name="popupTinyPaddingH">8dp</dimen>
 
+    <dimen name="weatherTitle">17sp</dimen>
+    <dimen name="weatherTitlePadV">3dp</dimen>
+    <dimen name="weatherTitlePadH">3dp</dimen>
+
+    <dimen name="weatherHead">14sp</dimen>
+    <dimen name="weatherHeadPadV">3dp</dimen>
+    <dimen name="weatherHeadPadH">3dp</dimen>
+
+    <dimen name="weatherUnit">14sp</dimen>
+    <dimen name="weatherUnitPadV">3dp</dimen>
+    <dimen name="weatherUnitPadH">3dp</dimen>
+
+    <dimen name="weatherGrid">14sp</dimen>
+    <dimen name="weatherGridPadV">3dp</dimen>
+    <dimen name="weatherGridPadH">3dp</dimen>
+
+    <dimen name="weatherCode">17sp</dimen>
+    <dimen name="weatherCodePadV">3dp</dimen>
+    <dimen name="weatherCodePadH">3dp</dimen>
 </resources>
