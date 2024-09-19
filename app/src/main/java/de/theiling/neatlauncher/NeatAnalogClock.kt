@@ -56,9 +56,12 @@ class NeatAnalogClock(
         val oy = paddingTop
         val cx = (width  - ox - paddingRight)  / 2F
         val cy = (height - oy - paddingBottom) / 2F
-        val r = min(cx, cy)
+        val al = min(cx, cy)
 
-        val ref = r / 100
+        val r0 = al * 0.98F
+        val r1 = al * 0.96F
+        val rr = r1
+        val ref = rr / 100
         val tsz = ref * 0.75F
         val msz = 2 * ref
         val hsz = 3.5F * ref
@@ -67,6 +70,7 @@ class NeatAnalogClock(
         val pm = dut * 1.75F
 
         val pf = paintOfColor(context.mainForeground)
+        val pd = paintOfColor(context.dimBackground)
         val pa = paintOfColor(context.accentColor)
         pf.strokeWidth = tsz
 
@@ -75,12 +79,15 @@ class NeatAnalogClock(
             translate(cx + ox, cy + oy)
             rotate(180F)
 
+            // face
+            drawCircle(0F, 0F, r0, pd)
+
             // dial
             for (i in 0..59) {
                 val qu = (i % 15) == 0
                 val ho = (i % 5) == 0
-                val ro = if (qu) r - (dot * 4) else r
-                val ri = if (ho) r * 0.85F else r * 0.95F
+                val ro = if (qu) r1 - ((if (i == 0) dut else dot) * 4) else rr
+                val ri = if (ho) rr * 0.85F else rr * 0.95F
                 save()
                 rotate(i * 6F)
                 // tick
@@ -89,10 +96,10 @@ class NeatAnalogClock(
                 // dots
                 when {
                     i == 0 -> {
-                        drawCircle(+pm, r - dut, dut, pa)
-                        drawCircle(-pm, r - dut, dut, pa)
+                        drawCircle(+pm, r1 - dut, dut, pa)
+                        drawCircle(-pm, r1 - dut, dut, pa)
                     }
-                    qu -> drawCircle(0F, r - dot, dot, pa)
+                    qu -> drawCircle(0F, r1 - dot, dot, pa)
                 }
                 restore()
             }
@@ -100,13 +107,13 @@ class NeatAnalogClock(
             // hour
             save()
             rotate(360F * hf)
-            drawPath(makeClockHand(hsz, r * 0.6F), pf)
+            drawPath(makeClockHand(hsz, rr * 0.6F), pf)
             restore()
 
             // minute
             save()
             rotate(360F * mf)
-            drawPath(makeClockHand(msz, r * 0.9F), pf)
+            drawPath(makeClockHand(msz, rr * 0.9F), pf)
             restore()
 
             // center dot

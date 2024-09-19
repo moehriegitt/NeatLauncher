@@ -4,6 +4,8 @@ import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Date
+import java.util.SimpleTimeZone
+import java.util.TimeZone
 import kotlin.math.roundToInt
 
 const val CURRENT_LOC = ""
@@ -21,7 +23,7 @@ const val WEATHER_FORECAST_URL =
     "&hourly=temperature_2m,apparent_temperature,weather_code" +
     "&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset" +
     "&timeformat=unixtime" +
-    "&timezone=GMT"
+    "&timezone=auto"
 
 class WeatherLoc(
     private val container: WeatherEngine,
@@ -264,10 +266,13 @@ data class WeatherDay(
 class WeatherData(
     private val c: Context,
     val timeStamp: Date,
+    val timeZone: SimpleTimeZone,
     val step: List<WeatherStep> = listOf(),
     val day: List<WeatherDay> = listOf())
 {
     companion object {
+        private fun simpleTz(x: Int = 0) = SimpleTimeZone(x, tzUtcId(x))
+
         private fun <T> meteoList(
             j: JSONObject, group: String, entry: String, make: (JSONArray, Int)->T): List<T> {
             val a = j.getJSONObject(group).getJSONArray(entry)
@@ -294,6 +299,7 @@ class WeatherData(
             meteoList(j, group, entry) { a, i -> Date(a.getLong(i) * 1000L) }
 
         fun fromOpenMeteo(context: Context, j: JSONObject): WeatherData {
+            val tz = simpleTz(1000 * j.getInt("utc_offset_seconds"))
             val day = mutableListOf<WeatherDay>()
             with (day) {
                 val start   = meteoDate(j, "daily", "time")
@@ -336,7 +342,7 @@ class WeatherData(
             }
             step.sortWith { a,b -> a.start.compareTo(b.start) }
 
-            return WeatherData(context, Date(), step, day)
+            return WeatherData(context, Date(), tz, step, day)
         }
 
         fun loadPref(context: Context): WeatherData {
@@ -352,6 +358,7 @@ class WeatherData(
             var tAbsMax = Temp(0)
             var tApp = Temp(0)
             var tAppMax = Temp(0)
+            var tz = simpleTz()
             for (v in getWeatherData(context).split("\n")) {
                 if (k == null) { k = v; continue }
                 when (k) {
@@ -366,16 +373,18 @@ class WeatherData(
                     "T" -> tAbsMax = Temp(v.toInt())
                     "a" -> tApp = Temp(v.toInt())
                     "A" -> tAppMax = Temp(v.toInt())
+                    "z" -> tz = simpleTz(v.toInt())
                 }
                 k = null
             }
-            return WeatherData(context, update, step, day)
+            return WeatherData(context, update, tz, step, day)
         }
     }
 
     fun savePref() {
         val s = buildString {
             append("u\n${timeStamp.time}\n")
+            append("z\n${timeZone.rawOffset}\n")
             for (i in day) {
                 append("s\n${i.start.time}\n")
                 append("c\n${i.code.wmo}\n")

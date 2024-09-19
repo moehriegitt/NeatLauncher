@@ -39,6 +39,7 @@
                     android:id="@+id/weather_grid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/dimBackground"
                     android:clickable="true"
                     android:orientation="horizontal"
                     android:columnCount="15"
@@ -47,6 +48,7 @@
                     <TextView
                         android:id="@+id/weather_loc"
                         android:layout_columnSpan="15"
+                        android:ellipsize="end"
                         style="@style/AppTheme.WeatherTitle"
                         />
 
@@ -110,7 +112,7 @@
                     <de.theiling.neatlauncher.NeatAnalogClock
                         android:id="@+id/clock_analog"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="210dp"
                         />
 
                     <de.theiling.neatlauncher.NeatWordClock

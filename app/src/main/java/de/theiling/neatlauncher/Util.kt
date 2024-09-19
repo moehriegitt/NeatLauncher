@@ -20,6 +20,7 @@ val Context.accentColor: Int get() {
 }
 
 val Context.mainForeground: Int get() = getColor(R.color.mainForeground)
+val Context.dimBackground: Int get() = getColor(R.color.dimBackground)
 val Context.veryDimColor: Int get() = getColor(R.color.veryDimColor)
 
 fun View.setOnClickDismiss(d: DialogInterface, andDo: ()->Unit) =
@@ -115,3 +116,13 @@ fun getWeekdayNames() =
             it[Calendar.SATURDAY].toString(),
             it[Calendar.SUNDAY].toString())
    }
+
+fun tzUtcId(m: Int): String {
+    val o = abs(m) / 60_000
+    if (o == 0) return "UTC"
+    val s = if (m < 0) "-" else "+"
+    val h = o / 60
+    val m = o % 60
+    if (m == 0) return "UTC%s%d".format(s, h)
+    return "UTC%s%02d%02d".format(s, h, m)
+}

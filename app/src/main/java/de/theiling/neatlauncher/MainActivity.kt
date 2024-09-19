@@ -1,5 +1,6 @@
 package de.theiling.neatlauncher
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
@@ -11,7 +12,6 @@ import android.content.IntentFilter
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.hardware.display.DisplayManager
-import android.Manifest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -47,9 +47,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import kotlin.math.abs
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
@@ -59,7 +58,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import kotlin.math.roundToInt
+import kotlin.math.abs
 
 class MainActivity:
     AppCompatActivity(),
@@ -131,8 +130,15 @@ class MainActivity:
     // for getting added/removed packages, we need the sequence counter:
     private var bootSeq = 0
     private var searchStr: String = ""
+    private var clockValid = false
+    private var clockWeatherValid = false
     private var weatherData: WeatherData? = null
-    private var weatherUpdateMin = 15 // currently non-configurable
+    private var weatherUpdateMillis = 15L * 60_000L  // currently non-configurable
+    private var weatherTryLongMillis = 15L * 60_000L
+    private var weatherTryShortMillis = 2L * 60_000L
+    private var weatherTryMinMillis = 1_000L
+    private var weatherTryLast = Date(0)
+    private var weatherTryNext = Date(0)
     private lateinit var z: MainActivityBinding
     private lateinit var searchEngine: SearchEngine
     private lateinit var weather: WeatherEngine
@@ -157,14 +163,14 @@ class MainActivity:
 
         searchEngine = SearchEngine(c)
         weather = WeatherEngine(c)
-        dateChoice = EnumDate(c) { onMinuteTick() }
-        timeChoice = EnumTime(c) { onMinuteTick() }
+        dateChoice = EnumDate(c) { clockRedraw(true) }
+        timeChoice = EnumTime(c) { clockRedraw(true) }
         backChoice = EnumBack(c) { restart() }  // recreate() is not reset enough (bug?)
         colorChoice = EnumColor(c) { recreate() }
         fontChoice = EnumFont(c) { recreate() }
-        tempChoice = EnumTemp(c) { onWeatherData() }
-        ttypeChoice = EnumTtype(c) { onWeatherData() }
-        weekStart = EnumWstart(c) { onWeatherData() }
+        tempChoice = EnumTemp(c) { weatherRedraw() }
+        ttypeChoice = EnumTtype(c) { weatherRedraw() }
+        weekStart = EnumWstart(c) { weatherRedraw() }
 
         contactChoice = BoolContact(c) {
             if (it >= 0) { // -1 resets but does not trigger itemsNotifyChange()
@@ -282,7 +288,6 @@ class MainActivity:
     override fun onResume() {
         super.onResume()
         itemsNotifyChange(0)
-        onWeatherData()
         onMinuteTick()
     }
 
@@ -307,23 +312,20 @@ class MainActivity:
 
     @Suppress("OVERRIDE_DEPRECATION")
     @SuppressLint("MissingSuperCall")
-    override fun onBackPressed() {
+    override fun onBackPressed() =
         resetView(!z.mainSearch.hasFocus())
-    }
 
     override fun dispatchTouchEvent(e: MotionEvent): Boolean {
         gestures.onTouchEvent(e)
         return super.dispatchTouchEvent(e)
     }
 
-    private fun onFlingRight() {
+    private fun onFlingRight() =
         rightItem?.let { itemLaunch(it) } ?: startPhone()
-    }
 
-    private fun onFlingLeft() {
+    private fun onFlingLeft() =
         leftItem?.let { itemLaunch(it) } ?:
             startActivity(Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA))
-    }
 
     private fun onFlingUp() {
         if (getMode() == modePrimary()) {
@@ -354,14 +356,51 @@ class MainActivity:
     }
 
     private fun onMinuteTick() {
-        val now = Date()
+        clockValid = false
+        weatherUpdate(false)
+        clockRedraw(false)
+    }
 
-        // every now and then, update weather info
-        weatherData?.let {
-            if ((now.time - it.timeStamp.time) >= (weatherUpdateMin * 60L * 1000L)) {
-                weatherLoad(false)
-            }
-        }
+    private fun onWeatherData() {
+        clockWeatherValid = false
+        weatherRedraw()
+        clockRedraw(false)
+    }
+
+    // auxiliary oneliners
+    private val c get() = applicationContext
+    private fun shortToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
+    private fun longToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+    private val langCode get() = Locale.getDefault().language
+    private val viewGroup: ViewGroup get() = findViewById(android.R.id.content)
+    private val defaultDisplay get() = displayManager.getDisplay(Display.DEFAULT_DISPLAY)
+    private fun getUserHandle(uid: Long): UserHandle = userManager.getUserForSerialNumber(uid)
+    private val userManager get() = c.getSystemService(USER_SERVICE) as UserManager
+    private val displayManager get() = c.getSystemService(DISPLAY_SERVICE) as DisplayManager
+    private val launcher get() = c.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+
+    private val inputMethodManager get() =
+        c.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
+    private fun packageIntent(s: String) = packageManager.getLaunchIntentForPackage(s)
+    private fun modePrimary() = if (homeItems.size > 0) Mode.HOME1 else Mode.DRAWER1
+    private fun modeSecondary() = Mode.DRAWER2
+    private fun drawerNotifyChange() = drawerAdapter.getFilter().filter(searchStr)
+    private fun visibleIf(b: Boolean) = if (b) View.VISIBLE else View.GONE
+    private fun <T>theSingle(v: List<T>) = if (v.isEmpty()) null else v[0]
+
+    private fun urlText(url: String): String =
+        (URL(url).openConnection() as HttpURLConnection).inputStream.bufferedReader().readText()
+
+    // functionality
+    private fun clockRedraw(force: Boolean) {
+        // guards
+        if (force) clockValid = false
+        if (clockValid) return
+        clockValid = true
+
+        // doit
+        val now = Date()
 
         // update clock and date
         val fmt = formatTime(now)
@@ -400,36 +439,6 @@ class MainActivity:
         }
     }
 
-    private fun onWeatherData() {
-        z.weatherBox.visibility = visibleIf(renderWeather())
-    }
-
-    // auxiliary oneliners
-    private val c get() = applicationContext
-    private fun shortToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
-    private fun longToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
-    private val langCode get() = Locale.getDefault().language
-    private val viewGroup: ViewGroup get() = findViewById(android.R.id.content)
-    private val defaultDisplay get() = displayManager.getDisplay(Display.DEFAULT_DISPLAY)
-    private fun getUserHandle(uid: Long): UserHandle = userManager.getUserForSerialNumber(uid)
-    private val userManager get() = c.getSystemService(USER_SERVICE) as UserManager
-    private val displayManager get() = c.getSystemService(DISPLAY_SERVICE) as DisplayManager
-    private val launcher get() = c.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-
-    private val inputMethodManager get() =
-        c.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-
-    private fun packageIntent(s: String) = packageManager.getLaunchIntentForPackage(s)
-    private fun modePrimary() = if (homeItems.size > 0) Mode.HOME1 else Mode.DRAWER1
-    private fun modeSecondary() = Mode.DRAWER2
-    private fun drawerNotifyChange() = drawerAdapter.getFilter().filter(searchStr)
-    private fun visibleIf(b: Boolean) = if (b) View.VISIBLE else View.GONE
-    private fun <T>theSingle(v: List<T>) = if (v.isEmpty()) null else v[0]
-
-    private fun urlText(url: String): String =
-        (URL(url).openConnection() as HttpURLConnection).inputStream.bufferedReader().readText()
-
-    // functionality
     private fun clearSearch() {
         if (z.mainSearch.text.isNotEmpty()) {
             z.mainSearch.text.clear()
@@ -945,29 +954,36 @@ class MainActivity:
     }
 
     // Weather
-    private fun renderWeather(): Boolean {
+    private fun weatherRedraw() {
+        z.weatherBox.visibility = visibleIf(weatherRender())
+    }
+
+    private fun weatherRender(): Boolean {
         val act = weather.active ?: return false
         val dat = weatherData ?: return false
 
         // process 'now'
         val cal = Calendar.getInstance()
-        val day = dat.day.filter { it.last >= cal.time }
+        val day = dat.day.filter { cal.time <= it.last }
         if (day.isEmpty()) return false
 
         // title
-        z.weatherLoc.text = if (act.isCurrent) getString(R.string.current_loc_title) else act.name
+        z.weatherLoc.text =
+            (if (act.isCurrent) getString(R.string.current_loc_title) else act.name) +
+            (if (cal.timeZone.getOffset(cal.time.time) != dat.timeZone.getOffset(cal.time.time))
+                " ${dat.timeZone.id}" else "")
 
-        // headline
-        val wd = (cal[Calendar.DAY_OF_WEEK] + 7 - Calendar.MONDAY) % 7  // day of week w/ 0=Mon
+        // set time zone to get week days right in table (may be out of sync with date display!)
+        cal.timeZone = dat.timeZone
 
         // rows min/max temp
-        z.gridBu.text = "${tempChoice}"
-        z.gridCu.text = "${tempChoice}"
+        z.gridBu.text = "$tempChoice"
+        z.gridCu.text = "$tempChoice"
         for (i in 0..6) {
-            val wdi = (i + wd) % 7
             val ci = (cal.clone() as Calendar).apply { add(Calendar.DAY_OF_MONTH, i) }
-            val d = day.filter { (ci.time >= it.start) && (ci.time <= it.last) }.firstOrNull()
-            z.gridS[i].visibility = visibleIf(wdi == weekStart.x)
+            val wi = (ci[Calendar.DAY_OF_WEEK] + 7 - Calendar.MONDAY) % 7  // day of week w/ 0=Mon
+            val d = day.firstOrNull { (ci.time >= it.start) && (ci.time <= it.last) }
+            z.gridS[i].visibility = visibleIf(wi == weekStart.x)
             z.gridB[i].text = if (d == null) "" else d.tMax(ttypeChoice)[tempChoice].ceilString()
             z.gridC[i].text = if (d == null) "" else d.tMin(ttypeChoice)[tempChoice].floorString()
             z.gridE[i].text = if (d == null) "" else d.code.toString()
@@ -982,19 +998,41 @@ class MainActivity:
         weatherData = null
     }
 
-    private fun weatherLoad(clear: Boolean)
+    private fun weatherUpdate(forceLoad: Boolean)
     {
+        var doLoad = forceLoad
+
+        val now = Date()
+        val wd = weatherData
+        // update rate
+        if ((wd == null) || ((now.time - wd.timeStamp.time) >= weatherUpdateMillis)) {
+            doLoad = true
+        }
+
+        // error rate limit
+        if (!forceLoad && (now.time < weatherTryNext.time)) {
+            doLoad = false
+        }
+        // last resort rate limit
+        if (now.time < (weatherTryLast.time + weatherTryMinMillis)) {
+            doLoad = false
+        }
+
         val loc = weather.active
-        if (loc == null) {
+        if (!doLoad || (loc == null)) {
             onWeatherData() // make sure weatherData is removed from display
             return
         }
 
         // if the location switched, remove weather data until we have fresh data
-        if (clear) {
+        if (forceLoad) {
             weatherClear()
             onWeatherData()
         }
+        shortToast("Net: Weather?")
+        weatherTryLast = now
+        weatherTryNext = Date(now.time + weatherTryLongMillis)
+
         lifecycleScope.launch(Dispatchers.IO) {
             val url = String.format(WEATHER_FORECAST_URL, loc.lat.toUrl(), loc.lon.toUrl())
             try {
@@ -1006,7 +1044,8 @@ class MainActivity:
                     onWeatherData()
                 }
             } catch (e: UnknownHostException) {
-                /* ignore: we have no internet access */
+                // ignore: we have no internet access, but try again sooner
+                weatherTryNext = Date(now.time + weatherTryShortMillis)
             } catch (e: Exception) {
                 runOnUiThread {
                     longToast(getString(R.string.error_msg, "$e"))
@@ -1024,7 +1063,7 @@ class MainActivity:
                     weather.current -> getString(R.string.switched_to_current_location)
                     else -> getString(R.string.switched_to_location, it.name)
                 })}
-                weatherLoad(true)
+                weatherUpdate(true)
             }
             weather.savePref()
         }
