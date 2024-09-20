@@ -403,10 +403,15 @@ class MainActivity:
 
     // functionality
     private fun clockRedraw(force: Boolean) {
+        val anlg = timeChoice.x == time_anlg
+        val canWeather = anlg
+
         // guards
         if (force) clockValid = false
+        if (canWeather && !clockWeatherValid) clockValid = false
         if (clockValid) return
         clockValid = true
+        clockWeatherValid = true
 
         // doit
         val now = Date()
@@ -420,8 +425,8 @@ class MainActivity:
         z.mainDate.text = dat
         z.mainDate.visibility = visibleIf(dat.isNotEmpty())
 
-        val anlg = timeChoice.x == time_anlg
         z.clockAnalog.visibility = visibleIf(anlg)
+        z.clockAnalog.weatherData = weatherData
         if (anlg) {
             z.clockAnalog.updateTime()
         }

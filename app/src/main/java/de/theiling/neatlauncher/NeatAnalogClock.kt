@@ -4,10 +4,12 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import java.util.Calendar
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 // I want a pointed end, so neither BUTT nor ROUND nor SQUARE are right.
 fun makeClockHand(sz: Float, len: Float): Path =
@@ -26,6 +28,8 @@ class NeatAnalogClock(
     attrs: AttributeSet):
     View(c, attrs)
 {
+    var weatherData: WeatherData? = null
+
     override fun onMeasure(specW: Int, specH: Int) =
         setMeasuredDimension(
             resolveSizeAndState(
@@ -35,12 +39,70 @@ class NeatAnalogClock(
                 paddingTop + paddingBottom + suggestedMinimumHeight,
                 specH, 1))
 
-    private fun paintOfColor(color: Int): Paint {
+    private fun paintOfColor(color: Int, style: Paint.Style = Paint.Style.FILL): Paint {
         val p = Paint()
-        p.style = Paint.Style.FILL
+        p.style = style
         p.isAntiAlias = true
         p.color = color
         return p
+    }
+
+    private fun drawRain(canvas: Canvas, shower: Boolean, rm: Float, a: Float, l: Float, p: Paint) {
+        val r = RectF(-rm, -rm, +rm, +rm)
+        if (shower) {
+            // show it in 7.5min steps, on and off
+            val deg = 3.75F
+            val cnt = (l / deg).roundToInt()
+            for (i in 0..<cnt) {
+                val aa = a + ((l / cnt) * i)
+                canvas.drawArc(r, aa + (deg/4), (deg/2), false, p)
+            }
+            return
+        }
+        canvas.drawArc(r, a, l, false, p)
+    }
+
+    private fun drawWeatherData(canvas: Canvas, cal: Calendar, zero: Float, ri: Float, ro: Float) {
+        val wd = weatherData ?: return
+        val now = cal.time.time
+        val start = now - 15 * 60_000L
+        val end = now + (9 * 60 * 60_000L)
+        var lastEnd = 0L
+        val p = paintOfColor(context.accentColor, Paint.Style.STROKE)
+        for (d in wd.step) {
+            val thisStart = if (d.start.time >= lastEnd) d.start.time else lastEnd
+            if ((start >= d.end.time) || (thisStart >= end)) continue
+            if (thisStart >= d.end.time) continue
+            lastEnd = d.end.time
+
+            val intense = when (d.code.wmo) {
+                0, 1, 2, 3  -> continue        // clear sky..overcast
+                45, 48 -> 1                    // fog, depositing rime fog
+                51 -> 1; 53 -> 2; 55 -> 3      // drizzle: light, moderate, dense
+                56 -> 1;          57 -> 3      // freezing drizzle: light, dense
+                61 -> 1; 63 -> 2; 65 -> 3      // rain: light, moderate, heavy
+                66 -> 1;          67 -> 3      // freezing rain: light, heavy
+                71 -> 1; 73 -> 2; 75 -> 3      // snow fall: light, moderate, heavy
+                77 -> 2                        // snow grains
+                80 -> 1; 81 -> 2; 82 -> 3      // rain showers: light, moderate, violent
+                85 -> 1;          86 -> 3      // snow showers: light, heavy
+                95 -> 1; 96 -> 2; 99 -> 3      // thunderstorm: slight, hail, heavy hail
+                else -> continue               // unknown weather code
+            }
+            val shower = when (d.code.wmo) {
+                80, 81, 82, 85, 86 -> true
+                else -> false
+            }
+
+            val a = zero + ((d.start.time - now) / 43200_000F)
+            val b = zero + ((d.end.time   - now) / 43200_000F)
+
+            val ru = ri + (((ro - ri) / 4F) * (intense + 1))
+            val rm = (ru + ri) / 2
+            p.strokeWidth = ru - ri
+
+            drawRain(canvas, shower, rm, (0.25F + a) * 360F, (b - a) * 360F, p)
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -58,8 +120,8 @@ class NeatAnalogClock(
         val cy = (height - oy - paddingBottom) / 2F
         val al = min(cx, cy)
 
-        val r0 = al * 0.98F
-        val r1 = al * 0.96F
+        val r0 = al * 0.97F
+        val r1 = al * 0.95F
         val rr = r1
         val ref = rr / 100
         val tsz = ref * 0.75F
@@ -81,6 +143,9 @@ class NeatAnalogClock(
 
             // face
             drawCircle(0F, 0F, r0, pd)
+
+            // weather first, to be behind anything else (if there's overlap)
+            drawWeatherData(canvas, cal, hf, r1, al)
 
             // dial
             for (i in 0..59) {

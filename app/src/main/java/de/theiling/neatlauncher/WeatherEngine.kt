@@ -17,7 +17,7 @@ const val WEATHER_FORECAST_URL =
     "https://api.open-meteo.com/v1/forecast" +
     "?latitude=%s" +
     "&longitude=%s" +
-    "&forecast_minutely_15=12" +
+    "&forecast_minutely_15=13" +
     "&minutely_15=temperature_2m,apparent_temperature,weather_code" +
     "&forecast_hours=12" +
     "&hourly=temperature_2m,apparent_temperature,weather_code" +
@@ -234,6 +234,12 @@ data class WeatherStep(
 {
     val end  get() = Date(start.time + (durSec * 1000L))
     val last get() = Date(end.time - 1)
+
+    fun compareTo(other: WeatherStep): Int {
+        val i = this.end.compareTo(other.end) // earlier end time first
+        if (i != 0) return i
+        return other.durSec.compareTo(this.durSec) // short ones first
+    }
 }
 
 /* A weather day has additional min/max ranges,
@@ -335,12 +341,12 @@ class WeatherData(
                 val tAbs  = meteoTemp(j, "hourly", "temperature_2m")
                 val tApp  = meteoTemp(j, "hourly", "apparent_temperature")
                 for (i in code.indices) {
-                    if (step.isEmpty() || (start[i] >= step[step.lastIndex].end)) {
+                    if (step.isEmpty() || (start[i] >= step[step.lastIndex].start)) {
                         add(WeatherStep(start[i], 60*60, code[i], tAbs[i], tApp[i]))
                     }
                 }
             }
-            step.sortWith { a,b -> a.start.compareTo(b.start) }
+            step.sortWith { a,b -> a.compareTo(b) }
 
             return WeatherData(context, Date(), tz, step, day)
         }

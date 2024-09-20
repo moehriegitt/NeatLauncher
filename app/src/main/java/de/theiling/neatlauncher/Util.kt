@@ -8,10 +8,9 @@ import android.widget.CompoundButton
 import java.net.URLEncoder
 import java.text.DateFormatSymbols
 import java.util.Calendar
-import java.util.Date
+import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
-import kotlin.math.abs
 
 val Context.accentColor: Int get() {
     val tv = TypedValue()
@@ -97,17 +96,10 @@ fun Any.toUrl(): String = URLEncoder.encode(toString(), "UTF-8")
 fun Double.ceilString(): String  = ceil(this).toInt().toString()
 fun Double.floorString(): String = floor(this).toInt().toString()
 
-fun Double.ceilString1(): String {
-    val a = abs(this)
-    if (a <= 0.01) return ""
-    if (a > 9) return ceilString()
-    return (ceil(this * 10.0) / 10.0).toString().removeSuffix(".0")
-}
-
 // We use Mon=0 (i.e., ISO8601 minus 1), so the array can be indexed directly.
 fun getWeekdayNames() =
-    DateFormatSymbols.getInstance().getWeekdays().let {
-        arrayOf<String>(
+    DateFormatSymbols.getInstance().weekdays.let {
+        arrayOf(
             it[Calendar.MONDAY].toString(),
             it[Calendar.TUESDAY].toString(),
             it[Calendar.WEDNESDAY].toString(),
@@ -117,10 +109,10 @@ fun getWeekdayNames() =
             it[Calendar.SUNDAY].toString())
    }
 
-fun tzUtcId(m: Int): String {
-    val o = abs(m) / 60_000
+fun tzUtcId(mi: Int): String {
+    val o = abs(mi) / 60_000
     if (o == 0) return "UTC"
-    val s = if (m < 0) "-" else "+"
+    val s = if (mi < 0) "-" else "+"
     val h = o / 60
     val m = o % 60
     if (m == 0) return "UTC%s%d".format(s, h)
