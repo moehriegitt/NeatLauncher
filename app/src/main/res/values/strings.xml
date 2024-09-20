@@ -143,6 +143,13 @@
     <string name="current_loc_title">Here</string>
     <string name="wstart_choice_title">First Day of Week</string>
 
+    <string name="tweath_choice_title">Forecast Choice</string>
+    <string-array name="tweath_choice">
+        <item>Both</item>
+        <item>Rain on analog clock</item>
+        <item>Tabular week</item>
+    </string-array>
+
     <string name="temp_choice_title">Temperature Unit</string>
     <!-- typically needs no translation -->
     <string-array name="temp_choice">

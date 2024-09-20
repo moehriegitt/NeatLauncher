@@ -147,6 +147,9 @@ class EnumTemp(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.temp_c
 class EnumTtype(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.ttype_choice_title,
     R.array.ttype_choice, R.array.ttype_choice_key, "tempTypeChoice", ttype_actu, onChange)
 
+class EnumTweath(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.tweath_choice_title,
+    R.array.tweath_choice, R.array.tweath_choice_key, "weathTypeChoice", tweath_all, onChange)
+
 class BoolContact(c: Context, onChange: (Int) -> Unit): PrefBool(c,
     R.string.contact_choice_title, R.array.contact_choice, "readContacts", true, onChange)
 

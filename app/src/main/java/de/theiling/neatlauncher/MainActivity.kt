@@ -152,6 +152,7 @@ class MainActivity:
     private lateinit var tempChoice: EnumTemp
     private lateinit var contactChoice: BoolContact
     private lateinit var weekStart: EnumWstart
+    private lateinit var weatherType: EnumTweath
 
     // override on....()
     override fun onCreate(
@@ -172,6 +173,7 @@ class MainActivity:
         tempChoice = EnumTemp(c) { weatherRedraw() }
         ttypeChoice = EnumTtype(c) { weatherRedraw() }
         weekStart = EnumWstart(c) { weatherRedraw() }
+        weatherType = EnumTweath(c) { weatherRedraw() }
 
         contactChoice = BoolContact(c) {
             if (it >= 0) { // -1 resets but does not trigger itemsNotifyChange()
@@ -404,7 +406,7 @@ class MainActivity:
     // functionality
     private fun clockRedraw(force: Boolean) {
         val anlg = timeChoice.x == time_anlg
-        val canWeather = anlg
+        val canWeather = haveWeatherClock && anlg
 
         // guards
         if (force) clockValid = false
@@ -426,7 +428,7 @@ class MainActivity:
         z.mainDate.visibility = visibleIf(dat.isNotEmpty())
 
         z.clockAnalog.visibility = visibleIf(anlg)
-        z.clockAnalog.weatherData = weatherData
+        z.clockAnalog.weatherData = if (canWeather) weatherData else null
         if (anlg) {
             z.clockAnalog.updateTime()
         }
@@ -975,7 +977,20 @@ class MainActivity:
         z.weatherBox.visibility = visibleIf(weatherRender())
     }
 
+    private val haveWeatherTable get() = when (weatherType.x) {
+        tweath_all -> true
+        tweath_tabl -> true
+        else -> false
+    }
+
+    private val haveWeatherClock get() = when (weatherType.x) {
+        tweath_all -> true
+        tweath_clok -> true
+        else -> false
+    }
+
     private fun weatherRender(): Boolean {
+        if (!haveWeatherTable) return false
         val act = weather.active ?: return false
         val dat = weatherData ?: return false
 
@@ -1156,6 +1171,7 @@ class MainActivity:
             done
         }
 
+        z.weatherType. setOnClickDismiss(d) { choiceDialog(view, weatherType) }
         z.ttypeChoice. setOnClickDismiss(d) { choiceDialog(view, ttypeChoice) }
         z.weekStart.   setOnClickDismiss(d) { choiceDialog(view, weekStart) }
         z.tempChoice.  setOnClickDismiss(d) { choiceDialog(view, tempChoice) }

@@ -145,6 +145,13 @@
     <string name="current_loc_title">Hier</string>
     <string name="wstart_choice_title">Erster Tag der Woche</string>
 
+    <string name="tweath_choice_title">Vorhersageauswahl</string>
+    <string-array name="tweath_choice">
+        <item>Beides</item>
+        <item>Regen auf Analoguhr</item>
+        <item>Wochentabelle</item>
+    </string-array>
+
     <string name="temp_choice_title">Temperatureinheit</string>
 
     <string name="ttype_choice_title">Temperaturmaß</string>

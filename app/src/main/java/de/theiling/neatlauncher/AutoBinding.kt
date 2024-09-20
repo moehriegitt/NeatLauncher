@@ -555,6 +555,7 @@ class WeatherDialogBinding(
     val oMeteoLink: TextView,
     val tempChoice: TextView,
     val ttypeChoice: TextView,
+    val weatherType: TextView,
     val weekStart: TextView):
     ViewBinding
 {
@@ -569,6 +570,7 @@ class WeatherDialogBinding(
             rootView.findViewById(R.id.o_meteo_link)!!,
             rootView.findViewById(R.id.temp_choice)!!,
             rootView.findViewById(R.id.ttype_choice)!!,
+            rootView.findViewById(R.id.weather_type)!!,
             rootView.findViewById(R.id.week_start)!!)
 
         fun inflate(
