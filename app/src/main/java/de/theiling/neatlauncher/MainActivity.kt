@@ -80,6 +80,7 @@ class MainActivity:
     private var timeItem : Item? = null
     private var weathItem : Item? = null
     private var dateItem : Item? = null
+    private var bgrdItem : Item? = null
 
     private val homeAdapter = ItemAdapter(homeItems, R.layout.home_item, { true }, this)
     private val drawerAdapter = ItemAdapter(items, R.layout.drawer_item, { !it.hidden }, this)
@@ -227,6 +228,14 @@ class MainActivity:
                 true -> searchOptDialog(viewGroup)
                 else -> mainOptDialog(viewGroup)
             }
+        }
+        z.mainSearchOpt.setOnLongClickListener {
+            mainOptDialog(viewGroup)
+            true
+        }
+        z.content.setOnLongClickListener {
+            bgrdItem?.let { itemLaunch(it) } ?: mainOptDialog(viewGroup)
+            true
         }
 
         if (Build.VERSION.SDK_INT >= 26) {
@@ -453,6 +462,7 @@ class MainActivity:
         downItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_DOWN) != 0 })
         timeItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_TIME) != 0 })
         dateItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_DATE) != 0 })
+        bgrdItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_BGRD) != 0 })
         weathItem = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_WEATH) != 0 })
         homeItems.clear()
         pinItems.filterTo(homeItems) { (it.pinned and ITEM_PIN_HOME) != 0 }
@@ -742,7 +752,7 @@ class MainActivity:
     private fun itemSetupButton(
         view: View, list: LinearLayout, d: AlertDialog, prefix: String, item: Item)
     {
-        val v = LayoutInflater.from(view.context).inflate(R.layout.popup_item, list, false)
+        val v = LayoutInflater.from(view.context).inflate(R.layout.popup_action, list, false)
         list.addView(v)
         val t = v.findViewById<TextView>(R.id.item_name)
         t.text = item.label.removePrefix(prefix)
@@ -880,6 +890,7 @@ class MainActivity:
                 (if (z.pinDown.isChecked)  pinUnset(downItem,  ITEM_PIN_DOWN)  else 0) +
                 (if (z.pinTime.isChecked)  pinUnset(timeItem,  ITEM_PIN_TIME)  else 0) +
                 (if (z.pinDate.isChecked)  pinUnset(dateItem,  ITEM_PIN_DATE)  else 0) +
+                (if (z.pinBgrd.isChecked)  pinUnset(bgrdItem,  ITEM_PIN_BGRD)  else 0) +
                 (if (z.pinWeath.isChecked) pinUnset(weathItem, ITEM_PIN_WEATH) else 0)
             homeNotifyChange()
         }.create()
@@ -890,6 +901,7 @@ class MainActivity:
         z.pinDown.isChecked  = (item.pinned and ITEM_PIN_DOWN) != 0
         z.pinTime.isChecked  = (item.pinned and ITEM_PIN_TIME) != 0
         z.pinDate.isChecked  = (item.pinned and ITEM_PIN_DATE) != 0
+        z.pinBgrd.isChecked  = (item.pinned and ITEM_PIN_BGRD) != 0
         z.pinWeath.isChecked = (item.pinned and ITEM_PIN_WEATH) != 0
 
         d.show()

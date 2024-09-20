@@ -96,6 +96,7 @@
     <string name="pin_left">Swipe Left</string>
     <string name="pin_right">Swipe Right</string>
     <string name="pin_down">Swipe Down</string>
+    <string name="pin_bgrd">Long Click Background</string>
     <string name="pin_time">Click Time</string>
     <string name="pin_date">Click Date</string>
     <string name="pin_weath">Click Weather</string>

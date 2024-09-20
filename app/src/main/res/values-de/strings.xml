@@ -99,6 +99,7 @@
     <string name="pin_left">Wisch nach links</string>
     <string name="pin_right">Wisch nach rechts</string>
     <string name="pin_down">Wisch nach unten</string>
+    <string name="pin_bgrd">Langer Klick auf Hintergrund</string>
     <string name="pin_time">Klick auf Uhr</string>
     <string name="pin_date">Klick auf Datum</string>
     <string name="pin_weath">Klick auf Wetter</string>

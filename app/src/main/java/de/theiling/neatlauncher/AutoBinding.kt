@@ -310,6 +310,7 @@ class MainOptDialogBinding(
 
 class PinDialogBinding(
     rootView: FrameLayout,
+    val pinBgrd: CheckBox,
     val pinDate: CheckBox,
     val pinDown: CheckBox,
     val pinHome: CheckBox,
@@ -323,6 +324,7 @@ class PinDialogBinding(
     companion object {
         fun bind(rootView: View) = PinDialogBinding(
             rootView as FrameLayout,
+            rootView.findViewById(R.id.pin_bgrd)!!,
             rootView.findViewById(R.id.pin_date)!!,
             rootView.findViewById(R.id.pin_down)!!,
             rootView.findViewById(R.id.pin_home)!!,
