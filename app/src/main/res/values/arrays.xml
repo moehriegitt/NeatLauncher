@@ -49,9 +49,9 @@
     </string-array>
 
     <string-array name="tweath_choice_key" translatable="false">
-        <item>all</item>
-        <item>clok</item>
         <item>tabl</item>
+        <item>clok</item>
+        <item>all</item>
     </string-array>
 
     <string-array name="temp_choice_key" translatable="false">

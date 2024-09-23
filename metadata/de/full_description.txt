@@ -1,16 +1,16 @@
 Die neue Start-App (der Launcher) Deines Android-Geräts ersetzt hässliche Start-Apps, die zu bunt, grell, ablenkend, verwirrend, ineffizient und voller unsinniger Icons sind.
 
-Sorgt für Übersichtlichkeit durch minimalistisches, effizientes und elegantes Design auf Textbasis. Ermöglicht die Konfiguration des Schnellzugriffs auf Apps, Verknüpfungen oder Kontakte auf verschiedene Weise (einschließlich Gesten), und entfernt verwirrende Dinge vom Startbildschirm.
+Übersichtlichkeit durch effizientes und elegantes Design auf Textbasis. Ermöglicht die Konfiguration des Schnellzugriffs auf Apps, Verknüpfungen oder Kontakte auf verschiedene Weise (einschließlich Gesten).
 
-Unterstützt Verknüpfungen, integriert die Kontaktliste (falls gewünscht) und die Suchfunktion enthält eine konfigurierbare Websuche.
+Unterstützt App-Verknüpfungen, sowohl statische wie dynamische.
 
-Für Benutzer, die Übersichtlichkeit und geradliniges Design schätzen.
+Integriert auf Wunsch die Kontaktliste.
+
+Die Suchfunktion enthält eine konfigurierbare Websuche.
 
 Bietet genug Konfigurierbarkeit, aber ohne das Testen von Sonderfällen mühsam zu machen, so daß Funktionalität und Robustheit gewährleistet werden können.
 
-Neue App von Grund auf neuentwickelt.
-
-Inspiriert von Unlauncher (einem Fork von Slimlauncher) und Nolauncher sowie von Benutzerfeedback.
+Neue App von Grund auf neuentwickelt. Inspiriert von Unlauncher (einem Fork von Slimlauncher) und Nolauncher sowie von Benutzerfeedback.
 
 Features:
 
@@ -24,7 +24,7 @@ Features:
   - integrierte, konfigurierbare Websuche
   - mehrere Uhroptionen
   - Datumsformatoptionen
-  - Wettervorhersageoptionen
+  - Wettervorhersageoptionen (durch open-meteo.com)
   - konfigurierbares Farbschema
   - kann Standardhintergrundbild benutzen
   - freie Open-Source-Software

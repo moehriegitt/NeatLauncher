@@ -317,6 +317,7 @@ class PinDialogBinding(
     val pinLeft: CheckBox,
     val pinRight: CheckBox,
     val pinTime: CheckBox,
+    val pinUp: CheckBox,
     val pinWeath: CheckBox):
     ViewBinding
 {
@@ -331,6 +332,7 @@ class PinDialogBinding(
             rootView.findViewById(R.id.pin_left)!!,
             rootView.findViewById(R.id.pin_right)!!,
             rootView.findViewById(R.id.pin_time)!!,
+            rootView.findViewById(R.id.pin_up)!!,
             rootView.findViewById(R.id.pin_weath)!!)
 
         fun inflate(

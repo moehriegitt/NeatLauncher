@@ -1,16 +1,16 @@
 The new home app (the launcher) of your Android device to replace ugly home apps that are too colourful, bright, distracting, confusing, inefficient, and full of non-sensical icons.
 
-Provides clarity by minimal, efficient, and elegant design based on text. It allows to configure quick access to apps, shortcuts, or contacts in different ways (including gestures), and it removes confusing stuff from the home screen.
+Clarity by efficient and elegant design based on text. Gives quick access to apps, shortcuts, or contacts via a list or by gestures.
 
-Supports shortcuts, integrates the contact list (if you want to), and its search function includes a configurable web search.
+Supports app shortcuts, both static and dynamic.
 
-For users who value clarity and straight design.
+Optionally integrates the contact list.
+
+Search function includes a configurable web search.
 
 Tries to have enough configurability without making testing corner cases tedious, to ensure functionality and robustness.
 
-New app developed from scratch.
-
-Takes inspiration from Unlauncher (a fork of Slimlauncher), and Nolauncher, and also feedback of users.
+New app developed from scratch. Takes inspiration from Unlauncher (a fork of Slimlauncher), and Nolauncher, and also feedback of users.
 
 Features:
 

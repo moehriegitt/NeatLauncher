@@ -77,6 +77,7 @@ class MainActivity:
     private var leftItem : Item? = null
     private var rightItem : Item? = null
     private var downItem : Item? = null
+    private var upItem : Item? = null
     private var timeItem : Item? = null
     private var weathItem : Item? = null
     private var dateItem : Item? = null
@@ -134,9 +135,9 @@ class MainActivity:
     private var clockValid = false
     private var clockWeatherValid = false
     private var weatherData: WeatherData? = null
-    private var weatherUpdateMillis = 15L * 60_000L  // currently non-configurable
+    private var weatherUpdateMillis = 60L * 60_000L  // currently not configurable
     private var weatherTryLongMillis = 15L * 60_000L
-    private var weatherTryShortMillis = 2L * 60_000L
+    private var weatherTryShortMillis = 5L * 60_000L
     private var weatherTryMinMillis = 1_000L
     private var weatherTryLast = Date(0)
     private var weatherTryNext = Date(0)
@@ -173,7 +174,7 @@ class MainActivity:
         tempChoice = EnumTemp(c) { weatherRedraw() }
         ttypeChoice = EnumTtype(c) { weatherRedraw() }
         weekStart = EnumWstart(c) { weatherRedraw() }
-        weatherType = EnumTweath(c) { weatherRedraw() }
+        weatherType = EnumTweath(c) { onWeatherData() }
 
         contactChoice = BoolContact(c) {
             if (it >= 0) { // -1 resets but does not trigger itemsNotifyChange()
@@ -331,6 +332,14 @@ class MainActivity:
         return super.dispatchTouchEvent(e)
     }
 
+    override fun onClickItem(view: View, item: Item) {
+        if (allowClick) {
+            itemLaunch(item)
+        }
+    }
+
+    override fun onLongClickItem(view: View, item: Item) = itemDialog(view, item)
+
     private fun onFlingRight() =
         rightItem?.let { itemLaunch(it) } ?: startPhone()
 
@@ -340,18 +349,12 @@ class MainActivity:
 
     private fun onFlingUp() {
         if (getMode() == modePrimary()) {
-            clearSearch()
-            setMode(modeSecondary())
+            upItem?.let { itemLaunch(it) } ?: run {
+                clearSearch()
+                setMode(modeSecondary())
+            }
         }
     }
-
-    override fun onClickItem(view: View, item: Item) {
-        if (allowClick) {
-            itemLaunch(item)
-        }
-    }
-
-    override fun onLongClickItem(view: View, item: Item) = itemDialog(view, item)
 
     private fun onFlingDown() {
         when (getMode()) {
@@ -406,7 +409,7 @@ class MainActivity:
     // functionality
     private fun clockRedraw(force: Boolean) {
         val anlg = timeChoice.x == time_anlg
-        val canWeather = haveWeatherClock && anlg
+        val canWeather = anlg
 
         // guards
         if (force) clockValid = false
@@ -428,7 +431,7 @@ class MainActivity:
         z.mainDate.visibility = visibleIf(dat.isNotEmpty())
 
         z.clockAnalog.visibility = visibleIf(anlg)
-        z.clockAnalog.weatherData = if (canWeather) weatherData else null
+        z.clockAnalog.weatherData = if (haveWeatherClock) weatherData else null
         if (anlg) {
             z.clockAnalog.updateTime()
         }
@@ -467,6 +470,7 @@ class MainActivity:
         leftItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_LEFT) != 0 })
         rightItem = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_RIGHT) != 0 })
         downItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_DOWN) != 0 })
+        upItem    = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_UP) != 0 })
         timeItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_TIME) != 0 })
         dateItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_DATE) != 0 })
         bgrdItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_BGRD) != 0 })
@@ -895,6 +899,7 @@ class MainActivity:
                 (if (z.pinLeft.isChecked)  pinUnset(leftItem,  ITEM_PIN_LEFT)  else 0) +
                 (if (z.pinRight.isChecked) pinUnset(rightItem, ITEM_PIN_RIGHT) else 0) +
                 (if (z.pinDown.isChecked)  pinUnset(downItem,  ITEM_PIN_DOWN)  else 0) +
+                (if (z.pinUp.isChecked)    pinUnset(upItem,    ITEM_PIN_UP)    else 0) +
                 (if (z.pinTime.isChecked)  pinUnset(timeItem,  ITEM_PIN_TIME)  else 0) +
                 (if (z.pinDate.isChecked)  pinUnset(dateItem,  ITEM_PIN_DATE)  else 0) +
                 (if (z.pinBgrd.isChecked)  pinUnset(bgrdItem,  ITEM_PIN_BGRD)  else 0) +
@@ -906,6 +911,7 @@ class MainActivity:
         z.pinLeft.isChecked  = (item.pinned and ITEM_PIN_LEFT) != 0
         z.pinRight.isChecked = (item.pinned and ITEM_PIN_RIGHT) != 0
         z.pinDown.isChecked  = (item.pinned and ITEM_PIN_DOWN) != 0
+        z.pinUp.isChecked    = (item.pinned and ITEM_PIN_UP) != 0
         z.pinTime.isChecked  = (item.pinned and ITEM_PIN_TIME) != 0
         z.pinDate.isChecked  = (item.pinned and ITEM_PIN_DATE) != 0
         z.pinBgrd.isChecked  = (item.pinned and ITEM_PIN_BGRD) != 0
@@ -1146,7 +1152,10 @@ class MainActivity:
 
         val d = b.create()
         z.noWeather.isChecked = weather.active == null
-        z.noWeather.setOnClickDismiss(d) { weather.active?.isActive = false }
+        z.noWeather.setOnClickDismiss(d) {
+            weather.active?.isActive = false
+            weatherClear()
+        }
 
         z.currentLocation.isChecked = (weather.current == weather.active)
         z.currentLocation.setOnClickDismiss(d) {

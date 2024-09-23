@@ -23,23 +23,21 @@
     ugly home apps that are too colourful, bright, distracting,
     confusing, inefficient, and full of non-sensical icons.
 
-    Provides clarity by minimal, efficient, and elegant design based
-    on text.  It allows to configure quick access to apps, shortcuts,
-    or contacts in different ways (including gestures), and it removes
-    confusing stuff from the home screen.
+    Clarity by efficient and elegant design based on text.  Gives
+    quick access to apps, shortcuts, or contacts via a list or by
+    gestures.
 
-    Supports shortcuts, integrates the contact list (if you want to),
-    and its search function includes a configurable web search.
+    Supports app shortcuts, both static and dynamic.
 
-    For users who value clarity and straight design.
+    Optionally integrates the contact list.
+
+    Search function includes a configurable web search.
 
     Tries to have enough configurability without making testing corner
     cases tedious, to ensure functionality and robustness.
 
-    New app developed from scratch.
-
-    Takes inspiration from Unlauncher (a fork of Slimlauncher), and
-    Nolauncher, and also feedback of users.
+    New app developed from scratch.  Takes inspiration from Unlauncher (a
+    fork of Slimlauncher), and Nolauncher, and also feedback of users.
     </string>
 
     <string name="readme_features">Features</string>
@@ -96,6 +94,7 @@
     <string name="pin_left">Swipe Left</string>
     <string name="pin_right">Swipe Right</string>
     <string name="pin_down">Swipe Down</string>
+    <string name="pin_up">Swipe Up</string>
     <string name="pin_bgrd">Long Click Background</string>
     <string name="pin_time">Click Time</string>
     <string name="pin_date">Click Date</string>
@@ -145,9 +144,9 @@
 
     <string name="tweath_choice_title">Forecast Choice</string>
     <string-array name="tweath_choice">
-        <item>Both</item>
-        <item>Rain on analog clock</item>
         <item>Tabular week</item>
+        <item>Rain on analog clock</item>
+        <item>Both</item>
     </string-array>
 
     <string name="temp_choice_title">Temperature Unit</string>

@@ -16,6 +16,7 @@ const val ITEM_PIN_TIME = 16
 const val ITEM_PIN_DATE = 32
 const val ITEM_PIN_WEATH = 64
 const val ITEM_PIN_BGRD = 128
+const val ITEM_PIN_UP = 256
 
 fun itemDefaultHidden(type: String) =
     (type == ITEM_TYPE_SHORT) ||

@@ -52,6 +52,14 @@
             />
 
         <CheckBox
+            android:id="@+id/pin_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_up"
+            style="@style/AppTheme.PopupSwitch"
+            />
+
+        <CheckBox
             android:id="@+id/pin_bgrd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
