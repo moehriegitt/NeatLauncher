@@ -28,10 +28,13 @@ const val WEATHER_FORECAST_URL =
 class WeatherLoc(
     private val container: WeatherEngine,
     name: String,
-    val lat: Double,
-    val lon: Double,
+    lat: Double,
+    lon: Double,
     isActive: Boolean)
 {
+    var lat = lat; private set
+    var lon = lon; private set
+
     var name = name
         set(v) {
             if ((field != CURRENT_LOC) && (v != CURRENT_LOC) && (field != v)) {
@@ -61,6 +64,13 @@ class WeatherLoc(
         }
 
     fun displayCompareTo(that: WeatherLoc) = this.order.compareTo(that.order)
+
+    fun setLoc(lat: Double, lon: Double) {
+        if (!isCurrent) throw IllegalArgumentException()
+        this.lat = lat
+        this.lon = lon
+        container.touch(this)
+    }
 }
 
 class WeatherEngine(private val c: Context)
@@ -77,10 +87,10 @@ class WeatherEngine(private val c: Context)
         if (which == active) activeModified = true
     }
 
-    fun add(name: String, lat: Double, lon: Double, isActive: Boolean = false) {
+    fun add(name: String, lat: Double, lon: Double, isActive: Boolean = false): WeatherLoc {
         val e = WeatherLoc(this, name, lat, lon, false)
         if (e.isCurrent) {
-            if (currentMaybe != null) return
+            if (currentMaybe != null) return current
             currentMaybe = e
         }
         them.add(e)
@@ -88,6 +98,7 @@ class WeatherEngine(private val c: Context)
             e.isActive = true
         }
         modified = true
+        return e
     }
 
     fun delete(e: WeatherLoc) {

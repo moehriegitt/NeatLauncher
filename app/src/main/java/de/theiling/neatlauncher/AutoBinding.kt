@@ -110,6 +110,36 @@ class ItemActionsBinding(
     }
 }
 
+class LocCurDialogBinding(
+    rootView: FrameLayout,
+    val editLabel: EditText,
+    val editOrder: EditText,
+    val geoLink: TextView):
+    ViewBinding
+{
+    override val root = rootView
+    companion object {
+        fun bind(rootView: View) = LocCurDialogBinding(
+            rootView as FrameLayout,
+            rootView.findViewById(R.id.edit_label)!!,
+            rootView.findViewById(R.id.edit_order)!!,
+            rootView.findViewById(R.id.geo_link)!!)
+
+        fun inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            attachToParent: Boolean): LocCurDialogBinding
+        {
+            val root = inflater.inflate(R.layout.loc_cur_dialog, parent, false)
+            if (attachToParent) parent?.addView(root)
+            return bind(root)
+        }
+
+        @Suppress("unused")
+        fun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)
+    }
+}
+
 class LocDialogBinding(
     rootView: FrameLayout,
     val editDel: RadioButton,

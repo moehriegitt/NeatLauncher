@@ -119,7 +119,9 @@
     <string name="main_opt_title">Einstellungen</string>
     <string name="about_title">Infos über NeatLauncher</string>
 
-    <string name="read_contacts_no_perm">Keine Zugriffsrechte auf Kontaktlist</string>
+    <string name="read_contacts_no_perm">Lesen der Kontaktliste wurde verweigert</string>
+    <string name="location_no_perm">Standortbestimmung wurde verweigert</string>
+
     <string name="main_info">Verwaltung</string>
     <string name="main_about">Infos</string>
 
@@ -141,7 +143,7 @@
     <string name="switched_to_current_location">Wetterstandort ist hier</string>
     <string name="switched_off_weather">Wetter ausgeschaltet</string>
     <string name="location_title">Ortseinstellungen</string>
-    <string name="current_loc_title">Hier</string>
+    <string name="loc_cur_title">Aktueller Standort</string>
     <string name="wstart_choice_title">Erster Tag der Woche</string>
 
     <string name="tweath_choice_title">Vorhersageauswahl</string>

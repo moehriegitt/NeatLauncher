@@ -12,6 +12,10 @@ import android.content.IntentFilter
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.hardware.display.DisplayManager
+import android.location.Criteria
+import android.location.Location
+import android.location.LocationManager
+import android.location.provider.ProviderProperties
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -141,6 +145,7 @@ class MainActivity:
     private var weatherTryMinMillis = 1_000L
     private var weatherTryLast = Date(0)
     private var weatherTryNext = Date(0)
+    private var weatherCurrentUpdate = false
     private lateinit var z: MainActivityBinding
     private lateinit var searchEngine: SearchEngine
     private lateinit var weather: WeatherEngine
@@ -319,6 +324,10 @@ class MainActivity:
                shortToast(getString(R.string.read_contacts_no_perm))
                contactChoice.x = -1  // don't try again
            }
+           1818 -> if (granted) locRequest() else {
+               shortToast(getString(R.string.location_no_perm))
+               weather.current.isActive = false
+           }
         }
     }
 
@@ -391,6 +400,7 @@ class MainActivity:
     private fun getUserHandle(uid: Long): UserHandle = userManager.getUserForSerialNumber(uid)
     private val userManager get() = c.getSystemService(USER_SERVICE) as UserManager
     private val displayManager get() = c.getSystemService(DISPLAY_SERVICE) as DisplayManager
+    private val locationManager get() = c.getSystemService(LOCATION_SERVICE) as LocationManager
     private val launcher get() = c.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
     private val inputMethodManager get() =
@@ -1006,8 +1016,9 @@ class MainActivity:
         if (day.isEmpty()) return false
 
         // title
+        z.weatherLoc.visibility = visibleIf(!act.isCurrent)
         z.weatherLoc.text =
-            (if (act.isCurrent) getString(R.string.current_loc_title) else act.name) +
+            act.name +
             (if (cal.timeZone.getOffset(cal.time.time) != dat.timeZone.getOffset(cal.time.time))
                 " ${dat.timeZone.id}" else "")
 
@@ -1038,7 +1049,8 @@ class MainActivity:
 
     private fun weatherUpdate(forceLoad: Boolean)
     {
-        var doLoad = forceLoad
+        val loadRequest = forceLoad || weatherCurrentUpdate
+        var doLoad = loadRequest
 
         val now = Date()
         val wd = weatherData
@@ -1048,7 +1060,7 @@ class MainActivity:
         }
 
         // error rate limit
-        if (!forceLoad && (now.time < weatherTryNext.time)) {
+        if (!loadRequest && (now.time < weatherTryNext.time)) {
             doLoad = false
         }
         // last resort rate limit
@@ -1067,10 +1079,19 @@ class MainActivity:
             weatherClear()
             onWeatherData()
         }
-        shortToast("Net: Weather?")
+        weatherCurrentUpdate = false
         weatherTryLast = now
         weatherTryNext = Date(now.time + weatherTryLongMillis)
 
+        if (loc.isCurrent)
+           locTryRequest()
+        else
+           weatherRequest()
+    }
+
+    private fun weatherRequest() {
+        shortToast("Net: weather?")
+        val loc = weather.active ?: return onWeatherData()
         lifecycleScope.launch(Dispatchers.IO) {
             val url = String.format(WEATHER_FORECAST_URL, loc.lat.toUrl(), loc.lon.toUrl())
             try {
@@ -1083,7 +1104,7 @@ class MainActivity:
                 }
             } catch (e: UnknownHostException) {
                 // ignore: we have no internet access, but try again sooner
-                weatherTryNext = Date(now.time + weatherTryShortMillis)
+                weatherTryNext = Date(Date().time + weatherTryShortMillis)
             } catch (e: Exception) {
                 runOnUiThread {
                     longToast(getString(R.string.error_msg, "$e"))
@@ -1092,18 +1113,17 @@ class MainActivity:
         }
     }
 
-    private fun weatherNotify()
-    {
-        if (weather.modified) {
-            if (weather.activeModified) {
+    private fun weatherNotify() {
+        if (weather.modified || weatherCurrentUpdate) {
+            if (weather.activeModified || weatherCurrentUpdate) {
                 weather.active.let { longToast(when (it) {
                     null -> getString(R.string.switched_off_weather)
                     weather.current -> getString(R.string.switched_to_current_location)
                     else -> getString(R.string.switched_to_location, it.name)
                 })}
-                weatherUpdate(true)
+                weatherUpdate(weather.modified)
             }
-            weather.savePref()
+            if (weather.modified) weather.savePref()
         }
     }
 
@@ -1119,6 +1139,30 @@ class MainActivity:
                 e.order = z.editOrder.text.toString()
             }
             weatherNotify()
+        }.create()
+
+        z.geoLink.setOnClickDismiss(d) {
+            startUrl("geo:${e.lat},${e.lon}")
+        }
+
+        z.editLabel.setText(e.name)
+        z.editOrder.setText(e.orderOrEmpty)
+
+        setOnDoneClickOk(z.editLabel, d)
+        setOnDoneClickOk(z.editOrder, d)
+        d.show()
+    }
+
+    private fun locCurDialog(view: View, e: WeatherLoc)
+    {
+        val z = LocCurDialogBinding.inflate(LayoutInflater.from(view.context))
+        val d = dialogInit(view, z.root, getString(R.string.loc_cur_title)) {
+            val name = z.editLabel.text.toString()
+            if (name != CURRENT_LOC) { // define a new location with these coordinates
+                val e2 = weather.add(name, e.lat, e.lon, true)
+                e2.order = z.editOrder.text.toString()
+                weatherNotify()
+            }
         }.create()
 
         z.geoLink.setOnClickDismiss(d) {
@@ -1157,10 +1201,17 @@ class MainActivity:
             weatherClear()
         }
 
+        // getCurrentLocation is used, requires API 30.
+        // Will not support older requestSingleUpdate: too much work.
+        z.currentLocation.visibility = visibleIf(Build.VERSION.SDK_INT >= 30)
         z.currentLocation.isChecked = (weather.current == weather.active)
         z.currentLocation.setOnClickDismiss(d) {
             weather.current.isActive = true
-            weather.touch(weather.current) // reload loc even if active not changed
+            weatherCurrentUpdate = true // reload loc even if active not changed
+            weatherNotify()
+        }
+        z.currentLocation.setOnLongClickDismiss(d) {
+            locCurDialog(view, weather.current)
         }
 
         for (e in l) {
@@ -1231,6 +1282,31 @@ class MainActivity:
                     z.statusMsg.text = getString(R.string.error_msg, "$e")
                 }
             }
+        }
+    }
+
+    // Location
+    private fun locTryRequest() {
+        if (checkRequestPerm(Manifest.permission.ACCESS_COARSE_LOCATION, 1818)) locRequest()
+    }
+
+    private fun locRequest() {
+        if (Build.VERSION.SDK_INT < 30) return
+        try {
+            locationManager.getCurrentLocation(
+                LocationManager.FUSED_PROVIDER, null, ContextCompat.getMainExecutor(c))
+            { loc: Location? ->
+                runOnUiThread {
+                    if (loc != null) {
+                        weather.current.setLoc(loc.latitude, loc.longitude)
+                        weather.savePref()
+                    }
+                    weatherRequest()
+                }
+            }
+        } catch (e: SecurityException) {
+            shortToast(getString(R.string.location_no_perm))
+            weather.current.isActive = false
         }
     }
 }

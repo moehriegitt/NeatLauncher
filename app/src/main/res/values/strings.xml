@@ -117,6 +117,7 @@
     <string name="about_title">About NeatLauncher</string>
 
     <string name="read_contacts_no_perm">No permission to read contact list</string>
+    <string name="location_no_perm">No permission to access location</string>
 
     <string name="main_info">Info</string>
     <string name="main_about">About</string>
@@ -139,7 +140,7 @@
     <string name="switched_to_current_location">Weather location is here</string>
     <string name="switched_off_weather">Weather is off</string>
     <string name="location_title">Location Settings</string>
-    <string name="current_loc_title">Here</string>
+    <string name="loc_cur_title">Current Location</string>
     <string name="wstart_choice_title">First Day of Week</string>
 
     <string name="tweath_choice_title">Forecast Choice</string>

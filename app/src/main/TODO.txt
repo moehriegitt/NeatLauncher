@@ -8,10 +8,6 @@
       * open keyboard immediately in drawer (use click instead of swipe up)
       * configure default search engine
 
-  * weather: current location
-      * implement
-      * remove headline instead of showing 'here'
-
   * weather: list the weather code Unicode 'icons'
       * replace multiple when() in code by an array for better modularity
       * generate the helping table from this new array
