@@ -8,8 +8,8 @@
       * open keyboard immediately in drawer (use click instead of swipe up)
       * configure default search engine
 
-  * weather: list the weather code Unicode 'icons'
-      * replace multiple when() in code by an array for better modularity
-      * generate the helping table from this new array
-
   * maybe have a generic rain display (instead of only on analog clock)
+
+  * update docs
+
+  * update screenshots

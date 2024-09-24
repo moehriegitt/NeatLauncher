@@ -74,4 +74,44 @@
         <item>sat</item>
         <item>sun</item>
     </string-array>
+
+    <string-array name="weather_key" translatable="false">
+        <item>cloud</item>
+        <item>fog</item>
+        <item>drizl</item>
+        <item>rain</item>
+        <item>snow</item>
+        <item>thund</item>
+    </string-array>
+
+    <string-array name="weather_code_arr" translatable="false">
+        <item>0;  "\u2600\ufe0e"  ; cloud 0 0   0    ; clear sky                       </item>
+        <item>1;  "\u2600\ufe0e`" ; cloud 1 0   0    ; mainly clear                    </item>
+        <item>2;  "\u26c5\ufe0e"  ; cloud 2 0   0    ; partly cloudy                   </item>
+        <item>3;  "\u2601\ufe0e"  ; cloud 3 0   0    ; overcast                        </item>
+        <item>45; "≡"             ; fog   1 0   0    ; fog                             </item>
+        <item>48; "≡≀"            ; fog   1 ice 0    ; depositing rime fog             </item>
+        <item>51; "‵"             ; drizl 1 0   0    ; drizzle: light                  </item>
+        <item>53; "‶"             ; drizl 2 0   0    ; drizzle: moderate               </item>
+        <item>55; "‷"             ; drizl 3 0   0    ; drizzle: dense                  </item>
+        <item>56; "‵≀"            ; drizl 1 ice 0    ; freezing drizzle: light         </item>
+        <item>57; "‷≀"            ; drizl 3 ice 0    ; freezing drizzle: dense         </item>
+        <item>61; "·"             ; rain  1 0   0    ; rain: slight                    </item>
+        <item>63; "··"            ; rain  2 0   0    ; rain: moderate                  </item>
+        <item>65; "∴"             ; rain  3 0   0    ; rain: heavy                     </item>
+        <item>66; "·≀"            ; rain  1 ice 0    ; freezing rain: light            </item>
+        <item>67; "∴≀"            ; rain  3 ice 0    ; freezing rain: heavy            </item>
+        <item>71; "*"             ; snow  1 0   0    ; snow fall: slight               </item>
+        <item>73; "**"            ; snow  2 0   0    ; snow fall: moderate             </item>
+        <item>75; "⁂"             ; snow  3 0   0    ; snow fall: heavy                </item>
+        <item>77; "▵"             ; snow  2 ice 0    ; snow grains                     </item>
+        <item>80; "∶"             ; rain  1 0   show ; rain showers: slight            </item>
+        <item>81; "∵"             ; rain  2 0   show ; rain showers: moderate          </item>
+        <item>82; "∷"             ; rain  3 0   show ; rain showers: violent           </item>
+        <item>85; "⁑"             ; snow  1 0   show ; snow showers: slight            </item>
+        <item>86; "⁑⁑"            ; snow  3 0   show ; snow showers: heavy             </item>
+        <item>95; "☈"             ; thund 1 0   0    ; thunderstorm: slight or moderate</item>
+        <item>96; "☈▵"            ; thund 1 ice 0    ; thunderstorm: with slight hail  </item>
+        <item>99; "☈!"            ; thund 3 ice 0    ; thunderstorm: with heavy hail   </item>
+    </string-array>
 </resources>

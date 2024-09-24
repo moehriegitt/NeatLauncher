@@ -75,24 +75,10 @@ class NeatAnalogClock(
             if (thisStart >= d.end.time) continue
             lastEnd = d.end.time
 
-            val intense = when (d.code.wmo) {
-                0, 1, 2, 3  -> continue        // clear sky..overcast
-                45, 48 -> 1                    // fog, depositing rime fog
-                51 -> 1; 53 -> 2; 55 -> 3      // drizzle: light, moderate, dense
-                56 -> 1;          57 -> 3      // freezing drizzle: light, dense
-                61 -> 1; 63 -> 2; 65 -> 3      // rain: light, moderate, heavy
-                66 -> 1;          67 -> 3      // freezing rain: light, heavy
-                71 -> 1; 73 -> 2; 75 -> 3      // snow fall: light, moderate, heavy
-                77 -> 2                        // snow grains
-                80 -> 1; 81 -> 2; 82 -> 3      // rain showers: light, moderate, violent
-                85 -> 1;          86 -> 3      // snow showers: light, heavy
-                95 -> 1; 96 -> 2; 99 -> 3      // thunderstorm: slight, hail, heavy hail
-                else -> continue               // unknown weather code
-            }
-            val shower = when (d.code.wmo) {
-                80, 81, 82, 85, 86 -> true
-                else -> false
-            }
+            val prop = WeatherProp.prop[d.code.wmo] ?: continue
+            val intense = prop.level
+            if (intense == 0) continue
+            val shower = prop.shower
 
             val a = zero + ((d.start.time - now) / 43200_000F)
             val b = zero + ((d.end.time   - now) / 43200_000F)

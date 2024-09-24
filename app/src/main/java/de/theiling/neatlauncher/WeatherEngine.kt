@@ -5,7 +5,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Date
 import java.util.SimpleTimeZone
-import java.util.TimeZone
 import kotlin.math.roundToInt
 
 const val CURRENT_LOC = ""
@@ -196,39 +195,57 @@ data class Temp(val k100th: Int) {
     }
 }
 
+data class WeatherProp(
+    val idx: Int,
+    val wmo: Int,
+    val symbol: String,
+    val kind: Int,
+    val level: Int,
+    val ice: Boolean,
+    val shower: Boolean,
+    val label: String)
+{
+    companion object {
+        lateinit var prop: Map<Int,WeatherProp>
+            private set
+
+        fun make(c: Context) {
+            val w = mutableMapOf<Int,WeatherProp>()
+            var idx = 0
+            for (v in c.resources.getStringArray(R.array.weather_code_arr)) {
+                val (wmo0, symbol, info, raw) = v.split(";").map { it.trim() }
+                val wmo = wmo0.toInt()
+                var kind = weather_cloud
+                var level = 0
+                var ice = false
+                var shower = false
+                for (u in info.split(" ")) when (u) {
+                    "cloud" -> kind = weather_cloud
+                    "fog"   -> kind = weather_fog
+                    "drizl" -> kind = weather_drizl
+                    "rain"  -> kind = weather_rain
+                    "snow"  -> kind = weather_snow
+                    "thund" -> kind = weather_thund
+                    "ice"   -> ice = true
+                    "show"  -> shower = true
+                    "1"     -> level = 1
+                    "2"     -> level = 2
+                    "3"     -> level = 3
+                }
+                val (wmo1, label) = c.resources.getStringArray(R.array.weather_code_descr)[idx]
+                    .split(";").map { it.trim() }
+                if (wmo1.toInt() != wmo) throw IndexOutOfBoundsException()
+                w[wmo] = WeatherProp(idx, wmo, symbol, kind, level, ice, shower, label)
+                idx++
+            }
+            prop = w
+        }
+    }
+}
+
 // weather code WMO; restricted by open-meteo docs
 data class WeatherCode(val wmo: Int) {
-    override fun toString() = when (wmo) {
-        0  -> "\u2600\ufe0e"  // clear sky
-        1  -> "\u2600\ufe0e`" // mainly clear
-        2  -> "\u26c5\ufe0e"  // partly cloudy
-        3  -> "\u2601\ufe0e"  // overcast
-        45 -> "="             // fog
-        48 -> "\u2A6E"        // depositing rime fog
-        51 -> "’"             // drizzle: light
-        53 -> "”"             // drizzle: moderate
-        55 -> "’”"            // drizzle: dense
-        56 -> "’!"            // freezing drizzle: light
-        57 -> "”!"            // freezing drizzle: dense
-        61 -> "··"            // rain: slight
-        63 -> "∴"             // rain: moderate
-        65 -> "⁘"             // rain: heavy
-        66 -> "!"             // freezing rain: light
-        67 -> "‼"             // freezing rain: heavy
-        71 -> "*"             // snow fall: slight
-        73 -> "**"            // snow fall: moderate
-        75 -> "⁂"            // snow fall: heavy
-        77 -> "\u2744\uFE0E"  // snow grains
-        80 -> "∶"             // rain showers: slight
-        81 -> "∷"             // rain showers: moderate
-        82 -> "⁝⁝"             // rain showers: violent
-        85 -> "⁑"             // snow showers: slight
-        86 -> "⁑⁑"            // snow showers: heavy
-        95 -> "☈"             // thunderstorm: slight or moderate
-        96 -> "☈."            // thunderstorm: with slight hail
-        99 -> "☈!"            // thunderstorm: with heavy hail
-        else -> "?"           // unknown weather code
-    }
+    override fun toString() = WeatherProp.prop[wmo]?.symbol ?: "?"
 }
 
 /* Units used for internal storage:
@@ -308,9 +325,6 @@ class WeatherData(
 
         private fun meteoCode(j: JSONObject, group: String, entry: String) =
             meteoList(j, group, entry) { a, i -> WeatherCode(a.getInt(i)) }
-
-        private fun meteoLong(j: JSONObject, group: String, entry: String) =
-            meteoList(j, group, entry) { a, i -> a.getLong(i) }
 
         private fun meteoDate(j: JSONObject, group: String, entry: String) =
             meteoList(j, group, entry) { a, i -> Date(a.getLong(i) * 1000L) }

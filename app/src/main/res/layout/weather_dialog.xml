@@ -56,6 +56,14 @@
                 />
 
             <TextView
+                android:id="@+id/symbols"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/weather_symbol_title"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
                 android:id="@+id/weather_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

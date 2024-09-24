@@ -12,10 +12,8 @@ import android.content.IntentFilter
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.hardware.display.DisplayManager
-import android.location.Criteria
 import android.location.Location
 import android.location.LocationManager
-import android.location.provider.ProviderProperties
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -168,6 +166,8 @@ class MainActivity:
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+
+        WeatherProp.make(c)
 
         searchEngine = SearchEngine(c)
         weather = WeatherEngine(c)
@@ -1231,6 +1231,7 @@ class MainActivity:
             done
         }
 
+        z.symbols.     setOnClickDismiss(d) { weatherSymbolDialog(view) }
         z.weatherType. setOnClickDismiss(d) { choiceDialog(view, weatherType) }
         z.ttypeChoice. setOnClickDismiss(d) { choiceDialog(view, ttypeChoice) }
         z.weekStart.   setOnClickDismiss(d) { choiceDialog(view, weekStart) }
@@ -1283,6 +1284,18 @@ class MainActivity:
                 }
             }
         }
+    }
+
+    private fun weatherSymbolDialog(view: View) {
+        val z = TableDialogBinding.inflate(LayoutInflater.from(view.context))
+        val b = dialogInit(view, z.root, getString(R.string.weather_symbol_title)) {}
+        for (i in WeatherProp.prop.values) {
+            val z2 = TableRowBinding.inflate(LayoutInflater.from(view.context))
+            z2.text1.text = i.symbol
+            z2.text2.text = i.label
+            z.table.addView(z2.root)
+        }
+        b.create().show()
     }
 
     // Location

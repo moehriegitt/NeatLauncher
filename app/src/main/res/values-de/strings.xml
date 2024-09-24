@@ -161,6 +161,63 @@
         <item>gefühlt</item>
     </string-array>
 
+    <string-array name="weather_code">
+        <item>Wolken</item>
+        <item>Nebel</item>
+        <item>Niesel</item>
+        <item>Regen</item>
+        <item>Schnee</item>
+        <item>Gewitter</item>
+    </string-array>
+
+    <string-array name="weather_level">
+        <item>keine</item>
+        <item>leicht</item>
+        <item>mittel</item>
+        <item>stark</item>
+    </string-array>
+
+    <string name="weather_icy">
+        gefrierend
+    </string>
+
+    <string name="weather_shower">
+        Schauer
+    </string>
+
+    <string-array name="weather_code_descr">
+        <item>0;  klarer Himmel</item>
+        <item>1;  weitgehend klar</item>
+        <item>2;  leicht bewölkt</item>
+        <item>3;  bewölkt</item>
+        <item>45; Nebel</item>
+        <item>48; Eisnebel</item>
+        <item>51; Niesel, leicht</item>
+        <item>53; Niesel, mittel</item>
+        <item>55; Niesel, stark</item>
+        <item>56; gefrierender Niesel, leicht</item>
+        <item>57; gefrierender Niesel, stark</item>
+        <item>61; Regen, leicht</item>
+        <item>63; Regen, mittel</item>
+        <item>65; Regen, stark</item>
+        <item>66; gefrierender Regen, leicht</item>
+        <item>67; gefrierender Regen, stark</item>
+        <item>71; Schnee, leicht</item>
+        <item>73; Schnee, mittelstark</item>
+        <item>75; Schnee, stark</item>
+        <item>77; Graupel</item>
+        <item>80; Regenschauer, leicht</item>
+        <item>81; Regenschauer, mittelstark</item>
+        <item>82; Regenschauer, stark</item>
+        <item>85; Schneeschauer, leicht</item>
+        <item>86; Schneeschauer, stark</item>
+        <item>95; Gewitter</item>
+        <item>96; Gewitter mit Hagel</item>
+        <item>99; starkes Gewitter mit Hagel</item>
+    </string-array>
+
+    <string name="weather_symbol_title">Wetterzeichen</string>
+
     <string name="contact_choice_title">Kontakte</string>
     <string-array name="contact_choice">
         <item>Liste nicht auslesen</item>

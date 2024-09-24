@@ -231,6 +231,13 @@
         <item name="android:textColor">?colorAccent</item>
     </style>
 
+    <style name="AppTheme.TableItem">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/tableItem</item>
+        <item name="android:paddingVertical">@dimen/tableItemPaddingV</item>
+        <item name="android:paddingHorizontal">@dimen/tableItemPaddingH</item>
+    </style>
+
     <style name="AppTheme.WeatherTitle">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
         <item name="android:textSize">@dimen/weatherTitle</item>

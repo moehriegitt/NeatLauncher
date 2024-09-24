@@ -14,6 +14,8 @@ import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -574,6 +576,86 @@ class SearchRenameDialogBinding(
     }
 }
 
+class TableDialogBinding(
+    rootView: FrameLayout,
+    val table: TableLayout):
+    ViewBinding
+{
+    override val root = rootView
+    companion object {
+        fun bind(rootView: View) = TableDialogBinding(
+            rootView as FrameLayout,
+            rootView.findViewById(R.id.table)!!)
+
+        fun inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            attachToParent: Boolean): TableDialogBinding
+        {
+            val root = inflater.inflate(R.layout.table_dialog, parent, false)
+            if (attachToParent) parent?.addView(root)
+            return bind(root)
+        }
+
+        @Suppress("unused")
+        fun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)
+    }
+}
+
+class TableRowBinding(
+    rootView: TableRow,
+    val text1: TextView,
+    val text2: TextView):
+    ViewBinding
+{
+    override val root = rootView
+    companion object {
+        fun bind(rootView: View) = TableRowBinding(
+            rootView as TableRow,
+            rootView.findViewById(R.id.text1)!!,
+            rootView.findViewById(R.id.text2)!!)
+
+        fun inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            attachToParent: Boolean): TableRowBinding
+        {
+            val root = inflater.inflate(R.layout.table_row, parent, false)
+            if (attachToParent) parent?.addView(root)
+            return bind(root)
+        }
+
+        @Suppress("unused")
+        fun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)
+    }
+}
+
+class TextDialogBinding(
+    rootView: FrameLayout,
+    val text: TextView):
+    ViewBinding
+{
+    override val root = rootView
+    companion object {
+        fun bind(rootView: View) = TextDialogBinding(
+            rootView as FrameLayout,
+            rootView.findViewById(R.id.text)!!)
+
+        fun inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            attachToParent: Boolean): TextDialogBinding
+        {
+            val root = inflater.inflate(R.layout.text_dialog, parent, false)
+            if (attachToParent) parent?.addView(root)
+            return bind(root)
+        }
+
+        @Suppress("unused")
+        fun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)
+    }
+}
+
 interface ViewBinding {
 	val root: View
 }
@@ -585,6 +667,7 @@ class WeatherDialogBinding(
     val newLocation: EditText,
     val noWeather: RadioButton,
     val oMeteoLink: TextView,
+    val symbols: TextView,
     val tempChoice: TextView,
     val ttypeChoice: TextView,
     val weatherType: TextView,
@@ -600,6 +683,7 @@ class WeatherDialogBinding(
             rootView.findViewById(R.id.new_location)!!,
             rootView.findViewById(R.id.no_weather)!!,
             rootView.findViewById(R.id.o_meteo_link)!!,
+            rootView.findViewById(R.id.symbols)!!,
             rootView.findViewById(R.id.temp_choice)!!,
             rootView.findViewById(R.id.ttype_choice)!!,
             rootView.findViewById(R.id.weather_type)!!,

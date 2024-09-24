@@ -164,6 +164,63 @@
         <item>apparent</item>
     </string-array>
 
+    <string-array name="weather_code">
+        <item>clouds</item>
+        <item>fog</item>
+        <item>drizzle</item>
+        <item>rain</item>
+        <item>snow</item>
+        <item>thunderstorm</item>
+    </string-array>
+
+    <string-array name="weather_level">
+        <item>none</item>
+        <item>light</item>
+        <item>moderate</item>
+        <item>heavy</item>
+    </string-array>
+
+    <string name="weather_icy">
+        freezing
+    </string>
+
+    <string name="weather_shower">
+        shower
+    </string>
+
+    <string-array name="weather_code_descr">
+        <item>0;  clear sky</item>
+        <item>1;  mainly clear</item>
+        <item>2;  partly cloudy</item>
+        <item>3;  overcast</item>
+        <item>45; fog</item>
+        <item>48; depositing rime fog</item>
+        <item>51; drizzle, light</item>
+        <item>53; drizzle, moderate</item>
+        <item>55; drizzle, dense</item>
+        <item>56; freezing drizzle, light</item>
+        <item>57; freezing drizzle, dense</item>
+        <item>61; rain, slight</item>
+        <item>63; rain, moderate</item>
+        <item>65; rain, heavy</item>
+        <item>66; freezing rain, light</item>
+        <item>67; freezing rain, heavy</item>
+        <item>71; snow fall, slight</item>
+        <item>73; snow fall, moderate</item>
+        <item>75; snow fall, heavy</item>
+        <item>77; snow grains</item>
+        <item>80; rain showers, slight</item>
+        <item>81; rain showers, moderate</item>
+        <item>82; rain showers, violent</item>
+        <item>85; snow showers, slight</item>
+        <item>86; snow showers, heavy</item>
+        <item>95; thunderstorm</item>
+        <item>96; thunderstorm with hail</item>
+        <item>99; heavy thunderstorm with hail</item>
+    </string-array>
+
+    <string name="weather_symbol_title">Weather Symbols</string>
+
     <string name="contact_choice_title">Contacts</string>
     <string-array name="contact_choice">
         <item>Do not read list</item>

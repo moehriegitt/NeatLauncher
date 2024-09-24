@@ -59,6 +59,10 @@
     <dimen name="popupTinyPaddingBottom">8dp</dimen>
     <dimen name="popupTinyPaddingH">8dp</dimen>
 
+    <dimen name="tableItem">20sp</dimen>
+    <dimen name="tableItemPaddingV">4dp</dimen>
+    <dimen name="tableItemPaddingH">8dp</dimen>
+
     <dimen name="weatherTitle">17sp</dimen>
     <dimen name="weatherTitlePadV">3dp</dimen>
     <dimen name="weatherTitlePadH">3dp</dimen>
