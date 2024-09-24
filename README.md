@@ -2,6 +2,12 @@
 
 A neat and convenient launcher without icons.
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/de.theiling.neatlauncher/)
+
+Or download the latest APK from the [Releases Section](https://github.com/moehriegitt/NeatLauncher/releases/latest).
+
 ## Description
 
 The new home app (the launcher) of your Android device to replace
