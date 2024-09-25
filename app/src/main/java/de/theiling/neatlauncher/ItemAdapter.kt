@@ -65,15 +65,15 @@ class ItemAdapter(
     override fun getItemCount(): Int = partial.size
 
     override fun getFilter(): Filter = object: Filter() {
-        override fun performFiltering(hay: CharSequence): FilterResults
+        override fun performFiltering(needle: CharSequence): FilterResults
         {
             val f = mutableListOf<ItemViewInfo>()
-            if (hay == "") {
+            if (needle == "") {
                 them.forEach { if (whenEmpty(it)) f.add(ItemViewInfo(it)) }
                 f.sortWith { a, b -> a.item.displayCompareTo(b.item) }
             } else {
                 them.forEach {
-                    val m = it.label.containsWords(hay, true)
+                    val m = it.containsWords(needle, true)
                     if (m != null) f.add(ItemViewInfo(it, m))
                 }
                 f.sortWith { a, b -> a.displayCompareToMatch(b) }

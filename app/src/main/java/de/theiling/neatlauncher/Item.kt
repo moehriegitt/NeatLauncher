@@ -100,6 +100,8 @@ class Item(
             prefSet()
         }
 
+    private val baseLabel get() = label.removePrefix(parentLabelPrefix)
+
     var order: String
         get() = (if (pref.order != "") pref.order else defaultOrder())
         set(v) {
@@ -176,5 +178,14 @@ class Item(
         if (j != 0) return j
 
         return this.displayCompareTo(other)
+    }
+
+    fun containsWords(needle: CharSequence, ignoreCase: Boolean): MatchWords? {
+        val words = needle.split(" ")
+        val r = label.containsWords(words, ignoreCase) ?: return null
+        if ((parentLabelPrefix != "") &&
+            words.isNotEmpty() &&
+            !baseLabel.containsOneWord(words, ignoreCase)) return null
+        return r
     }
 }

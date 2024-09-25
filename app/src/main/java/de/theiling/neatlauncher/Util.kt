@@ -63,11 +63,11 @@ fun CharSequence.isWordStartBoundary(pos: Int): Boolean {
     return (a.lowercase() == a.toString()) && (b.uppercase() == b.toString())
 }
 
-fun String.containsWords(needle: CharSequence, ignoreCase: Boolean): MatchWords? {
+fun String.containsWords(words: List<String>, ignoreCase: Boolean): MatchWords? {
     val s = mutableListOf<Span>()
     var sumRank = 0
     var pos = 0
-    for (word in needle.split(" ")) {
+    for (word in words) {
         if (word == "") continue
         var idx = -1
         var rank = -1
@@ -88,6 +88,14 @@ fun String.containsWords(needle: CharSequence, ignoreCase: Boolean): MatchWords?
         pos = idx + word.length
     }
     return MatchWords(this, sumRank, s)
+}
+
+fun String.containsOneWord(words: List<String>, ignoreCase: Boolean): Boolean {
+    for (word in words) {
+        if (word == "") continue
+        if (indexOf(word, 0, ignoreCase) >= 0) return true
+    }
+    return false
 }
 
 fun Any.toUrl(): String = URLEncoder.encode(toString(), "UTF-8")

@@ -11,9 +11,9 @@ import java.util.Calendar
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-// I want a pointed end, so neither BUTT nor ROUND nor SQUARE are right.
+// I want a pointed end, so neither BUTT, ROUND, nor SQUARE is right.
 fun makeClockHand(sz: Float, len: Float): Path =
-    Path().also { with (it) { // why does .also insist on {}?
+    Path().apply {
         val hz = sz / 2
         moveTo(hz, 0F)
         rLineTo(0F, len)
@@ -21,7 +21,7 @@ fun makeClockHand(sz: Float, len: Float): Path =
         rLineTo(-hz, -hz)
         rLineTo(0F, -len)
         close()
-    }}
+    }
 
 class NeatAnalogClock(
     c: Context,
@@ -47,7 +47,8 @@ class NeatAnalogClock(
         return p
     }
 
-    private fun drawRain(canvas: Canvas, shower: Boolean, rm: Float, a: Float, l: Float, p: Paint) {
+    private fun drawRain(canvas: Canvas, shower: Boolean, rm: Float, a: Float, l: Float, p: Paint)
+    {
         val r = RectF(-rm, -rm, +rm, +rm)
         if (shower) {
             // show it in 7.5min steps, on and off
@@ -76,6 +77,7 @@ class NeatAnalogClock(
             lastEnd = d.end.time
 
             val prop = WeatherProp.prop[d.code.wmo] ?: continue
+            if (prop.kind == weather_cloud) continue
             val intense = prop.level
             if (intense == 0) continue
             val shower = prop.shower

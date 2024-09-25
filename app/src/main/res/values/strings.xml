@@ -66,10 +66,13 @@
     <string name="main_search_hint">Search</string>
 
     <string name="item_nothing">Nothing</string>
-    <string name="item_camera_photo">Camera: Photo</string>
-    <string name="item_camera_video">Camera: Video</string>
-    <string name="item_settings_home">Settings: Home</string>
-    <string name="item_phone_dial">Phone: Dial</string>
+    <string name="item_photo">Photo</string>
+    <string name="item_video">Video</string>
+    <string name="item_home">Home</string>
+    <string name="item_dial">Dial</string>
+    <string name="item_camera">Camera</string>
+    <string name="item_settings">Settings</string>
+    <string name="item_phone">Phone</string>
 
     <string name="item_start">Start</string>
     <string name="item_info">Info</string>
@@ -119,6 +122,7 @@
     <string name="read_contacts_no_perm">No permission to read contact list</string>
     <string name="location_no_perm">No permission to access location</string>
 
+    <string name="main_language">Language</string>
     <string name="main_info">Info</string>
     <string name="main_about">About</string>
 

@@ -290,10 +290,10 @@ class MainActivity:
     override fun onStart() {
         super.onStart()
         registerReceiver(minuteTick, IntentFilter(Intent.ACTION_TIME_TICK))
-        onMinuteTick()
         searchEngine.loadPref()
         weather.loadPref()
         itemsNotifyChange(2)
+        onMinuteTick()
     }
 
     override fun onStop() {
@@ -406,7 +406,6 @@ class MainActivity:
     private val inputMethodManager get() =
         c.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
-    private fun packageIntent(s: String) = packageManager.getLaunchIntentForPackage(s)
     private fun modePrimary() = if (homeItems.size > 0) Mode.HOME1 else Mode.DRAWER1
     private fun modeSecondary() = Mode.DRAWER2
     private fun drawerNotifyChange() = drawerAdapter.getFilter().filter(searchStr)
@@ -498,6 +497,17 @@ class MainActivity:
         return false
     }
 
+    data class stdIntent(
+        val prefix: String,
+        val name: String,
+        val intent: String,
+        val packDefault: String?,
+        val pack: String?,
+        var found: Boolean = false)
+
+    private fun stdIntent(pref: Int, name: Int, def: String?, which: String) =
+        stdIntent(getString(pref), getString(name), which, def, packageFromIntent(Intent(which)))
+
     private fun learnItems() {
         val c: Context = this
         val um = userManager
@@ -507,16 +517,18 @@ class MainActivity:
         items.clear()
 
         // Standard Actions
-        items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_nothing),
-            "", "", myUid))
-        items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_camera_photo),
-            "", MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA, myUid))
-        items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_camera_video),
-            "", MediaStore.INTENT_ACTION_VIDEO_CAMERA, myUid))
-        items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_settings_home),
-            "", Settings.ACTION_HOME_SETTINGS, myUid))
-        items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_phone_dial),
-            "", Intent.ACTION_DIAL, myUid))
+        items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_nothing), "", "", myUid))
+
+        // Arbitrary list of standard intents.  FIXME: this needs some love.
+        val intents = listOf(
+            stdIntent(R.string.item_camera, R.string.item_photo,
+                null, MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA),
+            stdIntent(R.string.item_camera, R.string.item_video,
+                null, MediaStore.INTENT_ACTION_VIDEO_CAMERA),
+            stdIntent(R.string.item_settings, R.string.item_home,
+                "com.android.settings", Settings.ACTION_HOME_SETTINGS),
+            stdIntent(R.string.item_phone, R.string.item_dial,
+                "com.android.dialer", Intent.ACTION_DIAL))
 
         // items
         for (profile in um.userProfiles) {
@@ -528,8 +540,17 @@ class MainActivity:
                     pack, acti.name, uid)
                 items.add(app)
 
+                // standard intents
+                for (i in intents.filter { !it.found })
+                    if ((i.pack == pack) || (i.packDefault == pack)) {
+                        i.found = true
+                        val sub = Item(c, ITEM_TYPE_INT, app, i.name, "", i.intent, myUid)
+                        app.shortcuts.add(sub)
+                        items.add(sub)
+                    }
+
+                // shortcuts
                 if (Build.VERSION.SDK_INT >= 25) {
-                    // Shortcuts
                     val q = LauncherApps.ShortcutQuery().setPackage(pack).setQueryFlags(
                         LauncherApps.ShortcutQuery.FLAG_MATCH_MANIFEST or
                         LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC or
@@ -548,6 +569,11 @@ class MainActivity:
                     }
                 }
             }
+        }
+
+        // add standard intents we did not find (you never know)
+        for (i in intents.filter { !it.found }) {
+            items.add(Item(c, ITEM_TYPE_INT, null, "${i.prefix}: ${i.name}", "", i.intent, myUid))
         }
 
         // Contact list:
@@ -636,9 +662,7 @@ class MainActivity:
         }
 
     private fun setMode(want: Mode) {
-        if (want == getMode()) {
-            return
-        }
+        if (want == getMode()) return
         z.mainHead.visibility = visibleIf(want != Mode.DRAWER2)
         z.homeRecycler.visibility = visibleIf(want == Mode.HOME1)
         z.drawerRecycler.visibility = visibleIf(want != Mode.HOME1)
@@ -672,6 +696,10 @@ class MainActivity:
     private fun simpleFormatDate(now: Date, s: String) =
         SimpleDateFormat(s, Locale.getDefault()).format(now)
 
+    private fun packageFromIntent(i: Intent) = i.resolveActivity(packageManager)?.packageName
+
+    private fun packageIntent(s: String) = packageManager.getLaunchIntentForPackage(s)
+
     private fun packageIntent(i: Intent) =
         try {
             val p = packageManager
@@ -683,8 +711,7 @@ class MainActivity:
     // Instead of directly starting ACTION_DIAL, we will find the package
     // and start its main activity, because ACTION_DIAL opens the number pad,
     // but we usually do not want that, we want to search the contacts.
-    private fun startPhone() =
-        startActivity(packageIntent(Intent(Intent.ACTION_DIAL)))
+    private fun startPhone() = startActivity(packageIntent(Intent(Intent.ACTION_DIAL)))
 
     private fun startCalendar()
     {
@@ -724,12 +751,18 @@ class MainActivity:
         }
     }
 
-    private fun itemInfoLaunch(pack: String) {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        intent.addCategory(Intent.CATEGORY_DEFAULT)
-        intent.data = Uri.parse("package:$pack")
-        startActivity(intent)
-    }
+    private fun itemInfoLaunch(pack: String) =
+        startActivity(
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                addCategory(Intent.CATEGORY_DEFAULT)
+                data = Uri.parse("package:$pack")
+            })
+
+    private fun appLanguageLaunch(pack: String) =
+        startActivity(
+            Intent(Settings.ACTION_APP_LOCALE_SETTINGS).apply {
+                data = Uri.parse("package:$pack")
+            })
 
     private fun restart() {
         val i = intent
@@ -983,6 +1016,7 @@ class MainActivity:
         z.dateChoice.   setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
         z.contactChoice.setOnClickDismiss(d) { choiceDialog(view, contactChoice) }
         z.weatherMenu.  setOnClickDismiss(d) { weatherDialog(view) }
+        z.language.     setOnClickDismiss(d) { appLanguageLaunch(c.packageName) }
         z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
         z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
         d.show()
@@ -1090,7 +1124,7 @@ class MainActivity:
     }
 
     private fun weatherRequest() {
-        shortToast("Net: weather?")
+        // shortToast("Net: weather?")
         val loc = weather.active ?: return onWeatherData()
         lifecycleScope.launch(Dispatchers.IO) {
             val url = String.format(WEATHER_FORECAST_URL, loc.lat.toUrl(), loc.lon.toUrl())

@@ -8,8 +8,16 @@
       * open keyboard immediately in drawer (use click instead of swipe up)
       * configure default search engine
 
-  * maybe have a generic rain display (instead of only on analog clock)
-
   * update docs
 
   * update screenshots
+
+## Possibly for later releases
+
+  * have a generic rain display (instead of only on analog clock)
+
+  * have internal actions as item so they can be pinned and reconfigured
+    (but converting to activities seems like overkill)
+      * all dialogs (incl., weather symbols, about, etc.)
+      * drawer open; drawer open w/ keyboard
+      * actions in opt menus: info, app language
