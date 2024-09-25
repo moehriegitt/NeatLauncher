@@ -63,29 +63,58 @@ fun CharSequence.isWordStartBoundary(pos: Int): Boolean {
     return (a.lowercase() == a.toString()) && (b.uppercase() == b.toString())
 }
 
+// Like substr.equals, but skips non-letter chars if a letter is searched.
+// This is to make 'ob' match 'Foo-Bar' and 'Foo Bar' the same as it would match 'FooBar'.
+// Returns the length of the match in the haystack (may be >needle.length) or null for no match
+fun CharSequence.hasWordAt(
+    needle: CharSequence, index: Int, ignoreCase: Boolean = false): Int?
+{
+    var i = index
+    for (c in needle) {
+        while (true) {
+            val x = getOrNull(i) ?: return null
+            i++
+            if (x.equals(c, ignoreCase)) break
+            if ((i == index+1) || !c.isLetter() || x.isLetter()) return null
+        }
+    }
+    return i - index
+}
+
+fun CharSequence.wordSpanOf(
+    needle: CharSequence, startIndex: Int = 0, ignoreCase: Boolean = false): Span?
+{
+    for (i in startIndex .. (length - needle.length)) {
+        return Span(i, hasWordAt(needle, i, ignoreCase) ?: continue)
+    }
+    return null
+}
+
 fun String.containsWords(words: List<String>, ignoreCase: Boolean): MatchWords? {
     val s = mutableListOf<Span>()
     var sumRank = 0
     var pos = 0
     for (word in words) {
         if (word == "") continue
-        var idx = -1
+        var at: Span? = null
         var rank = -1
         var p = 0
         while (true) {
-            val i = indexOf(word, p, ignoreCase)
-            if (i < 0) break
-            val r = (if (isWordStartBoundary(i)) 100 else 0) + (if (i >= pos) 10 else 0)
+            val sp = wordSpanOf(word, p, ignoreCase) ?: break
+            var i = sp.start
+            val r =
+                (if (isWordStartBoundary(i)) 100 else 0) +
+                (if (i >= pos) 10 else 0) +
+                (if (sp.size == word.length) 1 else 0)
             if (r > rank) {
-                idx = i
+                at = sp
                 rank = r
             }
             p = i + 1
         }
-        if (idx < 0) return null
-        s.add(Span(idx, word.length))
+        s.add(at ?: return null)
         sumRank += rank
-        pos = idx + word.length
+        pos = at.end
     }
     return MatchWords(this, sumRank, s)
 }
@@ -93,7 +122,7 @@ fun String.containsWords(words: List<String>, ignoreCase: Boolean): MatchWords? 
 fun String.containsOneWord(words: List<String>, ignoreCase: Boolean): Boolean {
     for (word in words) {
         if (word == "") continue
-        if (indexOf(word, 0, ignoreCase) >= 0) return true
+        if (wordSpanOf(word, 0, ignoreCase) != null) return true
     }
     return false
 }
