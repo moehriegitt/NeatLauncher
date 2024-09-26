@@ -8,6 +8,8 @@
       * open keyboard immediately in drawer (use click instead of swipe up)
       * configure default search engine
 
+  * make location coordinates editable
+
   * update docs
 
   * update screenshots

@@ -639,6 +639,10 @@ sub make_metadata($)
         }
     }
 
+    # F-Droid link
+    $readme .= qq{\n[<img src="https://f-droid.org/badge/get-it-on.png"
+        alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/$C->{pack}/)\n};
+
     # find screenshot images
     my @img = ();
     my $dir = "$C->{meta_en}/images/phoneScreenshots";

@@ -43,6 +43,9 @@ fork of Slimlauncher), and Nolauncher, and also feedback of users.
   - no icon set support (no need: no icons at all)
   - no widget support
 
+[<img src="https://f-droid.org/badge/get-it-on.png"
+        alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/de.theiling.neatlauncher/)
+
 ## Screenshots
 
 ![image clock02.png](metadata/en-US/images/phoneScreenshots/clock02.png)
