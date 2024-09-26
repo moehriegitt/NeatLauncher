@@ -307,6 +307,7 @@ class MainOptDialogBinding(
     val fontChoice: TextView,
     val language: TextView,
     val mainAbout: TextView,
+    val mainFaq: TextView,
     val mainInfo: TextView,
     val timeChoice: TextView,
     val weatherMenu: TextView):
@@ -323,6 +324,7 @@ class MainOptDialogBinding(
             rootView.findViewById(R.id.font_choice)!!,
             rootView.findViewById(R.id.language)!!,
             rootView.findViewById(R.id.main_about)!!,
+            rootView.findViewById(R.id.main_faq)!!,
             rootView.findViewById(R.id.main_info)!!,
             rootView.findViewById(R.id.time_choice)!!,
             rootView.findViewById(R.id.weather_menu)!!)

@@ -1017,6 +1017,7 @@ class MainActivity:
         z.contactChoice.setOnClickDismiss(d) { choiceDialog(view, contactChoice) }
         z.weatherMenu.  setOnClickDismiss(d) { weatherDialog(view) }
         z.language.     setOnClickDismiss(d) { appLanguageLaunch(c.packageName) }
+        z.mainFaq.      setOnClickDismiss(d) { faqDialog(view) }
         z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
         z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
         d.show()
@@ -1329,6 +1330,13 @@ class MainActivity:
             z2.text2.text = i.label
             z.table.addView(z2.root)
         }
+        b.create().show()
+    }
+
+    private fun faqDialog(view: View) {
+        val z = TextDialogBinding.inflate(LayoutInflater.from(view.context))
+        val b = dialogInit(view, z.root, getString(R.string.main_faq)) {}
+        z.text.text = getString(R.string.faq_text).replace("\n ", "\n").removeSuffix("\n")
         b.create().show()
     }
 

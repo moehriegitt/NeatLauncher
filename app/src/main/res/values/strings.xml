@@ -61,6 +61,23 @@
     - no widget support
     </string>
 
+    <string name="faq_text">
+    Q: How to configure a thing?\n
+    A: Try long clicking on it.\n
+    \n
+    Q: How to disable swipes or other actions?\n
+    A: By pinning the ‘Nothing’ item to it.\n
+    \n
+    Q: How to set a search engine as default?\n
+    A: Long click on search engine to configure it.\n
+    \n
+    Q: How to open keyboard immediately when drawer opens?\n
+    A: Click on ‘Search’ field instead of swiping up to open the drawer.\n
+    \n
+    Q: How to make current weather location a permanent entry?\n
+    A: Long click on ‘Current location’, then give it a name.\n
+    </string>
+
     <string name="readme_screenshots">Screenshots</string>
 
     <string name="main_search_hint">Search</string>
@@ -122,6 +139,7 @@
     <string name="read_contacts_no_perm">No permission to read contact list</string>
     <string name="location_no_perm">No permission to access location</string>
 
+    <string name="main_faq">FAQ / Help</string>
     <string name="main_language">Language</string>
     <string name="main_info">Info</string>
     <string name="main_about">About</string>

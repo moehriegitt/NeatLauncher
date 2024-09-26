@@ -64,6 +64,23 @@
     - keine Widget-Unterstützung
     </string>
 
+    <string name="faq_text">
+    F: Wie stelle ich was ein?\n
+    A: Versuch mal lange draufzuklicken.\n
+    \n
+    F: Wie kann ich einen Wisch oder andere Aktionen ausschalten?\n
+    A: Indem Du als Schnellzugriff „Nichts“ festlegst.\n
+    \n
+    F: Wie kann ich eine Suchmaschine standardmäßig benutzen?\n
+    A: Mit einem langen Klick kannst Du die Suchmaschine konfigurieren.\n
+    \n
+    F: Die Tastatur soll sofort aufgehen, wenn die App-Schublade geöffnet wird.\n
+    A: Statt hochzuwischen, klick auf das „Suche“-Feld, um die App-Schublade zu öffnen.\n
+    \n
+    F: Wie mache aus dem aktuellen Standort einen eigenen Eintrag?\n
+    A: Lange auf „Aktueller Standort“ klicken und dann einen Namen vergeben.\n
+    </string>
+
     <string name="readme_screenshots">Screenshots</string>
 
     <string name="main_search_hint">Suche</string>
@@ -125,6 +142,7 @@
     <string name="read_contacts_no_perm">Lesen der Kontaktliste wurde verweigert</string>
     <string name="location_no_perm">Standortbestimmung wurde verweigert</string>
 
+    <string name="main_faq">FAQ / Hilfe</string>
     <string name="main_language">Sprache</string>
     <string name="main_info">Verwaltung</string>
     <string name="main_about">Infos</string>

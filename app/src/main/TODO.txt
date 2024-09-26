@@ -2,12 +2,6 @@
 
 ## For next feature release
 
-  * FAQ for issues reported by users
-      * in-app or offline?  better in-app
-      * 'Nothing' app to disable swipe gestures
-      * open keyboard immediately in drawer (use click instead of swipe up)
-      * configure default search engine
-
   * make location coordinates editable
 
   * update docs
