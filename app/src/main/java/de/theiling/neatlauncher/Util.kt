@@ -8,6 +8,7 @@ import android.widget.CompoundButton
 import java.net.URLEncoder
 import java.text.DateFormatSymbols
 import java.util.Calendar
+import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -155,3 +156,6 @@ fun tzUtcId(mi: Int): String {
     if (m == 0) return "UTC%s%d".format(s, h)
     return "UTC%s%02d%02d".format(s, h, m)
 }
+
+fun Double.toDecString(count: Int) =
+    "%.${count}f".format(Locale.ROOT, this).dropLastWhile { it == '0' }

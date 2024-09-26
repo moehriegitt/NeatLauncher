@@ -65,7 +65,6 @@ class WeatherLoc(
     fun displayCompareTo(that: WeatherLoc) = this.order.compareTo(that.order)
 
     fun setLoc(lat: Double, lon: Double) {
-        if (!isCurrent) throw IllegalArgumentException()
         this.lat = lat
         this.lon = lon
         container.touch(this)

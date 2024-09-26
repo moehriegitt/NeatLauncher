@@ -186,6 +186,10 @@
         <item>apparent</item>
     </string-array>
 
+    <string name="coord_title">Coordinates</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+
     <string-array name="weather_code">
         <item>clouds</item>
         <item>fog</item>

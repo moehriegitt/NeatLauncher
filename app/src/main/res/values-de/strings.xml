@@ -183,6 +183,10 @@
         <item>gefühlt</item>
     </string-array>
 
+    <string name="coord_title">Koordinaten</string>
+    <string name="latitude">Breitengrad</string>
+    <string name="longitude">Längengrad</string>
+
     <string-array name="weather_code">
         <item>Wolken</item>
         <item>Nebel</item>

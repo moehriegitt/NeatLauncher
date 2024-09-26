@@ -1172,6 +1172,13 @@ class MainActivity:
             else {
                 e.name = z.editLabel.text.toString()
                 e.order = z.editOrder.text.toString()
+                try {
+                    e.setLoc(
+                        z.latitude.text.toString().toDouble(),
+                        z.longitude.text.toString().toDouble())
+                } catch (err: Exception) {
+                    shortToast("ERR: $err")
+                }
             }
             weatherNotify()
         }.create()
@@ -1182,6 +1189,8 @@ class MainActivity:
 
         z.editLabel.setText(e.name)
         z.editOrder.setText(e.orderOrEmpty)
+        z.latitude.setText(e.lat.toDecString(5))
+        z.longitude.setText(e.lon.toDecString(5))
 
         setOnDoneClickOk(z.editLabel, d)
         setOnDoneClickOk(z.editOrder, d)

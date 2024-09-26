@@ -44,6 +44,39 @@
             tools:ignore="Autofill,LabelFor"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/coord_title"
+            style="@style/AppTheme.PopupHeading"
+            />
+
+        <EditText
+            android:id="@+id/latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/latitude"
+            android:imeOptions="actionNext"
+            android:inputType="number|numberDecimal|numberSigned"
+            android:lines="1"
+            android:ems="10"
+            style="@style/AppTheme.PopupItem"
+            tools:ignore="Autofill,LabelFor"
+            />
+
+        <EditText
+            android:id="@+id/longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/longitude"
+            android:imeOptions="actionDone"
+            android:inputType="number|numberDecimal|numberSigned"
+            android:lines="1"
+            android:ems="10"
+            style="@style/AppTheme.PopupItem"
+            tools:ignore="Autofill,LabelFor"
+            />
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -148,7 +148,9 @@ class LocDialogBinding(
     val editKeep: RadioButton,
     val editLabel: EditText,
     val editOrder: EditText,
-    val geoLink: TextView):
+    val geoLink: TextView,
+    val latitude: EditText,
+    val longitude: EditText):
     ViewBinding
 {
     override val root = rootView
@@ -159,7 +161,9 @@ class LocDialogBinding(
             rootView.findViewById(R.id.edit_keep)!!,
             rootView.findViewById(R.id.edit_label)!!,
             rootView.findViewById(R.id.edit_order)!!,
-            rootView.findViewById(R.id.geo_link)!!)
+            rootView.findViewById(R.id.geo_link)!!,
+            rootView.findViewById(R.id.latitude)!!,
+            rootView.findViewById(R.id.longitude)!!)
 
         fun inflate(
             inflater: LayoutInflater,
