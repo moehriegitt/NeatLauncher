@@ -102,7 +102,7 @@ fun String.containsWords(words: List<String>, ignoreCase: Boolean): MatchWords? 
         var p = 0
         while (true) {
             val sp = wordSpanOf(word, p, ignoreCase) ?: break
-            var i = sp.start
+            val i = sp.start
             val r =
                 (if (isWordStartBoundary(i)) 100 else 0) +
                 (if (i >= pos) 10 else 0) +

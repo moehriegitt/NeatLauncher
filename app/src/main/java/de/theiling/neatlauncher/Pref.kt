@@ -77,16 +77,15 @@ fun prefToJson(c: Context) = JSONObject().apply {
 
 fun prefFromJson(c: Context, j: JSONObject) {
     with (pref(c).edit()) {
-        if (j.optString("pack") != c.packageName) throw IllegalArgumentException("Not our package")
-        val m = j.optJSONObject("pref") ?: throw IllegalArgumentException("Empty pref map")
+        if (j.optString("pack") != c.packageName) throw IllegalArgumentException("Not our prefs")
+        val m = j.optJSONObject("pref") ?: throw IllegalArgumentException("No pref map")
         clear()
         for (k in m.keys()) {
-            val v = m[k]
-            when (v) {
+            when (val v = m[k]) {
                 is String  -> putString(k,v)
                 is Boolean -> putBoolean(k,v)
                 is Int     -> putInt(k,v)
-                else -> return throw IllegalArgumentException("Illegal pref type")
+                else -> throw IllegalArgumentException("Illegal pref type")
             }
         }
         commit()  // synchronous store

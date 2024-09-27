@@ -44,6 +44,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -398,12 +399,13 @@ class MainActivity:
             1919 -> try {
                 val f = contentResolver.openOutputStream(uri)!!
                 f.write(prefToJson(c).toString(8).toByteArray())
+                f.close()
                 shortToast(getString(R.string.ok_save))
             } catch (_: Exception) {
                 shortToast(getString(R.string.err_save))
             }
             2020 -> try {
-                val s = contentResolver.openInputStream(uri)!!.bufferedReader()!!.readText()
+                val s = contentResolver.openInputStream(uri)!!.bufferedReader().readText()
                 prefFromJson(c, JSONObject(s))
                 shortToast(getString(R.string.ok_load))
                 restart() // strongest reset needed by any option
@@ -520,7 +522,7 @@ class MainActivity:
         return false
     }
 
-    data class stdIntent(
+    data class StdIntent(
         val prefix: String,
         val name: String,
         val intent: String,
@@ -529,7 +531,7 @@ class MainActivity:
         var found: Boolean = false)
 
     private fun stdIntent(pref: Int, name: Int, def: String?, which: String) =
-        stdIntent(getString(pref), getString(name), which, def, packageFromIntent(Intent(which)))
+        StdIntent(getString(pref), getString(name), which, def, packageFromIntent(Intent(which)))
 
     private fun learnItems() {
         val c: Context = this
@@ -781,6 +783,7 @@ class MainActivity:
                 data = Uri.parse("package:$pack")
             })
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun appLanguageLaunch(pack: String) =
         startActivity(
             Intent(Settings.ACTION_APP_LOCALE_SETTINGS).apply {
@@ -1058,11 +1061,15 @@ class MainActivity:
         z.dateChoice.   setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
         z.contactChoice.setOnClickDismiss(d) { choiceDialog(view, contactChoice) }
         z.weatherMenu.  setOnClickDismiss(d) { weatherDialog(view) }
-        z.language.     setOnClickDismiss(d) { appLanguageLaunch(c.packageName) }
         z.mainFaq.      setOnClickDismiss(d) { faqDialog(view) }
         z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
         z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
         z.saveRestore.  setOnClickDismiss(d) { saveRestoreDialog(view) }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            z.language.setOnClickDismiss(d) { appLanguageLaunch(c.packageName) }
+        } else {
+            z.language.visibility = View.GONE
+        }
         d.show()
     }
 
@@ -1299,7 +1306,7 @@ class MainActivity:
 
         // getCurrentLocation is used, requires API 30.
         // Will not support older requestSingleUpdate: too much work.
-        z.currentLocation.visibility = visibleIf(Build.VERSION.SDK_INT >= 30)
+        z.currentLocation.visibility = visibleIf(Build.VERSION.SDK_INT >= 31)
         z.currentLocation.isChecked = (weather.current == weather.active)
         z.currentLocation.setOnClickDismiss(d) {
             weather.current.isActive = true
@@ -1407,7 +1414,7 @@ class MainActivity:
     }
 
     private fun locRequest() {
-        if (Build.VERSION.SDK_INT < 30) return
+        if (Build.VERSION.SDK_INT < 31) return
         try {
             locationManager.getCurrentLocation(
                 LocationManager.FUSED_PROVIDER, null, ContextCompat.getMainExecutor(c))
