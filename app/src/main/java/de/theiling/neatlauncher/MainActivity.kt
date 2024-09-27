@@ -390,6 +390,29 @@ class MainActivity:
         clockRedraw(false)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != RESULT_OK) return
+        val uri = data?.data ?: return
+        when (requestCode) {
+            1919 -> try {
+                val f = contentResolver.openOutputStream(uri)!!
+                f.write(prefToJson(c).toString(8).toByteArray())
+                shortToast(getString(R.string.ok_save))
+            } catch (_: Exception) {
+                shortToast(getString(R.string.err_save))
+            }
+            2020 -> try {
+                val s = contentResolver.openInputStream(uri)!!.bufferedReader()!!.readText()
+                prefFromJson(c, JSONObject(s))
+                shortToast(getString(R.string.ok_load))
+                restart() // strongest reset needed by any option
+            } catch (_: Exception) {
+                shortToast(getString(R.string.err_load))
+            }
+        }
+    }
+
     // auxiliary oneliners
     private val c get() = applicationContext
     private fun shortToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
@@ -779,6 +802,25 @@ class MainActivity:
             replace("%s", searchStr.toUrl()).
             replace("%L", searchStr.lowercase(Locale.getDefault()).toUrl()))
 
+    private fun savePrefs()
+    {
+        val i = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            type = "application/json"
+            addCategory(Intent.CATEGORY_OPENABLE)
+            putExtra(Intent.EXTRA_TITLE, "neatlauncher-prefs.json")
+        }
+        startActivityForResult(i, 1919)
+    }
+
+    private fun loadPrefs()
+    {
+        val i = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type = "application/json"
+            addCategory(Intent.CATEGORY_OPENABLE)
+        }
+        startActivityForResult(i, 2020)
+    }
+
     // dialogs
     private fun dialogInit(
         view: View, content: View?, title: String, onOK: (() -> Unit)? = null): AlertDialog.Builder
@@ -1020,6 +1062,16 @@ class MainActivity:
         z.mainFaq.      setOnClickDismiss(d) { faqDialog(view) }
         z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
         z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
+        z.saveRestore.  setOnClickDismiss(d) { saveRestoreDialog(view) }
+        d.show()
+    }
+
+    private fun saveRestoreDialog(view: View)
+    {
+        val z = SaveRestoreBinding.inflate(LayoutInflater.from(view.context))
+        val d = dialogInit(view, z.root, getString(R.string.save_restore)).create()
+        z.prefSave.setOnClickDismiss(d) { savePrefs() }
+        z.prefLoad.setOnClickDismiss(d) { loadPrefs() }
         d.show()
     }
 
@@ -1332,7 +1384,7 @@ class MainActivity:
 
     private fun weatherSymbolDialog(view: View) {
         val z = TableDialogBinding.inflate(LayoutInflater.from(view.context))
-        val b = dialogInit(view, z.root, getString(R.string.weather_symbol_title)) {}
+        val b = dialogInit(view, z.root, getString(R.string.weather_symbol_title))
         for (i in WeatherProp.prop.values) {
             val z2 = TableRowBinding.inflate(LayoutInflater.from(view.context))
             z2.text1.text = i.symbol
@@ -1344,7 +1396,7 @@ class MainActivity:
 
     private fun faqDialog(view: View) {
         val z = TextDialogBinding.inflate(LayoutInflater.from(view.context))
-        val b = dialogInit(view, z.root, getString(R.string.main_faq)) {}
+        val b = dialogInit(view, z.root, getString(R.string.main_faq))
         z.text.text = getString(R.string.faq_text).replace("\n ", "\n").removeSuffix("\n")
         b.create().show()
     }

@@ -313,6 +313,7 @@ class MainOptDialogBinding(
     val mainAbout: TextView,
     val mainFaq: TextView,
     val mainInfo: TextView,
+    val saveRestore: TextView,
     val timeChoice: TextView,
     val weatherMenu: TextView):
     ViewBinding
@@ -330,6 +331,7 @@ class MainOptDialogBinding(
             rootView.findViewById(R.id.main_about)!!,
             rootView.findViewById(R.id.main_faq)!!,
             rootView.findViewById(R.id.main_info)!!,
+            rootView.findViewById(R.id.save_restore)!!,
             rootView.findViewById(R.id.time_choice)!!,
             rootView.findViewById(R.id.weather_menu)!!)
 
@@ -485,6 +487,34 @@ class RenameDialogBinding(
             attachToParent: Boolean): RenameDialogBinding
         {
             val root = inflater.inflate(R.layout.rename_dialog, parent, false)
+            if (attachToParent) parent?.addView(root)
+            return bind(root)
+        }
+
+        @Suppress("unused")
+        fun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)
+    }
+}
+
+class SaveRestoreBinding(
+    rootView: LinearLayout,
+    val prefLoad: TextView,
+    val prefSave: TextView):
+    ViewBinding
+{
+    override val root = rootView
+    companion object {
+        fun bind(rootView: View) = SaveRestoreBinding(
+            rootView as LinearLayout,
+            rootView.findViewById(R.id.pref_load)!!,
+            rootView.findViewById(R.id.pref_save)!!)
+
+        fun inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            attachToParent: Boolean): SaveRestoreBinding
+        {
+            val root = inflater.inflate(R.layout.save_restore, parent, false)
             if (attachToParent) parent?.addView(root)
             return bind(root)
         }

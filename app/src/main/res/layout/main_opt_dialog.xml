@@ -83,6 +83,19 @@
                 style="@style/AppTheme.PopupItem"
                 />
 
+            <View
+                android:layout_width="match_parent"
+                style="@style/AppTheme.PopupSep"
+                />
+
+            <TextView
+                android:id="@+id/main_faq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_faq"
+                style="@style/AppTheme.PopupItem"
+                />
+
             <TextView
                 android:id="@+id/main_info"
                 android:layout_width="match_parent"
@@ -92,10 +105,10 @@
                 />
 
             <TextView
-                android:id="@+id/main_faq"
+                android:id="@+id/save_restore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/main_faq"
+                android:text="@string/save_restore"
                 style="@style/AppTheme.PopupItem"
                 />
 

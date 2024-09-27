@@ -92,7 +92,7 @@
     <string name="item_phone">Phone</string>
 
     <string name="item_start">Start</string>
-    <string name="item_info">Info</string>
+    <string name="item_info">App Info</string>
     <string name="item_rename">Rename</string>
     <string name="item_pin">Pin</string>
     <string name="item_rid">Unpin</string>
@@ -139,10 +139,18 @@
     <string name="read_contacts_no_perm">No permission to read contact list</string>
     <string name="location_no_perm">No permission to access location</string>
 
+    <string name="save_restore">Save / Restore Preferences</string>
+    <string name="pref_save">Save Preferences</string>
+    <string name="pref_load">Load Preferences</string>
+    <string name="ok_load">Loading complete.</string>
+    <string name="err_load">Loading failed.</string>
+    <string name="ok_save">Saving complete.</string>
+    <string name="err_save">Saving failed.</string>
+
     <string name="main_faq">FAQ / Help</string>
     <string name="main_language">Language</string>
-    <string name="main_info">Info</string>
-    <string name="main_about">About</string>
+    <string name="main_info">App Info</string>
+    <string name="main_about">About NeatLauncher</string>
 
     <string name="do_hide">%s: hide (still shown in search)</string>
     <string name="do_show">%s: show</string>

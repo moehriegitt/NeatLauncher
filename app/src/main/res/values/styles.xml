@@ -176,6 +176,13 @@
         <item name="android:paddingHorizontal">@dimen/popupItemPaddingH</item>
     </style>
 
+    <style name="AppTheme.PopupSep">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/dimColor</item>
+        <item name="android:layout_marginVertical">@dimen/popupSepMarginV</item>
+        <item name="android:layout_marginHorizontal">@dimen/popupSepMarginH</item>
+    </style>
+
     <style name="AppTheme.PopupShort">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
         <item name="android:textSize">@dimen/popupShort</item>

@@ -2,6 +2,7 @@ package de.theiling.neatlauncher
 
 import android.content.Context
 import android.content.SharedPreferences
+import org.json.JSONObject
 
 const val PREF_MAIN = "de.theiling.neatlauncher.PREF_MAIN"
 
@@ -63,6 +64,34 @@ fun setWeatherLoc(c: Context, s: String) = prefPutString(c, "weatherLoc", s, "")
 
 fun getWeatherData(c: Context) = pref(c).getString("weatherData", "")!!
 fun setWeatherData(c: Context, s: String) = prefPutString(c, "weatherData", s, "")
+
+fun prefToJson(c: Context) = JSONObject().apply {
+    put("pack", c.packageName)
+    put("ver", c.packageManager.getPackageInfo(c.packageName, 0).versionCode)
+    put("pref", JSONObject().apply {
+        for ((k,v) in pref(c).all) {
+            put(k, v)
+        }
+    })
+}
+
+fun prefFromJson(c: Context, j: JSONObject) {
+    with (pref(c).edit()) {
+        if (j.optString("pack") != c.packageName) throw IllegalArgumentException("Not our package")
+        val m = j.optJSONObject("pref") ?: throw IllegalArgumentException("Empty pref map")
+        clear()
+        for (k in m.keys()) {
+            val v = m[k]
+            when (v) {
+                is String  -> putString(k,v)
+                is Boolean -> putBoolean(k,v)
+                is Int     -> putInt(k,v)
+                else -> return throw IllegalArgumentException("Illegal pref type")
+            }
+        }
+        commit()  // synchronous store
+    }
+}
 
 abstract class PrefChoice(
     val c: Context,

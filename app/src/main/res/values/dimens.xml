@@ -33,6 +33,9 @@
     <dimen name="popupItemPaddingV">12dp</dimen>
     <dimen name="popupItemPaddingH">8dp</dimen>
 
+    <dimen name="popupSepMarginV">12dp</dimen>
+    <dimen name="popupSepMarginH">4dp</dimen>
+
     <dimen name="popupShort">17sp</dimen>
     <dimen name="popupShortPaddingV">8dp</dimen>
     <dimen name="popupShortPaddingH">8dp</dimen>

@@ -95,7 +95,7 @@
     <string name="item_phone">Telefon</string>
 
     <string name="item_start">Starten</string>
-    <string name="item_info">Info</string>
+    <string name="item_info">App-Info</string>
     <string name="item_rename">Umbenennen</string>
     <string name="item_pin">Schnellzugriff</string>
     <string name="item_rid">kein Schnellzugriff</string>
@@ -142,10 +142,18 @@
     <string name="read_contacts_no_perm">Lesen der Kontaktliste wurde verweigert</string>
     <string name="location_no_perm">Standortbestimmung wurde verweigert</string>
 
+    <string name="save_restore">Einstellungen Sichern / Rücksichern</string>
+    <string name="pref_save">Einstellungen Sichern</string>
+    <string name="pref_load">Einstellungen Rücksichern</string>
+    <string name="ok_load">Rücksicherung abgeschlossen.</string>
+    <string name="err_load">Rücksicherung fehlgeschlagen.</string>
+    <string name="ok_save">Sicherung abgeschlossen.</string>
+    <string name="err_save">Sicherung fehlgeschlagen.</string>
+
     <string name="main_faq">FAQ / Hilfe</string>
     <string name="main_language">Sprache</string>
-    <string name="main_info">Verwaltung</string>
-    <string name="main_about">Infos</string>
+    <string name="main_info">App-Verwaltung</string>
+    <string name="main_about">Infos über NeatLauncher</string>
 
     <string name="do_hide">%s: verstecken (bei Suche noch anzeigen)</string>
     <string name="do_show">%s: anzeigen</string>
