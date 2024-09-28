@@ -3,6 +3,7 @@ package de.theiling.neatlauncher
 import android.content.Context
 import android.content.SharedPreferences
 import org.json.JSONObject
+import java.util.Locale
 
 const val PREF_MAIN = "de.theiling.neatlauncher.PREF_MAIN"
 
@@ -65,17 +66,27 @@ fun setWeatherLoc(c: Context, s: String) = prefPutString(c, "weatherLoc", s, "")
 fun getWeatherData(c: Context) = pref(c).getString("weatherData", "")!!
 fun setWeatherData(c: Context, s: String) = prefPutString(c, "weatherData", s, "")
 
+fun prefDoSave(s: String) = when (s) {
+    "weatherData" -> false
+    else -> true
+}
+
 fun prefToJson(c: Context) = JSONObject().apply {
     put("pack", c.packageName)
     put("ver", c.packageManager.getPackageInfo(c.packageName, 0).versionCode)
+    put("lang", Locale.getDefault().toString())
     put("pref", JSONObject().apply {
         for ((k,v) in pref(c).all) {
-            put(k, v)
+            if (prefDoSave(k)) put(k, v)
         }
     })
 }
 
 fun prefFromJson(c: Context, j: JSONObject) {
+    // FIXME: Locale is currently not restored, because the Internet recommends against
+    // messing with the App Locale system setting.
+    // FIXME: The version code is currently not compared, but we probably should shown an
+    // alert and ask when downgrading config.  Add this Alert as soon as it matters.
     with (pref(c).edit()) {
         if (j.optString("pack") != c.packageName) throw IllegalArgumentException("Not our prefs")
         val m = j.optJSONObject("pref") ?: throw IllegalArgumentException("No pref map")

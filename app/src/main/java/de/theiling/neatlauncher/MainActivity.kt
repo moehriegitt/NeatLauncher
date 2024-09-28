@@ -397,7 +397,7 @@ class MainActivity:
         val uri = data?.data ?: return
         when (requestCode) {
             1919 -> try {
-                val f = contentResolver.openOutputStream(uri)!!
+                val f = contentResolver.openOutputStream(uri, "wt")!!
                 f.write(prefToJson(c).toString(8).toByteArray())
                 f.close()
                 shortToast(getString(R.string.ok_save))

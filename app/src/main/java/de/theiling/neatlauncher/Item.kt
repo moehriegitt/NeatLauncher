@@ -36,6 +36,10 @@ class ItemInfo(private val defaultHidden: Boolean, confStr: String)
     var pinned = 0
 
     init {
+        // Here and elsewhere, we have to live with an Android bug that adds four spaces
+        // after a final "\n".  This causes a final v="    ", which is ignored here.
+        // We could use a different format, but ignoring works with no additional code.
+        // See: https://issuetracker.google.com/issues/37032278
         var k : String? = null
         for (v in confStr.split("\n")) {
             if (k == null) {
