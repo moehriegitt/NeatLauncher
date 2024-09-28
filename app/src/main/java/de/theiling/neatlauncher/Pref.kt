@@ -3,15 +3,17 @@ package de.theiling.neatlauncher
 import android.content.Context
 import android.content.SharedPreferences
 import org.json.JSONObject
+import java.util.Date
 import java.util.Locale
 
-const val PREF_MAIN = "de.theiling.neatlauncher.PREF_MAIN"
-
 fun pref(c: Context): SharedPreferences =
-    c.getSharedPreferences(PREF_MAIN, Context.MODE_PRIVATE)
+    c.getSharedPreferences("de.theiling.neatlauncher.PREF_MAIN", Context.MODE_PRIVATE)
 
-fun prefPutBool(c: Context, key: String, v: Boolean, def: Boolean) =
-    with (pref(c).edit()) {
+fun state(c: Context): SharedPreferences =
+    c.getSharedPreferences("de.theiling.neatlauncher.STATE_MAIN", Context.MODE_PRIVATE)
+
+fun prefPutBool(p: SharedPreferences, key: String, v: Boolean, def: Boolean) =
+    with (p.edit()) {
         if (v == def) {
             remove(key)
         } else {
@@ -20,8 +22,18 @@ fun prefPutBool(c: Context, key: String, v: Boolean, def: Boolean) =
         apply()
     }
 
-fun prefPutString(c: Context, key: String, v: String, def: String) =
-    with (pref(c).edit()) {
+fun prefPutLong(p: SharedPreferences, key: String, v: Long, def: Long) =
+    with (p.edit()) {
+        if (v == def) {
+            remove(key)
+        } else {
+            putLong(key, v)
+        }
+        apply()
+    }
+
+fun prefPutString(p: SharedPreferences, key: String, v: String, def: String) =
+    with (p.edit()) {
         if (v == def) {
             remove(key)
         } else {
@@ -30,16 +42,16 @@ fun prefPutString(c: Context, key: String, v: String, def: String) =
         apply()
     }
 
-fun prefPutEnum(c: Context, arrId: Int, key: String, i: Int, def: Int) =
-    prefPutString(c, key,
+fun prefPutEnum(c: Context, p: SharedPreferences, arrId: Int, key: String, i: Int, def: Int) =
+    prefPutString(p, key,
         (try {
             if (i == def) "" else c.resources.getTextArray(arrId)[i].toString()
         } catch (_: Exception) { "" }),
         "")
 
-fun prefGetEnum(c: Context, arrId: Int, key: String, def: Int): Int {
+fun prefGetEnum(c: Context, p: SharedPreferences, arrId: Int, key: String, def: Int): Int {
     try {
-        val s = pref(c).getString(key, null)!!
+        val s = p.getString(key, null)!!
         c.resources.getTextArray(arrId).forEachIndexed { i, v ->
             if (v.toString() == s) {
                 return i
@@ -55,21 +67,16 @@ fun getItemInfo(c: Context, type: String, pack: String, klass: String): String? 
     pref(c).getString(keyItemInfo(type, pack, klass), null)
 
 fun setItemInfo(c: Context, type: String, pack: String, klass: String, v: String, def: String) =
-    prefPutString(c, keyItemInfo(type, pack, klass), v, def)
+    prefPutString(pref(c), keyItemInfo(type, pack, klass), v, def)
 
 fun getSearchEngine(c: Context) = pref(c).getString("searchEngine", "")!!
-fun setSearchEngine(c: Context, s: String) = prefPutString(c, "searchEngine", s, "")
+fun setSearchEngine(c: Context, s: String) = prefPutString(pref(c), "searchEngine", s, "")
 
 fun getWeatherLoc(c: Context) = pref(c).getString("weatherLoc", "")!!
-fun setWeatherLoc(c: Context, s: String) = prefPutString(c, "weatherLoc", s, "")
+fun setWeatherLoc(c: Context, s: String) = prefPutString(pref(c), "weatherLoc", s, "")
 
-fun getWeatherData(c: Context) = pref(c).getString("weatherData", "")!!
-fun setWeatherData(c: Context, s: String) = prefPutString(c, "weatherData", s, "")
-
-fun prefDoSave(s: String) = when (s) {
-    "weatherData" -> false
-    else -> true
-}
+fun getWeatherData(c: Context) = state(c).getString("weatherData", "")!!
+fun setWeatherData(c: Context, s: String) = prefPutString(state(c), "weatherData", s, "")
 
 fun prefToJson(c: Context) = JSONObject().apply {
     put("pack", c.packageName)
@@ -77,7 +84,7 @@ fun prefToJson(c: Context) = JSONObject().apply {
     put("lang", Locale.getDefault().toString())
     put("pref", JSONObject().apply {
         for ((k,v) in pref(c).all) {
-            if (prefDoSave(k)) put(k, v)
+            put(k, v)
         }
     })
 }
@@ -128,11 +135,11 @@ abstract class PrefEnum(
         prefKey: String, defVal: Int, onChange: (Int) -> Unit): this (
         c, titleId, { c.resources.getStringArray(nameArrId) }, keyArrId, prefKey, defVal, onChange)
 
-    override var x = prefGetEnum(c, keyArrId, prefKey, defVal)
+    override var x = prefGetEnum(c, pref(c), keyArrId, prefKey, defVal)
         set(new) {
             if (field != new) {
                 field = new
-                prefPutEnum(c, keyArrId, prefKey, field, defVal)
+                prefPutEnum(c, pref(c), keyArrId, prefKey, field, defVal)
                 onChange(field)
             }
         }
@@ -159,10 +166,24 @@ abstract class PrefBool(
             val newI = if (new > 0) 1 else 0
             if (field != newI) {
                 field = newI
-                prefPutBool(c, prefKey, field > 0, defVal)
+                prefPutBool(pref(c), prefKey, field > 0, defVal)
                 onChange(new) // pass exact int value
             }
         }
+}
+
+abstract class StateDate(
+    private val c: Context,
+    private val prefKey: String)
+{
+    var date = Date(state(c).getLong(prefKey, 0) ?: 0)
+        set(new) {
+            field = new
+            prefPutLong(state(c), prefKey, new.time, 0)
+        }
+    var time: Long
+        get() = date.time
+        set(new) { date = Date(new) }
 }
 
 class EnumDate(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.date_choice_title,
@@ -194,3 +215,6 @@ class BoolContact(c: Context, onChange: (Int) -> Unit): PrefBool(c,
 
 class EnumWstart(c: Context, onChange: (Int) -> Unit): PrefWeekday(c,
     R.string.wstart_choice_title, "weekStart", weekday_mon, onChange)
+
+class StateWeatherTryNext(c: Context): StateDate(c, "weathTryNext")
+class StateWeatherTryLast(c: Context): StateDate(c, "weathTryLast")

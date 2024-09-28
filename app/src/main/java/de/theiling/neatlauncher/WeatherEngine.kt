@@ -380,7 +380,7 @@ class WeatherData(
             val step = mutableListOf<WeatherStep>()
             var k: String? = null
             var c = WeatherCode(0)
-            var update = Date()
+            var update = Date(0)
             var s = Date(0)
             var sRise = Date(0)
             var sSet = Date(0)

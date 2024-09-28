@@ -63,6 +63,12 @@ import java.util.Date
 import java.util.Locale
 import kotlin.math.abs
 
+// non-configurable timing settings for weather updates
+const val weatherUpdateMillis = 60L * 60_000L
+const val weatherTryLongMillis = 15L * 60_000L
+const val weatherTryShortMillis = 5L * 60_000L
+const val weatherTryMinMillis = 1_000L
+
 class MainActivity:
     AppCompatActivity(),
     ItemAdapter.ClickListener,
@@ -137,14 +143,8 @@ class MainActivity:
     private var searchStr: String = ""
     private var clockValid = false
     private var clockWeatherValid = false
-    private var weatherData: WeatherData? = null
-    private var weatherUpdateMillis = 60L * 60_000L  // currently not configurable
-    private var weatherTryLongMillis = 15L * 60_000L
-    private var weatherTryShortMillis = 5L * 60_000L
-    private var weatherTryMinMillis = 1_000L
-    private var weatherTryLast = Date(0)
-    private var weatherTryNext = Date(0)
     private var weatherCurrentUpdate = false
+    private var weatherData: WeatherData? = null
     private lateinit var z: MainActivityBinding
     private lateinit var searchEngine: SearchEngine
     private lateinit var weather: WeatherEngine
@@ -158,6 +158,8 @@ class MainActivity:
     private lateinit var contactChoice: BoolContact
     private lateinit var weekStart: EnumWstart
     private lateinit var weatherType: EnumTweath
+    private lateinit var weatherTryLast: StateWeatherTryLast
+    private lateinit var weatherTryNext: StateWeatherTryNext
 
     // override on....()
     override fun onCreate(
@@ -181,6 +183,8 @@ class MainActivity:
         ttypeChoice = EnumTtype(c) { weatherRedraw() }
         weekStart = EnumWstart(c) { weatherRedraw() }
         weatherType = EnumTweath(c) { onWeatherData() }
+        weatherTryLast = StateWeatherTryLast(c)
+        weatherTryNext = StateWeatherTryNext(c)
 
         contactChoice = BoolContact(c) {
             if (it >= 0) { // -1 resets but does not trigger itemsNotifyChange()
@@ -1174,8 +1178,8 @@ class MainActivity:
             onWeatherData()
         }
         weatherCurrentUpdate = false
-        weatherTryLast = now
-        weatherTryNext = Date(now.time + weatherTryLongMillis)
+        weatherTryLast.time = now.time
+        weatherTryNext.time = now.time + weatherTryLongMillis
 
         if (loc.isCurrent)
            locTryRequest()
@@ -1198,7 +1202,7 @@ class MainActivity:
                 }
             } catch (e: UnknownHostException) {
                 // ignore: we have no internet access, but try again sooner
-                weatherTryNext = Date(Date().time + weatherTryShortMillis)
+                weatherTryNext.time = Date().time + weatherTryShortMillis
             } catch (e: Exception) {
                 runOnUiThread {
                     longToast(getString(R.string.error_msg, "$e"))
