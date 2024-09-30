@@ -13,3 +13,4 @@ local.properties
 app/release
 nobackup
 app/src/main/mkresource.pl
+app/src/main/mklang.pl

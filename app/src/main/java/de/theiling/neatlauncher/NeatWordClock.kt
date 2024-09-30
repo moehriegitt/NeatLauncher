@@ -41,11 +41,15 @@ abstract class NeatWordClockBase(
     private fun hourStr(i: Int): CharSequence {
         val j = i % 12
         val pri = arr(priHour)
-        if (i < pri.size) { return pri[i] }
-        if (j < pri.size) { return pri[j] }
+        if (pri != null) {
+            val s = pri.getOrNull(i) ?: pri.getOrNull(j) ?: ""
+            if (s != "") return s;
+        }
         val sec = arr(secHour)
-        if (i < sec.size) { return sec[i] }
-        if (j < sec.size) { return sec[j] }
+        if (sec != null) {
+            val s = sec.getOrNull(i) ?: sec.getOrNull(j) ?: ""
+            if (s != "") return s;
+        }
         return ""
     }
 

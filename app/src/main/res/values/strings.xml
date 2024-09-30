@@ -1,10 +1,13 @@
-<resources>
-    <string name="app_name">NeatLauncher</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name" tools:ifEmpty="drop">NeatLauncher</string>
 
     <string name="package_n_version">Package &amp; Version</string>
     <string name="package_version_code">%s v%s (version code %d)</string>
     <string name="author_name">Author: %s</string>
-    <string name="license_name">License: %s</string>
+    <string name="license_name">Licence: %s</string>
     <string name="source_link">Source code: %s</string>
     <string name="package_link">App repository: %s</string>
     <string name="license_other">Other Licences</string>
@@ -23,9 +26,8 @@
     ugly home apps that are too colourful, bright, distracting,
     confusing, inefficient, and full of non-sensical icons.
 
-    Clarity by efficient and elegant design based on text.  Gives
-    quick access to apps, shortcuts, or contacts via a list or by
-    gestures.
+    Clarity by efficient and elegant design based on text. Gives quick
+    access to apps, shortcuts, or contacts via a list or by gestures.
 
     Supports app shortcuts, both static and dynamic.
 
@@ -36,8 +38,9 @@
     Tries to have enough configurability without making testing corner
     cases tedious, to ensure functionality and robustness.
 
-    New app developed from scratch.  Takes inspiration from Unlauncher (a
-    fork of Slimlauncher), and Nolauncher, and also feedback of users.
+    New app developed from scratch. Takes inspiration from Unlauncher
+    (a fork of Slimlauncher), and Nolauncher, and also feedback of
+    users.
     </string>
 
     <string name="readme_features">Features</string>
@@ -150,7 +153,6 @@
     <string name="main_faq">FAQ / Help</string>
     <string name="main_language">Language</string>
     <string name="main_info">App Info</string>
-    <string name="main_about">About NeatLauncher</string>
 
     <string name="do_hide">%s: hide (still shown in search)</string>
     <string name="do_show">%s: show</string>
@@ -181,8 +183,13 @@
     </string-array>
 
     <string name="temp_choice_title">Temperature Unit</string>
-    <!-- typically needs no translation -->
-    <string-array name="temp_choice">
+    <!--
+    Usually, don't translate temperature units, i.e., leave this
+    empty.  But if for whatever reason, a temperature unit needs to be
+    translated, then all three entries need to be set.  So set either
+    all or none.
+    -->
+    <string-array name="temp_choice" tools:ifEmpty="drop">
         <item>K</item>
         <item>°C</item>
         <item>°F</item>
@@ -214,19 +221,33 @@
         <item>heavy</item>
     </string-array>
 
-    <string name="weather_icy">
-        freezing
-    </string>
+    <string name="weather_icy">freezing</string>
+    <string name="weather_shower">shower</string>
 
-    <string name="weather_shower">
-        shower
-    </string>
+    <!--
+    This is a list of WMO weather code and a human readable description.
 
+    If an entry is an empty string, then it will be computed from
+    weather_code, weather_level, weather_icy, and weather_shower, as a
+    list with commas, e.g., for WMO=0, it would be "clouds, none" and
+    for WMO=67, "rain, heavy, freezing".
+
+    If a full translation is given here, then it must be given after
+    the WMO code followed by a semicolon, for consistency checking
+    (the index is not the WMO code, so things could get mixed up).
+
+    If no translation is given, the WMO code may be dropped, but a ";"
+    must remain, because empty items are removed by Android, making
+    this array shorter.
+
+    The default translation has full entries, i.e., with WMO code and
+    full description, so that you know what to translate.
+    -->
     <string-array name="weather_code_descr">
-        <item>0;  clear sky</item>
-        <item>1;  mainly clear</item>
-        <item>2;  partly cloudy</item>
-        <item>3;  overcast</item>
+        <item>0; clear sky</item>
+        <item>1; mainly clear</item>
+        <item>2; partly cloudy</item>
+        <item>3; overcast</item>
         <item>45; fog</item>
         <item>48; depositing rime fog</item>
         <item>51; drizzle, light</item>
@@ -310,37 +331,73 @@
         <item>Transparent</item>
     </string-array>
 
+    <!--
+        The grid of letters used by NeatGridClock.  Any word used in
+        time_grid_except, time_grid_min, and time_grid hour must be
+        in this grid, either horizontally or vertically, otherwise it will
+        not be shown.
+
+        This is rendered with a monospace font.
+
+        There are no hard contraints on width or height.  But lines should be
+        equally long, more than eight lines will make the clock quite large,
+        and the clock should be rendered roughly square, if possible (letter
+        aspect ratio (for monospace font) is roughtly 8:11).  Only letters
+        should be used, no digits nor punctuation marks (they may look ugly in
+        monospace), but diacritical marks are fine.
+    -->
     <string name="time_grid_base">
-        twentyafive
-        quarterhalf
-        tenspastoho
-        twelveleven
-        teninethree
-        twosevenoon
-        fiveightsix
-        fournoclock
+    twentyafive
+    quarterhalf
+    tenspastoho
+    twelveleven
+    teninethree
+    twosevenoon
+    fiveightsix
+    fournoclock
     </string>
 
     <!--
       Full time lookups: starts with a 24h time (rounded to 60/time_grid_min.length) minutes),
-      then the full sequence of words.
-      E.g., "00:05 zero five" will use "zero five" at 00h05.
-      If nothing is found, time_grid_min is used as a pattern, and time_grid_hour is inserted.
-      Empty strings are ignored (may be needed to make arrays non-empty).
-      NeatGridClock uses this if the array is not empty, otherwise, time_word_except is used.
+      then the full sequence of words.  E.g., "00:05 zero five" will use "zero five" at 00h05.
+
+      Minutes will be rounded according to the number of entries in time_grid_min: if that array
+      has 12 entries, minutes here are 00, 05, 10, etc.  If it has 8 entries, minutes here are
+      00, 08, 15, etc.
+
+      If nothing is found in this exception list, then time_grid_min is used as a pattern,
+      and time_grid_hour is inserted for = or + or -.
+
+      Entries without a matching time are ignored.  I.e., an entry with no time, e.g.,
+      "nothing" can be added to make this array non-empty, to avoid that time_word_except
+      is used instead.
+
+      NeatGridClock uses this if it has any entries, otherwise it uses time_word_except.
     -->
-    <string-array name="time_grid_except">
+    <string-array name="time_grid_except" tools:varLen="true" tools:ifEmpty="keep">
         <item>12:00 noon</item>
     </string-array>
 
     <!--
-      Minutes: this is indexed with a minutes: ((min * time_grid_min.length) / 60).
-      Numbers 1, 2, 3, ..., 9 in the item string define which word in the grid
-      farthest from the top-left corner will be highlighted, if there are multiple
-      possibilities.  NeatWordClock ignores these annotations.
-      NeatGridclock queries this first, then time_word_min
+      Minutes: This can have any number of entries, but more than 60 does not make
+      sense.  It is indexed with ((minute * time_grid_min.length) / 60).  The most
+      reasonable number of entries is 12 for five minute steps, or maybe 8 for 7.5
+      minute steps.
+
+      NeatGridClock ignores the order of words in these strings, but
+      simply searches for words in the grid and highlights them.
+      Numbers 1, 2, 3, ..., 9 preceding a word define which word in
+      the grid farthest from the top-left corner will be highlighted
+      (if there are multiple possibilities).
+
+      Instead, NeatWordClock ignores numbers and prints words in order.
+
+      For =, the hour string is inserted.  For +, the hour string for hour+1
+      and for -, the hour string for hour-1.
+
+      NeatGridclock indexes this first, but if nothing is found, indexes time_word_min.
     -->
-    <string-array name="time_grid_min">
+    <string-array name="time_grid_min" tools:varLen="true" tools:ifEmpty="keep">
         <item>= oclock</item>
         <item>five past =</item>
         <item>ten past =</item>
@@ -356,10 +413,14 @@
     </string-array>
 
     <!--
-      Hours: indexed with (hour % 12), inserted by =, +, or - from the min array
-      NeatGridclock queries this first, then time_word_hour.
+      Hours: this can have between 12 and 24 entries.  It is indexed with hour first,
+      then if nothing is found (index out of range or empty string), it is indexed again
+      with (hour % 12).  The result is inserted via =, +, or - from the min array.
+
+      NeatGridclock indexes this first, but if nothing is found or is empty, it indexes
+      time_word_hour.
     -->
-    <string-array name="time_grid_hour">
+    <string-array name="time_grid_hour" tools:varLen="true" tools:ifEmpty="keep">
         <item>twelve</item>
         <item>one</item>
         <item>two</item>
@@ -374,16 +435,29 @@
         <item>eleven</item>
     </string-array>
 
-    <!-- NeatWordClock queries this first, then time_grid_except -->
-    <string-array name="time_word_except">
+    <!--
+      Same format as time_grid_except.
+
+      NeatWordClock uses this if it has any entries, otherwise it uses time_grid_except.
+    -->
+    <string-array name="time_word_except" tools:varLen="true" tools:ifEmpty="keep">
     </string-array>
 
-    <!-- NeatWordClock queries this first, then time_grid_min -->
-    <string-array name="time_word_min">
+    <!--
+      Same format as time_grid_min.
+
+      NeatWordClock indexes this first, but if nothing is found, indexes time_grid_min.
+   -->
+    <string-array name="time_word_min" tools:varLen="true" tools:ifEmpty="keep">
         <item>= o\'clock</item>
     </string-array>
 
-    <!-- NeatWordClock queries this first, then time_grid_hour -->
-    <string-array name="time_word_hour">
+    <!--
+      Same format as time_grid_hour.
+
+      NeatWordClock indexes this first, but if nothing is found or is empty, it indexes
+      time_grid_hour.
+    -->
+    <string-array name="time_word_hour" tools:varLen="true" tools:ifEmpty="keep">
     </string-array>
 </resources>

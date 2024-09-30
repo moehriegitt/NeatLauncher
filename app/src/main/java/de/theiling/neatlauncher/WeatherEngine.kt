@@ -231,9 +231,26 @@ data class WeatherProp(
                     "2"     -> level = 2
                     "3"     -> level = 3
                 }
-                val (wmo1, label) = c.resources.getStringArray(R.array.weather_code_descr)[idx]
+                var (wmo1, label) = c.resources.getStringArray(R.array.weather_code_descr)[idx]
                     .split(";").map { it.trim() }
-                if (wmo1.toInt() != wmo) throw IndexOutOfBoundsException()
+                if (label != "") {
+                    if (wmo1.toInt() != wmo) throw IndexOutOfBoundsException()
+                } else {
+                    // default if there is no special translation
+                    label = StringBuilder().apply {
+                        append(c.resources.getStringArray(R.array.weather_code)[kind])
+                        append(", ")
+                        append(c.resources.getStringArray(R.array.weather_level)[level])
+                        if (ice) {
+                            append(", ")
+                            append(c.resources.getString(R.string.weather_icy))
+                        }
+                        if (shower) {
+                            append(", ")
+                            append(c.resources.getString(R.string.weather_shower))
+                        }
+                    }.toString()
+                }
                 w[wmo] = WeatherProp(idx, wmo, symbol, kind, level, ice, shower, label)
                 idx++
             }

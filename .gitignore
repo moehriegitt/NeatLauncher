@@ -16,3 +16,4 @@ local.properties
 /nobackup
 /stuff
 app/src/main/mkresource.pl
+app/src/main/mklang.pl

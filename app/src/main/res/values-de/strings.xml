@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NeatLauncher</string>
 
     <string name="package_n_version">Paket &amp; Version</string>
     <string name="package_version_code">%s v%s (Versionscode %d)</string>
@@ -35,10 +35,10 @@
     Die Suchfunktion enthält eine konfigurierbare Websuche.
 
     Bietet genug Konfigurierbarkeit, aber ohne das Testen von
-    Sonderfällen mühsam zu machen, so daß Funktionalität und Robustheit
-    gewährleistet werden können.
+    Sonderfällen mühsam zu machen, so daß Funktionalität und
+    Robustheit gewährleistet werden können.
 
-    Neue App von Grund auf neuentwickelt.  Inspiriert von Unlauncher
+    Neue App von Grund auf neuentwickelt. Inspiriert von Unlauncher
     (einem Fork von Slimlauncher) und Nolauncher sowie von
     Benutzerfeedback.
     </string>
@@ -153,7 +153,6 @@
     <string name="main_faq">FAQ / Hilfe</string>
     <string name="main_language">Sprache</string>
     <string name="main_info">App-Verwaltung</string>
-    <string name="main_about">Infos über NeatLauncher</string>
 
     <string name="do_hide">%s: verstecken (bei Suche noch anzeigen)</string>
     <string name="do_show">%s: anzeigen</string>
@@ -207,38 +206,33 @@
     <string-array name="weather_level">
         <item>keine</item>
         <item>leicht</item>
-        <item>mittel</item>
+        <item>mäßig</item>
         <item>stark</item>
     </string-array>
 
-    <string name="weather_icy">
-        gefrierend
-    </string>
-
-    <string name="weather_shower">
-        Schauer
-    </string>
+    <string name="weather_icy">gefrierend</string>
+    <string name="weather_shower">Schauer</string>
 
     <string-array name="weather_code_descr">
-        <item>0;  klarer Himmel</item>
-        <item>1;  weitgehend klar</item>
-        <item>2;  leicht bewölkt</item>
-        <item>3;  bewölkt</item>
+        <item>0; klarer Himmel</item>
+        <item>1; weitgehend klar</item>
+        <item>2; leicht bewölkt</item>
+        <item>3; bewölkt</item>
         <item>45; Nebel</item>
         <item>48; Eisnebel</item>
-        <item>51; Niesel, leicht</item>
-        <item>53; Niesel, mittel</item>
-        <item>55; Niesel, stark</item>
+        <item>;</item>
+        <item>;</item>
+        <item>;</item>
         <item>56; gefrierender Niesel, leicht</item>
         <item>57; gefrierender Niesel, stark</item>
-        <item>61; Regen, leicht</item>
-        <item>63; Regen, mittel</item>
-        <item>65; Regen, stark</item>
+        <item>;</item>
+        <item>;</item>
+        <item>;</item>
         <item>66; gefrierender Regen, leicht</item>
         <item>67; gefrierender Regen, stark</item>
-        <item>71; Schnee, leicht</item>
-        <item>73; Schnee, mittelstark</item>
-        <item>75; Schnee, stark</item>
+        <item>;</item>
+        <item>;</item>
+        <item>;</item>
         <item>77; Graupel</item>
         <item>80; Regenschauer, leicht</item>
         <item>81; Regenschauer, mittelstark</item>
@@ -308,14 +302,14 @@
     </string-array>
 
     <string name="time_grid_base">
-        abkurzinull
-        dreiviertel
-        nachtvorrat
-        halbadreins
-        siebenvacht
-        elfzweizehn
-        zwölfuefünf
-        sechsnrfuhr
+    abkurzinull
+    dreiviertel
+    nachtvorrat
+    halbadreins
+    siebenvacht
+    elfzweizehn
+    zwölfuefünf
+    sechsnrfuhr
     </string>
 
     <string-array name="time_grid_except">
@@ -351,7 +345,7 @@
     </string-array>
 
     <string-array name="time_word_except">
-        <item></item>
+        <item>nothing</item>
     </string-array>
 
     <string-array name="time_word_min">

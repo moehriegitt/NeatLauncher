@@ -8,6 +8,10 @@
     http://www.theiling.de/
     </string>
 
+    <string name="xlat_email" translatable="false">
+    neatlauncher-xlat@theiling.de
+    </string>
+
     <string name="source_url" translatable="false">
     https://github.com/moehriegitt/NeatLauncher
     </string>

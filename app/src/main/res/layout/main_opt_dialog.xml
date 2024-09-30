@@ -116,7 +116,7 @@
                 android:id="@+id/main_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/main_about"
+                android:text="@string/about_title"
                 style="@style/AppTheme.PopupItem"
                 />
 
