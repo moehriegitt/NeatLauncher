@@ -657,11 +657,7 @@ sub make_metadata($)
     }
 
     # Translation link:
-    if ($do_gz) {
-        $readme .= qq(\n[Help Translate!](TRANSLATE.html.gz?raw=1)\n);
-    } else {
-        $readme .= qq(\n[Help Translate!](TRANSLATE.html?raw=1)\n);
-    }
+    $readme .= qq(\n[Help Translate!](http://henrik.theiling.de/neatlauncher/TRANSLATE.html)\n);
 
     # F-Droid link
     $readme .= qq{\n[<img src="https://f-droid.org/badge/get-it-on.png"
