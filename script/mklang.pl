@@ -457,6 +457,18 @@ sub quote_html($)
     return $s;
 }
 
+sub quote_html_android($)
+{
+    my ($s) = @_;
+    $s =~ s(\\)(\\\\)g;
+    $s =~ s(\")(\\")g;
+    $s =~ s(\')(\\')g;
+    $s =~ s(\&)(&amp;)g;
+    $s =~ s(<)(&lt;)g;
+    $s =~ s(>)(&gt;)g;
+    return $s;
+}
+
 sub block($)
 {
     my ($s) = @_;
@@ -600,7 +612,7 @@ sub get_string($$$$$)
     my $rdata = $mod->{rdata};
 
     if ($org->{tag} eq 'string') {
-        my $qdata = quote_html($rdata);
+        my $qdata = quote_html_android($rdata);
         die "ERROR: Wrong type for <string> '$key': ".Dumper($mod) if ref($qdata);
         if ($qdata =~ /\n/) {
             if ($mod->{type} eq '') {
@@ -633,7 +645,7 @@ sub get_string($$$$$)
         my $conc = join("", @rdata);
         return [] if $conc eq '';
 
-        my $qdata = [ map { quote_html($_) } @rdata ];
+        my $qdata = [ map { quote_html_android($_) } @rdata ];
         return $qdata;
     }
 
