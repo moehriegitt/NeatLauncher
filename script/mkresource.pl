@@ -670,6 +670,7 @@ sub make_metadata($)
         next if $i =~ m(^[.]);
         next unless $i =~ m([.](?:png|jpg)$);
         next unless -f "$dir/$i";
+        next unless -s "$dir/$i";
         (my $rel = "$dir/$i") =~ s(^\Q$C->{top_dir}\E/?)();
         push @img, $rel;
     }

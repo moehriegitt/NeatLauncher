@@ -43,7 +43,7 @@ users.
   - no icon set support (no need: no icons at all)
   - no widget support
 
-[Help Translate!](TRANSLATE.html?raw=1)
+[Help Translate!](http://henrik.theiling.de/neatlauncher/TRANSLATE.html)
 
 [<img src="https://f-droid.org/badge/get-it-on.png"
         alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/de.theiling.neatlauncher/)
