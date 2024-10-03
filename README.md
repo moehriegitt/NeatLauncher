@@ -4,21 +4,23 @@ A neat and convenient launcher without icons.
 
 ## Description
 
-The new home app (the launcher) of your Android device to replace
-ugly home apps that are too colourful, bright, distracting,
-confusing, inefficient, and full of non-sensical icons.
+The home app (the launcher) to replace ugly home apps that are too
+colourful, distracting, inefficient, and full of non-sensical
+icons.
 
-Clarity by efficient and elegant design based on text. Gives quick
-access to apps, shortcuts, or contacts via a list or by gestures.
+Clarity by efficient and elegant design based on text. With
+onfigurable quick access to apps, shortcuts, or contacts via a
+list or by gestures.
 
 Supports app shortcuts, both static and dynamic.
 
-Optionally integrates the contact list.
-
-Search function includes a configurable web search.
+Search function optionally integrates the contact list, and
+includes a configurable web search.
 
 Tries to have enough configurability without making testing corner
 cases tedious, to ensure functionality and robustness.
+
+Weather info (uses network and location services, if necessary).
 
 New app developed from scratch. Takes inspiration from Unlauncher
 (a fork of Slimlauncher), and Nolauncher, and also feedback of
@@ -27,7 +29,7 @@ users.
 ## Features
 
   - uniform and elegant text-based design
-  - configurable quick access links and gestures on home screen
+  - configurable quick access and gestures on home screen
   - shortcut support (long click on app by default)
   - hide/show apps (but keep searchable)
   - apps can be renamed and reordered

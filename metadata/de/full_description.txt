@@ -1,14 +1,14 @@
-Die neue Start-App (der Launcher) Deines Android-Geräts ersetzt hässliche Start-Apps, die zu bunt, grell, ablenkend, verwirrend, ineffizient und voller unsinniger Icons sind.
+Die Start-App (der Launcher) ersetzt hässliche Start-Apps, die zu bunt, ablenkend, ineffizient und voller unsinniger Icons sind.
 
-Übersichtlichkeit durch effizientes und elegantes Design auf Textbasis. Ermöglicht die Konfiguration des Schnellzugriffs auf Apps, Verknüpfungen oder Kontakte auf verschiedene Weise (einschließlich Gesten).
+Klarheit durch effizientes und elegantes Design auf Textbasis. Mit konfigurierbarem Schnellzugriffs auf Apps, Verknüpfungen oder Kontakte als Liste oder über Gesten.
 
 Unterstützt App-Verknüpfungen, sowohl statische wie dynamische.
 
-Integriert auf Wunsch die Kontaktliste.
-
-Die Suchfunktion enthält eine konfigurierbare Websuche.
+Die Suchfunktion integriert auf Wunsch die Kontaktliste und hat eine konfigurierbare Websuche.
 
 Bietet genug Konfigurierbarkeit, aber ohne das Testen von Sonderfällen mühsam zu machen, so daß Funktionalität und Robustheit gewährleistet werden können.
+
+Wetterinfo (benutzt Netzwerk und Standortabfrage, falls nötig).
 
 Neue App von Grund auf neuentwickelt. Inspiriert von Unlauncher (einem Fork von Slimlauncher) und Nolauncher sowie von Benutzerfeedback.
 

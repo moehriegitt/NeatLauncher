@@ -285,7 +285,7 @@ sub parse_submission($)
             $form{lang_new} = normalize_lang($val);
             next;
         }
-        if ($k =~ m(^meta_(.+)$)) {
+        if (($k =~ m(^(githash)$)) || ($k =~ m(^meta_(.+)$))) {
             $form{meta}{"X-".ucfirst($1)} = $val;
             next;
         }
