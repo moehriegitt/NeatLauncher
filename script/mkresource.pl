@@ -111,6 +111,16 @@ sub camelCase($)
     return lcfirst(CamelCase($x));
 }
 
+sub quote_html($)
+{
+    my ($s) = @_;
+    $s =~ s(\&)(&amp;)g;
+    $s =~ s(\")(&quot;)g;
+    $s =~ s(<)(&lt;)g;
+    $s =~ s(>)(&gt;)g;
+    return $s;
+}
+
 ######################################################################
 
 sub base_dir()
@@ -403,10 +413,35 @@ sub learn_res_rec($$)
     }
 }
 
+sub var_expand($$)
+{
+    my ($C, $s) = @_;
+    $s =~ s($C->{var_re})($C->{var}{$1})eg;
+    return $s;
+}
+
+sub expand_resources($)
+{
+    my ($C) = @_;
+
+    # compile constants for direct use:
+    for my $key (sort keys %{ $C->{resource}{string} }) {
+        my $v = $C->{resource}{string}{$key};
+        next unless $v->{attr};
+        next unless $v->{attr}{translatable};
+        my ($xlatabl) = values %{ $v->{attr}{translatable} };
+        next unless ($xlatabl // '') eq 'false';
+        my $val = get_string($C, $key, '');
+        $C->{const}{$key} = $val;
+        $C->{quote}{$key} = quote_html($val);
+    }
+}
+
 sub learn_resources($)
 {
     my ($C) = @_;
     learn_res_rec($C, $C->{res_dir});
+    expand_resources($C);
 }
 
 ######################################################################
@@ -657,11 +692,11 @@ sub make_metadata($)
     }
 
     # Translation link:
-    $readme .= qq(\n[Help Translate!](http://henrik.theiling.de/neatlauncher/TRANSLATE.html)\n);
+    $readme .= qq(\n[Help Translate This App!]($C->{const}{xlat_url})\n);
 
     # F-Droid link
     $readme .= qq{\n[<img src="https://f-droid.org/badge/get-it-on.png"
-        alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/$C->{pack}/)\n};
+        alt="Get it on F-Droid" height="80">]($C->{const}{package_url})\n};
 
     # find screenshot images
     my @img = ();
@@ -955,16 +990,6 @@ sub export_newline($)
     return ($kind, $txt);
 }
 
-sub quote_html($)
-{
-    my ($s) = @_;
-    $s =~ s(\&)(&amp;)g;
-    $s =~ s(\")(&quot;)g;
-    $s =~ s(<)(&lt;)g;
-    $s =~ s(>)(&gt;)g;
-    return $s;
-}
-
 # This quotation stuff is basically broken -- we're not doing it
 # like Android does.  But the strings in this project also don't
 # use it, so...
@@ -1061,6 +1086,9 @@ sub make_xlat($)
         border-color: #f00 }\n);
     $t .= qq(textarea.meta { width: 50%; min-width: 600px; }\n);
     $t .= qq(input.meta { width: 50%; min-width: 600px }\n);
+    $t .= qq(h1 { padding: 10px; background-color: #ddd; }\n);
+    $t .= qq(h2 { padding: 10px; background-color: #ddd; }\n);
+    $t .= qq(p.foot { padding: 10px; background-color: #ddd; }\n);
 
     for my $l ('new', sort lang_cmp keys %lang) {
         my $ql = quote_html($l);
@@ -1082,6 +1110,7 @@ sub make_xlat($)
     $t .= qq(<form action="mailto:$xlat_email?subject=$title Translations"
         method="POST" enctype="application/x-www-form-urlencoded">\n);
 
+    $t .= qq(<input type="hidden" name="githash" value="XXGITHASH" />\n);
     $t .= qq(<table>\n);
 
     $t .= qq(<tr><td>.</td><td>.</td>\n);
@@ -1249,8 +1278,9 @@ sub make_xlat($)
         }
     }
     $t .= qq(</table>\n);
-    $t .= qq(<p>If you want credit for your translation in a Git commit,
-    then please give a name or pseudonym.  If empty, you won't be mentioned.<br>
+    $t .= qq(<p>If you want credit for your translation in a Git commit message and/or
+    package documentation, then please give a name or pseudonym.  If empty, you won't be
+    mentioned.<br>
     <input name="meta_name" value="" placeholder="Your Name" class="meta"/></p>\n);
     $t .= qq(<p>Any comments or suggestions or questions?<br>
     <textarea name="meta_comment" placeholder="Comment" class="meta"
@@ -1259,6 +1289,14 @@ sub make_xlat($)
     $t .= qq(<p>NOTE: Please do not edit or reformat the text in the e-mail before ).
           qq(sending, but just send the raw text as is.</p>\n);
     $t .= qq(</form>\n);
+    $t .= qq(<p class="foot"><small>\n);
+    $t .= qq(&COPY; <a href="$C->{quote}{author_url}">$C->{quote}{author}</a>.
+        Licence: <a href="$C->{quote}{license_url}">$C->{quote}{license}</a>
+        App package: <a href="$C->{quote}{package_url}">$C->{quote}{package_repo}</a>.
+        Source code: <a href="$C->{quote}{source_url}">$C->{quote}{source_repo}</a>.
+        Githash: XXGITHASH.
+        );
+    $t .= qq(</small></p>\n);
     $t .= qq(</body>\n);
     $t .= qq(</html>\n);
 

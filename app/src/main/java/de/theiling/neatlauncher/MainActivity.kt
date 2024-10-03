@@ -1049,6 +1049,7 @@ class MainActivity:
         z.licenseBox.setOnClickDismiss(d) { startUrl(getString(R.string.license_url)) }
         z.sourceBox. setOnClickDismiss(d) { startUrl(getString(R.string.source_url)) }
         z.packageBox.setOnClickDismiss(d) { startUrl(getString(R.string.package_url)) }
+        z.xlatBox.   setOnClickDismiss(d) { startUrl(getString(R.string.xlat_url)) }
         z.ubuntuBox. setOnClickDismiss(d) { startUrl(getString(R.string.ubuntu_url)) }
         z.oMeteoBox. setOnClickDismiss(d) { startUrl(getString(R.string.lic_open_meteo_url)) }
         d.show()

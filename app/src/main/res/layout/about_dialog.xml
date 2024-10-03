@@ -87,6 +87,26 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/package_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/package_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTheme.PopupTinyHeading.Action"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/package_url"
+                    style="@style/AppTheme.PopupTiny"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/source_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,21 +127,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/package_box"
+                android:id="@+id/xlat_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
                 <TextView
-                    android:id="@+id/package_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/xlat_title"
                     style="@style/AppTheme.PopupTinyHeading.Action"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/package_url"
+                    android:text="@string/xlat_url"
                     style="@style/AppTheme.PopupTiny"
                     />
             </LinearLayout>

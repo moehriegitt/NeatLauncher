@@ -10,6 +10,7 @@
     <string name="license_name">Licence: %s</string>
     <string name="source_link">Source code: %s</string>
     <string name="package_link">App repository: %s</string>
+    <string name="xlat_title">Translation</string>
     <string name="license_other">Other Licences</string>
     <string name="font_ubuntu">Ubuntu Font</string>
     <string name="service_open_meteo">Open-Meteo Service</string>

@@ -33,7 +33,8 @@ class AboutDialogBinding(
     val sourceLink: TextView,
     val ubuntuBox: LinearLayout,
     val versionBox: LinearLayout,
-    val versionName: TextView):
+    val versionName: TextView,
+    val xlatBox: LinearLayout):
     ViewBinding
 {
     override val root = rootView
@@ -51,7 +52,8 @@ class AboutDialogBinding(
             rootView.findViewById(R.id.source_link)!!,
             rootView.findViewById(R.id.ubuntu_box)!!,
             rootView.findViewById(R.id.version_box)!!,
-            rootView.findViewById(R.id.version_name)!!)
+            rootView.findViewById(R.id.version_name)!!,
+            rootView.findViewById(R.id.xlat_box)!!)
 
         fun inflate(
             inflater: LayoutInflater,

@@ -7,6 +7,7 @@
     <string name="license_name">Lizenz: %s</string>
     <string name="source_link">Quellcode: %s</string>
     <string name="package_link">Paketdepot: %s</string>
+    <string name="xlat_title">Übersetzung</string>
     <string name="license_other">Andere Lizenzen</string>
     <string name="font_ubuntu">Ubuntu-Schriftart</string>
     <string name="service_open_meteo">Open-Meteo-Dienst</string>

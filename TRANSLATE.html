@@ -24,6 +24,9 @@ textarea.req:placeholder-shown, input.req:placeholder-shown {
         border-color: #f00 }
 textarea.meta { width: 50%; min-width: 600px; }
 input.meta { width: 50%; min-width: 600px }
+h1 { padding: 10px; background-color: #ddd; }
+h2 { padding: 10px; background-color: #ddd; }
+p.foot { padding: 10px; background-color: #ddd; }
 input[type="checkbox"]#lnew:not(:checked) ~ form td.langnew { display: none }
 input[type="checkbox"]#ldefault:not(:checked) ~ form td.langdefault { display: none }
 input[type="checkbox"]#lde:not(:checked) ~ form td.langde { display: none }
@@ -41,6 +44,7 @@ input[type="checkbox"]#lde:not(:checked) ~ form td.langde { display: none }
     neatlauncher-xlat@theiling.de
     ?subject=NeatLauncher Translations"
         method="POST" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="githash" value="XXGITHASH" />
 <table>
 <tr><td>.</td><td>.</td>
 <td class="langnew " ><input name="lang_new" class="req" tabindex="1" placeholder="new langcode (e.g. 'ee', 'kl-GL', ...)" type="text" value=""/></td><td lang="en" class="langdefault head" >default</th><td lang="de" class="langde head" >de</th></tr>
@@ -114,72 +118,82 @@ input[type="checkbox"]#lde:not(:checked) ~ form td.langde { display: none }
 <input name="package_link.de" class="req" tabindex="50007" placeholder="package_link" type="text" value="Paketdepot: %s" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">license_other</th><th></th>
+<tr class="odd0"><th class="small">xlat_title</th><th></th>
 <td class="langnew " >
-<input name="license_other.*" class="req" tabindex="20008" placeholder="license_other" type="text" value=""/></td>
+<input name="xlat_title.*" class="req" tabindex="20008" placeholder="xlat_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="license_other._" class="req" tabindex="30008" placeholder="license_other" type="text" value="Other Licences" />
+<input name="xlat_title._" class="req" tabindex="30008" placeholder="xlat_title" type="text" value="Translation" />
 </td>
 <td lang="de" class="langde " >
-<input name="license_other.de" class="req" tabindex="50008" placeholder="license_other" type="text" value="Andere Lizenzen" />
+<input name="xlat_title.de" class="req" tabindex="50008" placeholder="xlat_title" type="text" value="Übersetzung" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">font_ubuntu</th><th></th>
+<tr class="odd1"><th class="small">license_other</th><th></th>
 <td class="langnew " >
-<input name="font_ubuntu.*" class="req" tabindex="20009" placeholder="font_ubuntu" type="text" value=""/></td>
+<input name="license_other.*" class="req" tabindex="20009" placeholder="license_other" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="font_ubuntu._" class="req" tabindex="30009" placeholder="font_ubuntu" type="text" value="Ubuntu Font" />
+<input name="license_other._" class="req" tabindex="30009" placeholder="license_other" type="text" value="Other Licences" />
 </td>
 <td lang="de" class="langde " >
-<input name="font_ubuntu.de" class="req" tabindex="50009" placeholder="font_ubuntu" type="text" value="Ubuntu-Schriftart" />
+<input name="license_other.de" class="req" tabindex="50009" placeholder="license_other" type="text" value="Andere Lizenzen" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">service_open_meteo</th><th></th>
+<tr class="odd0"><th class="small">font_ubuntu</th><th></th>
 <td class="langnew " >
-<input name="service_open_meteo.*" class="req" tabindex="20010" placeholder="service_open_meteo" type="text" value=""/></td>
+<input name="font_ubuntu.*" class="req" tabindex="20010" placeholder="font_ubuntu" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="service_open_meteo._" class="req" tabindex="30010" placeholder="service_open_meteo" type="text" value="Open-Meteo Service" />
+<input name="font_ubuntu._" class="req" tabindex="30010" placeholder="font_ubuntu" type="text" value="Ubuntu Font" />
 </td>
 <td lang="de" class="langde " >
-<input name="service_open_meteo.de" class="req" tabindex="50010" placeholder="service_open_meteo" type="text" value="Open-Meteo-Dienst" />
+<input name="font_ubuntu.de" class="req" tabindex="50010" placeholder="font_ubuntu" type="text" value="Ubuntu-Schriftart" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">open_meteo_link</th><th></th>
+<tr class="odd1"><th class="small">service_open_meteo</th><th></th>
 <td class="langnew " >
-<input name="open_meteo_link.*" class="req" tabindex="20011" placeholder="open_meteo_link" type="text" value=""/></td>
+<input name="service_open_meteo.*" class="req" tabindex="20011" placeholder="service_open_meteo" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="open_meteo_link._" class="req" tabindex="30011" placeholder="open_meteo_link" type="text" value="Weather data by Open-Meteo.com" />
+<input name="service_open_meteo._" class="req" tabindex="30011" placeholder="service_open_meteo" type="text" value="Open-Meteo Service" />
 </td>
 <td lang="de" class="langde " >
-<input name="open_meteo_link.de" class="req" tabindex="50011" placeholder="open_meteo_link" type="text" value="Wetterdaten von Open-Meteo.com" />
+<input name="service_open_meteo.de" class="req" tabindex="50011" placeholder="service_open_meteo" type="text" value="Open-Meteo-Dienst" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">readme_short_description</th><th></th>
+<tr class="odd0"><th class="small">open_meteo_link</th><th></th>
 <td class="langnew " >
-<input name="readme_short_description.*" class="req" tabindex="20012" placeholder="readme_short_description" type="text" value=""/></td>
+<input name="open_meteo_link.*" class="req" tabindex="20012" placeholder="open_meteo_link" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="readme_short_description._" class="req" tabindex="30012" placeholder="readme_short_description" type="text" value="A neat and convenient launcher without icons." />
+<input name="open_meteo_link._" class="req" tabindex="30012" placeholder="open_meteo_link" type="text" value="Weather data by Open-Meteo.com" />
 </td>
 <td lang="de" class="langde " >
-<input name="readme_short_description.de" class="req" tabindex="50012" placeholder="readme_short_description" type="text" value="Ein aufgeräumter und praktischer Launcher ohne Icons." />
+<input name="open_meteo_link.de" class="req" tabindex="50012" placeholder="open_meteo_link" type="text" value="Wetterdaten von Open-Meteo.com" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">readme_description</th><th></th>
+<tr class="odd1"><th class="small">readme_short_description</th><th></th>
 <td class="langnew " >
-<input name="readme_description.*" class="req" tabindex="20013" placeholder="readme_description" type="text" value=""/></td>
+<input name="readme_short_description.*" class="req" tabindex="20013" placeholder="readme_short_description" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="readme_description._" class="req" tabindex="30013" placeholder="readme_description" type="text" value="Description" />
+<input name="readme_short_description._" class="req" tabindex="30013" placeholder="readme_short_description" type="text" value="A neat and convenient launcher without icons." />
 </td>
 <td lang="de" class="langde " >
-<input name="readme_description.de" class="req" tabindex="50013" placeholder="readme_description" type="text" value="Beschreibung" />
+<input name="readme_short_description.de" class="req" tabindex="50013" placeholder="readme_short_description" type="text" value="Ein aufgeräumter und praktischer Launcher ohne Icons." />
 </td>
 </tr>
-<tr class="odd0"><th class="small">readme_full_description</th><th></th>
+<tr class="odd0"><th class="small">readme_description</th><th></th>
 <td class="langnew " >
-<textarea name="readme_full_description.*" class="req" tabindex="20014" placeholder="readme_full_description" rows="23"></textarea>
+<input name="readme_description.*" class="req" tabindex="20014" placeholder="readme_description" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="readme_description._" class="req" tabindex="30014" placeholder="readme_description" type="text" value="Description" />
+</td>
+<td lang="de" class="langde " >
+<input name="readme_description.de" class="req" tabindex="50014" placeholder="readme_description" type="text" value="Beschreibung" />
+</td>
+</tr>
+<tr class="odd1"><th class="small">readme_full_description</th><th></th>
+<td class="langnew " >
+<textarea name="readme_full_description.*" class="req" tabindex="20015" placeholder="readme_full_description" rows="23"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="readme_full_description._" class="req" tabindex="30014" placeholder="readme_full_description" rows="23">The new home app (the launcher) of your Android
+<textarea name="readme_full_description._" class="req" tabindex="30015" placeholder="readme_full_description" rows="23">The new home app (the launcher) of your Android
 device to replace ugly home apps that are too
 colourful, bright, distracting, confusing,
 inefficient, and full of non-sensical icons.
@@ -204,7 +218,7 @@ from Unlauncher (a fork of Slimlauncher), and
 Nolauncher, and also feedback of users.</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="readme_full_description.de" class="req" tabindex="50014" placeholder="readme_full_description" rows="27">Die neue Start-App (der Launcher) Deines
+<textarea name="readme_full_description.de" class="req" tabindex="50015" placeholder="readme_full_description" rows="27">Die neue Start-App (der Launcher) Deines
 Android-Geräts ersetzt hässliche Start-Apps, die
 zu bunt, grell, ablenkend, verwirrend, ineffizient
 und voller unsinniger Icons sind.
@@ -233,22 +247,22 @@ von Unlauncher (einem Fork von Slimlauncher) und
 Nolauncher sowie von Benutzerfeedback.</textarea>
 </td>
 </tr>
-<tr class="odd1"><th class="small">readme_features</th><th></th>
+<tr class="odd0"><th class="small">readme_features</th><th></th>
 <td class="langnew " >
-<input name="readme_features.*" class="req" tabindex="20015" placeholder="readme_features" type="text" value=""/></td>
+<input name="readme_features.*" class="req" tabindex="20016" placeholder="readme_features" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="readme_features._" class="req" tabindex="30015" placeholder="readme_features" type="text" value="Features" />
+<input name="readme_features._" class="req" tabindex="30016" placeholder="readme_features" type="text" value="Features" />
 </td>
 <td lang="de" class="langde " >
-<input name="readme_features.de" class="req" tabindex="50015" placeholder="readme_features" type="text" value="Features" />
+<input name="readme_features.de" class="req" tabindex="50016" placeholder="readme_features" type="text" value="Features" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">readme_feature_list</th><th></th>
+<tr class="odd1"><th class="small">readme_feature_list</th><th></th>
 <td class="langnew " >
-<textarea name="readme_feature_list.*" class="req" tabindex="20016" placeholder="readme_feature_list" rows="17"></textarea>
+<textarea name="readme_feature_list.*" class="req" tabindex="20017" placeholder="readme_feature_list" rows="17"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="readme_feature_list._" class="req" tabindex="30016" placeholder="readme_feature_list" rows="17">- uniform and elegant text-based design
+<textarea name="readme_feature_list._" class="req" tabindex="30017" placeholder="readme_feature_list" rows="17">- uniform and elegant text-based design
 - configurable quick access links and gestures on
 home screen
 - shortcut support (long click on app by default)
@@ -267,7 +281,7 @@ home screen
 - no widget support</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="readme_feature_list.de" class="req" tabindex="50016" placeholder="readme_feature_list" rows="21">- einheitliches und elegantes textgestütztes
+<textarea name="readme_feature_list.de" class="req" tabindex="50017" placeholder="readme_feature_list" rows="21">- einheitliches und elegantes textgestütztes
 Design
 - konfigurierbare Schnellzugriffslinks und Gesten
 auf dem Startbildschirm
@@ -290,12 +304,12 @@ erforderlich: es gibt keine Symbole)
 - keine Widget-Unterstützung</textarea>
 </td>
 </tr>
-<tr class="odd1"><th class="small">faq_text-</th><th></th>
+<tr class="odd0"><th class="small">faq_text-</th><th></th>
 <td class="langnew " >
-<textarea name="faq_text-.*" class="req" tabindex="20017" placeholder="faq_text-" rows="14"></textarea>
+<textarea name="faq_text-.*" class="req" tabindex="20018" placeholder="faq_text-" rows="14"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="faq_text-._" class="req" tabindex="30017" placeholder="faq_text-" rows="14">Q: How to configure a thing?
+<textarea name="faq_text-._" class="req" tabindex="30018" placeholder="faq_text-" rows="14">Q: How to configure a thing?
 A: Try long clicking on it.
 
 Q: How to disable swipes or other actions?
@@ -311,7 +325,7 @@ Q: How to make current weather location a permanent entry?
 A: Long click on ‘Current location’, then give it a name.</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="faq_text-.de" class="req" tabindex="50017" placeholder="faq_text-" rows="14">F: Wie stelle ich was ein?
+<textarea name="faq_text-.de" class="req" tabindex="50018" placeholder="faq_text-" rows="14">F: Wie stelle ich was ein?
 A: Versuch mal lange draufzuklicken.
 
 F: Wie kann ich einen Wisch oder andere Aktionen ausschalten?
@@ -327,1028 +341,1028 @@ F: Wie mache aus dem aktuellen Standort einen eigenen Eintrag?
 A: Lange auf „Aktueller Standort“ klicken und dann einen Namen vergeben.</textarea>
 </td>
 </tr>
-<tr class="odd0"><th class="small">readme_screenshots</th><th></th>
+<tr class="odd1"><th class="small">readme_screenshots</th><th></th>
 <td class="langnew " >
-<input name="readme_screenshots.*" class="req" tabindex="20018" placeholder="readme_screenshots" type="text" value=""/></td>
+<input name="readme_screenshots.*" class="req" tabindex="20019" placeholder="readme_screenshots" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="readme_screenshots._" class="req" tabindex="30018" placeholder="readme_screenshots" type="text" value="Screenshots" />
+<input name="readme_screenshots._" class="req" tabindex="30019" placeholder="readme_screenshots" type="text" value="Screenshots" />
 </td>
 <td lang="de" class="langde " >
-<input name="readme_screenshots.de" class="req" tabindex="50018" placeholder="readme_screenshots" type="text" value="Screenshots" />
+<input name="readme_screenshots.de" class="req" tabindex="50019" placeholder="readme_screenshots" type="text" value="Screenshots" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">main_search_hint</th><th></th>
+<tr class="odd0"><th class="small">main_search_hint</th><th></th>
 <td class="langnew " >
-<input name="main_search_hint.*" class="req" tabindex="20019" placeholder="main_search_hint" type="text" value=""/></td>
+<input name="main_search_hint.*" class="req" tabindex="20020" placeholder="main_search_hint" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="main_search_hint._" class="req" tabindex="30019" placeholder="main_search_hint" type="text" value="Search" />
+<input name="main_search_hint._" class="req" tabindex="30020" placeholder="main_search_hint" type="text" value="Search" />
 </td>
 <td lang="de" class="langde " >
-<input name="main_search_hint.de" class="req" tabindex="50019" placeholder="main_search_hint" type="text" value="Suche" />
+<input name="main_search_hint.de" class="req" tabindex="50020" placeholder="main_search_hint" type="text" value="Suche" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_nothing</th><th></th>
+<tr class="odd1"><th class="small">item_nothing</th><th></th>
 <td class="langnew " >
-<input name="item_nothing.*" class="req" tabindex="20020" placeholder="item_nothing" type="text" value=""/></td>
+<input name="item_nothing.*" class="req" tabindex="20021" placeholder="item_nothing" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_nothing._" class="req" tabindex="30020" placeholder="item_nothing" type="text" value="Nothing" />
+<input name="item_nothing._" class="req" tabindex="30021" placeholder="item_nothing" type="text" value="Nothing" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_nothing.de" class="req" tabindex="50020" placeholder="item_nothing" type="text" value="Nichts" />
+<input name="item_nothing.de" class="req" tabindex="50021" placeholder="item_nothing" type="text" value="Nichts" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_photo</th><th></th>
+<tr class="odd0"><th class="small">item_photo</th><th></th>
 <td class="langnew " >
-<input name="item_photo.*" class="req" tabindex="20021" placeholder="item_photo" type="text" value=""/></td>
+<input name="item_photo.*" class="req" tabindex="20022" placeholder="item_photo" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_photo._" class="req" tabindex="30021" placeholder="item_photo" type="text" value="Photo" />
+<input name="item_photo._" class="req" tabindex="30022" placeholder="item_photo" type="text" value="Photo" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_photo.de" class="req" tabindex="50021" placeholder="item_photo" type="text" value="Foto" />
+<input name="item_photo.de" class="req" tabindex="50022" placeholder="item_photo" type="text" value="Foto" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_video</th><th></th>
+<tr class="odd1"><th class="small">item_video</th><th></th>
 <td class="langnew " >
-<input name="item_video.*" class="req" tabindex="20022" placeholder="item_video" type="text" value=""/></td>
+<input name="item_video.*" class="req" tabindex="20023" placeholder="item_video" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_video._" class="req" tabindex="30022" placeholder="item_video" type="text" value="Video" />
+<input name="item_video._" class="req" tabindex="30023" placeholder="item_video" type="text" value="Video" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_video.de" class="req" tabindex="50022" placeholder="item_video" type="text" value="Video" />
+<input name="item_video.de" class="req" tabindex="50023" placeholder="item_video" type="text" value="Video" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_home</th><th></th>
+<tr class="odd0"><th class="small">item_home</th><th></th>
 <td class="langnew " >
-<input name="item_home.*" class="req" tabindex="20023" placeholder="item_home" type="text" value=""/></td>
+<input name="item_home.*" class="req" tabindex="20024" placeholder="item_home" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_home._" class="req" tabindex="30023" placeholder="item_home" type="text" value="Home" />
+<input name="item_home._" class="req" tabindex="30024" placeholder="item_home" type="text" value="Home" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_home.de" class="req" tabindex="50023" placeholder="item_home" type="text" value="Start" />
+<input name="item_home.de" class="req" tabindex="50024" placeholder="item_home" type="text" value="Start" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_dial</th><th></th>
+<tr class="odd1"><th class="small">item_dial</th><th></th>
 <td class="langnew " >
-<input name="item_dial.*" class="req" tabindex="20024" placeholder="item_dial" type="text" value=""/></td>
+<input name="item_dial.*" class="req" tabindex="20025" placeholder="item_dial" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_dial._" class="req" tabindex="30024" placeholder="item_dial" type="text" value="Dial" />
+<input name="item_dial._" class="req" tabindex="30025" placeholder="item_dial" type="text" value="Dial" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_dial.de" class="req" tabindex="50024" placeholder="item_dial" type="text" value="Wählen" />
+<input name="item_dial.de" class="req" tabindex="50025" placeholder="item_dial" type="text" value="Wählen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_camera</th><th></th>
+<tr class="odd0"><th class="small">item_camera</th><th></th>
 <td class="langnew " >
-<input name="item_camera.*" class="req" tabindex="20025" placeholder="item_camera" type="text" value=""/></td>
+<input name="item_camera.*" class="req" tabindex="20026" placeholder="item_camera" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_camera._" class="req" tabindex="30025" placeholder="item_camera" type="text" value="Camera" />
+<input name="item_camera._" class="req" tabindex="30026" placeholder="item_camera" type="text" value="Camera" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_camera.de" class="req" tabindex="50025" placeholder="item_camera" type="text" value="Kamera" />
+<input name="item_camera.de" class="req" tabindex="50026" placeholder="item_camera" type="text" value="Kamera" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_settings</th><th></th>
+<tr class="odd1"><th class="small">item_settings</th><th></th>
 <td class="langnew " >
-<input name="item_settings.*" class="req" tabindex="20026" placeholder="item_settings" type="text" value=""/></td>
+<input name="item_settings.*" class="req" tabindex="20027" placeholder="item_settings" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_settings._" class="req" tabindex="30026" placeholder="item_settings" type="text" value="Settings" />
+<input name="item_settings._" class="req" tabindex="30027" placeholder="item_settings" type="text" value="Settings" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_settings.de" class="req" tabindex="50026" placeholder="item_settings" type="text" value="Einstellungen" />
+<input name="item_settings.de" class="req" tabindex="50027" placeholder="item_settings" type="text" value="Einstellungen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_phone</th><th></th>
+<tr class="odd0"><th class="small">item_phone</th><th></th>
 <td class="langnew " >
-<input name="item_phone.*" class="req" tabindex="20027" placeholder="item_phone" type="text" value=""/></td>
+<input name="item_phone.*" class="req" tabindex="20028" placeholder="item_phone" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_phone._" class="req" tabindex="30027" placeholder="item_phone" type="text" value="Phone" />
+<input name="item_phone._" class="req" tabindex="30028" placeholder="item_phone" type="text" value="Phone" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_phone.de" class="req" tabindex="50027" placeholder="item_phone" type="text" value="Telefon" />
+<input name="item_phone.de" class="req" tabindex="50028" placeholder="item_phone" type="text" value="Telefon" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_start</th><th></th>
+<tr class="odd1"><th class="small">item_start</th><th></th>
 <td class="langnew " >
-<input name="item_start.*" class="req" tabindex="20028" placeholder="item_start" type="text" value=""/></td>
+<input name="item_start.*" class="req" tabindex="20029" placeholder="item_start" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_start._" class="req" tabindex="30028" placeholder="item_start" type="text" value="Start" />
+<input name="item_start._" class="req" tabindex="30029" placeholder="item_start" type="text" value="Start" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_start.de" class="req" tabindex="50028" placeholder="item_start" type="text" value="Starten" />
+<input name="item_start.de" class="req" tabindex="50029" placeholder="item_start" type="text" value="Starten" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_info</th><th></th>
+<tr class="odd0"><th class="small">item_info</th><th></th>
 <td class="langnew " >
-<input name="item_info.*" class="req" tabindex="20029" placeholder="item_info" type="text" value=""/></td>
+<input name="item_info.*" class="req" tabindex="20030" placeholder="item_info" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_info._" class="req" tabindex="30029" placeholder="item_info" type="text" value="App Info" />
+<input name="item_info._" class="req" tabindex="30030" placeholder="item_info" type="text" value="App Info" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_info.de" class="req" tabindex="50029" placeholder="item_info" type="text" value="App-Info" />
+<input name="item_info.de" class="req" tabindex="50030" placeholder="item_info" type="text" value="App-Info" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_rename</th><th></th>
+<tr class="odd1"><th class="small">item_rename</th><th></th>
 <td class="langnew " >
-<input name="item_rename.*" class="req" tabindex="20030" placeholder="item_rename" type="text" value=""/></td>
+<input name="item_rename.*" class="req" tabindex="20031" placeholder="item_rename" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_rename._" class="req" tabindex="30030" placeholder="item_rename" type="text" value="Rename" />
+<input name="item_rename._" class="req" tabindex="30031" placeholder="item_rename" type="text" value="Rename" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_rename.de" class="req" tabindex="50030" placeholder="item_rename" type="text" value="Umbenennen" />
+<input name="item_rename.de" class="req" tabindex="50031" placeholder="item_rename" type="text" value="Umbenennen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_pin</th><th></th>
+<tr class="odd0"><th class="small">item_pin</th><th></th>
 <td class="langnew " >
-<input name="item_pin.*" class="req" tabindex="20031" placeholder="item_pin" type="text" value=""/></td>
+<input name="item_pin.*" class="req" tabindex="20032" placeholder="item_pin" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_pin._" class="req" tabindex="30031" placeholder="item_pin" type="text" value="Pin" />
+<input name="item_pin._" class="req" tabindex="30032" placeholder="item_pin" type="text" value="Pin" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_pin.de" class="req" tabindex="50031" placeholder="item_pin" type="text" value="Schnellzugriff" />
+<input name="item_pin.de" class="req" tabindex="50032" placeholder="item_pin" type="text" value="Schnellzugriff" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_rid</th><th></th>
+<tr class="odd1"><th class="small">item_rid</th><th></th>
 <td class="langnew " >
-<input name="item_rid.*" class="req" tabindex="20032" placeholder="item_rid" type="text" value=""/></td>
+<input name="item_rid.*" class="req" tabindex="20033" placeholder="item_rid" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_rid._" class="req" tabindex="30032" placeholder="item_rid" type="text" value="Unpin" />
+<input name="item_rid._" class="req" tabindex="30033" placeholder="item_rid" type="text" value="Unpin" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_rid.de" class="req" tabindex="50032" placeholder="item_rid" type="text" value="kein Schnellzugriff" />
+<input name="item_rid.de" class="req" tabindex="50033" placeholder="item_rid" type="text" value="kein Schnellzugriff" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_hide</th><th></th>
+<tr class="odd0"><th class="small">item_hide</th><th></th>
 <td class="langnew " >
-<input name="item_hide.*" class="req" tabindex="20033" placeholder="item_hide" type="text" value=""/></td>
+<input name="item_hide.*" class="req" tabindex="20034" placeholder="item_hide" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_hide._" class="req" tabindex="30033" placeholder="item_hide" type="text" value="Hide" />
+<input name="item_hide._" class="req" tabindex="30034" placeholder="item_hide" type="text" value="Hide" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_hide.de" class="req" tabindex="50033" placeholder="item_hide" type="text" value="Verstecken" />
+<input name="item_hide.de" class="req" tabindex="50034" placeholder="item_hide" type="text" value="Verstecken" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_show</th><th></th>
+<tr class="odd1"><th class="small">item_show</th><th></th>
 <td class="langnew " >
-<input name="item_show.*" class="req" tabindex="20034" placeholder="item_show" type="text" value=""/></td>
+<input name="item_show.*" class="req" tabindex="20035" placeholder="item_show" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_show._" class="req" tabindex="30034" placeholder="item_show" type="text" value="Unhide" />
+<input name="item_show._" class="req" tabindex="30035" placeholder="item_show" type="text" value="Unhide" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_show.de" class="req" tabindex="50034" placeholder="item_show" type="text" value="Anzeigen" />
+<input name="item_show.de" class="req" tabindex="50035" placeholder="item_show" type="text" value="Anzeigen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">item_remove</th><th></th>
+<tr class="odd0"><th class="small">item_remove</th><th></th>
 <td class="langnew " >
-<input name="item_remove.*" class="req" tabindex="20035" placeholder="item_remove" type="text" value=""/></td>
+<input name="item_remove.*" class="req" tabindex="20036" placeholder="item_remove" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_remove._" class="req" tabindex="30035" placeholder="item_remove" type="text" value="Remove" />
+<input name="item_remove._" class="req" tabindex="30036" placeholder="item_remove" type="text" value="Remove" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_remove.de" class="req" tabindex="50035" placeholder="item_remove" type="text" value="Entfernen" />
+<input name="item_remove.de" class="req" tabindex="50036" placeholder="item_remove" type="text" value="Entfernen" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">item_title_shortcuts</th><th></th>
+<tr class="odd1"><th class="small">item_title_shortcuts</th><th></th>
 <td class="langnew " >
-<input name="item_title_shortcuts.*" class="req" tabindex="20036" placeholder="item_title_shortcuts" type="text" value=""/></td>
+<input name="item_title_shortcuts.*" class="req" tabindex="20037" placeholder="item_title_shortcuts" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="item_title_shortcuts._" class="req" tabindex="30036" placeholder="item_title_shortcuts" type="text" value="Shortcuts" />
+<input name="item_title_shortcuts._" class="req" tabindex="30037" placeholder="item_title_shortcuts" type="text" value="Shortcuts" />
 </td>
 <td lang="de" class="langde " >
-<input name="item_title_shortcuts.de" class="req" tabindex="50036" placeholder="item_title_shortcuts" type="text" value="Verknüpfung" />
+<input name="item_title_shortcuts.de" class="req" tabindex="50037" placeholder="item_title_shortcuts" type="text" value="Verknüpfung" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">button_ok</th><th></th>
+<tr class="odd0"><th class="small">button_ok</th><th></th>
 <td class="langnew " >
-<input name="button_ok.*" class="req" tabindex="20037" placeholder="button_ok" type="text" value=""/></td>
+<input name="button_ok.*" class="req" tabindex="20038" placeholder="button_ok" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="button_ok._" class="req" tabindex="30037" placeholder="button_ok" type="text" value="OK" />
+<input name="button_ok._" class="req" tabindex="30038" placeholder="button_ok" type="text" value="OK" />
 </td>
 <td lang="de" class="langde " >
-<input name="button_ok.de" class="req" tabindex="50037" placeholder="button_ok" type="text" value="OK" />
+<input name="button_ok.de" class="req" tabindex="50038" placeholder="button_ok" type="text" value="OK" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">button_cancel</th><th></th>
+<tr class="odd1"><th class="small">button_cancel</th><th></th>
 <td class="langnew " >
-<input name="button_cancel.*" class="req" tabindex="20038" placeholder="button_cancel" type="text" value=""/></td>
+<input name="button_cancel.*" class="req" tabindex="20039" placeholder="button_cancel" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="button_cancel._" class="req" tabindex="30038" placeholder="button_cancel" type="text" value="Cancel" />
+<input name="button_cancel._" class="req" tabindex="30039" placeholder="button_cancel" type="text" value="Cancel" />
 </td>
 <td lang="de" class="langde " >
-<input name="button_cancel.de" class="req" tabindex="50038" placeholder="button_cancel" type="text" value="Abbrechen" />
+<input name="button_cancel.de" class="req" tabindex="50039" placeholder="button_cancel" type="text" value="Abbrechen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">rename_title</th><th></th>
+<tr class="odd0"><th class="small">rename_title</th><th></th>
 <td class="langnew " >
-<input name="rename_title.*" class="req" tabindex="20039" placeholder="rename_title" type="text" value=""/></td>
+<input name="rename_title.*" class="req" tabindex="20040" placeholder="rename_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="rename_title._" class="req" tabindex="30039" placeholder="rename_title" type="text" value="Rename" />
+<input name="rename_title._" class="req" tabindex="30040" placeholder="rename_title" type="text" value="Rename" />
 </td>
 <td lang="de" class="langde " >
-<input name="rename_title.de" class="req" tabindex="50039" placeholder="rename_title" type="text" value="Unbenennen" />
+<input name="rename_title.de" class="req" tabindex="50040" placeholder="rename_title" type="text" value="Unbenennen" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">edit_order_title</th><th></th>
+<tr class="odd1"><th class="small">edit_order_title</th><th></th>
 <td class="langnew " >
-<input name="edit_order_title.*" class="req" tabindex="20040" placeholder="edit_order_title" type="text" value=""/></td>
+<input name="edit_order_title.*" class="req" tabindex="20041" placeholder="edit_order_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="edit_order_title._" class="req" tabindex="30040" placeholder="edit_order_title" type="text" value="Sort like" />
+<input name="edit_order_title._" class="req" tabindex="30041" placeholder="edit_order_title" type="text" value="Sort like" />
 </td>
 <td lang="de" class="langde " >
-<input name="edit_order_title.de" class="req" tabindex="50040" placeholder="edit_order_title" type="text" value="Sortieren nach" />
+<input name="edit_order_title.de" class="req" tabindex="50041" placeholder="edit_order_title" type="text" value="Sortieren nach" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">edit_order_hint</th><th></th>
+<tr class="odd0"><th class="small">edit_order_hint</th><th></th>
 <td class="langnew " >
-<input name="edit_order_hint.*" class="req" tabindex="20041" placeholder="edit_order_hint" type="text" value=""/></td>
+<input name="edit_order_hint.*" class="req" tabindex="20042" placeholder="edit_order_hint" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="edit_order_hint._" class="req" tabindex="30041" placeholder="edit_order_hint" type="text" value="label" />
+<input name="edit_order_hint._" class="req" tabindex="30042" placeholder="edit_order_hint" type="text" value="label" />
 </td>
 <td lang="de" class="langde " >
-<input name="edit_order_hint.de" class="req" tabindex="50041" placeholder="edit_order_hint" type="text" value="Name" />
+<input name="edit_order_hint.de" class="req" tabindex="50042" placeholder="edit_order_hint" type="text" value="Name" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">pin_heading</th><th></th>
+<tr class="odd1"><th class="small">pin_heading</th><th></th>
 <td class="langnew " >
-<input name="pin_heading.*" class="req" tabindex="20042" placeholder="pin_heading" type="text" value=""/></td>
+<input name="pin_heading.*" class="req" tabindex="20043" placeholder="pin_heading" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_heading._" class="req" tabindex="30042" placeholder="pin_heading" type="text" value="Pin to Home" />
+<input name="pin_heading._" class="req" tabindex="30043" placeholder="pin_heading" type="text" value="Pin to Home" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_heading.de" class="req" tabindex="50042" placeholder="pin_heading" type="text" value="Schnellzugriff über" />
+<input name="pin_heading.de" class="req" tabindex="50043" placeholder="pin_heading" type="text" value="Schnellzugriff über" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">pin_home</th><th></th>
+<tr class="odd0"><th class="small">pin_home</th><th></th>
 <td class="langnew " >
-<input name="pin_home.*" class="req" tabindex="20043" placeholder="pin_home" type="text" value=""/></td>
+<input name="pin_home.*" class="req" tabindex="20044" placeholder="pin_home" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_home._" class="req" tabindex="30043" placeholder="pin_home" type="text" value="List" />
+<input name="pin_home._" class="req" tabindex="30044" placeholder="pin_home" type="text" value="List" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_home.de" class="req" tabindex="50043" placeholder="pin_home" type="text" value="Liste" />
+<input name="pin_home.de" class="req" tabindex="50044" placeholder="pin_home" type="text" value="Liste" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">pin_left</th><th></th>
+<tr class="odd1"><th class="small">pin_left</th><th></th>
 <td class="langnew " >
-<input name="pin_left.*" class="req" tabindex="20044" placeholder="pin_left" type="text" value=""/></td>
+<input name="pin_left.*" class="req" tabindex="20045" placeholder="pin_left" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_left._" class="req" tabindex="30044" placeholder="pin_left" type="text" value="Swipe Left" />
+<input name="pin_left._" class="req" tabindex="30045" placeholder="pin_left" type="text" value="Swipe Left" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_left.de" class="req" tabindex="50044" placeholder="pin_left" type="text" value="Wisch nach links" />
+<input name="pin_left.de" class="req" tabindex="50045" placeholder="pin_left" type="text" value="Wisch nach links" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">pin_right</th><th></th>
+<tr class="odd0"><th class="small">pin_right</th><th></th>
 <td class="langnew " >
-<input name="pin_right.*" class="req" tabindex="20045" placeholder="pin_right" type="text" value=""/></td>
+<input name="pin_right.*" class="req" tabindex="20046" placeholder="pin_right" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_right._" class="req" tabindex="30045" placeholder="pin_right" type="text" value="Swipe Right" />
+<input name="pin_right._" class="req" tabindex="30046" placeholder="pin_right" type="text" value="Swipe Right" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_right.de" class="req" tabindex="50045" placeholder="pin_right" type="text" value="Wisch nach rechts" />
+<input name="pin_right.de" class="req" tabindex="50046" placeholder="pin_right" type="text" value="Wisch nach rechts" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">pin_down</th><th></th>
+<tr class="odd1"><th class="small">pin_down</th><th></th>
 <td class="langnew " >
-<input name="pin_down.*" class="req" tabindex="20046" placeholder="pin_down" type="text" value=""/></td>
+<input name="pin_down.*" class="req" tabindex="20047" placeholder="pin_down" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_down._" class="req" tabindex="30046" placeholder="pin_down" type="text" value="Swipe Down" />
+<input name="pin_down._" class="req" tabindex="30047" placeholder="pin_down" type="text" value="Swipe Down" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_down.de" class="req" tabindex="50046" placeholder="pin_down" type="text" value="Wisch nach unten" />
+<input name="pin_down.de" class="req" tabindex="50047" placeholder="pin_down" type="text" value="Wisch nach unten" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">pin_up</th><th></th>
+<tr class="odd0"><th class="small">pin_up</th><th></th>
 <td class="langnew " >
-<input name="pin_up.*" class="req" tabindex="20047" placeholder="pin_up" type="text" value=""/></td>
+<input name="pin_up.*" class="req" tabindex="20048" placeholder="pin_up" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_up._" class="req" tabindex="30047" placeholder="pin_up" type="text" value="Swipe Up" />
+<input name="pin_up._" class="req" tabindex="30048" placeholder="pin_up" type="text" value="Swipe Up" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_up.de" class="req" tabindex="50047" placeholder="pin_up" type="text" value="Wisch nach oben" />
+<input name="pin_up.de" class="req" tabindex="50048" placeholder="pin_up" type="text" value="Wisch nach oben" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">pin_bgrd</th><th></th>
+<tr class="odd1"><th class="small">pin_bgrd</th><th></th>
 <td class="langnew " >
-<input name="pin_bgrd.*" class="req" tabindex="20048" placeholder="pin_bgrd" type="text" value=""/></td>
+<input name="pin_bgrd.*" class="req" tabindex="20049" placeholder="pin_bgrd" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_bgrd._" class="req" tabindex="30048" placeholder="pin_bgrd" type="text" value="Long Click Background" />
+<input name="pin_bgrd._" class="req" tabindex="30049" placeholder="pin_bgrd" type="text" value="Long Click Background" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_bgrd.de" class="req" tabindex="50048" placeholder="pin_bgrd" type="text" value="Langer Klick auf Hintergrund" />
+<input name="pin_bgrd.de" class="req" tabindex="50049" placeholder="pin_bgrd" type="text" value="Langer Klick auf Hintergrund" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">pin_time</th><th></th>
+<tr class="odd0"><th class="small">pin_time</th><th></th>
 <td class="langnew " >
-<input name="pin_time.*" class="req" tabindex="20049" placeholder="pin_time" type="text" value=""/></td>
+<input name="pin_time.*" class="req" tabindex="20050" placeholder="pin_time" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_time._" class="req" tabindex="30049" placeholder="pin_time" type="text" value="Click Time" />
+<input name="pin_time._" class="req" tabindex="30050" placeholder="pin_time" type="text" value="Click Time" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_time.de" class="req" tabindex="50049" placeholder="pin_time" type="text" value="Klick auf Uhr" />
+<input name="pin_time.de" class="req" tabindex="50050" placeholder="pin_time" type="text" value="Klick auf Uhr" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">pin_date</th><th></th>
+<tr class="odd1"><th class="small">pin_date</th><th></th>
 <td class="langnew " >
-<input name="pin_date.*" class="req" tabindex="20050" placeholder="pin_date" type="text" value=""/></td>
+<input name="pin_date.*" class="req" tabindex="20051" placeholder="pin_date" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_date._" class="req" tabindex="30050" placeholder="pin_date" type="text" value="Click Date" />
+<input name="pin_date._" class="req" tabindex="30051" placeholder="pin_date" type="text" value="Click Date" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_date.de" class="req" tabindex="50050" placeholder="pin_date" type="text" value="Klick auf Datum" />
+<input name="pin_date.de" class="req" tabindex="50051" placeholder="pin_date" type="text" value="Klick auf Datum" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">pin_weath</th><th></th>
+<tr class="odd0"><th class="small">pin_weath</th><th></th>
 <td class="langnew " >
-<input name="pin_weath.*" class="req" tabindex="20051" placeholder="pin_weath" type="text" value=""/></td>
+<input name="pin_weath.*" class="req" tabindex="20052" placeholder="pin_weath" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pin_weath._" class="req" tabindex="30051" placeholder="pin_weath" type="text" value="Click Weather" />
+<input name="pin_weath._" class="req" tabindex="30052" placeholder="pin_weath" type="text" value="Click Weather" />
 </td>
 <td lang="de" class="langde " >
-<input name="pin_weath.de" class="req" tabindex="50051" placeholder="pin_weath" type="text" value="Klick auf Wetter" />
+<input name="pin_weath.de" class="req" tabindex="50052" placeholder="pin_weath" type="text" value="Klick auf Wetter" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">error_starting</th><th></th>
+<tr class="odd1"><th class="small">error_starting</th><th></th>
 <td class="langnew " >
-<input name="error_starting.*" class="req" tabindex="20052" placeholder="error_starting" type="text" value=""/></td>
+<input name="error_starting.*" class="req" tabindex="20053" placeholder="error_starting" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="error_starting._" class="req" tabindex="30052" placeholder="error_starting" type="text" value="Error starting %s" />
+<input name="error_starting._" class="req" tabindex="30053" placeholder="error_starting" type="text" value="Error starting %s" />
 </td>
 <td lang="de" class="langde " >
-<input name="error_starting.de" class="req" tabindex="50052" placeholder="error_starting" type="text" value="Fehler beim Starten: %s" />
+<input name="error_starting.de" class="req" tabindex="50053" placeholder="error_starting" type="text" value="Fehler beim Starten: %s" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">error_removing</th><th></th>
+<tr class="odd0"><th class="small">error_removing</th><th></th>
 <td class="langnew " >
-<input name="error_removing.*" class="req" tabindex="20053" placeholder="error_removing" type="text" value=""/></td>
+<input name="error_removing.*" class="req" tabindex="20054" placeholder="error_removing" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="error_removing._" class="req" tabindex="30053" placeholder="error_removing" type="text" value="Error removing %s" />
+<input name="error_removing._" class="req" tabindex="30054" placeholder="error_removing" type="text" value="Error removing %s" />
 </td>
 <td lang="de" class="langde " >
-<input name="error_removing.de" class="req" tabindex="50053" placeholder="error_removing" type="text" value="Fehler beim Entfernen: %s" />
+<input name="error_removing.de" class="req" tabindex="50054" placeholder="error_removing" type="text" value="Fehler beim Entfernen: %s" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">ok_remove_shortcut</th><th></th>
+<tr class="odd1"><th class="small">ok_remove_shortcut</th><th></th>
 <td class="langnew " >
-<input name="ok_remove_shortcut.*" class="req" tabindex="20054" placeholder="ok_remove_shortcut" type="text" value=""/></td>
+<input name="ok_remove_shortcut.*" class="req" tabindex="20055" placeholder="ok_remove_shortcut" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="ok_remove_shortcut._" class="req" tabindex="30054" placeholder="ok_remove_shortcut" type="text" value="%s: remove shortcut" />
+<input name="ok_remove_shortcut._" class="req" tabindex="30055" placeholder="ok_remove_shortcut" type="text" value="%s: remove shortcut" />
 </td>
 <td lang="de" class="langde " >
-<input name="ok_remove_shortcut.de" class="req" tabindex="50054" placeholder="ok_remove_shortcut" type="text" value="%s: Kürzel entfernen" />
+<input name="ok_remove_shortcut.de" class="req" tabindex="50055" placeholder="ok_remove_shortcut" type="text" value="%s: Kürzel entfernen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">search_opt_title</th><th></th>
+<tr class="odd0"><th class="small">search_opt_title</th><th></th>
 <td class="langnew " >
-<input name="search_opt_title.*" class="req" tabindex="20055" placeholder="search_opt_title" type="text" value=""/></td>
+<input name="search_opt_title.*" class="req" tabindex="20056" placeholder="search_opt_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_opt_title._" class="req" tabindex="30055" placeholder="search_opt_title" type="text" value="Search Engine" />
+<input name="search_opt_title._" class="req" tabindex="30056" placeholder="search_opt_title" type="text" value="Search Engine" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_opt_title.de" class="req" tabindex="50055" placeholder="search_opt_title" type="text" value="Suchmaschine" />
+<input name="search_opt_title.de" class="req" tabindex="50056" placeholder="search_opt_title" type="text" value="Suchmaschine" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">search_name_hint</th><th></th>
+<tr class="odd1"><th class="small">search_name_hint</th><th></th>
 <td class="langnew " >
-<input name="search_name_hint.*" class="req" tabindex="20056" placeholder="search_name_hint" type="text" value=""/></td>
+<input name="search_name_hint.*" class="req" tabindex="20057" placeholder="search_name_hint" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_name_hint._" class="req" tabindex="30056" placeholder="search_name_hint" type="text" value="Name" />
+<input name="search_name_hint._" class="req" tabindex="30057" placeholder="search_name_hint" type="text" value="Name" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_name_hint.de" class="req" tabindex="50056" placeholder="search_name_hint" type="text" value="Name" />
+<input name="search_name_hint.de" class="req" tabindex="50057" placeholder="search_name_hint" type="text" value="Name" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">search_url_hint</th><th></th>
+<tr class="odd0"><th class="small">search_url_hint</th><th></th>
 <td class="langnew " >
-<input name="search_url_hint.*" class="req" tabindex="20057" placeholder="search_url_hint" type="text" value=""/></td>
+<input name="search_url_hint.*" class="req" tabindex="20058" placeholder="search_url_hint" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_url_hint._" class="req" tabindex="30057" placeholder="search_url_hint" type="text" value="URL" />
+<input name="search_url_hint._" class="req" tabindex="30058" placeholder="search_url_hint" type="text" value="URL" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_url_hint.de" class="req" tabindex="50057" placeholder="search_url_hint" type="text" value="URL" />
+<input name="search_url_hint.de" class="req" tabindex="50058" placeholder="search_url_hint" type="text" value="URL" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">search_make_default</th><th></th>
+<tr class="odd1"><th class="small">search_make_default</th><th></th>
 <td class="langnew " >
-<input name="search_make_default.*" class="req" tabindex="20058" placeholder="search_make_default" type="text" value=""/></td>
+<input name="search_make_default.*" class="req" tabindex="20059" placeholder="search_make_default" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_make_default._" class="req" tabindex="30058" placeholder="search_make_default" type="text" value="Default search engine" />
+<input name="search_make_default._" class="req" tabindex="30059" placeholder="search_make_default" type="text" value="Default search engine" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_make_default.de" class="req" tabindex="50058" placeholder="search_make_default" type="text" value="Standardsuchmaschine" />
+<input name="search_make_default.de" class="req" tabindex="50059" placeholder="search_make_default" type="text" value="Standardsuchmaschine" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">search_keep</th><th></th>
+<tr class="odd0"><th class="small">search_keep</th><th></th>
 <td class="langnew " >
-<input name="search_keep.*" class="req" tabindex="20059" placeholder="search_keep" type="text" value=""/></td>
+<input name="search_keep.*" class="req" tabindex="20060" placeholder="search_keep" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_keep._" class="req" tabindex="30059" placeholder="search_keep" type="text" value="Keep" />
+<input name="search_keep._" class="req" tabindex="30060" placeholder="search_keep" type="text" value="Keep" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_keep.de" class="req" tabindex="50059" placeholder="search_keep" type="text" value="Behalten" />
+<input name="search_keep.de" class="req" tabindex="50060" placeholder="search_keep" type="text" value="Behalten" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">search_copy</th><th></th>
+<tr class="odd1"><th class="small">search_copy</th><th></th>
 <td class="langnew " >
-<input name="search_copy.*" class="req" tabindex="20060" placeholder="search_copy" type="text" value=""/></td>
+<input name="search_copy.*" class="req" tabindex="20061" placeholder="search_copy" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_copy._" class="req" tabindex="30060" placeholder="search_copy" type="text" value="Make New" />
+<input name="search_copy._" class="req" tabindex="30061" placeholder="search_copy" type="text" value="Make New" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_copy.de" class="req" tabindex="50060" placeholder="search_copy" type="text" value="Neuanlegen" />
+<input name="search_copy.de" class="req" tabindex="50061" placeholder="search_copy" type="text" value="Neuanlegen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">search_delete</th><th></th>
+<tr class="odd0"><th class="small">search_delete</th><th></th>
 <td class="langnew " >
-<input name="search_delete.*" class="req" tabindex="20061" placeholder="search_delete" type="text" value=""/></td>
+<input name="search_delete.*" class="req" tabindex="20062" placeholder="search_delete" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_delete._" class="req" tabindex="30061" placeholder="search_delete" type="text" value="Delete" />
+<input name="search_delete._" class="req" tabindex="30062" placeholder="search_delete" type="text" value="Delete" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_delete.de" class="req" tabindex="50061" placeholder="search_delete" type="text" value="Löschen" />
+<input name="search_delete.de" class="req" tabindex="50062" placeholder="search_delete" type="text" value="Löschen" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">main_opt_title</th><th></th>
+<tr class="odd1"><th class="small">main_opt_title</th><th></th>
 <td class="langnew " >
-<input name="main_opt_title.*" class="req" tabindex="20062" placeholder="main_opt_title" type="text" value=""/></td>
+<input name="main_opt_title.*" class="req" tabindex="20063" placeholder="main_opt_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="main_opt_title._" class="req" tabindex="30062" placeholder="main_opt_title" type="text" value="Settings" />
+<input name="main_opt_title._" class="req" tabindex="30063" placeholder="main_opt_title" type="text" value="Settings" />
 </td>
 <td lang="de" class="langde " >
-<input name="main_opt_title.de" class="req" tabindex="50062" placeholder="main_opt_title" type="text" value="Einstellungen" />
+<input name="main_opt_title.de" class="req" tabindex="50063" placeholder="main_opt_title" type="text" value="Einstellungen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">about_title</th><th></th>
+<tr class="odd0"><th class="small">about_title</th><th></th>
 <td class="langnew " >
-<input name="about_title.*" class="req" tabindex="20063" placeholder="about_title" type="text" value=""/></td>
+<input name="about_title.*" class="req" tabindex="20064" placeholder="about_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="about_title._" class="req" tabindex="30063" placeholder="about_title" type="text" value="About NeatLauncher" />
+<input name="about_title._" class="req" tabindex="30064" placeholder="about_title" type="text" value="About NeatLauncher" />
 </td>
 <td lang="de" class="langde " >
-<input name="about_title.de" class="req" tabindex="50063" placeholder="about_title" type="text" value="Infos über NeatLauncher" />
+<input name="about_title.de" class="req" tabindex="50064" placeholder="about_title" type="text" value="Infos über NeatLauncher" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">read_contacts_no_perm</th><th></th>
+<tr class="odd1"><th class="small">read_contacts_no_perm</th><th></th>
 <td class="langnew " >
-<input name="read_contacts_no_perm.*" class="req" tabindex="20064" placeholder="read_contacts_no_perm" type="text" value=""/></td>
+<input name="read_contacts_no_perm.*" class="req" tabindex="20065" placeholder="read_contacts_no_perm" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="read_contacts_no_perm._" class="req" tabindex="30064" placeholder="read_contacts_no_perm" type="text" value="No permission to read contact list" />
+<input name="read_contacts_no_perm._" class="req" tabindex="30065" placeholder="read_contacts_no_perm" type="text" value="No permission to read contact list" />
 </td>
 <td lang="de" class="langde " >
-<input name="read_contacts_no_perm.de" class="req" tabindex="50064" placeholder="read_contacts_no_perm" type="text" value="Lesen der Kontaktliste wurde verweigert" />
+<input name="read_contacts_no_perm.de" class="req" tabindex="50065" placeholder="read_contacts_no_perm" type="text" value="Lesen der Kontaktliste wurde verweigert" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">location_no_perm</th><th></th>
+<tr class="odd0"><th class="small">location_no_perm</th><th></th>
 <td class="langnew " >
-<input name="location_no_perm.*" class="req" tabindex="20065" placeholder="location_no_perm" type="text" value=""/></td>
+<input name="location_no_perm.*" class="req" tabindex="20066" placeholder="location_no_perm" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="location_no_perm._" class="req" tabindex="30065" placeholder="location_no_perm" type="text" value="No permission to access location" />
+<input name="location_no_perm._" class="req" tabindex="30066" placeholder="location_no_perm" type="text" value="No permission to access location" />
 </td>
 <td lang="de" class="langde " >
-<input name="location_no_perm.de" class="req" tabindex="50065" placeholder="location_no_perm" type="text" value="Standortbestimmung wurde verweigert" />
+<input name="location_no_perm.de" class="req" tabindex="50066" placeholder="location_no_perm" type="text" value="Standortbestimmung wurde verweigert" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">save_restore</th><th></th>
+<tr class="odd1"><th class="small">save_restore</th><th></th>
 <td class="langnew " >
-<input name="save_restore.*" class="req" tabindex="20066" placeholder="save_restore" type="text" value=""/></td>
+<input name="save_restore.*" class="req" tabindex="20067" placeholder="save_restore" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="save_restore._" class="req" tabindex="30066" placeholder="save_restore" type="text" value="Save / Restore Preferences" />
+<input name="save_restore._" class="req" tabindex="30067" placeholder="save_restore" type="text" value="Save / Restore Preferences" />
 </td>
 <td lang="de" class="langde " >
-<input name="save_restore.de" class="req" tabindex="50066" placeholder="save_restore" type="text" value="Einstellungen Sichern / Rücksichern" />
+<input name="save_restore.de" class="req" tabindex="50067" placeholder="save_restore" type="text" value="Einstellungen Sichern / Rücksichern" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">pref_save</th><th></th>
+<tr class="odd0"><th class="small">pref_save</th><th></th>
 <td class="langnew " >
-<input name="pref_save.*" class="req" tabindex="20067" placeholder="pref_save" type="text" value=""/></td>
+<input name="pref_save.*" class="req" tabindex="20068" placeholder="pref_save" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pref_save._" class="req" tabindex="30067" placeholder="pref_save" type="text" value="Save Preferences" />
+<input name="pref_save._" class="req" tabindex="30068" placeholder="pref_save" type="text" value="Save Preferences" />
 </td>
 <td lang="de" class="langde " >
-<input name="pref_save.de" class="req" tabindex="50067" placeholder="pref_save" type="text" value="Einstellungen Sichern" />
+<input name="pref_save.de" class="req" tabindex="50068" placeholder="pref_save" type="text" value="Einstellungen Sichern" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">pref_load</th><th></th>
+<tr class="odd1"><th class="small">pref_load</th><th></th>
 <td class="langnew " >
-<input name="pref_load.*" class="req" tabindex="20068" placeholder="pref_load" type="text" value=""/></td>
+<input name="pref_load.*" class="req" tabindex="20069" placeholder="pref_load" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="pref_load._" class="req" tabindex="30068" placeholder="pref_load" type="text" value="Load Preferences" />
+<input name="pref_load._" class="req" tabindex="30069" placeholder="pref_load" type="text" value="Load Preferences" />
 </td>
 <td lang="de" class="langde " >
-<input name="pref_load.de" class="req" tabindex="50068" placeholder="pref_load" type="text" value="Einstellungen Rücksichern" />
+<input name="pref_load.de" class="req" tabindex="50069" placeholder="pref_load" type="text" value="Einstellungen Rücksichern" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">ok_load</th><th></th>
+<tr class="odd0"><th class="small">ok_load</th><th></th>
 <td class="langnew " >
-<input name="ok_load.*" class="req" tabindex="20069" placeholder="ok_load" type="text" value=""/></td>
+<input name="ok_load.*" class="req" tabindex="20070" placeholder="ok_load" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="ok_load._" class="req" tabindex="30069" placeholder="ok_load" type="text" value="Loading complete." />
+<input name="ok_load._" class="req" tabindex="30070" placeholder="ok_load" type="text" value="Loading complete." />
 </td>
 <td lang="de" class="langde " >
-<input name="ok_load.de" class="req" tabindex="50069" placeholder="ok_load" type="text" value="Rücksicherung abgeschlossen." />
+<input name="ok_load.de" class="req" tabindex="50070" placeholder="ok_load" type="text" value="Rücksicherung abgeschlossen." />
 </td>
 </tr>
-<tr class="odd0"><th class="small">err_load</th><th></th>
+<tr class="odd1"><th class="small">err_load</th><th></th>
 <td class="langnew " >
-<input name="err_load.*" class="req" tabindex="20070" placeholder="err_load" type="text" value=""/></td>
+<input name="err_load.*" class="req" tabindex="20071" placeholder="err_load" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="err_load._" class="req" tabindex="30070" placeholder="err_load" type="text" value="Loading failed." />
+<input name="err_load._" class="req" tabindex="30071" placeholder="err_load" type="text" value="Loading failed." />
 </td>
 <td lang="de" class="langde " >
-<input name="err_load.de" class="req" tabindex="50070" placeholder="err_load" type="text" value="Rücksicherung fehlgeschlagen." />
+<input name="err_load.de" class="req" tabindex="50071" placeholder="err_load" type="text" value="Rücksicherung fehlgeschlagen." />
 </td>
 </tr>
-<tr class="odd1"><th class="small">ok_save</th><th></th>
+<tr class="odd0"><th class="small">ok_save</th><th></th>
 <td class="langnew " >
-<input name="ok_save.*" class="req" tabindex="20071" placeholder="ok_save" type="text" value=""/></td>
+<input name="ok_save.*" class="req" tabindex="20072" placeholder="ok_save" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="ok_save._" class="req" tabindex="30071" placeholder="ok_save" type="text" value="Saving complete." />
+<input name="ok_save._" class="req" tabindex="30072" placeholder="ok_save" type="text" value="Saving complete." />
 </td>
 <td lang="de" class="langde " >
-<input name="ok_save.de" class="req" tabindex="50071" placeholder="ok_save" type="text" value="Sicherung abgeschlossen." />
+<input name="ok_save.de" class="req" tabindex="50072" placeholder="ok_save" type="text" value="Sicherung abgeschlossen." />
 </td>
 </tr>
-<tr class="odd0"><th class="small">err_save</th><th></th>
+<tr class="odd1"><th class="small">err_save</th><th></th>
 <td class="langnew " >
-<input name="err_save.*" class="req" tabindex="20072" placeholder="err_save" type="text" value=""/></td>
+<input name="err_save.*" class="req" tabindex="20073" placeholder="err_save" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="err_save._" class="req" tabindex="30072" placeholder="err_save" type="text" value="Saving failed." />
+<input name="err_save._" class="req" tabindex="30073" placeholder="err_save" type="text" value="Saving failed." />
 </td>
 <td lang="de" class="langde " >
-<input name="err_save.de" class="req" tabindex="50072" placeholder="err_save" type="text" value="Sicherung fehlgeschlagen." />
+<input name="err_save.de" class="req" tabindex="50073" placeholder="err_save" type="text" value="Sicherung fehlgeschlagen." />
 </td>
 </tr>
-<tr class="odd1"><th class="small">main_faq</th><th></th>
+<tr class="odd0"><th class="small">main_faq</th><th></th>
 <td class="langnew " >
-<input name="main_faq.*" class="req" tabindex="20073" placeholder="main_faq" type="text" value=""/></td>
+<input name="main_faq.*" class="req" tabindex="20074" placeholder="main_faq" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="main_faq._" class="req" tabindex="30073" placeholder="main_faq" type="text" value="FAQ / Help" />
+<input name="main_faq._" class="req" tabindex="30074" placeholder="main_faq" type="text" value="FAQ / Help" />
 </td>
 <td lang="de" class="langde " >
-<input name="main_faq.de" class="req" tabindex="50073" placeholder="main_faq" type="text" value="FAQ / Hilfe" />
+<input name="main_faq.de" class="req" tabindex="50074" placeholder="main_faq" type="text" value="FAQ / Hilfe" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">main_language</th><th></th>
+<tr class="odd1"><th class="small">main_language</th><th></th>
 <td class="langnew " >
-<input name="main_language.*" class="req" tabindex="20074" placeholder="main_language" type="text" value=""/></td>
+<input name="main_language.*" class="req" tabindex="20075" placeholder="main_language" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="main_language._" class="req" tabindex="30074" placeholder="main_language" type="text" value="Language" />
+<input name="main_language._" class="req" tabindex="30075" placeholder="main_language" type="text" value="Language" />
 </td>
 <td lang="de" class="langde " >
-<input name="main_language.de" class="req" tabindex="50074" placeholder="main_language" type="text" value="Sprache" />
+<input name="main_language.de" class="req" tabindex="50075" placeholder="main_language" type="text" value="Sprache" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">main_info</th><th></th>
+<tr class="odd0"><th class="small">main_info</th><th></th>
 <td class="langnew " >
-<input name="main_info.*" class="req" tabindex="20075" placeholder="main_info" type="text" value=""/></td>
+<input name="main_info.*" class="req" tabindex="20076" placeholder="main_info" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="main_info._" class="req" tabindex="30075" placeholder="main_info" type="text" value="App Info" />
+<input name="main_info._" class="req" tabindex="30076" placeholder="main_info" type="text" value="App Info" />
 </td>
 <td lang="de" class="langde " >
-<input name="main_info.de" class="req" tabindex="50075" placeholder="main_info" type="text" value="App-Verwaltung" />
+<input name="main_info.de" class="req" tabindex="50076" placeholder="main_info" type="text" value="App-Verwaltung" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">do_hide</th><th></th>
+<tr class="odd1"><th class="small">do_hide</th><th></th>
 <td class="langnew " >
-<input name="do_hide.*" class="req" tabindex="20076" placeholder="do_hide" type="text" value=""/></td>
+<input name="do_hide.*" class="req" tabindex="20077" placeholder="do_hide" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="do_hide._" class="req" tabindex="30076" placeholder="do_hide" type="text" value="%s: hide (still shown in search)" />
+<input name="do_hide._" class="req" tabindex="30077" placeholder="do_hide" type="text" value="%s: hide (still shown in search)" />
 </td>
 <td lang="de" class="langde " >
-<input name="do_hide.de" class="req" tabindex="50076" placeholder="do_hide" type="text" value="%s: verstecken (bei Suche noch anzeigen)" />
+<input name="do_hide.de" class="req" tabindex="50077" placeholder="do_hide" type="text" value="%s: verstecken (bei Suche noch anzeigen)" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">do_show</th><th></th>
+<tr class="odd0"><th class="small">do_show</th><th></th>
 <td class="langnew " >
-<input name="do_show.*" class="req" tabindex="20077" placeholder="do_show" type="text" value=""/></td>
+<input name="do_show.*" class="req" tabindex="20078" placeholder="do_show" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="do_show._" class="req" tabindex="30077" placeholder="do_show" type="text" value="%s: show" />
+<input name="do_show._" class="req" tabindex="30078" placeholder="do_show" type="text" value="%s: show" />
 </td>
 <td lang="de" class="langde " >
-<input name="do_show.de" class="req" tabindex="50077" placeholder="do_show" type="text" value="%s: anzeigen" />
+<input name="do_show.de" class="req" tabindex="50078" placeholder="do_show" type="text" value="%s: anzeigen" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">do_unpin</th><th></th>
+<tr class="odd1"><th class="small">do_unpin</th><th></th>
 <td class="langnew " >
-<input name="do_unpin.*" class="req" tabindex="20078" placeholder="do_unpin" type="text" value=""/></td>
+<input name="do_unpin.*" class="req" tabindex="20079" placeholder="do_unpin" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="do_unpin._" class="req" tabindex="30078" placeholder="do_unpin" type="text" value="%s: unpin" />
+<input name="do_unpin._" class="req" tabindex="30079" placeholder="do_unpin" type="text" value="%s: unpin" />
 </td>
 <td lang="de" class="langde " >
-<input name="do_unpin.de" class="req" tabindex="50078" placeholder="do_unpin" type="text" value="%s: Schnellzgriff entfernen" />
+<input name="do_unpin.de" class="req" tabindex="50079" placeholder="do_unpin" type="text" value="%s: Schnellzgriff entfernen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">weather_title</th><th></th>
+<tr class="odd0"><th class="small">weather_title</th><th></th>
 <td class="langnew " >
-<input name="weather_title.*" class="req" tabindex="20079" placeholder="weather_title" type="text" value=""/></td>
+<input name="weather_title.*" class="req" tabindex="20080" placeholder="weather_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="weather_title._" class="req" tabindex="30079" placeholder="weather_title" type="text" value="Weather" />
+<input name="weather_title._" class="req" tabindex="30080" placeholder="weather_title" type="text" value="Weather" />
 </td>
 <td lang="de" class="langde " >
-<input name="weather_title.de" class="req" tabindex="50079" placeholder="weather_title" type="text" value="Wetter" />
+<input name="weather_title.de" class="req" tabindex="50080" placeholder="weather_title" type="text" value="Wetter" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">no_weather</th><th></th>
+<tr class="odd1"><th class="small">no_weather</th><th></th>
 <td class="langnew " >
-<input name="no_weather.*" class="req" tabindex="20080" placeholder="no_weather" type="text" value=""/></td>
+<input name="no_weather.*" class="req" tabindex="20081" placeholder="no_weather" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="no_weather._" class="req" tabindex="30080" placeholder="no_weather" type="text" value="No weather" />
+<input name="no_weather._" class="req" tabindex="30081" placeholder="no_weather" type="text" value="No weather" />
 </td>
 <td lang="de" class="langde " >
-<input name="no_weather.de" class="req" tabindex="50080" placeholder="no_weather" type="text" value="Kein Wetter" />
+<input name="no_weather.de" class="req" tabindex="50081" placeholder="no_weather" type="text" value="Kein Wetter" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">current_location</th><th></th>
+<tr class="odd0"><th class="small">current_location</th><th></th>
 <td class="langnew " >
-<input name="current_location.*" class="req" tabindex="20081" placeholder="current_location" type="text" value=""/></td>
+<input name="current_location.*" class="req" tabindex="20082" placeholder="current_location" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="current_location._" class="req" tabindex="30081" placeholder="current_location" type="text" value="Current location" />
+<input name="current_location._" class="req" tabindex="30082" placeholder="current_location" type="text" value="Current location" />
 </td>
 <td lang="de" class="langde " >
-<input name="current_location.de" class="req" tabindex="50081" placeholder="current_location" type="text" value="Aktueller Standort" />
+<input name="current_location.de" class="req" tabindex="50082" placeholder="current_location" type="text" value="Aktueller Standort" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">search_location_hint</th><th></th>
+<tr class="odd1"><th class="small">search_location_hint</th><th></th>
 <td class="langnew " >
-<input name="search_location_hint.*" class="req" tabindex="20082" placeholder="search_location_hint" type="text" value=""/></td>
+<input name="search_location_hint.*" class="req" tabindex="20083" placeholder="search_location_hint" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_location_hint._" class="req" tabindex="30082" placeholder="search_location_hint" type="text" value="Search for new location" />
+<input name="search_location_hint._" class="req" tabindex="30083" placeholder="search_location_hint" type="text" value="Search for new location" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_location_hint.de" class="req" tabindex="50082" placeholder="search_location_hint" type="text" value="Neuen Ort suchen" />
+<input name="search_location_hint.de" class="req" tabindex="50083" placeholder="search_location_hint" type="text" value="Neuen Ort suchen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">search_location_title</th><th></th>
+<tr class="odd0"><th class="small">search_location_title</th><th></th>
 <td class="langnew " >
-<input name="search_location_title.*" class="req" tabindex="20083" placeholder="search_location_title" type="text" value=""/></td>
+<input name="search_location_title.*" class="req" tabindex="20084" placeholder="search_location_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_location_title._" class="req" tabindex="30083" placeholder="search_location_title" type="text" value="Search Location" />
+<input name="search_location_title._" class="req" tabindex="30084" placeholder="search_location_title" type="text" value="Search Location" />
 </td>
 <td lang="de" class="langde " >
-<input name="search_location_title.de" class="req" tabindex="50083" placeholder="search_location_title" type="text" value="Ortssuche" />
+<input name="search_location_title.de" class="req" tabindex="50084" placeholder="search_location_title" type="text" value="Ortssuche" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">geo_link</th><th></th>
+<tr class="odd1"><th class="small">geo_link</th><th></th>
 <td class="langnew " >
-<input name="geo_link.*" class="req" tabindex="20084" placeholder="geo_link" type="text" value=""/></td>
+<input name="geo_link.*" class="req" tabindex="20085" placeholder="geo_link" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="geo_link._" class="req" tabindex="30084" placeholder="geo_link" type="text" value="Show on Map" />
+<input name="geo_link._" class="req" tabindex="30085" placeholder="geo_link" type="text" value="Show on Map" />
 </td>
 <td lang="de" class="langde " >
-<input name="geo_link.de" class="req" tabindex="50084" placeholder="geo_link" type="text" value="Auf Karte zeigen" />
+<input name="geo_link.de" class="req" tabindex="50085" placeholder="geo_link" type="text" value="Auf Karte zeigen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">error_msg</th><th></th>
+<tr class="odd0"><th class="small">error_msg</th><th></th>
 <td class="langnew " >
-<input name="error_msg.*" class="req" tabindex="20085" placeholder="error_msg" type="text" value=""/></td>
+<input name="error_msg.*" class="req" tabindex="20086" placeholder="error_msg" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="error_msg._" class="req" tabindex="30085" placeholder="error_msg" type="text" value="Error: %s" />
+<input name="error_msg._" class="req" tabindex="30086" placeholder="error_msg" type="text" value="Error: %s" />
 </td>
 <td lang="de" class="langde " >
-<input name="error_msg.de" class="req" tabindex="50085" placeholder="error_msg" type="text" value="Fehler: %s" />
+<input name="error_msg.de" class="req" tabindex="50086" placeholder="error_msg" type="text" value="Fehler: %s" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">searching_msg</th><th></th>
+<tr class="odd1"><th class="small">searching_msg</th><th></th>
 <td class="langnew " >
-<input name="searching_msg.*" class="req" tabindex="20086" placeholder="searching_msg" type="text" value=""/></td>
+<input name="searching_msg.*" class="req" tabindex="20087" placeholder="searching_msg" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="searching_msg._" class="req" tabindex="30086" placeholder="searching_msg" type="text" value="Searching..." />
+<input name="searching_msg._" class="req" tabindex="30087" placeholder="searching_msg" type="text" value="Searching..." />
 </td>
 <td lang="de" class="langde " >
-<input name="searching_msg.de" class="req" tabindex="50086" placeholder="searching_msg" type="text" value="Suche läuft..." />
+<input name="searching_msg.de" class="req" tabindex="50087" placeholder="searching_msg" type="text" value="Suche läuft..." />
 </td>
 </tr>
-<tr class="odd1"><th class="small">search_empty</th><th></th>
+<tr class="odd0"><th class="small">search_empty</th><th></th>
 <td class="langnew " >
-<input name="search_empty.*" class="req" tabindex="20087" placeholder="search_empty" type="text" value=""/></td>
+<input name="search_empty.*" class="req" tabindex="20088" placeholder="search_empty" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="search_empty._" class="req" tabindex="30087" placeholder="search_empty" type="text" value="Nothing was found." />
+<input name="search_empty._" class="req" tabindex="30088" placeholder="search_empty" type="text" value="Nothing was found." />
 </td>
 <td lang="de" class="langde " >
-<input name="search_empty.de" class="req" tabindex="50087" placeholder="search_empty" type="text" value="Es wurde nichts gefunden." />
+<input name="search_empty.de" class="req" tabindex="50088" placeholder="search_empty" type="text" value="Es wurde nichts gefunden." />
 </td>
 </tr>
-<tr class="odd0"><th class="small">switched_to_location</th><th></th>
+<tr class="odd1"><th class="small">switched_to_location</th><th></th>
 <td class="langnew " >
-<input name="switched_to_location.*" class="req" tabindex="20088" placeholder="switched_to_location" type="text" value=""/></td>
+<input name="switched_to_location.*" class="req" tabindex="20089" placeholder="switched_to_location" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="switched_to_location._" class="req" tabindex="30088" placeholder="switched_to_location" type="text" value="Weather location is %s" />
+<input name="switched_to_location._" class="req" tabindex="30089" placeholder="switched_to_location" type="text" value="Weather location is %s" />
 </td>
 <td lang="de" class="langde " >
-<input name="switched_to_location.de" class="req" tabindex="50088" placeholder="switched_to_location" type="text" value="Wetterstandort ist %s" />
+<input name="switched_to_location.de" class="req" tabindex="50089" placeholder="switched_to_location" type="text" value="Wetterstandort ist %s" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">switched_to_current_location</th><th></th>
+<tr class="odd0"><th class="small">switched_to_current_location</th><th></th>
 <td class="langnew " >
-<input name="switched_to_current_location.*" class="req" tabindex="20089" placeholder="switched_to_current_location" type="text" value=""/></td>
+<input name="switched_to_current_location.*" class="req" tabindex="20090" placeholder="switched_to_current_location" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="switched_to_current_location._" class="req" tabindex="30089" placeholder="switched_to_current_location" type="text" value="Weather location is here" />
+<input name="switched_to_current_location._" class="req" tabindex="30090" placeholder="switched_to_current_location" type="text" value="Weather location is here" />
 </td>
 <td lang="de" class="langde " >
-<input name="switched_to_current_location.de" class="req" tabindex="50089" placeholder="switched_to_current_location" type="text" value="Wetterstandort ist hier" />
+<input name="switched_to_current_location.de" class="req" tabindex="50090" placeholder="switched_to_current_location" type="text" value="Wetterstandort ist hier" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">switched_off_weather</th><th></th>
+<tr class="odd1"><th class="small">switched_off_weather</th><th></th>
 <td class="langnew " >
-<input name="switched_off_weather.*" class="req" tabindex="20090" placeholder="switched_off_weather" type="text" value=""/></td>
+<input name="switched_off_weather.*" class="req" tabindex="20091" placeholder="switched_off_weather" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="switched_off_weather._" class="req" tabindex="30090" placeholder="switched_off_weather" type="text" value="Weather is off" />
+<input name="switched_off_weather._" class="req" tabindex="30091" placeholder="switched_off_weather" type="text" value="Weather is off" />
 </td>
 <td lang="de" class="langde " >
-<input name="switched_off_weather.de" class="req" tabindex="50090" placeholder="switched_off_weather" type="text" value="Wetter ausgeschaltet" />
+<input name="switched_off_weather.de" class="req" tabindex="50091" placeholder="switched_off_weather" type="text" value="Wetter ausgeschaltet" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">location_title</th><th></th>
+<tr class="odd0"><th class="small">location_title</th><th></th>
 <td class="langnew " >
-<input name="location_title.*" class="req" tabindex="20091" placeholder="location_title" type="text" value=""/></td>
+<input name="location_title.*" class="req" tabindex="20092" placeholder="location_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="location_title._" class="req" tabindex="30091" placeholder="location_title" type="text" value="Location Settings" />
+<input name="location_title._" class="req" tabindex="30092" placeholder="location_title" type="text" value="Location Settings" />
 </td>
 <td lang="de" class="langde " >
-<input name="location_title.de" class="req" tabindex="50091" placeholder="location_title" type="text" value="Ortseinstellungen" />
+<input name="location_title.de" class="req" tabindex="50092" placeholder="location_title" type="text" value="Ortseinstellungen" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">loc_cur_title</th><th></th>
+<tr class="odd1"><th class="small">loc_cur_title</th><th></th>
 <td class="langnew " >
-<input name="loc_cur_title.*" class="req" tabindex="20092" placeholder="loc_cur_title" type="text" value=""/></td>
+<input name="loc_cur_title.*" class="req" tabindex="20093" placeholder="loc_cur_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="loc_cur_title._" class="req" tabindex="30092" placeholder="loc_cur_title" type="text" value="Current Location" />
+<input name="loc_cur_title._" class="req" tabindex="30093" placeholder="loc_cur_title" type="text" value="Current Location" />
 </td>
 <td lang="de" class="langde " >
-<input name="loc_cur_title.de" class="req" tabindex="50092" placeholder="loc_cur_title" type="text" value="Aktueller Standort" />
+<input name="loc_cur_title.de" class="req" tabindex="50093" placeholder="loc_cur_title" type="text" value="Aktueller Standort" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">wstart_choice_title</th><th></th>
+<tr class="odd0"><th class="small">wstart_choice_title</th><th></th>
 <td class="langnew " >
-<input name="wstart_choice_title.*" class="req" tabindex="20093" placeholder="wstart_choice_title" type="text" value=""/></td>
+<input name="wstart_choice_title.*" class="req" tabindex="20094" placeholder="wstart_choice_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="wstart_choice_title._" class="req" tabindex="30093" placeholder="wstart_choice_title" type="text" value="First Day of Week" />
+<input name="wstart_choice_title._" class="req" tabindex="30094" placeholder="wstart_choice_title" type="text" value="First Day of Week" />
 </td>
 <td lang="de" class="langde " >
-<input name="wstart_choice_title.de" class="req" tabindex="50093" placeholder="wstart_choice_title" type="text" value="Erster Tag der Woche" />
+<input name="wstart_choice_title.de" class="req" tabindex="50094" placeholder="wstart_choice_title" type="text" value="Erster Tag der Woche" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">tweath_choice_title</th><th></th>
+<tr class="odd1"><th class="small">tweath_choice_title</th><th></th>
 <td class="langnew " >
-<input name="tweath_choice_title.*" class="req" tabindex="20094" placeholder="tweath_choice_title" type="text" value=""/></td>
+<input name="tweath_choice_title.*" class="req" tabindex="20095" placeholder="tweath_choice_title" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="tweath_choice_title._" class="req" tabindex="30094" placeholder="tweath_choice_title" type="text" value="Forecast Choice" />
+<input name="tweath_choice_title._" class="req" tabindex="30095" placeholder="tweath_choice_title" type="text" value="Forecast Choice" />
 </td>
 <td lang="de" class="langde " >
-<input name="tweath_choice_title.de" class="req" tabindex="50094" placeholder="tweath_choice_title" type="text" value="Vorhersageauswahl" />
+<input name="tweath_choice_title.de" class="req" tabindex="50095" placeholder="tweath_choice_title" type="text" value="Vorhersageauswahl" />
 </td>
 </tr>
-<tr class="odd1"><th rowspan="3" class="small">tweath_choice</th><th>0</th>
+<tr class="odd0"><th rowspan="3" class="small">tweath_choice</th><th>0</th>
 <td class="langnew " >
-<input name="tweath_choice.0.*" class="req" tabindex="20095" placeholder="tweath_choice 0" type="text" value=""/></td>
+<input name="tweath_choice.0.*" class="req" tabindex="20096" placeholder="tweath_choice 0" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="tweath_choice.0._" class="req" tabindex="30095" placeholder="tweath_choice 0" type="text" value="Tabular week" />
+<input name="tweath_choice.0._" class="req" tabindex="30096" placeholder="tweath_choice 0" type="text" value="Tabular week" />
 </td>
 <td lang="de" class="langde " >
-<input name="tweath_choice.0.de" class="req" tabindex="50095" placeholder="tweath_choice 0" type="text" value="Wochentabelle" />
-</td>
-</tr>
-<tr class="odd1"><th>1</th>
-<td class="langnew " >
-<input name="tweath_choice.1.*" class="req" tabindex="20096" placeholder="tweath_choice 1" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="tweath_choice.1._" class="req" tabindex="30096" placeholder="tweath_choice 1" type="text" value="Rain on analog clock" />
-</td>
-<td lang="de" class="langde " >
-<input name="tweath_choice.1.de" class="req" tabindex="50096" placeholder="tweath_choice 1" type="text" value="Regen auf Analoguhr" />
-</td>
-</tr>
-<tr class="odd1"><th>2</th>
-<td class="langnew " >
-<input name="tweath_choice.2.*" class="req" tabindex="20097" placeholder="tweath_choice 2" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="tweath_choice.2._" class="req" tabindex="30097" placeholder="tweath_choice 2" type="text" value="Both" />
-</td>
-<td lang="de" class="langde " >
-<input name="tweath_choice.2.de" class="req" tabindex="50097" placeholder="tweath_choice 2" type="text" value="Beides" />
-</td>
-</tr>
-<tr class="odd0"><th class="small">temp_choice_title</th><th></th>
-<td class="langnew " >
-<input name="temp_choice_title.*" class="req" tabindex="20098" placeholder="temp_choice_title" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="temp_choice_title._" class="req" tabindex="30098" placeholder="temp_choice_title" type="text" value="Temperature Unit" />
-</td>
-<td lang="de" class="langde " >
-<input name="temp_choice_title.de" class="req" tabindex="50098" placeholder="temp_choice_title" type="text" value="Temperatureinheit" />
-</td>
-</tr>
-<tr class="odd1"><th></th><th></th>
-<td colspan="3"><p class="preln">Usually, don't translate temperature units, i.e., leave this empty. But if for whatever reason, a temperature unit needs to be translated, then all three entries need to be set. So set either all or none.</p></td></tr><tr class="odd1"><th rowspan="3" class="small">temp_choice</th><th>0</th>
-<td class="langnew " >
-<input name="temp_choice.0.*" class="" tabindex="20099" placeholder="" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="temp_choice.0._" class="" tabindex="30099" placeholder="" type="text" value="K" />
-</td>
-<td lang="de" class="langde " >
-<input name="temp_choice.0.de" class="" tabindex="50099" placeholder="" type="text" value="" />
-</td>
-</tr>
-<tr class="odd1"><th>1</th>
-<td class="langnew " >
-<input name="temp_choice.1.*" class="" tabindex="20100" placeholder="" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="temp_choice.1._" class="" tabindex="30100" placeholder="" type="text" value="°C" />
-</td>
-<td lang="de" class="langde " >
-<input name="temp_choice.1.de" class="" tabindex="50100" placeholder="" type="text" value="" />
-</td>
-</tr>
-<tr class="odd1"><th>2</th>
-<td class="langnew " >
-<input name="temp_choice.2.*" class="" tabindex="20101" placeholder="" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="temp_choice.2._" class="" tabindex="30101" placeholder="" type="text" value="°F" />
-</td>
-<td lang="de" class="langde " >
-<input name="temp_choice.2.de" class="" tabindex="50101" placeholder="" type="text" value="" />
-</td>
-</tr>
-<tr class="odd0"><th class="small">ttype_choice_title</th><th></th>
-<td class="langnew " >
-<input name="ttype_choice_title.*" class="req" tabindex="20102" placeholder="ttype_choice_title" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="ttype_choice_title._" class="req" tabindex="30102" placeholder="ttype_choice_title" type="text" value="Temperature Measure" />
-</td>
-<td lang="de" class="langde " >
-<input name="ttype_choice_title.de" class="req" tabindex="50102" placeholder="ttype_choice_title" type="text" value="Temperaturmaß" />
-</td>
-</tr>
-<tr class="odd1"><th rowspan="2" class="small">ttype_choice</th><th>0</th>
-<td class="langnew " >
-<input name="ttype_choice.0.*" class="req" tabindex="20103" placeholder="ttype_choice 0" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="ttype_choice.0._" class="req" tabindex="30103" placeholder="ttype_choice 0" type="text" value="actual" />
-</td>
-<td lang="de" class="langde " >
-<input name="ttype_choice.0.de" class="req" tabindex="50103" placeholder="ttype_choice 0" type="text" value="tatsächlich" />
-</td>
-</tr>
-<tr class="odd1"><th>1</th>
-<td class="langnew " >
-<input name="ttype_choice.1.*" class="req" tabindex="20104" placeholder="ttype_choice 1" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="ttype_choice.1._" class="req" tabindex="30104" placeholder="ttype_choice 1" type="text" value="apparent" />
-</td>
-<td lang="de" class="langde " >
-<input name="ttype_choice.1.de" class="req" tabindex="50104" placeholder="ttype_choice 1" type="text" value="gefühlt" />
-</td>
-</tr>
-<tr class="odd0"><th class="small">coord_title</th><th></th>
-<td class="langnew " >
-<input name="coord_title.*" class="req" tabindex="20105" placeholder="coord_title" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="coord_title._" class="req" tabindex="30105" placeholder="coord_title" type="text" value="Coordinates" />
-</td>
-<td lang="de" class="langde " >
-<input name="coord_title.de" class="req" tabindex="50105" placeholder="coord_title" type="text" value="Koordinaten" />
-</td>
-</tr>
-<tr class="odd1"><th class="small">latitude</th><th></th>
-<td class="langnew " >
-<input name="latitude.*" class="req" tabindex="20106" placeholder="latitude" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="latitude._" class="req" tabindex="30106" placeholder="latitude" type="text" value="Latitude" />
-</td>
-<td lang="de" class="langde " >
-<input name="latitude.de" class="req" tabindex="50106" placeholder="latitude" type="text" value="Breitengrad" />
-</td>
-</tr>
-<tr class="odd0"><th class="small">longitude</th><th></th>
-<td class="langnew " >
-<input name="longitude.*" class="req" tabindex="20107" placeholder="longitude" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="longitude._" class="req" tabindex="30107" placeholder="longitude" type="text" value="Longitude" />
-</td>
-<td lang="de" class="langde " >
-<input name="longitude.de" class="req" tabindex="50107" placeholder="longitude" type="text" value="Längengrad" />
-</td>
-</tr>
-<tr class="odd1"><th rowspan="6" class="small">weather_code</th><th>0</th>
-<td class="langnew " >
-<input name="weather_code.0.*" class="req" tabindex="20108" placeholder="weather_code 0" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code.0._" class="req" tabindex="30108" placeholder="weather_code 0" type="text" value="clouds" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code.0.de" class="req" tabindex="50108" placeholder="weather_code 0" type="text" value="Wolken" />
-</td>
-</tr>
-<tr class="odd1"><th>1</th>
-<td class="langnew " >
-<input name="weather_code.1.*" class="req" tabindex="20109" placeholder="weather_code 1" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code.1._" class="req" tabindex="30109" placeholder="weather_code 1" type="text" value="fog" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code.1.de" class="req" tabindex="50109" placeholder="weather_code 1" type="text" value="Nebel" />
-</td>
-</tr>
-<tr class="odd1"><th>2</th>
-<td class="langnew " >
-<input name="weather_code.2.*" class="req" tabindex="20110" placeholder="weather_code 2" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code.2._" class="req" tabindex="30110" placeholder="weather_code 2" type="text" value="drizzle" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code.2.de" class="req" tabindex="50110" placeholder="weather_code 2" type="text" value="Niesel" />
-</td>
-</tr>
-<tr class="odd1"><th>3</th>
-<td class="langnew " >
-<input name="weather_code.3.*" class="req" tabindex="20111" placeholder="weather_code 3" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code.3._" class="req" tabindex="30111" placeholder="weather_code 3" type="text" value="rain" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code.3.de" class="req" tabindex="50111" placeholder="weather_code 3" type="text" value="Regen" />
-</td>
-</tr>
-<tr class="odd1"><th>4</th>
-<td class="langnew " >
-<input name="weather_code.4.*" class="req" tabindex="20112" placeholder="weather_code 4" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code.4._" class="req" tabindex="30112" placeholder="weather_code 4" type="text" value="snow" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code.4.de" class="req" tabindex="50112" placeholder="weather_code 4" type="text" value="Schnee" />
-</td>
-</tr>
-<tr class="odd1"><th>5</th>
-<td class="langnew " >
-<input name="weather_code.5.*" class="req" tabindex="20113" placeholder="weather_code 5" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code.5._" class="req" tabindex="30113" placeholder="weather_code 5" type="text" value="thunderstorm" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code.5.de" class="req" tabindex="50113" placeholder="weather_code 5" type="text" value="Gewitter" />
-</td>
-</tr>
-<tr class="odd0"><th rowspan="4" class="small">weather_level</th><th>0</th>
-<td class="langnew " >
-<input name="weather_level.0.*" class="req" tabindex="20114" placeholder="weather_level 0" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_level.0._" class="req" tabindex="30114" placeholder="weather_level 0" type="text" value="none" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_level.0.de" class="req" tabindex="50114" placeholder="weather_level 0" type="text" value="keine" />
+<input name="tweath_choice.0.de" class="req" tabindex="50096" placeholder="tweath_choice 0" type="text" value="Wochentabelle" />
 </td>
 </tr>
 <tr class="odd0"><th>1</th>
 <td class="langnew " >
-<input name="weather_level.1.*" class="req" tabindex="20115" placeholder="weather_level 1" type="text" value=""/></td>
+<input name="tweath_choice.1.*" class="req" tabindex="20097" placeholder="tweath_choice 1" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="weather_level.1._" class="req" tabindex="30115" placeholder="weather_level 1" type="text" value="light" />
+<input name="tweath_choice.1._" class="req" tabindex="30097" placeholder="tweath_choice 1" type="text" value="Rain on analog clock" />
 </td>
 <td lang="de" class="langde " >
-<input name="weather_level.1.de" class="req" tabindex="50115" placeholder="weather_level 1" type="text" value="leicht" />
+<input name="tweath_choice.1.de" class="req" tabindex="50097" placeholder="tweath_choice 1" type="text" value="Regen auf Analoguhr" />
 </td>
 </tr>
 <tr class="odd0"><th>2</th>
 <td class="langnew " >
-<input name="weather_level.2.*" class="req" tabindex="20116" placeholder="weather_level 2" type="text" value=""/></td>
+<input name="tweath_choice.2.*" class="req" tabindex="20098" placeholder="tweath_choice 2" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="weather_level.2._" class="req" tabindex="30116" placeholder="weather_level 2" type="text" value="moderate" />
+<input name="tweath_choice.2._" class="req" tabindex="30098" placeholder="tweath_choice 2" type="text" value="Both" />
 </td>
 <td lang="de" class="langde " >
-<input name="weather_level.2.de" class="req" tabindex="50116" placeholder="weather_level 2" type="text" value="mäßig" />
+<input name="tweath_choice.2.de" class="req" tabindex="50098" placeholder="tweath_choice 2" type="text" value="Beides" />
+</td>
+</tr>
+<tr class="odd1"><th class="small">temp_choice_title</th><th></th>
+<td class="langnew " >
+<input name="temp_choice_title.*" class="req" tabindex="20099" placeholder="temp_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="temp_choice_title._" class="req" tabindex="30099" placeholder="temp_choice_title" type="text" value="Temperature Unit" />
+</td>
+<td lang="de" class="langde " >
+<input name="temp_choice_title.de" class="req" tabindex="50099" placeholder="temp_choice_title" type="text" value="Temperatureinheit" />
+</td>
+</tr>
+<tr class="odd0"><th></th><th></th>
+<td colspan="3"><p class="preln">Usually, don't translate temperature units, i.e., leave this empty. But if for whatever reason, a temperature unit needs to be translated, then all three entries need to be set. So set either all or none.</p></td></tr><tr class="odd0"><th rowspan="3" class="small">temp_choice</th><th>0</th>
+<td class="langnew " >
+<input name="temp_choice.0.*" class="" tabindex="20100" placeholder="" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="temp_choice.0._" class="" tabindex="30100" placeholder="" type="text" value="K" />
+</td>
+<td lang="de" class="langde " >
+<input name="temp_choice.0.de" class="" tabindex="50100" placeholder="" type="text" value="" />
+</td>
+</tr>
+<tr class="odd0"><th>1</th>
+<td class="langnew " >
+<input name="temp_choice.1.*" class="" tabindex="20101" placeholder="" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="temp_choice.1._" class="" tabindex="30101" placeholder="" type="text" value="°C" />
+</td>
+<td lang="de" class="langde " >
+<input name="temp_choice.1.de" class="" tabindex="50101" placeholder="" type="text" value="" />
+</td>
+</tr>
+<tr class="odd0"><th>2</th>
+<td class="langnew " >
+<input name="temp_choice.2.*" class="" tabindex="20102" placeholder="" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="temp_choice.2._" class="" tabindex="30102" placeholder="" type="text" value="°F" />
+</td>
+<td lang="de" class="langde " >
+<input name="temp_choice.2.de" class="" tabindex="50102" placeholder="" type="text" value="" />
+</td>
+</tr>
+<tr class="odd1"><th class="small">ttype_choice_title</th><th></th>
+<td class="langnew " >
+<input name="ttype_choice_title.*" class="req" tabindex="20103" placeholder="ttype_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="ttype_choice_title._" class="req" tabindex="30103" placeholder="ttype_choice_title" type="text" value="Temperature Measure" />
+</td>
+<td lang="de" class="langde " >
+<input name="ttype_choice_title.de" class="req" tabindex="50103" placeholder="ttype_choice_title" type="text" value="Temperaturmaß" />
+</td>
+</tr>
+<tr class="odd0"><th rowspan="2" class="small">ttype_choice</th><th>0</th>
+<td class="langnew " >
+<input name="ttype_choice.0.*" class="req" tabindex="20104" placeholder="ttype_choice 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="ttype_choice.0._" class="req" tabindex="30104" placeholder="ttype_choice 0" type="text" value="actual" />
+</td>
+<td lang="de" class="langde " >
+<input name="ttype_choice.0.de" class="req" tabindex="50104" placeholder="ttype_choice 0" type="text" value="tatsächlich" />
+</td>
+</tr>
+<tr class="odd0"><th>1</th>
+<td class="langnew " >
+<input name="ttype_choice.1.*" class="req" tabindex="20105" placeholder="ttype_choice 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="ttype_choice.1._" class="req" tabindex="30105" placeholder="ttype_choice 1" type="text" value="apparent" />
+</td>
+<td lang="de" class="langde " >
+<input name="ttype_choice.1.de" class="req" tabindex="50105" placeholder="ttype_choice 1" type="text" value="gefühlt" />
+</td>
+</tr>
+<tr class="odd1"><th class="small">coord_title</th><th></th>
+<td class="langnew " >
+<input name="coord_title.*" class="req" tabindex="20106" placeholder="coord_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="coord_title._" class="req" tabindex="30106" placeholder="coord_title" type="text" value="Coordinates" />
+</td>
+<td lang="de" class="langde " >
+<input name="coord_title.de" class="req" tabindex="50106" placeholder="coord_title" type="text" value="Koordinaten" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">latitude</th><th></th>
+<td class="langnew " >
+<input name="latitude.*" class="req" tabindex="20107" placeholder="latitude" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="latitude._" class="req" tabindex="30107" placeholder="latitude" type="text" value="Latitude" />
+</td>
+<td lang="de" class="langde " >
+<input name="latitude.de" class="req" tabindex="50107" placeholder="latitude" type="text" value="Breitengrad" />
+</td>
+</tr>
+<tr class="odd1"><th class="small">longitude</th><th></th>
+<td class="langnew " >
+<input name="longitude.*" class="req" tabindex="20108" placeholder="longitude" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="longitude._" class="req" tabindex="30108" placeholder="longitude" type="text" value="Longitude" />
+</td>
+<td lang="de" class="langde " >
+<input name="longitude.de" class="req" tabindex="50108" placeholder="longitude" type="text" value="Längengrad" />
+</td>
+</tr>
+<tr class="odd0"><th rowspan="6" class="small">weather_code</th><th>0</th>
+<td class="langnew " >
+<input name="weather_code.0.*" class="req" tabindex="20109" placeholder="weather_code 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_code.0._" class="req" tabindex="30109" placeholder="weather_code 0" type="text" value="clouds" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_code.0.de" class="req" tabindex="50109" placeholder="weather_code 0" type="text" value="Wolken" />
+</td>
+</tr>
+<tr class="odd0"><th>1</th>
+<td class="langnew " >
+<input name="weather_code.1.*" class="req" tabindex="20110" placeholder="weather_code 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_code.1._" class="req" tabindex="30110" placeholder="weather_code 1" type="text" value="fog" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_code.1.de" class="req" tabindex="50110" placeholder="weather_code 1" type="text" value="Nebel" />
+</td>
+</tr>
+<tr class="odd0"><th>2</th>
+<td class="langnew " >
+<input name="weather_code.2.*" class="req" tabindex="20111" placeholder="weather_code 2" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_code.2._" class="req" tabindex="30111" placeholder="weather_code 2" type="text" value="drizzle" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_code.2.de" class="req" tabindex="50111" placeholder="weather_code 2" type="text" value="Niesel" />
 </td>
 </tr>
 <tr class="odd0"><th>3</th>
 <td class="langnew " >
-<input name="weather_level.3.*" class="req" tabindex="20117" placeholder="weather_level 3" type="text" value=""/></td>
+<input name="weather_code.3.*" class="req" tabindex="20112" placeholder="weather_code 3" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="weather_level.3._" class="req" tabindex="30117" placeholder="weather_level 3" type="text" value="heavy" />
+<input name="weather_code.3._" class="req" tabindex="30112" placeholder="weather_code 3" type="text" value="rain" />
 </td>
 <td lang="de" class="langde " >
-<input name="weather_level.3.de" class="req" tabindex="50117" placeholder="weather_level 3" type="text" value="stark" />
+<input name="weather_code.3.de" class="req" tabindex="50112" placeholder="weather_code 3" type="text" value="Regen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">weather_icy</th><th></th>
+<tr class="odd0"><th>4</th>
 <td class="langnew " >
-<input name="weather_icy.*" class="req" tabindex="20118" placeholder="weather_icy" type="text" value=""/></td>
+<input name="weather_code.4.*" class="req" tabindex="20113" placeholder="weather_code 4" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="weather_icy._" class="req" tabindex="30118" placeholder="weather_icy" type="text" value="freezing" />
+<input name="weather_code.4._" class="req" tabindex="30113" placeholder="weather_code 4" type="text" value="snow" />
 </td>
 <td lang="de" class="langde " >
-<input name="weather_icy.de" class="req" tabindex="50118" placeholder="weather_icy" type="text" value="gefrierend" />
+<input name="weather_code.4.de" class="req" tabindex="50113" placeholder="weather_code 4" type="text" value="Schnee" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">weather_shower</th><th></th>
+<tr class="odd0"><th>5</th>
 <td class="langnew " >
-<input name="weather_shower.*" class="req" tabindex="20119" placeholder="weather_shower" type="text" value=""/></td>
+<input name="weather_code.5.*" class="req" tabindex="20114" placeholder="weather_code 5" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="weather_shower._" class="req" tabindex="30119" placeholder="weather_shower" type="text" value="shower" />
+<input name="weather_code.5._" class="req" tabindex="30114" placeholder="weather_code 5" type="text" value="thunderstorm" />
 </td>
 <td lang="de" class="langde " >
-<input name="weather_shower.de" class="req" tabindex="50119" placeholder="weather_shower" type="text" value="Schauer" />
+<input name="weather_code.5.de" class="req" tabindex="50114" placeholder="weather_code 5" type="text" value="Gewitter" />
 </td>
 </tr>
-<tr class="odd1"><th></th><th></th>
+<tr class="odd1"><th rowspan="4" class="small">weather_level</th><th>0</th>
+<td class="langnew " >
+<input name="weather_level.0.*" class="req" tabindex="20115" placeholder="weather_level 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_level.0._" class="req" tabindex="30115" placeholder="weather_level 0" type="text" value="none" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_level.0.de" class="req" tabindex="50115" placeholder="weather_level 0" type="text" value="keine" />
+</td>
+</tr>
+<tr class="odd1"><th>1</th>
+<td class="langnew " >
+<input name="weather_level.1.*" class="req" tabindex="20116" placeholder="weather_level 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_level.1._" class="req" tabindex="30116" placeholder="weather_level 1" type="text" value="light" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_level.1.de" class="req" tabindex="50116" placeholder="weather_level 1" type="text" value="leicht" />
+</td>
+</tr>
+<tr class="odd1"><th>2</th>
+<td class="langnew " >
+<input name="weather_level.2.*" class="req" tabindex="20117" placeholder="weather_level 2" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_level.2._" class="req" tabindex="30117" placeholder="weather_level 2" type="text" value="moderate" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_level.2.de" class="req" tabindex="50117" placeholder="weather_level 2" type="text" value="mäßig" />
+</td>
+</tr>
+<tr class="odd1"><th>3</th>
+<td class="langnew " >
+<input name="weather_level.3.*" class="req" tabindex="20118" placeholder="weather_level 3" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_level.3._" class="req" tabindex="30118" placeholder="weather_level 3" type="text" value="heavy" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_level.3.de" class="req" tabindex="50118" placeholder="weather_level 3" type="text" value="stark" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">weather_icy</th><th></th>
+<td class="langnew " >
+<input name="weather_icy.*" class="req" tabindex="20119" placeholder="weather_icy" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_icy._" class="req" tabindex="30119" placeholder="weather_icy" type="text" value="freezing" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_icy.de" class="req" tabindex="50119" placeholder="weather_icy" type="text" value="gefrierend" />
+</td>
+</tr>
+<tr class="odd1"><th class="small">weather_shower</th><th></th>
+<td class="langnew " >
+<input name="weather_shower.*" class="req" tabindex="20120" placeholder="weather_shower" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_shower._" class="req" tabindex="30120" placeholder="weather_shower" type="text" value="shower" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_shower.de" class="req" tabindex="50120" placeholder="weather_shower" type="text" value="Schauer" />
+</td>
+</tr>
+<tr class="odd0"><th></th><th></th>
 <td colspan="3"><p class="preln">This is a list of WMO weather code and a human readable description.
 
 If an entry is an empty string, then it will be computed from weather_code, weather_level, weather_icy, and weather_shower, as a list with commas, e.g., for WMO=0, it would be &quot;clouds, none&quot; and for WMO=67, &quot;rain, heavy, freezing&quot;.
@@ -1357,677 +1371,677 @@ If a full translation is given here, then it must be given after the WMO code fo
 
 If no translation is given, the WMO code may be dropped, but a &quot;;&quot; must remain, because empty items are removed by Android, making this array shorter.
 
-The default translation has full entries, i.e., with WMO code and full description, so that you know what to translate.</p></td></tr><tr class="odd1"><th rowspan="28" class="small">weather_code_descr</th><th>0</th>
+The default translation has full entries, i.e., with WMO code and full description, so that you know what to translate.</p></td></tr><tr class="odd0"><th rowspan="28" class="small">weather_code_descr</th><th>0</th>
 <td class="langnew " >
-<input name="weather_code_descr.0.*" class="req" tabindex="20120" placeholder="weather_code_descr 0" type="text" value=""/></td>
+<input name="weather_code_descr.0.*" class="req" tabindex="20121" placeholder="weather_code_descr 0" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="weather_code_descr.0._" class="req" tabindex="30120" placeholder="weather_code_descr 0" type="text" value="0; clear sky" />
+<input name="weather_code_descr.0._" class="req" tabindex="30121" placeholder="weather_code_descr 0" type="text" value="0; clear sky" />
 </td>
 <td lang="de" class="langde " >
-<input name="weather_code_descr.0.de" class="req" tabindex="50120" placeholder="weather_code_descr 0" type="text" value="0; klarer Himmel" />
-</td>
-</tr>
-<tr class="odd1"><th>1</th>
-<td class="langnew " >
-<input name="weather_code_descr.1.*" class="req" tabindex="20121" placeholder="weather_code_descr 1" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.1._" class="req" tabindex="30121" placeholder="weather_code_descr 1" type="text" value="1; mainly clear" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.1.de" class="req" tabindex="50121" placeholder="weather_code_descr 1" type="text" value="1; weitgehend klar" />
-</td>
-</tr>
-<tr class="odd1"><th>2</th>
-<td class="langnew " >
-<input name="weather_code_descr.2.*" class="req" tabindex="20122" placeholder="weather_code_descr 2" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.2._" class="req" tabindex="30122" placeholder="weather_code_descr 2" type="text" value="2; partly cloudy" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.2.de" class="req" tabindex="50122" placeholder="weather_code_descr 2" type="text" value="2; leicht bewölkt" />
-</td>
-</tr>
-<tr class="odd1"><th>3</th>
-<td class="langnew " >
-<input name="weather_code_descr.3.*" class="req" tabindex="20123" placeholder="weather_code_descr 3" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.3._" class="req" tabindex="30123" placeholder="weather_code_descr 3" type="text" value="3; overcast" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.3.de" class="req" tabindex="50123" placeholder="weather_code_descr 3" type="text" value="3; bewölkt" />
-</td>
-</tr>
-<tr class="odd1"><th>4</th>
-<td class="langnew " >
-<input name="weather_code_descr.4.*" class="req" tabindex="20124" placeholder="weather_code_descr 4" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.4._" class="req" tabindex="30124" placeholder="weather_code_descr 4" type="text" value="45; fog" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.4.de" class="req" tabindex="50124" placeholder="weather_code_descr 4" type="text" value="45; Nebel" />
-</td>
-</tr>
-<tr class="odd1"><th>5</th>
-<td class="langnew " >
-<input name="weather_code_descr.5.*" class="req" tabindex="20125" placeholder="weather_code_descr 5" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.5._" class="req" tabindex="30125" placeholder="weather_code_descr 5" type="text" value="48; depositing rime fog" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.5.de" class="req" tabindex="50125" placeholder="weather_code_descr 5" type="text" value="48; Eisnebel" />
-</td>
-</tr>
-<tr class="odd1"><th>6</th>
-<td class="langnew " >
-<input name="weather_code_descr.6.*" class="req" tabindex="20126" placeholder="weather_code_descr 6" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.6._" class="req" tabindex="30126" placeholder="weather_code_descr 6" type="text" value="51; drizzle, light" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.6.de" class="req" tabindex="50126" placeholder="weather_code_descr 6" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>7</th>
-<td class="langnew " >
-<input name="weather_code_descr.7.*" class="req" tabindex="20127" placeholder="weather_code_descr 7" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.7._" class="req" tabindex="30127" placeholder="weather_code_descr 7" type="text" value="53; drizzle, moderate" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.7.de" class="req" tabindex="50127" placeholder="weather_code_descr 7" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>8</th>
-<td class="langnew " >
-<input name="weather_code_descr.8.*" class="req" tabindex="20128" placeholder="weather_code_descr 8" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.8._" class="req" tabindex="30128" placeholder="weather_code_descr 8" type="text" value="55; drizzle, dense" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.8.de" class="req" tabindex="50128" placeholder="weather_code_descr 8" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>9</th>
-<td class="langnew " >
-<input name="weather_code_descr.9.*" class="req" tabindex="20129" placeholder="weather_code_descr 9" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.9._" class="req" tabindex="30129" placeholder="weather_code_descr 9" type="text" value="56; freezing drizzle, light" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.9.de" class="req" tabindex="50129" placeholder="weather_code_descr 9" type="text" value="56; gefrierender Niesel, leicht" />
-</td>
-</tr>
-<tr class="odd1"><th>10</th>
-<td class="langnew " >
-<input name="weather_code_descr.10.*" class="req" tabindex="20130" placeholder="weather_code_descr 10" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.10._" class="req" tabindex="30130" placeholder="weather_code_descr 10" type="text" value="57; freezing drizzle, dense" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.10.de" class="req" tabindex="50130" placeholder="weather_code_descr 10" type="text" value="57; gefrierender Niesel, stark" />
-</td>
-</tr>
-<tr class="odd1"><th>11</th>
-<td class="langnew " >
-<input name="weather_code_descr.11.*" class="req" tabindex="20131" placeholder="weather_code_descr 11" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.11._" class="req" tabindex="30131" placeholder="weather_code_descr 11" type="text" value="61; rain, slight" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.11.de" class="req" tabindex="50131" placeholder="weather_code_descr 11" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>12</th>
-<td class="langnew " >
-<input name="weather_code_descr.12.*" class="req" tabindex="20132" placeholder="weather_code_descr 12" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.12._" class="req" tabindex="30132" placeholder="weather_code_descr 12" type="text" value="63; rain, moderate" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.12.de" class="req" tabindex="50132" placeholder="weather_code_descr 12" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>13</th>
-<td class="langnew " >
-<input name="weather_code_descr.13.*" class="req" tabindex="20133" placeholder="weather_code_descr 13" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.13._" class="req" tabindex="30133" placeholder="weather_code_descr 13" type="text" value="65; rain, heavy" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.13.de" class="req" tabindex="50133" placeholder="weather_code_descr 13" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>14</th>
-<td class="langnew " >
-<input name="weather_code_descr.14.*" class="req" tabindex="20134" placeholder="weather_code_descr 14" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.14._" class="req" tabindex="30134" placeholder="weather_code_descr 14" type="text" value="66; freezing rain, light" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.14.de" class="req" tabindex="50134" placeholder="weather_code_descr 14" type="text" value="66; gefrierender Regen, leicht" />
-</td>
-</tr>
-<tr class="odd1"><th>15</th>
-<td class="langnew " >
-<input name="weather_code_descr.15.*" class="req" tabindex="20135" placeholder="weather_code_descr 15" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.15._" class="req" tabindex="30135" placeholder="weather_code_descr 15" type="text" value="67; freezing rain, heavy" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.15.de" class="req" tabindex="50135" placeholder="weather_code_descr 15" type="text" value="67; gefrierender Regen, stark" />
-</td>
-</tr>
-<tr class="odd1"><th>16</th>
-<td class="langnew " >
-<input name="weather_code_descr.16.*" class="req" tabindex="20136" placeholder="weather_code_descr 16" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.16._" class="req" tabindex="30136" placeholder="weather_code_descr 16" type="text" value="71; snow fall, slight" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.16.de" class="req" tabindex="50136" placeholder="weather_code_descr 16" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>17</th>
-<td class="langnew " >
-<input name="weather_code_descr.17.*" class="req" tabindex="20137" placeholder="weather_code_descr 17" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.17._" class="req" tabindex="30137" placeholder="weather_code_descr 17" type="text" value="73; snow fall, moderate" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.17.de" class="req" tabindex="50137" placeholder="weather_code_descr 17" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>18</th>
-<td class="langnew " >
-<input name="weather_code_descr.18.*" class="req" tabindex="20138" placeholder="weather_code_descr 18" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.18._" class="req" tabindex="30138" placeholder="weather_code_descr 18" type="text" value="75; snow fall, heavy" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.18.de" class="req" tabindex="50138" placeholder="weather_code_descr 18" type="text" value=";" />
-</td>
-</tr>
-<tr class="odd1"><th>19</th>
-<td class="langnew " >
-<input name="weather_code_descr.19.*" class="req" tabindex="20139" placeholder="weather_code_descr 19" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.19._" class="req" tabindex="30139" placeholder="weather_code_descr 19" type="text" value="77; snow grains" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.19.de" class="req" tabindex="50139" placeholder="weather_code_descr 19" type="text" value="77; Graupel" />
-</td>
-</tr>
-<tr class="odd1"><th>20</th>
-<td class="langnew " >
-<input name="weather_code_descr.20.*" class="req" tabindex="20140" placeholder="weather_code_descr 20" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.20._" class="req" tabindex="30140" placeholder="weather_code_descr 20" type="text" value="80; rain showers, slight" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.20.de" class="req" tabindex="50140" placeholder="weather_code_descr 20" type="text" value="80; Regenschauer, leicht" />
-</td>
-</tr>
-<tr class="odd1"><th>21</th>
-<td class="langnew " >
-<input name="weather_code_descr.21.*" class="req" tabindex="20141" placeholder="weather_code_descr 21" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.21._" class="req" tabindex="30141" placeholder="weather_code_descr 21" type="text" value="81; rain showers, moderate" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.21.de" class="req" tabindex="50141" placeholder="weather_code_descr 21" type="text" value="81; Regenschauer, mäßig" />
-</td>
-</tr>
-<tr class="odd1"><th>22</th>
-<td class="langnew " >
-<input name="weather_code_descr.22.*" class="req" tabindex="20142" placeholder="weather_code_descr 22" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.22._" class="req" tabindex="30142" placeholder="weather_code_descr 22" type="text" value="82; rain showers, violent" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.22.de" class="req" tabindex="50142" placeholder="weather_code_descr 22" type="text" value="82; Regenschauer, stark" />
-</td>
-</tr>
-<tr class="odd1"><th>23</th>
-<td class="langnew " >
-<input name="weather_code_descr.23.*" class="req" tabindex="20143" placeholder="weather_code_descr 23" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.23._" class="req" tabindex="30143" placeholder="weather_code_descr 23" type="text" value="85; snow showers, slight" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.23.de" class="req" tabindex="50143" placeholder="weather_code_descr 23" type="text" value="85; Schneeschauer, leicht" />
-</td>
-</tr>
-<tr class="odd1"><th>24</th>
-<td class="langnew " >
-<input name="weather_code_descr.24.*" class="req" tabindex="20144" placeholder="weather_code_descr 24" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.24._" class="req" tabindex="30144" placeholder="weather_code_descr 24" type="text" value="86; snow showers, heavy" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.24.de" class="req" tabindex="50144" placeholder="weather_code_descr 24" type="text" value="86; Schneeschauer, stark" />
-</td>
-</tr>
-<tr class="odd1"><th>25</th>
-<td class="langnew " >
-<input name="weather_code_descr.25.*" class="req" tabindex="20145" placeholder="weather_code_descr 25" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.25._" class="req" tabindex="30145" placeholder="weather_code_descr 25" type="text" value="95; thunderstorm" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.25.de" class="req" tabindex="50145" placeholder="weather_code_descr 25" type="text" value="95; Gewitter" />
-</td>
-</tr>
-<tr class="odd1"><th>26</th>
-<td class="langnew " >
-<input name="weather_code_descr.26.*" class="req" tabindex="20146" placeholder="weather_code_descr 26" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.26._" class="req" tabindex="30146" placeholder="weather_code_descr 26" type="text" value="96; thunderstorm with hail" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.26.de" class="req" tabindex="50146" placeholder="weather_code_descr 26" type="text" value="96; Gewitter mit Hagel" />
-</td>
-</tr>
-<tr class="odd1"><th>27</th>
-<td class="langnew " >
-<input name="weather_code_descr.27.*" class="req" tabindex="20147" placeholder="weather_code_descr 27" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_code_descr.27._" class="req" tabindex="30147" placeholder="weather_code_descr 27" type="text" value="99; heavy thunderstorm with hail" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_code_descr.27.de" class="req" tabindex="50147" placeholder="weather_code_descr 27" type="text" value="99; starkes Gewitter mit Hagel" />
-</td>
-</tr>
-<tr class="odd0"><th class="small">weather_symbol_title</th><th></th>
-<td class="langnew " >
-<input name="weather_symbol_title.*" class="req" tabindex="20148" placeholder="weather_symbol_title" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="weather_symbol_title._" class="req" tabindex="30148" placeholder="weather_symbol_title" type="text" value="Weather Symbols" />
-</td>
-<td lang="de" class="langde " >
-<input name="weather_symbol_title.de" class="req" tabindex="50148" placeholder="weather_symbol_title" type="text" value="Wetterzeichen" />
-</td>
-</tr>
-<tr class="odd1"><th class="small">contact_choice_title</th><th></th>
-<td class="langnew " >
-<input name="contact_choice_title.*" class="req" tabindex="20149" placeholder="contact_choice_title" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="contact_choice_title._" class="req" tabindex="30149" placeholder="contact_choice_title" type="text" value="Contacts" />
-</td>
-<td lang="de" class="langde " >
-<input name="contact_choice_title.de" class="req" tabindex="50149" placeholder="contact_choice_title" type="text" value="Kontakte" />
-</td>
-</tr>
-<tr class="odd0"><th rowspan="2" class="small">contact_choice</th><th>0</th>
-<td class="langnew " >
-<input name="contact_choice.0.*" class="req" tabindex="20150" placeholder="contact_choice 0" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="contact_choice.0._" class="req" tabindex="30150" placeholder="contact_choice 0" type="text" value="Do not read list" />
-</td>
-<td lang="de" class="langde " >
-<input name="contact_choice.0.de" class="req" tabindex="50150" placeholder="contact_choice 0" type="text" value="Liste nicht auslesen" />
+<input name="weather_code_descr.0.de" class="req" tabindex="50121" placeholder="weather_code_descr 0" type="text" value="0; klarer Himmel" />
 </td>
 </tr>
 <tr class="odd0"><th>1</th>
 <td class="langnew " >
-<input name="contact_choice.1.*" class="req" tabindex="20151" placeholder="contact_choice 1" type="text" value=""/></td>
+<input name="weather_code_descr.1.*" class="req" tabindex="20122" placeholder="weather_code_descr 1" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="contact_choice.1._" class="req" tabindex="30151" placeholder="contact_choice 1" type="text" value="Read list for searching" />
+<input name="weather_code_descr.1._" class="req" tabindex="30122" placeholder="weather_code_descr 1" type="text" value="1; mainly clear" />
 </td>
 <td lang="de" class="langde " >
-<input name="contact_choice.1.de" class="req" tabindex="50151" placeholder="contact_choice 1" type="text" value="Liste auslesen und mitdurchsuchen" />
-</td>
-</tr>
-<tr class="odd1"><th class="small">date_choice_title</th><th></th>
-<td class="langnew " >
-<input name="date_choice_title.*" class="req" tabindex="20152" placeholder="date_choice_title" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="date_choice_title._" class="req" tabindex="30152" placeholder="date_choice_title" type="text" value="Date" />
-</td>
-<td lang="de" class="langde " >
-<input name="date_choice_title.de" class="req" tabindex="50152" placeholder="date_choice_title" type="text" value="Datum" />
-</td>
-</tr>
-<tr class="odd0"><th rowspan="5" class="small">date_choice</th><th>0</th>
-<td class="langnew " >
-<input name="date_choice.0.*" class="req" tabindex="20153" placeholder="date_choice 0" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="date_choice.0._" class="req" tabindex="30153" placeholder="date_choice 0" type="text" value="System settings" />
-</td>
-<td lang="de" class="langde " >
-<input name="date_choice.0.de" class="req" tabindex="50153" placeholder="date_choice 0" type="text" value="Voreinstellung" />
-</td>
-</tr>
-<tr class="odd0"><th>1</th>
-<td class="langnew " >
-<input name="date_choice.1.*" class="req" tabindex="20154" placeholder="date_choice 1" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="date_choice.1._" class="req" tabindex="30154" placeholder="date_choice 1" type="text" value="No date" />
-</td>
-<td lang="de" class="langde " >
-<input name="date_choice.1.de" class="req" tabindex="50154" placeholder="date_choice 1" type="text" value="kein Datum" />
+<input name="weather_code_descr.1.de" class="req" tabindex="50122" placeholder="weather_code_descr 1" type="text" value="1; weitgehend klar" />
 </td>
 </tr>
 <tr class="odd0"><th>2</th>
 <td class="langnew " >
-<input name="date_choice.2.*" class="req" tabindex="20155" placeholder="date_choice 2" type="text" value=""/></td>
+<input name="weather_code_descr.2.*" class="req" tabindex="20123" placeholder="weather_code_descr 2" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="date_choice.2._" class="req" tabindex="30155" placeholder="date_choice 2" type="text" value="2024-01-01" />
+<input name="weather_code_descr.2._" class="req" tabindex="30123" placeholder="weather_code_descr 2" type="text" value="2; partly cloudy" />
 </td>
 <td lang="de" class="langde " >
-<input name="date_choice.2.de" class="req" tabindex="50155" placeholder="date_choice 2" type="text" value="2024-01-01" />
+<input name="weather_code_descr.2.de" class="req" tabindex="50123" placeholder="weather_code_descr 2" type="text" value="2; leicht bewölkt" />
 </td>
 </tr>
 <tr class="odd0"><th>3</th>
 <td class="langnew " >
-<input name="date_choice.3.*" class="req" tabindex="20156" placeholder="date_choice 3" type="text" value=""/></td>
+<input name="weather_code_descr.3.*" class="req" tabindex="20124" placeholder="weather_code_descr 3" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="date_choice.3._" class="req" tabindex="30156" placeholder="date_choice 3" type="text" value="Mon 2024-01-01" />
+<input name="weather_code_descr.3._" class="req" tabindex="30124" placeholder="weather_code_descr 3" type="text" value="3; overcast" />
 </td>
 <td lang="de" class="langde " >
-<input name="date_choice.3.de" class="req" tabindex="50156" placeholder="date_choice 3" type="text" value="Mo. 2024-01-01" />
+<input name="weather_code_descr.3.de" class="req" tabindex="50124" placeholder="weather_code_descr 3" type="text" value="3; bewölkt" />
 </td>
 </tr>
 <tr class="odd0"><th>4</th>
 <td class="langnew " >
-<input name="date_choice.4.*" class="req" tabindex="20157" placeholder="date_choice 4" type="text" value=""/></td>
+<input name="weather_code_descr.4.*" class="req" tabindex="20125" placeholder="weather_code_descr 4" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="date_choice.4._" class="req" tabindex="30157" placeholder="date_choice 4" type="text" value="Monday" />
+<input name="weather_code_descr.4._" class="req" tabindex="30125" placeholder="weather_code_descr 4" type="text" value="45; fog" />
 </td>
 <td lang="de" class="langde " >
-<input name="date_choice.4.de" class="req" tabindex="50157" placeholder="date_choice 4" type="text" value="Montag" />
-</td>
-</tr>
-<tr class="odd1"><th class="small">time_choice_title</th><th></th>
-<td class="langnew " >
-<input name="time_choice_title.*" class="req" tabindex="20158" placeholder="time_choice_title" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="time_choice_title._" class="req" tabindex="30158" placeholder="time_choice_title" type="text" value="Time" />
-</td>
-<td lang="de" class="langde " >
-<input name="time_choice_title.de" class="req" tabindex="50158" placeholder="time_choice_title" type="text" value="Uhr" />
-</td>
-</tr>
-<tr class="odd0"><th rowspan="9" class="small">time_choice</th><th>0</th>
-<td class="langnew " >
-<input name="time_choice.0.*" class="req" tabindex="20159" placeholder="time_choice 0" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="time_choice.0._" class="req" tabindex="30159" placeholder="time_choice 0" type="text" value="System settings" />
-</td>
-<td lang="de" class="langde " >
-<input name="time_choice.0.de" class="req" tabindex="50159" placeholder="time_choice 0" type="text" value="Voreinstellung" />
-</td>
-</tr>
-<tr class="odd0"><th>1</th>
-<td class="langnew " >
-<input name="time_choice.1.*" class="req" tabindex="20160" placeholder="time_choice 1" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="time_choice.1._" class="req" tabindex="30160" placeholder="time_choice 1" type="text" value="No time" />
-</td>
-<td lang="de" class="langde " >
-<input name="time_choice.1.de" class="req" tabindex="50160" placeholder="time_choice 1" type="text" value="keine Uhr" />
-</td>
-</tr>
-<tr class="odd0"><th>2</th>
-<td class="langnew " >
-<input name="time_choice.2.*" class="req" tabindex="20161" placeholder="time_choice 2" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="time_choice.2._" class="req" tabindex="30161" placeholder="time_choice 2" type="text" value="8:30" />
-</td>
-<td lang="de" class="langde " >
-<input name="time_choice.2.de" class="req" tabindex="50161" placeholder="time_choice 2" type="text" value="8:30" />
-</td>
-</tr>
-<tr class="odd0"><th>3</th>
-<td class="langnew " >
-<input name="time_choice.3.*" class="req" tabindex="20162" placeholder="time_choice 3" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="time_choice.3._" class="req" tabindex="30162" placeholder="time_choice 3" type="text" value="08:30" />
-</td>
-<td lang="de" class="langde " >
-<input name="time_choice.3.de" class="req" tabindex="50162" placeholder="time_choice 3" type="text" value="08:30" />
-</td>
-</tr>
-<tr class="odd0"><th>4</th>
-<td class="langnew " >
-<input name="time_choice.4.*" class="req" tabindex="20163" placeholder="time_choice 4" type="text" value=""/></td>
-<td lang="en" class="langdefault " >
-<input name="time_choice.4._" class="req" tabindex="30163" placeholder="time_choice 4" type="text" value="8:30 am" />
-</td>
-<td lang="de" class="langde " >
-<input name="time_choice.4.de" class="req" tabindex="50163" placeholder="time_choice 4" type="text" value="8:30 am" />
+<input name="weather_code_descr.4.de" class="req" tabindex="50125" placeholder="weather_code_descr 4" type="text" value="45; Nebel" />
 </td>
 </tr>
 <tr class="odd0"><th>5</th>
 <td class="langnew " >
-<input name="time_choice.5.*" class="req" tabindex="20164" placeholder="time_choice 5" type="text" value=""/></td>
+<input name="weather_code_descr.5.*" class="req" tabindex="20126" placeholder="weather_code_descr 5" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="time_choice.5._" class="req" tabindex="30164" placeholder="time_choice 5" type="text" value="08:30 am" />
+<input name="weather_code_descr.5._" class="req" tabindex="30126" placeholder="weather_code_descr 5" type="text" value="48; depositing rime fog" />
 </td>
 <td lang="de" class="langde " >
-<input name="time_choice.5.de" class="req" tabindex="50164" placeholder="time_choice 5" type="text" value="08:30 am" />
+<input name="weather_code_descr.5.de" class="req" tabindex="50126" placeholder="weather_code_descr 5" type="text" value="48; Eisnebel" />
 </td>
 </tr>
 <tr class="odd0"><th>6</th>
 <td class="langnew " >
-<input name="time_choice.6.*" class="req" tabindex="20165" placeholder="time_choice 6" type="text" value=""/></td>
+<input name="weather_code_descr.6.*" class="req" tabindex="20127" placeholder="weather_code_descr 6" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="time_choice.6._" class="req" tabindex="30165" placeholder="time_choice 6" type="text" value="Analog" />
+<input name="weather_code_descr.6._" class="req" tabindex="30127" placeholder="weather_code_descr 6" type="text" value="51; drizzle, light" />
 </td>
 <td lang="de" class="langde " >
-<input name="time_choice.6.de" class="req" tabindex="50165" placeholder="time_choice 6" type="text" value="Analog" />
+<input name="weather_code_descr.6.de" class="req" tabindex="50127" placeholder="weather_code_descr 6" type="text" value=";" />
 </td>
 </tr>
 <tr class="odd0"><th>7</th>
 <td class="langnew " >
-<input name="time_choice.7.*" class="req" tabindex="20166" placeholder="time_choice 7" type="text" value=""/></td>
+<input name="weather_code_descr.7.*" class="req" tabindex="20128" placeholder="weather_code_descr 7" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="time_choice.7._" class="req" tabindex="30166" placeholder="time_choice 7" type="text" value="Words" />
+<input name="weather_code_descr.7._" class="req" tabindex="30128" placeholder="weather_code_descr 7" type="text" value="53; drizzle, moderate" />
 </td>
 <td lang="de" class="langde " >
-<input name="time_choice.7.de" class="req" tabindex="50166" placeholder="time_choice 7" type="text" value="Wörter" />
+<input name="weather_code_descr.7.de" class="req" tabindex="50128" placeholder="weather_code_descr 7" type="text" value=";" />
 </td>
 </tr>
 <tr class="odd0"><th>8</th>
 <td class="langnew " >
-<input name="time_choice.8.*" class="req" tabindex="20167" placeholder="time_choice 8" type="text" value=""/></td>
+<input name="weather_code_descr.8.*" class="req" tabindex="20129" placeholder="weather_code_descr 8" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="time_choice.8._" class="req" tabindex="30167" placeholder="time_choice 8" type="text" value="Grid" />
+<input name="weather_code_descr.8._" class="req" tabindex="30129" placeholder="weather_code_descr 8" type="text" value="55; drizzle, dense" />
 </td>
 <td lang="de" class="langde " >
-<input name="time_choice.8.de" class="req" tabindex="50167" placeholder="time_choice 8" type="text" value="Kreuzwort" />
+<input name="weather_code_descr.8.de" class="req" tabindex="50129" placeholder="weather_code_descr 8" type="text" value=";" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">color_choice_title</th><th></th>
+<tr class="odd0"><th>9</th>
 <td class="langnew " >
-<input name="color_choice_title.*" class="req" tabindex="20168" placeholder="color_choice_title" type="text" value=""/></td>
+<input name="weather_code_descr.9.*" class="req" tabindex="20130" placeholder="weather_code_descr 9" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice_title._" class="req" tabindex="30168" placeholder="color_choice_title" type="text" value="Colour" />
+<input name="weather_code_descr.9._" class="req" tabindex="30130" placeholder="weather_code_descr 9" type="text" value="56; freezing drizzle, light" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice_title.de" class="req" tabindex="50168" placeholder="color_choice_title" type="text" value="Farbe" />
+<input name="weather_code_descr.9.de" class="req" tabindex="50130" placeholder="weather_code_descr 9" type="text" value="56; gefrierender Niesel, leicht" />
 </td>
 </tr>
-<tr class="odd0"><th rowspan="7" class="small">color_choice</th><th>0</th>
+<tr class="odd0"><th>10</th>
 <td class="langnew " >
-<input name="color_choice.0.*" class="req" tabindex="20169" placeholder="color_choice 0" type="text" value=""/></td>
+<input name="weather_code_descr.10.*" class="req" tabindex="20131" placeholder="weather_code_descr 10" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice.0._" class="req" tabindex="30169" placeholder="color_choice 0" type="text" value="Achromic" />
+<input name="weather_code_descr.10._" class="req" tabindex="30131" placeholder="weather_code_descr 10" type="text" value="57; freezing drizzle, dense" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice.0.de" class="req" tabindex="50169" placeholder="color_choice 0" type="text" value="Farblos" />
+<input name="weather_code_descr.10.de" class="req" tabindex="50131" placeholder="weather_code_descr 10" type="text" value="57; gefrierender Niesel, stark" />
 </td>
 </tr>
-<tr class="odd0"><th>1</th>
+<tr class="odd0"><th>11</th>
 <td class="langnew " >
-<input name="color_choice.1.*" class="req" tabindex="20170" placeholder="color_choice 1" type="text" value=""/></td>
+<input name="weather_code_descr.11.*" class="req" tabindex="20132" placeholder="weather_code_descr 11" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice.1._" class="req" tabindex="30170" placeholder="color_choice 1" type="text" value="Amber" />
+<input name="weather_code_descr.11._" class="req" tabindex="30132" placeholder="weather_code_descr 11" type="text" value="61; rain, slight" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice.1.de" class="req" tabindex="50170" placeholder="color_choice 1" type="text" value="Bernstein" />
+<input name="weather_code_descr.11.de" class="req" tabindex="50132" placeholder="weather_code_descr 11" type="text" value=";" />
 </td>
 </tr>
-<tr class="odd0"><th>2</th>
+<tr class="odd0"><th>12</th>
 <td class="langnew " >
-<input name="color_choice.2.*" class="req" tabindex="20171" placeholder="color_choice 2" type="text" value=""/></td>
+<input name="weather_code_descr.12.*" class="req" tabindex="20133" placeholder="weather_code_descr 12" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice.2._" class="req" tabindex="30171" placeholder="color_choice 2" type="text" value="Pumpkin" />
+<input name="weather_code_descr.12._" class="req" tabindex="30133" placeholder="weather_code_descr 12" type="text" value="63; rain, moderate" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice.2.de" class="req" tabindex="50171" placeholder="color_choice 2" type="text" value="Kürbis" />
+<input name="weather_code_descr.12.de" class="req" tabindex="50133" placeholder="weather_code_descr 12" type="text" value=";" />
 </td>
 </tr>
-<tr class="odd0"><th>3</th>
+<tr class="odd0"><th>13</th>
 <td class="langnew " >
-<input name="color_choice.3.*" class="req" tabindex="20172" placeholder="color_choice 3" type="text" value=""/></td>
+<input name="weather_code_descr.13.*" class="req" tabindex="20134" placeholder="weather_code_descr 13" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice.3._" class="req" tabindex="30172" placeholder="color_choice 3" type="text" value="Red" />
+<input name="weather_code_descr.13._" class="req" tabindex="30134" placeholder="weather_code_descr 13" type="text" value="65; rain, heavy" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice.3.de" class="req" tabindex="50172" placeholder="color_choice 3" type="text" value="Rot" />
+<input name="weather_code_descr.13.de" class="req" tabindex="50134" placeholder="weather_code_descr 13" type="text" value=";" />
 </td>
 </tr>
-<tr class="odd0"><th>4</th>
+<tr class="odd0"><th>14</th>
 <td class="langnew " >
-<input name="color_choice.4.*" class="req" tabindex="20173" placeholder="color_choice 4" type="text" value=""/></td>
+<input name="weather_code_descr.14.*" class="req" tabindex="20135" placeholder="weather_code_descr 14" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice.4._" class="req" tabindex="30173" placeholder="color_choice 4" type="text" value="Lilac" />
+<input name="weather_code_descr.14._" class="req" tabindex="30135" placeholder="weather_code_descr 14" type="text" value="66; freezing rain, light" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice.4.de" class="req" tabindex="50173" placeholder="color_choice 4" type="text" value="Veilchen" />
+<input name="weather_code_descr.14.de" class="req" tabindex="50135" placeholder="weather_code_descr 14" type="text" value="66; gefrierender Regen, leicht" />
 </td>
 </tr>
-<tr class="odd0"><th>5</th>
+<tr class="odd0"><th>15</th>
 <td class="langnew " >
-<input name="color_choice.5.*" class="req" tabindex="20174" placeholder="color_choice 5" type="text" value=""/></td>
+<input name="weather_code_descr.15.*" class="req" tabindex="20136" placeholder="weather_code_descr 15" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice.5._" class="req" tabindex="30174" placeholder="color_choice 5" type="text" value="Blue" />
+<input name="weather_code_descr.15._" class="req" tabindex="30136" placeholder="weather_code_descr 15" type="text" value="67; freezing rain, heavy" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice.5.de" class="req" tabindex="50174" placeholder="color_choice 5" type="text" value="Blau" />
+<input name="weather_code_descr.15.de" class="req" tabindex="50136" placeholder="weather_code_descr 15" type="text" value="67; gefrierender Regen, stark" />
 </td>
 </tr>
-<tr class="odd0"><th>6</th>
+<tr class="odd0"><th>16</th>
 <td class="langnew " >
-<input name="color_choice.6.*" class="req" tabindex="20175" placeholder="color_choice 6" type="text" value=""/></td>
+<input name="weather_code_descr.16.*" class="req" tabindex="20137" placeholder="weather_code_descr 16" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="color_choice.6._" class="req" tabindex="30175" placeholder="color_choice 6" type="text" value="Cyan" />
+<input name="weather_code_descr.16._" class="req" tabindex="30137" placeholder="weather_code_descr 16" type="text" value="71; snow fall, slight" />
 </td>
 <td lang="de" class="langde " >
-<input name="color_choice.6.de" class="req" tabindex="50175" placeholder="color_choice 6" type="text" value="Türkis" />
+<input name="weather_code_descr.16.de" class="req" tabindex="50137" placeholder="weather_code_descr 16" type="text" value=";" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">font_choice_title</th><th></th>
+<tr class="odd0"><th>17</th>
 <td class="langnew " >
-<input name="font_choice_title.*" class="req" tabindex="20176" placeholder="font_choice_title" type="text" value=""/></td>
+<input name="weather_code_descr.17.*" class="req" tabindex="20138" placeholder="weather_code_descr 17" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="font_choice_title._" class="req" tabindex="30176" placeholder="font_choice_title" type="text" value="Font" />
+<input name="weather_code_descr.17._" class="req" tabindex="30138" placeholder="weather_code_descr 17" type="text" value="73; snow fall, moderate" />
 </td>
 <td lang="de" class="langde " >
-<input name="font_choice_title.de" class="req" tabindex="50176" placeholder="font_choice_title" type="text" value="Font" />
+<input name="weather_code_descr.17.de" class="req" tabindex="50138" placeholder="weather_code_descr 17" type="text" value=";" />
 </td>
 </tr>
-<tr class="odd0"><th rowspan="5" class="small">font_choice</th><th>0</th>
+<tr class="odd0"><th>18</th>
 <td class="langnew " >
-<input name="font_choice.0.*" class="req" tabindex="20177" placeholder="font_choice 0" type="text" value=""/></td>
+<input name="weather_code_descr.18.*" class="req" tabindex="20139" placeholder="weather_code_descr 18" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="font_choice.0._" class="req" tabindex="30177" placeholder="font_choice 0" type="text" value="Sans Serif" />
+<input name="weather_code_descr.18._" class="req" tabindex="30139" placeholder="weather_code_descr 18" type="text" value="75; snow fall, heavy" />
 </td>
 <td lang="de" class="langde " >
-<input name="font_choice.0.de" class="req" tabindex="50177" placeholder="font_choice 0" type="text" value="Sans Serif" />
+<input name="weather_code_descr.18.de" class="req" tabindex="50139" placeholder="weather_code_descr 18" type="text" value=";" />
 </td>
 </tr>
-<tr class="odd0"><th>1</th>
+<tr class="odd0"><th>19</th>
 <td class="langnew " >
-<input name="font_choice.1.*" class="req" tabindex="20178" placeholder="font_choice 1" type="text" value=""/></td>
+<input name="weather_code_descr.19.*" class="req" tabindex="20140" placeholder="weather_code_descr 19" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="font_choice.1._" class="req" tabindex="30178" placeholder="font_choice 1" type="text" value="Serif" />
+<input name="weather_code_descr.19._" class="req" tabindex="30140" placeholder="weather_code_descr 19" type="text" value="77; snow grains" />
 </td>
 <td lang="de" class="langde " >
-<input name="font_choice.1.de" class="req" tabindex="50178" placeholder="font_choice 1" type="text" value="Serif" />
+<input name="weather_code_descr.19.de" class="req" tabindex="50140" placeholder="weather_code_descr 19" type="text" value="77; Graupel" />
 </td>
 </tr>
-<tr class="odd0"><th>2</th>
+<tr class="odd0"><th>20</th>
 <td class="langnew " >
-<input name="font_choice.2.*" class="req" tabindex="20179" placeholder="font_choice 2" type="text" value=""/></td>
+<input name="weather_code_descr.20.*" class="req" tabindex="20141" placeholder="weather_code_descr 20" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="font_choice.2._" class="req" tabindex="30179" placeholder="font_choice 2" type="text" value="Monospace" />
+<input name="weather_code_descr.20._" class="req" tabindex="30141" placeholder="weather_code_descr 20" type="text" value="80; rain showers, slight" />
 </td>
 <td lang="de" class="langde " >
-<input name="font_choice.2.de" class="req" tabindex="50179" placeholder="font_choice 2" type="text" value="Monospace" />
+<input name="weather_code_descr.20.de" class="req" tabindex="50141" placeholder="weather_code_descr 20" type="text" value="80; Regenschauer, leicht" />
 </td>
 </tr>
-<tr class="odd0"><th>3</th>
+<tr class="odd0"><th>21</th>
 <td class="langnew " >
-<input name="font_choice.3.*" class="req" tabindex="20180" placeholder="font_choice 3" type="text" value=""/></td>
+<input name="weather_code_descr.21.*" class="req" tabindex="20142" placeholder="weather_code_descr 21" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="font_choice.3._" class="req" tabindex="30180" placeholder="font_choice 3" type="text" value="Cursive" />
+<input name="weather_code_descr.21._" class="req" tabindex="30142" placeholder="weather_code_descr 21" type="text" value="81; rain showers, moderate" />
 </td>
 <td lang="de" class="langde " >
-<input name="font_choice.3.de" class="req" tabindex="50180" placeholder="font_choice 3" type="text" value="Handschrift" />
+<input name="weather_code_descr.21.de" class="req" tabindex="50142" placeholder="weather_code_descr 21" type="text" value="81; Regenschauer, mäßig" />
 </td>
 </tr>
-<tr class="odd0"><th>4</th>
+<tr class="odd0"><th>22</th>
 <td class="langnew " >
-<input name="font_choice.4.*" class="req" tabindex="20181" placeholder="font_choice 4" type="text" value=""/></td>
+<input name="weather_code_descr.22.*" class="req" tabindex="20143" placeholder="weather_code_descr 22" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="font_choice.4._" class="req" tabindex="30181" placeholder="font_choice 4" type="text" value="Ubuntu" />
+<input name="weather_code_descr.22._" class="req" tabindex="30143" placeholder="weather_code_descr 22" type="text" value="82; rain showers, violent" />
 </td>
 <td lang="de" class="langde " >
-<input name="font_choice.4.de" class="req" tabindex="50181" placeholder="font_choice 4" type="text" value="Ubuntu" />
+<input name="weather_code_descr.22.de" class="req" tabindex="50143" placeholder="weather_code_descr 22" type="text" value="82; Regenschauer, stark" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">back_choice_title</th><th></th>
+<tr class="odd0"><th>23</th>
 <td class="langnew " >
-<input name="back_choice_title.*" class="req" tabindex="20182" placeholder="back_choice_title" type="text" value=""/></td>
+<input name="weather_code_descr.23.*" class="req" tabindex="20144" placeholder="weather_code_descr 23" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="back_choice_title._" class="req" tabindex="30182" placeholder="back_choice_title" type="text" value="Background" />
+<input name="weather_code_descr.23._" class="req" tabindex="30144" placeholder="weather_code_descr 23" type="text" value="85; snow showers, slight" />
 </td>
 <td lang="de" class="langde " >
-<input name="back_choice_title.de" class="req" tabindex="50182" placeholder="back_choice_title" type="text" value="Hintergrund" />
+<input name="weather_code_descr.23.de" class="req" tabindex="50144" placeholder="weather_code_descr 23" type="text" value="85; Schneeschauer, leicht" />
 </td>
 </tr>
-<tr class="odd0"><th rowspan="3" class="small">back_choice</th><th>0</th>
+<tr class="odd0"><th>24</th>
 <td class="langnew " >
-<input name="back_choice.0.*" class="req" tabindex="20183" placeholder="back_choice 0" type="text" value=""/></td>
+<input name="weather_code_descr.24.*" class="req" tabindex="20145" placeholder="weather_code_descr 24" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="back_choice.0._" class="req" tabindex="30183" placeholder="back_choice 0" type="text" value="Opaque" />
+<input name="weather_code_descr.24._" class="req" tabindex="30145" placeholder="weather_code_descr 24" type="text" value="86; snow showers, heavy" />
 </td>
 <td lang="de" class="langde " >
-<input name="back_choice.0.de" class="req" tabindex="50183" placeholder="back_choice 0" type="text" value="Einfarbig" />
+<input name="weather_code_descr.24.de" class="req" tabindex="50145" placeholder="weather_code_descr 24" type="text" value="86; Schneeschauer, stark" />
 </td>
 </tr>
-<tr class="odd0"><th>1</th>
+<tr class="odd0"><th>25</th>
 <td class="langnew " >
-<input name="back_choice.1.*" class="req" tabindex="20184" placeholder="back_choice 1" type="text" value=""/></td>
+<input name="weather_code_descr.25.*" class="req" tabindex="20146" placeholder="weather_code_descr 25" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="back_choice.1._" class="req" tabindex="30184" placeholder="back_choice 1" type="text" value="Translucent" />
+<input name="weather_code_descr.25._" class="req" tabindex="30146" placeholder="weather_code_descr 25" type="text" value="95; thunderstorm" />
 </td>
 <td lang="de" class="langde " >
-<input name="back_choice.1.de" class="req" tabindex="50184" placeholder="back_choice 1" type="text" value="Durchscheinend" />
+<input name="weather_code_descr.25.de" class="req" tabindex="50146" placeholder="weather_code_descr 25" type="text" value="95; Gewitter" />
 </td>
 </tr>
-<tr class="odd0"><th>2</th>
+<tr class="odd0"><th>26</th>
 <td class="langnew " >
-<input name="back_choice.2.*" class="req" tabindex="20185" placeholder="back_choice 2" type="text" value=""/></td>
+<input name="weather_code_descr.26.*" class="req" tabindex="20147" placeholder="weather_code_descr 26" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="back_choice.2._" class="req" tabindex="30185" placeholder="back_choice 2" type="text" value="Transparent" />
+<input name="weather_code_descr.26._" class="req" tabindex="30147" placeholder="weather_code_descr 26" type="text" value="96; thunderstorm with hail" />
 </td>
 <td lang="de" class="langde " >
-<input name="back_choice.2.de" class="req" tabindex="50185" placeholder="back_choice 2" type="text" value="Durchsichtig" />
+<input name="weather_code_descr.26.de" class="req" tabindex="50147" placeholder="weather_code_descr 26" type="text" value="96; Gewitter mit Hagel" />
 </td>
 </tr>
-<tr class="odd1"><th></th><th></th>
+<tr class="odd0"><th>27</th>
+<td class="langnew " >
+<input name="weather_code_descr.27.*" class="req" tabindex="20148" placeholder="weather_code_descr 27" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_code_descr.27._" class="req" tabindex="30148" placeholder="weather_code_descr 27" type="text" value="99; heavy thunderstorm with hail" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_code_descr.27.de" class="req" tabindex="50148" placeholder="weather_code_descr 27" type="text" value="99; starkes Gewitter mit Hagel" />
+</td>
+</tr>
+<tr class="odd1"><th class="small">weather_symbol_title</th><th></th>
+<td class="langnew " >
+<input name="weather_symbol_title.*" class="req" tabindex="20149" placeholder="weather_symbol_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="weather_symbol_title._" class="req" tabindex="30149" placeholder="weather_symbol_title" type="text" value="Weather Symbols" />
+</td>
+<td lang="de" class="langde " >
+<input name="weather_symbol_title.de" class="req" tabindex="50149" placeholder="weather_symbol_title" type="text" value="Wetterzeichen" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">contact_choice_title</th><th></th>
+<td class="langnew " >
+<input name="contact_choice_title.*" class="req" tabindex="20150" placeholder="contact_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="contact_choice_title._" class="req" tabindex="30150" placeholder="contact_choice_title" type="text" value="Contacts" />
+</td>
+<td lang="de" class="langde " >
+<input name="contact_choice_title.de" class="req" tabindex="50150" placeholder="contact_choice_title" type="text" value="Kontakte" />
+</td>
+</tr>
+<tr class="odd1"><th rowspan="2" class="small">contact_choice</th><th>0</th>
+<td class="langnew " >
+<input name="contact_choice.0.*" class="req" tabindex="20151" placeholder="contact_choice 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="contact_choice.0._" class="req" tabindex="30151" placeholder="contact_choice 0" type="text" value="Do not read list" />
+</td>
+<td lang="de" class="langde " >
+<input name="contact_choice.0.de" class="req" tabindex="50151" placeholder="contact_choice 0" type="text" value="Liste nicht auslesen" />
+</td>
+</tr>
+<tr class="odd1"><th>1</th>
+<td class="langnew " >
+<input name="contact_choice.1.*" class="req" tabindex="20152" placeholder="contact_choice 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="contact_choice.1._" class="req" tabindex="30152" placeholder="contact_choice 1" type="text" value="Read list for searching" />
+</td>
+<td lang="de" class="langde " >
+<input name="contact_choice.1.de" class="req" tabindex="50152" placeholder="contact_choice 1" type="text" value="Liste auslesen und mitdurchsuchen" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">date_choice_title</th><th></th>
+<td class="langnew " >
+<input name="date_choice_title.*" class="req" tabindex="20153" placeholder="date_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="date_choice_title._" class="req" tabindex="30153" placeholder="date_choice_title" type="text" value="Date" />
+</td>
+<td lang="de" class="langde " >
+<input name="date_choice_title.de" class="req" tabindex="50153" placeholder="date_choice_title" type="text" value="Datum" />
+</td>
+</tr>
+<tr class="odd1"><th rowspan="5" class="small">date_choice</th><th>0</th>
+<td class="langnew " >
+<input name="date_choice.0.*" class="req" tabindex="20154" placeholder="date_choice 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="date_choice.0._" class="req" tabindex="30154" placeholder="date_choice 0" type="text" value="System settings" />
+</td>
+<td lang="de" class="langde " >
+<input name="date_choice.0.de" class="req" tabindex="50154" placeholder="date_choice 0" type="text" value="Voreinstellung" />
+</td>
+</tr>
+<tr class="odd1"><th>1</th>
+<td class="langnew " >
+<input name="date_choice.1.*" class="req" tabindex="20155" placeholder="date_choice 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="date_choice.1._" class="req" tabindex="30155" placeholder="date_choice 1" type="text" value="No date" />
+</td>
+<td lang="de" class="langde " >
+<input name="date_choice.1.de" class="req" tabindex="50155" placeholder="date_choice 1" type="text" value="kein Datum" />
+</td>
+</tr>
+<tr class="odd1"><th>2</th>
+<td class="langnew " >
+<input name="date_choice.2.*" class="req" tabindex="20156" placeholder="date_choice 2" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="date_choice.2._" class="req" tabindex="30156" placeholder="date_choice 2" type="text" value="2024-01-01" />
+</td>
+<td lang="de" class="langde " >
+<input name="date_choice.2.de" class="req" tabindex="50156" placeholder="date_choice 2" type="text" value="2024-01-01" />
+</td>
+</tr>
+<tr class="odd1"><th>3</th>
+<td class="langnew " >
+<input name="date_choice.3.*" class="req" tabindex="20157" placeholder="date_choice 3" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="date_choice.3._" class="req" tabindex="30157" placeholder="date_choice 3" type="text" value="Mon 2024-01-01" />
+</td>
+<td lang="de" class="langde " >
+<input name="date_choice.3.de" class="req" tabindex="50157" placeholder="date_choice 3" type="text" value="Mo. 2024-01-01" />
+</td>
+</tr>
+<tr class="odd1"><th>4</th>
+<td class="langnew " >
+<input name="date_choice.4.*" class="req" tabindex="20158" placeholder="date_choice 4" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="date_choice.4._" class="req" tabindex="30158" placeholder="date_choice 4" type="text" value="Monday" />
+</td>
+<td lang="de" class="langde " >
+<input name="date_choice.4.de" class="req" tabindex="50158" placeholder="date_choice 4" type="text" value="Montag" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">time_choice_title</th><th></th>
+<td class="langnew " >
+<input name="time_choice_title.*" class="req" tabindex="20159" placeholder="time_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice_title._" class="req" tabindex="30159" placeholder="time_choice_title" type="text" value="Time" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice_title.de" class="req" tabindex="50159" placeholder="time_choice_title" type="text" value="Uhr" />
+</td>
+</tr>
+<tr class="odd1"><th rowspan="9" class="small">time_choice</th><th>0</th>
+<td class="langnew " >
+<input name="time_choice.0.*" class="req" tabindex="20160" placeholder="time_choice 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.0._" class="req" tabindex="30160" placeholder="time_choice 0" type="text" value="System settings" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.0.de" class="req" tabindex="50160" placeholder="time_choice 0" type="text" value="Voreinstellung" />
+</td>
+</tr>
+<tr class="odd1"><th>1</th>
+<td class="langnew " >
+<input name="time_choice.1.*" class="req" tabindex="20161" placeholder="time_choice 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.1._" class="req" tabindex="30161" placeholder="time_choice 1" type="text" value="No time" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.1.de" class="req" tabindex="50161" placeholder="time_choice 1" type="text" value="keine Uhr" />
+</td>
+</tr>
+<tr class="odd1"><th>2</th>
+<td class="langnew " >
+<input name="time_choice.2.*" class="req" tabindex="20162" placeholder="time_choice 2" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.2._" class="req" tabindex="30162" placeholder="time_choice 2" type="text" value="8:30" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.2.de" class="req" tabindex="50162" placeholder="time_choice 2" type="text" value="8:30" />
+</td>
+</tr>
+<tr class="odd1"><th>3</th>
+<td class="langnew " >
+<input name="time_choice.3.*" class="req" tabindex="20163" placeholder="time_choice 3" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.3._" class="req" tabindex="30163" placeholder="time_choice 3" type="text" value="08:30" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.3.de" class="req" tabindex="50163" placeholder="time_choice 3" type="text" value="08:30" />
+</td>
+</tr>
+<tr class="odd1"><th>4</th>
+<td class="langnew " >
+<input name="time_choice.4.*" class="req" tabindex="20164" placeholder="time_choice 4" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.4._" class="req" tabindex="30164" placeholder="time_choice 4" type="text" value="8:30 am" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.4.de" class="req" tabindex="50164" placeholder="time_choice 4" type="text" value="8:30 am" />
+</td>
+</tr>
+<tr class="odd1"><th>5</th>
+<td class="langnew " >
+<input name="time_choice.5.*" class="req" tabindex="20165" placeholder="time_choice 5" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.5._" class="req" tabindex="30165" placeholder="time_choice 5" type="text" value="08:30 am" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.5.de" class="req" tabindex="50165" placeholder="time_choice 5" type="text" value="08:30 am" />
+</td>
+</tr>
+<tr class="odd1"><th>6</th>
+<td class="langnew " >
+<input name="time_choice.6.*" class="req" tabindex="20166" placeholder="time_choice 6" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.6._" class="req" tabindex="30166" placeholder="time_choice 6" type="text" value="Analog" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.6.de" class="req" tabindex="50166" placeholder="time_choice 6" type="text" value="Analog" />
+</td>
+</tr>
+<tr class="odd1"><th>7</th>
+<td class="langnew " >
+<input name="time_choice.7.*" class="req" tabindex="20167" placeholder="time_choice 7" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.7._" class="req" tabindex="30167" placeholder="time_choice 7" type="text" value="Words" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.7.de" class="req" tabindex="50167" placeholder="time_choice 7" type="text" value="Wörter" />
+</td>
+</tr>
+<tr class="odd1"><th>8</th>
+<td class="langnew " >
+<input name="time_choice.8.*" class="req" tabindex="20168" placeholder="time_choice 8" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="time_choice.8._" class="req" tabindex="30168" placeholder="time_choice 8" type="text" value="Grid" />
+</td>
+<td lang="de" class="langde " >
+<input name="time_choice.8.de" class="req" tabindex="50168" placeholder="time_choice 8" type="text" value="Kreuzwort" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">color_choice_title</th><th></th>
+<td class="langnew " >
+<input name="color_choice_title.*" class="req" tabindex="20169" placeholder="color_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice_title._" class="req" tabindex="30169" placeholder="color_choice_title" type="text" value="Colour" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice_title.de" class="req" tabindex="50169" placeholder="color_choice_title" type="text" value="Farbe" />
+</td>
+</tr>
+<tr class="odd1"><th rowspan="7" class="small">color_choice</th><th>0</th>
+<td class="langnew " >
+<input name="color_choice.0.*" class="req" tabindex="20170" placeholder="color_choice 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice.0._" class="req" tabindex="30170" placeholder="color_choice 0" type="text" value="Achromic" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice.0.de" class="req" tabindex="50170" placeholder="color_choice 0" type="text" value="Farblos" />
+</td>
+</tr>
+<tr class="odd1"><th>1</th>
+<td class="langnew " >
+<input name="color_choice.1.*" class="req" tabindex="20171" placeholder="color_choice 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice.1._" class="req" tabindex="30171" placeholder="color_choice 1" type="text" value="Amber" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice.1.de" class="req" tabindex="50171" placeholder="color_choice 1" type="text" value="Bernstein" />
+</td>
+</tr>
+<tr class="odd1"><th>2</th>
+<td class="langnew " >
+<input name="color_choice.2.*" class="req" tabindex="20172" placeholder="color_choice 2" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice.2._" class="req" tabindex="30172" placeholder="color_choice 2" type="text" value="Pumpkin" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice.2.de" class="req" tabindex="50172" placeholder="color_choice 2" type="text" value="Kürbis" />
+</td>
+</tr>
+<tr class="odd1"><th>3</th>
+<td class="langnew " >
+<input name="color_choice.3.*" class="req" tabindex="20173" placeholder="color_choice 3" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice.3._" class="req" tabindex="30173" placeholder="color_choice 3" type="text" value="Red" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice.3.de" class="req" tabindex="50173" placeholder="color_choice 3" type="text" value="Rot" />
+</td>
+</tr>
+<tr class="odd1"><th>4</th>
+<td class="langnew " >
+<input name="color_choice.4.*" class="req" tabindex="20174" placeholder="color_choice 4" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice.4._" class="req" tabindex="30174" placeholder="color_choice 4" type="text" value="Lilac" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice.4.de" class="req" tabindex="50174" placeholder="color_choice 4" type="text" value="Veilchen" />
+</td>
+</tr>
+<tr class="odd1"><th>5</th>
+<td class="langnew " >
+<input name="color_choice.5.*" class="req" tabindex="20175" placeholder="color_choice 5" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice.5._" class="req" tabindex="30175" placeholder="color_choice 5" type="text" value="Blue" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice.5.de" class="req" tabindex="50175" placeholder="color_choice 5" type="text" value="Blau" />
+</td>
+</tr>
+<tr class="odd1"><th>6</th>
+<td class="langnew " >
+<input name="color_choice.6.*" class="req" tabindex="20176" placeholder="color_choice 6" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="color_choice.6._" class="req" tabindex="30176" placeholder="color_choice 6" type="text" value="Cyan" />
+</td>
+<td lang="de" class="langde " >
+<input name="color_choice.6.de" class="req" tabindex="50176" placeholder="color_choice 6" type="text" value="Türkis" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">font_choice_title</th><th></th>
+<td class="langnew " >
+<input name="font_choice_title.*" class="req" tabindex="20177" placeholder="font_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="font_choice_title._" class="req" tabindex="30177" placeholder="font_choice_title" type="text" value="Font" />
+</td>
+<td lang="de" class="langde " >
+<input name="font_choice_title.de" class="req" tabindex="50177" placeholder="font_choice_title" type="text" value="Font" />
+</td>
+</tr>
+<tr class="odd1"><th rowspan="5" class="small">font_choice</th><th>0</th>
+<td class="langnew " >
+<input name="font_choice.0.*" class="req" tabindex="20178" placeholder="font_choice 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="font_choice.0._" class="req" tabindex="30178" placeholder="font_choice 0" type="text" value="Sans Serif" />
+</td>
+<td lang="de" class="langde " >
+<input name="font_choice.0.de" class="req" tabindex="50178" placeholder="font_choice 0" type="text" value="Sans Serif" />
+</td>
+</tr>
+<tr class="odd1"><th>1</th>
+<td class="langnew " >
+<input name="font_choice.1.*" class="req" tabindex="20179" placeholder="font_choice 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="font_choice.1._" class="req" tabindex="30179" placeholder="font_choice 1" type="text" value="Serif" />
+</td>
+<td lang="de" class="langde " >
+<input name="font_choice.1.de" class="req" tabindex="50179" placeholder="font_choice 1" type="text" value="Serif" />
+</td>
+</tr>
+<tr class="odd1"><th>2</th>
+<td class="langnew " >
+<input name="font_choice.2.*" class="req" tabindex="20180" placeholder="font_choice 2" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="font_choice.2._" class="req" tabindex="30180" placeholder="font_choice 2" type="text" value="Monospace" />
+</td>
+<td lang="de" class="langde " >
+<input name="font_choice.2.de" class="req" tabindex="50180" placeholder="font_choice 2" type="text" value="Monospace" />
+</td>
+</tr>
+<tr class="odd1"><th>3</th>
+<td class="langnew " >
+<input name="font_choice.3.*" class="req" tabindex="20181" placeholder="font_choice 3" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="font_choice.3._" class="req" tabindex="30181" placeholder="font_choice 3" type="text" value="Cursive" />
+</td>
+<td lang="de" class="langde " >
+<input name="font_choice.3.de" class="req" tabindex="50181" placeholder="font_choice 3" type="text" value="Handschrift" />
+</td>
+</tr>
+<tr class="odd1"><th>4</th>
+<td class="langnew " >
+<input name="font_choice.4.*" class="req" tabindex="20182" placeholder="font_choice 4" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="font_choice.4._" class="req" tabindex="30182" placeholder="font_choice 4" type="text" value="Ubuntu" />
+</td>
+<td lang="de" class="langde " >
+<input name="font_choice.4.de" class="req" tabindex="50182" placeholder="font_choice 4" type="text" value="Ubuntu" />
+</td>
+</tr>
+<tr class="odd0"><th class="small">back_choice_title</th><th></th>
+<td class="langnew " >
+<input name="back_choice_title.*" class="req" tabindex="20183" placeholder="back_choice_title" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="back_choice_title._" class="req" tabindex="30183" placeholder="back_choice_title" type="text" value="Background" />
+</td>
+<td lang="de" class="langde " >
+<input name="back_choice_title.de" class="req" tabindex="50183" placeholder="back_choice_title" type="text" value="Hintergrund" />
+</td>
+</tr>
+<tr class="odd1"><th rowspan="3" class="small">back_choice</th><th>0</th>
+<td class="langnew " >
+<input name="back_choice.0.*" class="req" tabindex="20184" placeholder="back_choice 0" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="back_choice.0._" class="req" tabindex="30184" placeholder="back_choice 0" type="text" value="Opaque" />
+</td>
+<td lang="de" class="langde " >
+<input name="back_choice.0.de" class="req" tabindex="50184" placeholder="back_choice 0" type="text" value="Einfarbig" />
+</td>
+</tr>
+<tr class="odd1"><th>1</th>
+<td class="langnew " >
+<input name="back_choice.1.*" class="req" tabindex="20185" placeholder="back_choice 1" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="back_choice.1._" class="req" tabindex="30185" placeholder="back_choice 1" type="text" value="Translucent" />
+</td>
+<td lang="de" class="langde " >
+<input name="back_choice.1.de" class="req" tabindex="50185" placeholder="back_choice 1" type="text" value="Durchscheinend" />
+</td>
+</tr>
+<tr class="odd1"><th>2</th>
+<td class="langnew " >
+<input name="back_choice.2.*" class="req" tabindex="20186" placeholder="back_choice 2" type="text" value=""/></td>
+<td lang="en" class="langdefault " >
+<input name="back_choice.2._" class="req" tabindex="30186" placeholder="back_choice 2" type="text" value="Transparent" />
+</td>
+<td lang="de" class="langde " >
+<input name="back_choice.2.de" class="req" tabindex="50186" placeholder="back_choice 2" type="text" value="Durchsichtig" />
+</td>
+</tr>
+<tr class="odd0"><th></th><th></th>
 <td colspan="3"><p class="preln">The grid of letters used by NeatGridClock. Any word used in time_grid_except, time_grid_min, and time_grid hour must be in this grid, either horizontally or vertically, otherwise it will not be shown.
 
 This is rendered with a monospace font.
 
-There are no hard contraints on width or height. But lines should be equally long, more than eight lines will make the clock quite large, and the clock should be rendered roughly square, if possible (letter aspect ratio (for monospace font) is roughtly 8:11). Only letters should be used, no digits nor punctuation marks (they may look ugly in monospace), but diacritical marks are fine.</p></td></tr><tr class="odd1"><th class="small">time_grid_base</th><th></th>
+There are no hard contraints on width or height. But lines should be equally long, more than eight lines will make the clock quite large, and the clock should be rendered roughly square, if possible (letter aspect ratio (for monospace font) is roughtly 8:11). Only letters should be used, no digits nor punctuation marks (they may look ugly in monospace), but diacritical marks are fine.</p></td></tr><tr class="odd0"><th class="small">time_grid_base</th><th></th>
 <td class="langnew " >
-<textarea name="time_grid_base.*" class="req" tabindex="20186" placeholder="time_grid_base" rows="8"></textarea>
+<textarea name="time_grid_base.*" class="req" tabindex="20187" placeholder="time_grid_base" rows="8"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="time_grid_base._" class="req" tabindex="30186" placeholder="time_grid_base" rows="8">twentyafive
+<textarea name="time_grid_base._" class="req" tabindex="30187" placeholder="time_grid_base" rows="8">twentyafive
 quarterhalf
 tenspastoho
 twelveleven
@@ -2037,7 +2051,7 @@ fiveightsix
 fournoclock</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="time_grid_base.de" class="req" tabindex="50186" placeholder="time_grid_base" rows="8">abkurzinull
+<textarea name="time_grid_base.de" class="req" tabindex="50187" placeholder="time_grid_base" rows="8">abkurzinull
 dreiviertel
 nachtvorrat
 halbadreins
@@ -2047,7 +2061,7 @@ zwölfuefünf
 sechsnrfuhr</textarea>
 </td>
 </tr>
-<tr class="odd0"><th></th><th></th>
+<tr class="odd1"><th></th><th></th>
 <td colspan="3"><p class="preln">Full time lookups: starts with a 24h time (rounded to 60/time_grid_min.length) minutes), then the full sequence of words. E.g., &quot;00:05 zero five&quot; will use &quot;zero five&quot; at 00h05.
 
 Minutes will be rounded according to the number of entries in time_grid_min: if that array has 12 entries, minutes here are 00, 05, 10, etc. If it has 8 entries, minutes here are 00, 08, 15, etc.
@@ -2056,20 +2070,20 @@ If nothing is found in this exception list, then time_grid_min is used as a patt
 
 Entries without a matching time are ignored. I.e., an entry with no time, e.g., &quot;nothing&quot; can be added to make this array non-empty, to avoid that time_word_except is used instead.
 
-NeatGridClock uses this if it has any entries, otherwise it uses time_word_except.</p></td></tr><tr class="odd0"><th class="small">time_grid_except*</th><th></th>
+NeatGridClock uses this if it has any entries, otherwise it uses time_word_except.</p></td></tr><tr class="odd1"><th class="small">time_grid_except*</th><th></th>
 <td class="langnew " >
-<textarea name="time_grid_except*.*" class="" tabindex="20187" placeholder="" rows="10"></textarea>
+<textarea name="time_grid_except*.*" class="" tabindex="20188" placeholder="" rows="10"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="time_grid_except*._" class="" tabindex="30187" placeholder="" rows="10">12:00 noon</textarea>
+<textarea name="time_grid_except*._" class="" tabindex="30188" placeholder="" rows="10">12:00 noon</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="time_grid_except*.de" class="" tabindex="50187" placeholder="" rows="10">01:00 ein uhr
+<textarea name="time_grid_except*.de" class="" tabindex="50188" placeholder="" rows="10">01:00 ein uhr
 13:00 ein uhr
 00:00 null uhr</textarea>
 </td>
 </tr>
-<tr class="odd1"><th></th><th></th>
+<tr class="odd0"><th></th><th></th>
 <td colspan="3"><p class="preln">Minutes: This can have any number of entries, but more than 60 does not make sense. It is indexed with ((minute * time_grid_min.length) / 60). The most reasonable number of entries is 12 for five minute steps, or maybe 8 for 7.5 minute steps.
 
 NeatGridClock ignores the order of words in these strings, but simply searches for words in the grid and highlights them. Numbers 1, 2, 3, ..., 9 preceding a word define which word in the grid farthest from the top-left corner will be highlighted (if there are multiple possibilities).
@@ -2078,12 +2092,12 @@ Instead, NeatWordClock ignores numbers and prints words in order.
 
 For =, the hour string is inserted. For +, the hour string for hour+1 and for -, the hour string for hour-1.
 
-NeatGridclock indexes this first, but if nothing is found, indexes time_word_min.</p></td></tr><tr class="odd1"><th class="small">time_grid_min*</th><th></th>
+NeatGridclock indexes this first, but if nothing is found, indexes time_word_min.</p></td></tr><tr class="odd0"><th class="small">time_grid_min*</th><th></th>
 <td class="langnew " >
-<textarea name="time_grid_min*.*" class="" tabindex="20188" placeholder="" rows="12"></textarea>
+<textarea name="time_grid_min*.*" class="" tabindex="20189" placeholder="" rows="12"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="time_grid_min*._" class="" tabindex="30188" placeholder="" rows="12">= oclock
+<textarea name="time_grid_min*._" class="" tabindex="30189" placeholder="" rows="12">= oclock
 five past =
 ten past =
 a quarter past =
@@ -2097,7 +2111,7 @@ ten to +
 five to +</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="time_grid_min*.de" class="" tabindex="50188" placeholder="" rows="10">= uhr
+<textarea name="time_grid_min*.de" class="" tabindex="50189" placeholder="" rows="10">= uhr
 kurz nach =
 viertel nach =
 kurz vor halb +
@@ -2107,15 +2121,15 @@ viertel vor +
 kurz vor +</textarea>
 </td>
 </tr>
-<tr class="odd0"><th></th><th></th>
+<tr class="odd1"><th></th><th></th>
 <td colspan="3"><p class="preln">Hours: this can have between 12 and 24 entries. It is indexed with hour first, then if nothing is found (index out of range or empty string), it is indexed again with (hour % 12). The result is inserted via =, +, or - from the min array.
 
-NeatGridclock indexes this first, but if nothing is found or is empty, it indexes time_word_hour.</p></td></tr><tr class="odd0"><th class="small">time_grid_hour*</th><th></th>
+NeatGridclock indexes this first, but if nothing is found or is empty, it indexes time_word_hour.</p></td></tr><tr class="odd1"><th class="small">time_grid_hour*</th><th></th>
 <td class="langnew " >
-<textarea name="time_grid_hour*.*" class="" tabindex="20189" placeholder="" rows="12"></textarea>
+<textarea name="time_grid_hour*.*" class="" tabindex="20190" placeholder="" rows="12"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="time_grid_hour*._" class="" tabindex="30189" placeholder="" rows="12">twelve
+<textarea name="time_grid_hour*._" class="" tabindex="30190" placeholder="" rows="12">twelve
 one
 two
 three
@@ -2129,7 +2143,7 @@ nine
 eleven</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="time_grid_hour*.de" class="" tabindex="50189" placeholder="" rows="12">zwölf
+<textarea name="time_grid_hour*.de" class="" tabindex="50190" placeholder="" rows="12">zwölf
 eins
 zwei
 2 drei
@@ -2143,51 +2157,52 @@ zehn
 elf</textarea>
 </td>
 </tr>
-<tr class="odd1"><th></th><th></th>
+<tr class="odd0"><th></th><th></th>
 <td colspan="3"><p class="preln">Same format as time_grid_except.
 
-NeatWordClock uses this if it has any entries, otherwise it uses time_grid_except.</p></td></tr><tr class="odd1"><th class="small">time_word_except*</th><th></th>
+NeatWordClock uses this if it has any entries, otherwise it uses time_grid_except.</p></td></tr><tr class="odd0"><th class="small">time_word_except*</th><th></th>
 <td class="langnew " >
-<textarea name="time_word_except*.*" class="" tabindex="20190" placeholder="" rows="10"></textarea>
+<textarea name="time_word_except*.*" class="" tabindex="20191" placeholder="" rows="10"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="time_word_except*._" class="" tabindex="30190" placeholder="" rows="10"></textarea>
+<textarea name="time_word_except*._" class="" tabindex="30191" placeholder="" rows="10"></textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="time_word_except*.de" class="" tabindex="50190" placeholder="" rows="10">nothing</textarea>
+<textarea name="time_word_except*.de" class="" tabindex="50191" placeholder="" rows="10">nothing</textarea>
+</td>
+</tr>
+<tr class="odd1"><th></th><th></th>
+<td colspan="3"><p class="preln">Same format as time_grid_min.
+
+NeatWordClock indexes this first, but if nothing is found, indexes time_grid_min.</p></td></tr><tr class="odd1"><th class="small">time_word_min*</th><th></th>
+<td class="langnew " >
+<textarea name="time_word_min*.*" class="" tabindex="20192" placeholder="" rows="10"></textarea>
+</td>
+<td lang="en" class="langdefault " >
+<textarea name="time_word_min*._" class="" tabindex="30192" placeholder="" rows="10">= o'clock</textarea>
+</td>
+<td lang="de" class="langde " >
+<textarea name="time_word_min*.de" class="" tabindex="50192" placeholder="" rows="10">=</textarea>
 </td>
 </tr>
 <tr class="odd0"><th></th><th></th>
-<td colspan="3"><p class="preln">Same format as time_grid_min.
-
-NeatWordClock indexes this first, but if nothing is found, indexes time_grid_min.</p></td></tr><tr class="odd0"><th class="small">time_word_min*</th><th></th>
-<td class="langnew " >
-<textarea name="time_word_min*.*" class="" tabindex="20191" placeholder="" rows="10"></textarea>
-</td>
-<td lang="en" class="langdefault " >
-<textarea name="time_word_min*._" class="" tabindex="30191" placeholder="" rows="10">= o'clock</textarea>
-</td>
-<td lang="de" class="langde " >
-<textarea name="time_word_min*.de" class="" tabindex="50191" placeholder="" rows="10">=</textarea>
-</td>
-</tr>
-<tr class="odd1"><th></th><th></th>
 <td colspan="3"><p class="preln">Same format as time_grid_hour.
 
-NeatWordClock indexes this first, but if nothing is found or is empty, it indexes time_grid_hour.</p></td></tr><tr class="odd1"><th class="small">time_word_hour*</th><th></th>
+NeatWordClock indexes this first, but if nothing is found or is empty, it indexes time_grid_hour.</p></td></tr><tr class="odd0"><th class="small">time_word_hour*</th><th></th>
 <td class="langnew " >
-<textarea name="time_word_hour*.*" class="" tabindex="20192" placeholder="" rows="10"></textarea>
+<textarea name="time_word_hour*.*" class="" tabindex="20193" placeholder="" rows="10"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="time_word_hour*._" class="" tabindex="30192" placeholder="" rows="10"></textarea>
+<textarea name="time_word_hour*._" class="" tabindex="30193" placeholder="" rows="10"></textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="time_word_hour*.de" class="" tabindex="50192" placeholder="" rows="10"></textarea>
+<textarea name="time_word_hour*.de" class="" tabindex="50193" placeholder="" rows="10"></textarea>
 </td>
 </tr>
 </table>
-<p>If you want credit for your translation in a Git commit,
-    then please give a name or pseudonym.  If empty, you won't be mentioned.<br>
+<p>If you want credit for your translation in a Git commit message and/or
+    package documentation, then please give a name or pseudonym.  If empty, you won't be
+    mentioned.<br>
     <input name="meta_name" value="" placeholder="Your Name" class="meta"/></p>
 <p>Any comments or suggestions or questions?<br>
     <textarea name="meta_comment" placeholder="Comment" class="meta"
@@ -2195,5 +2210,20 @@ NeatWordClock indexes this first, but if nothing is found or is empty, it indexe
 <button type="submit" value="Submit">Submit Translations by E-Mail</button>
 <p>NOTE: Please do not edit or reformat the text in the e-mail before sending, but just send the raw text as is.</p>
 </form>
+<p class="foot"><small>
+&COPY; <a href="
+    http://www.theiling.de/
+    ">Henrik Theiling</a>.
+        Licence: <a href="
+    https://raw.githubusercontent.com/moehriegitt/NeatLauncher/master/LICENSE
+    ">BSD-2-Clause</a>
+        App package: <a href="
+    https://f-droid.org/en/packages/de.theiling.neatlauncher/
+    ">F-Droid</a>.
+        Source code: <a href="
+    https://github.com/moehriegitt/NeatLauncher
+    ">Github</a>.
+        Githash: XXGITHASH.
+        </small></p>
 </body>
 </html>

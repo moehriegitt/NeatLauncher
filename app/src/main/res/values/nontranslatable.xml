@@ -16,6 +16,10 @@
     https://github.com/moehriegitt/NeatLauncher
     </string>
 
+    <string name="xlat_url" translatable="false">
+    http://henrik.theiling.de/neatlauncher/TRANSLATE.html
+    </string>
+
     <string name="package_url" translatable="false">
     https://f-droid.org/en/packages/de.theiling.neatlauncher/
     </string>
