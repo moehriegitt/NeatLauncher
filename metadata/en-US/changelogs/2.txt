@@ -1,2 +1,2 @@
- - Fix issues in release process.
- - No functional change compared to v1.0.
+  - Fix issues in release process.
+  - No functional change compared to v1.0.

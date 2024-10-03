@@ -1070,32 +1070,39 @@ sub make_xlat($)
     $t .= qq(td.head { font-weight: bold; }\n);
     $t .= qq(p.preln { white-space: pre-line; font-style: italic; }\n);
     # $t .= qq(.small { color: read; font-size: 80\%; }\n);
-    $t .= qq(input[type="text"] { width: 600px; border: 2px solid #ccc; }\n);
     $t .= qq(button { margin: 10px; }\n);
     $t .= qq(table { border-spacing: 0px; }\n);
     $t .= qq(tr.odd0 { background-color: #efe; }\n);
     $t .= qq(tr.odd1 { background-color: #eef; }\n);
+    $t .= qq(input[type="text"] {
+        width: 100\%; min-width: 300px;
+        border: 2px solid #ccc; }\n);
     $t .= qq(textarea {
         border-color: 2px solid #ccc;
-        width: 600px;
+        width: 100\%; min-width: 300px;
         white-space: pre;
         overflow-wrap: normal;
         overflow-x: scroll; }\n);
     $t .= qq(textarea.req:placeholder-shown, input.req:placeholder-shown {
         background-color: #fee;
         border-color: #f00 }\n);
-    $t .= qq(textarea.meta { width: 50%; min-width: 600px; }\n);
-    $t .= qq(input.meta { width: 50%; min-width: 600px }\n);
+    $t .= qq(textarea.meta {
+        width: 100%; min-width: 300px;
+        }\n);
+    $t .= qq(input.meta {
+        width: 100%; min-width: 600px
+        }\n);
     $t .= qq(h1 { padding: 10px; background-color: #ddd; }\n);
     $t .= qq(h2 { padding: 10px; background-color: #ddd; }\n);
     $t .= qq(p.foot { padding: 10px; background-color: #ddd; }\n);
 
     for my $l ('new', sort lang_cmp keys %lang) {
         my $ql = quote_html($l);
-        $t .= qq(input[type="checkbox"]#l$ql:not(:checked) ~ form td.lang$ql { display: none }\n);
+        $t .= qq(input#l$ql:not(:checked) ~ form td.lang$ql { display: none }\n);
     }
 
     $t .= qq(</style>\n);
+    $t .= qq(<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n);
     $t .= qq(</head>\n);
     $t .= qq(<body>\n);
     $t .= qq(<h1>$qtitle</h1>\n);

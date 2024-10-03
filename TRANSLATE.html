@@ -8,29 +8,36 @@
 th, td { text-align: left; vertical-align: top; padding: 4px; }
 td.head { font-weight: bold; }
 p.preln { white-space: pre-line; font-style: italic; }
-input[type="text"] { width: 600px; border: 2px solid #ccc; }
 button { margin: 10px; }
 table { border-spacing: 0px; }
 tr.odd0 { background-color: #efe; }
 tr.odd1 { background-color: #eef; }
+input[type="text"] {
+        width: 100%; min-width: 300px;
+        border: 2px solid #ccc; }
 textarea {
         border-color: 2px solid #ccc;
-        width: 600px;
+        width: 100%; min-width: 300px;
         white-space: pre;
         overflow-wrap: normal;
         overflow-x: scroll; }
 textarea.req:placeholder-shown, input.req:placeholder-shown {
         background-color: #fee;
         border-color: #f00 }
-textarea.meta { width: 50%; min-width: 600px; }
-input.meta { width: 50%; min-width: 600px }
+textarea.meta {
+        width: 100%; min-width: 300px;
+        }
+input.meta {
+        width: 100%; min-width: 600px
+        }
 h1 { padding: 10px; background-color: #ddd; }
 h2 { padding: 10px; background-color: #ddd; }
 p.foot { padding: 10px; background-color: #ddd; }
-input[type="checkbox"]#lnew:not(:checked) ~ form td.langnew { display: none }
-input[type="checkbox"]#ldefault:not(:checked) ~ form td.langdefault { display: none }
-input[type="checkbox"]#lde:not(:checked) ~ form td.langde { display: none }
+input#lnew:not(:checked) ~ form td.langnew { display: none }
+input#ldefault:not(:checked) ~ form td.langdefault { display: none }
+input#lde:not(:checked) ~ form td.langde { display: none }
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 <h1>'NeatLauncher' Translations

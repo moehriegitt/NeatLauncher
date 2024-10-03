@@ -1,0 +1,3 @@
+  - added weather info from open-meteo.com
+  - improved menu structure and configurability
+  - improved search function
