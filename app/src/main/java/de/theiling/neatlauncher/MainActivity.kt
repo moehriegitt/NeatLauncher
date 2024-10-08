@@ -103,6 +103,13 @@ class MainActivity:
     // the same Down.  This is hacky -- dunno why it is needed.
     private var allowClick = false
 
+    // To avoid fling down/up if the recyclers can still scroll, we check their
+    // scroll state at the down event, so that we cannot hit the edge by scrolling
+    // and activating the fling in the same vertical swipe motion.
+    private var homeCanUp = false
+    private var homeCanDown = false
+    private var drawerCanDown = false
+
     private val minuteTick = object: BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             onMinuteTick()
@@ -114,6 +121,9 @@ class MainActivity:
         object: GestureDetector.SimpleOnGestureListener() {
         override fun onDown(e: MotionEvent): Boolean {
             allowClick = true
+            homeCanUp = z.homeRecycler.canScrollVertically(+1)
+            homeCanDown = z.homeRecycler.canScrollVertically(-1)
+            drawerCanDown = z.drawerRecycler.canScrollVertically(-1)
             return false
         }
         override fun onFling(e1: MotionEvent?, e2: MotionEvent, vx: Float, vy: Float): Boolean {
@@ -362,21 +372,24 @@ class MainActivity:
             startActivity(Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA))
 
     private fun onFlingUp() {
-        if (getMode() == modePrimary()) {
-            upItem?.let { itemLaunch(it) } ?: run {
-                clearSearch()
-                setMode(modeSecondary())
+        when (getMode()) {
+            modePrimary() -> if (!homeCanUp) {
+                upItem?.let { itemLaunch(it) } ?: run {
+                    clearSearch()
+                    setMode(modeSecondary())
+                }
             }
+            else -> Unit
         }
     }
 
     private fun onFlingDown() {
         when (getMode()) {
-            modePrimary() -> {
+            modePrimary() -> if (!homeCanDown) {
                 downItem?.let { itemLaunch(it) } ?:
                     startActivity(Intent(Settings.ACTION_SETTINGS))
             }
-            modeSecondary() -> if (!z.drawerRecycler.canScrollVertically(-1)) {
+            modeSecondary() -> if (!drawerCanDown) {
                 resetView(false)
             }
             else -> Unit
@@ -678,14 +691,13 @@ class MainActivity:
         }
         z.mainSearch.clearFocus()
         inputMethodManager.hideSoftInputFromWindow(viewGroup.windowToken, 0)
-        z.drawerRecycler.scrollToPosition(0)
         setMode(modePrimary())
     }
 
     private fun getMode() =
         when {
             z.mainHead.visibility == View.GONE -> Mode.DRAWER2
-            z.homeRecycler.visibility == View.GONE -> Mode.DRAWER1
+            z.homeRecyclerBox.visibility == View.GONE -> Mode.DRAWER1
             z.drawerRecycler.visibility == View.GONE -> Mode.HOME1
             else -> Mode.INIT
         }
@@ -693,8 +705,10 @@ class MainActivity:
     private fun setMode(want: Mode) {
         if (want == getMode()) return
         z.mainHead.visibility = visibleIf(want != Mode.DRAWER2)
-        z.homeRecycler.visibility = visibleIf(want == Mode.HOME1)
+        z.homeRecyclerBox.visibility = visibleIf(want == Mode.HOME1)
         z.drawerRecycler.visibility = visibleIf(want != Mode.HOME1)
+        z.drawerRecycler.scrollToPosition(0)
+        z.homeRecycler.scrollToPosition(0)
     }
 
     private fun resetMode() = setMode (

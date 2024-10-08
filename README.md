@@ -9,7 +9,7 @@ colourful, distracting, inefficient, and full of non-sensical
 icons.
 
 Clarity by efficient and elegant design based on text. With
-onfigurable quick access to apps, shortcuts, or contacts via a
+configurable quick access to apps, shortcuts, or contacts via a
 list or by gestures.
 
 Supports app shortcuts, both static and dynamic.

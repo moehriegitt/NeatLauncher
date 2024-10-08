@@ -14,6 +14,7 @@ import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.RelativeLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -223,6 +224,7 @@ class MainActivityBinding(
     val gridS5: View,
     val gridS6: View,
     val homeRecycler: RecyclerView,
+    val homeRecyclerBox: RelativeLayout,
     val mainDate: TextView,
     val mainHead: LinearLayout,
     val mainSearch: EditText,
@@ -280,6 +282,7 @@ class MainActivityBinding(
             rootView.findViewById(R.id.gridS5)!!,
             rootView.findViewById(R.id.gridS6)!!,
             rootView.findViewById(R.id.home_recycler)!!,
+            rootView.findViewById(R.id.home_recycler_box)!!,
             rootView.findViewById(R.id.main_date)!!,
             rootView.findViewById(R.id.main_head)!!,
             rootView.findViewById(R.id.main_search)!!,

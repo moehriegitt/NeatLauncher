@@ -11,7 +11,7 @@ policy, i.e., this file will be updated if the policy changes.
 
 NeatLauncher uses standard Android mechanisms (SharedPreferences) to
 make its configuration (pinning, app visibility on the drawer, theme
-selection, weather configuration) persistently across app or device
+selection, weather configuration) persistent across app or device
 restarts.  I.e., the configuration is stored in persistent memory like
 the sdcard or internal device memory.
 
@@ -72,6 +72,9 @@ which will process them.
 
 If you search for a new location, then NeatLauncher sends your search
 string to the server on the Internet and receives the list of results.
+
+While inactive (e.g., while the device is locked), NeatLauncher does
+not query weather information.
 
 ## Location Services
 
