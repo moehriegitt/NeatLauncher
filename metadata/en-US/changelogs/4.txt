@@ -1,0 +1,7 @@
+Bug fix release.
+
+- fix scrolling+centering of pinned list
+- fix/finalise translate framework
+- add translate link in 'About'
+- add 0 byte old screenshots, as deletion seems to have no effect
+- add privacy policy

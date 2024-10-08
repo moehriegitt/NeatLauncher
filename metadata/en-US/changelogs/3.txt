@@ -1,3 +1,5 @@
-  - added weather info from open-meteo.com
-  - improved menu structure and configurability
-  - improved search function
+Feature release.
+
+- added weather info from open-meteo.com
+- improved menu structure and configurability
+- improved search function
