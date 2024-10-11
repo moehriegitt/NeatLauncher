@@ -12,6 +12,10 @@
     neatlauncher-xlat@theiling.de
     </string>
 
+    <string name="problem_email" translatable="false">
+    neatlauncher-bug@theiling.de
+    </string>
+
     <string name="source_url" translatable="false">
     https://github.com/moehriegitt/NeatLauncher
     </string>

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -171,11 +172,37 @@ class MainActivity:
     private lateinit var weatherTryLast: StateWeatherTryLast
     private lateinit var weatherTryNext: StateWeatherTryNext
 
+    private var oldUncaught: Thread.UncaughtExceptionHandler? = null
+
+    private fun problemReport(e: Throwable) {
+        shortToast("E $e ${e.functionName}")
+        startActivity(Intent(Intent.ACTION_SEND).apply {
+            setType("text/plain")
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            putExtra(Intent.EXTRA_TEXT,
+                "To: ${getString(R.string.problem_email)}\n" +
+                "Subject: NeatLauncher Problem\n\n" +
+                "$e\n${e.functionName}\n${e.throwLocation}\n" +
+                "This happened when:")
+        })
+    }
+
     // override on....()
     override fun onCreate(
         savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+
+        // Uncaught exception global handler: last resort error report:
+        oldUncaught = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler() { t, e ->
+            try {
+                problemReport(e)
+            } finally {
+                oldUncaught?.uncaughtException(t,e) ?: System.exit(1)
+            }
+        }
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
@@ -608,6 +635,8 @@ class MainActivity:
                         }
                     } catch (e: SecurityException) {
                         /* nothing */
+                    } catch (e: Exception) {
+                        problemReport(e)
                     }
                 }
             }
@@ -636,6 +665,8 @@ class MainActivity:
             } catch (e: SecurityException) {
                 shortToast(getString(R.string.read_contacts_no_perm))
                 contactChoice.x = -1   // don't try again
+            } catch (e: Exception) {
+                problemReport(e)
             }
         }
     }
@@ -682,6 +713,9 @@ class MainActivity:
         }
         true
     } catch (e: SecurityException) {
+        false
+    } catch (e: Exception) {
+        problemReport(e)
         false
     }
 
@@ -777,15 +811,13 @@ class MainActivity:
     {
         resetView(true)
         try {
-            when(item.type) {
+            when (item.type) {
                 ITEM_TYPE_APP -> packageIntent(item.pack)?.let { startActivity(it) }
                 ITEM_TYPE_INT -> if (item.act != "") startActivity(Intent(item.act))
                 ITEM_TYPE_SHORT,
-                ITEM_TYPE_PIN -> {
+                ITEM_TYPE_PIN -> if (Build.VERSION.SDK_INT >= 25) {
                     val uha = getUserHandle(item.uid)
-                    if (Build.VERSION.SDK_INT >= 25) {
-                        launcher.startShortcut(item.pack, item.act, null, null, uha)
-                    }
+                    launcher.startShortcut(item.pack, item.act, null, null, uha)
                 }
                 ITEM_TYPE_CONTACT -> openContact(item)
             }
@@ -1254,8 +1286,8 @@ class MainActivity:
                     e.setLoc(
                         z.latitude.text.toString().toDouble(),
                         z.longitude.text.toString().toDouble())
-                } catch (err: Exception) {
-                    shortToast("ERR: $err")
+                } catch (e: Exception) {
+                    problemReport(e)
                 }
             }
             weatherNotify()
@@ -1449,6 +1481,8 @@ class MainActivity:
         } catch (e: SecurityException) {
             shortToast(getString(R.string.location_no_perm))
             weather.current.isActive = false
+        } catch (e: Exception) {
+            problemReport(e)
         }
     }
 }

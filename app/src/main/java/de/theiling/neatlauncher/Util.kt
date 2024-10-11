@@ -1,5 +1,6 @@
 package de.theiling.neatlauncher
 
+import android.app.ApplicationErrorReport
 import android.content.Context
 import android.content.DialogInterface
 import android.util.TypedValue
@@ -159,3 +160,17 @@ fun tzUtcId(mi: Int): String {
 
 fun Double.toDecString(count: Int) =
     "%.${count}f".format(Locale.ROOT, this).dropLastWhile { it == '0' }
+
+val Throwable.functionName: String get() {
+    for (f in stackTrace) {
+        return "${f.methodName} ${f.className}"
+    }
+    return "?"
+}
+
+val Throwable.throwLocation: String get() {
+    val i = ApplicationErrorReport.CrashInfo(this)
+    val f = i.throwFileName ?: "?"
+    val l = i.throwLineNumber
+    return "$f:$l"
+}

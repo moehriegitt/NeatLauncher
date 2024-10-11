@@ -142,9 +142,9 @@
     <string name="read_contacts_no_perm">Lesen der Kontaktliste verweigert</string>
     <string name="location_no_perm">Standortbestimmung verweigert</string>
 
-    <string name="save_restore">Einstellungen Sichern / Rücksichern</string>
-    <string name="pref_save">Einstellungen Sichern</string>
-    <string name="pref_load">Einstellungen Rücksichern</string>
+    <string name="save_restore">Einstellungen sichern / rücksichern</string>
+    <string name="pref_save">Einstellungen sichern</string>
+    <string name="pref_load">Einstellungen rücksichern</string>
     <string name="ok_load">Rücksicherung abgeschlossen.</string>
     <string name="err_load">Rücksicherung fehlgeschlagen.</string>
     <string name="ok_save">Sicherung abgeschlossen.</string>
