@@ -143,45 +143,26 @@ class Item(
         else -> c.accentColor
     }
 
-    fun displayCompareTo(other: Item): Int
-    {
-        var i = this.order.compareTo(other.order, true)
-        if (i != 0) return i
-
-        i = this.order.compareTo(other.order)
-        if (i != 0) return i
-
-        i = this.act.compareTo(other.act)
-        if (i != 0) return i
-
-        i = this.uid.compareTo(other.uid)
-        if (i != 0) return i
-
-        return 0
-    }
+    fun displayCompareTo(other: Item): Int =
+        this.order.compareTo(other.order, true).non0 ?:
+        this.order.compareTo(other.order).non0 ?:
+        this.act.compareTo(other.act).non0 ?:
+        this.uid.compareTo(other.uid)
 
     fun displayCompareToPrep(other: Item, prep: (String) -> String): Int
     {
         val t = prep(this.order)
         val o = prep(other.order)
-
-        var i = t.compareTo(o, true)
-        if (i != 0) return i
-
-        i = t.compareTo(o)
-        if (i != 0) return i
-
-        return this.displayCompareTo(other)
+        return t.compareTo(o, true).non0 ?:
+            t.compareTo(o).non0 ?:
+            this.displayCompareTo(other)
     }
 
     fun displayCompareToMatch(other: Item): Int
     {
         val u = typeRank(this.type)
         val v = typeRank(other.type)
-        val j = u.compareTo(v)
-        if (j != 0) return j
-
-        return this.displayCompareTo(other)
+        return u.compareTo(v).non0 ?: this.displayCompareTo(other)
     }
 
     fun containsWords(needle: CharSequence, ignoreCase: Boolean): MatchWords? {

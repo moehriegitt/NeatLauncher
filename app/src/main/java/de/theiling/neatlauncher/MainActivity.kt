@@ -82,6 +82,8 @@ class MainActivity:
         DRAWER2
     }
 
+    private var oldUncaught: Thread.UncaughtExceptionHandler? = null
+
     private val items = mutableSetOf<Item>()
     private val homeItems = mutableSetOf<Item>()
     private var leftItem : Item? = null
@@ -171,8 +173,6 @@ class MainActivity:
     private lateinit var weatherType: EnumTweath
     private lateinit var weatherTryLast: StateWeatherTryLast
     private lateinit var weatherTryNext: StateWeatherTryNext
-
-    private var oldUncaught: Thread.UncaughtExceptionHandler? = null
 
     private fun problemReport(e: Throwable) {
         shortToast("E $e ${e.functionName}")
@@ -1406,25 +1406,19 @@ class MainActivity:
             val url = String.format(SEARCH_LOC_URL, langCode.toUrl(), 100.toUrl(), search.toUrl())
             try {
                 val res = JSONObject(urlText(url)).optJSONArray("results") ?: JSONArray()
+                val r = mutableListOf<WeatherSearchResult>()
                 for (i in 0 until res.length()) {
-                    val o = res.getJSONObject(i)
-                    val short = o.getString("name")
-                    val name = StringBuilder().apply {
-                        append(short)
-                        for (key in listOf("admin4", "admin3", "admin2", "admin1", "country")) {
-                            o.optString(key).let { if (it != "") append(", $it") }
-                        }
-                    }.toString()
-                    val lat = o.getDouble("latitude")
-                    val lon = o.getDouble("longitude")
-                    val item = ListItem(name) {
-                        d.dismiss()
-                        weather.add(name, lat, lon, true)
-                        weatherNotify()
-                    }
-                    l.add(item)
+                    r.add(WeatherSearchResult(res.getJSONObject(i)))
                 }
-                l.sortWith { a,b -> a.text.compareTo(b.text) }
+                r.sortWith { a, b -> a.compareTo(b) }
+                for (w in r) {
+                    val name = "$w"
+                    l.add(ListItem(name) {
+                        d.dismiss()
+                        weather.add(name, w.lat, w.lon, true)
+                        weatherNotify()
+                    })
+                }
                 runOnUiThread {
                     z.statusMsg.text = getString(R.string.search_empty)
                     if (l.isNotEmpty()) {

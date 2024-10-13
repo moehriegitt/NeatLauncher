@@ -14,15 +14,16 @@ import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
 
-val Context.accentColor: Int get() {
+fun Context.resolveColor(which: Int): Int {
     val tv = TypedValue()
-    theme.resolveAttribute(android.R.attr.colorAccent, tv, true)
+    theme.resolveAttribute(which, tv, true)
     return tv.data
 }
 
-val Context.mainForeground: Int get() = getColor(R.color.mainForeground)
-val Context.dimBackground: Int get() = getColor(R.color.dimBackground)
-val Context.veryDimColor: Int get() = getColor(R.color.veryDimColor)
+inline val Context.accentColor: Int get() = resolveColor(android.R.attr.colorAccent)
+inline val Context.mainForeground: Int get() = getColor(R.color.mainForeground)
+inline val Context.dimBackground: Int get() = getColor(R.color.dimBackground)
+inline val Context.veryDimColor: Int get() = getColor(R.color.veryDimColor)
 
 fun View.setOnClickDismiss(d: DialogInterface, andDo: ()->Unit) =
     setOnClickListener {
@@ -129,11 +130,11 @@ fun String.containsOneWord(words: List<String>, ignoreCase: Boolean): Boolean {
     return false
 }
 
-fun Any.toUrl(): String = URLEncoder.encode(toString(), "UTF-8")
+inline fun Any.toUrl(): String = URLEncoder.encode(toString(), "UTF-8")
 
 // For numbers smaller than 10, round to 1 sign. digits, otherwise round to Int
-fun Double.ceilString(): String  = ceil(this).toInt().toString()
-fun Double.floorString(): String = floor(this).toInt().toString()
+inline fun Double.ceilString(): String  = ceil(this).toInt().toString()
+inline fun Double.floorString(): String = floor(this).toInt().toString()
 
 // We use Mon=0 (i.e., ISO8601 minus 1), so the array can be indexed directly.
 fun getWeekdayNames() =
@@ -160,6 +161,16 @@ fun tzUtcId(mi: Int): String {
 
 fun Double.toDecString(count: Int) =
     "%.${count}f".format(Locale.ROOT, this).dropLastWhile { it == '0' }
+
+// For more concise compound comparison functions based on ?:, we
+// want to map 0 to null.
+inline fun <T> T.nonEqual(n: T) = if (this == n) null else this
+
+// Cannot use <T> because 'zero' is not generic.
+inline val Int.non0 get() = this.nonEqual(0)
+inline val String.non0 get() = this.nonEqual("")
+
+// Similar for empty strings:
 
 val Throwable.functionName: String get() {
     for (f in stackTrace) {

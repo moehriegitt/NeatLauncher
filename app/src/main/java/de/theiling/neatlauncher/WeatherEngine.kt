@@ -24,6 +24,44 @@ const val WEATHER_FORECAST_URL =
     "&timeformat=unixtime" +
     "&timezone=auto"
 
+data class WeatherSearchResult(
+    val lat: Double,
+    val lon: Double,
+    val name: String,
+    val country: String,
+    val admin1: String,
+    val admin2: String,
+    val admin3: String,
+    val admin4: String)
+{
+    constructor(j: JSONObject): this(
+        j.getDouble("latitude"),
+        j.getDouble("longitude"),
+        j.getString("name"),
+        j.optString("country") ?: "",
+        j.optString("admin1") ?: "",
+        j.optString("admin2") ?: "",
+        j.optString("admin3") ?: "",
+        j.optString("admin4") ?: "")
+
+    fun compareTo(that: WeatherSearchResult): Int =
+        this.country.compareTo(that.country).non0 ?:
+        this.admin1.compareTo(that.admin1).non0 ?:
+        this.admin2.compareTo(that.admin2).non0 ?:
+        this.admin3.compareTo(that.admin3).non0 ?:
+        this.admin4.compareTo(that.admin4).non0 ?:
+        this.name.compareTo(that.name)
+
+    override fun toString() = StringBuilder().apply {
+        append(name)
+        admin4.non0?.let { append(", ", it) }
+        admin3.non0?.let { append(", ", it) }
+        admin2.non0?.let { append(", ", it) }
+        admin1.non0?.let { append(", ", it) }
+        country.non0?.let { append(", ", it) }
+    }.toString()
+}
+
 class WeatherLoc(
     private val container: WeatherEngine,
     name: String,
@@ -279,11 +317,9 @@ data class WeatherStep(
     val end  get() = Date(start.time + (durSec * 1000L))
     val last get() = Date(end.time - 1)
 
-    fun compareTo(other: WeatherStep): Int {
-        val i = this.end.compareTo(other.end) // earlier end time first
-        if (i != 0) return i
-        return other.durSec.compareTo(this.durSec) // short ones first
-    }
+    fun compareTo(other: WeatherStep): Int =
+        this.end.compareTo(other.end).non0 ?: // earlier end time first
+        other.durSec.compareTo(this.durSec) // short ones first
 }
 
 /* A weather day has additional min/max ranges,
