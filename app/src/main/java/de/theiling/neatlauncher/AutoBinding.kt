@@ -318,6 +318,7 @@ class MainOptDialogBinding(
     val mainAbout: TextView,
     val mainFaq: TextView,
     val mainInfo: TextView,
+    val notifChoice: TextView,
     val saveRestore: TextView,
     val timeChoice: TextView,
     val weatherMenu: TextView):
@@ -336,6 +337,7 @@ class MainOptDialogBinding(
             rootView.findViewById(R.id.main_about)!!,
             rootView.findViewById(R.id.main_faq)!!,
             rootView.findViewById(R.id.main_info)!!,
+            rootView.findViewById(R.id.notif_choice)!!,
             rootView.findViewById(R.id.save_restore)!!,
             rootView.findViewById(R.id.time_choice)!!,
             rootView.findViewById(R.id.weather_menu)!!)
@@ -346,6 +348,36 @@ class MainOptDialogBinding(
             attachToParent: Boolean): MainOptDialogBinding
         {
             val root = inflater.inflate(R.layout.main_opt_dialog, parent, false)
+            if (attachToParent) parent?.addView(root)
+            return bind(root)
+        }
+
+        @Suppress("unused")
+        fun inflate(inflater: LayoutInflater) = inflate(inflater, null, false)
+    }
+}
+
+class NotifDialogBinding(
+    rootView: LinearLayout,
+    val notifAble: TextView,
+    val notifPerm: TextView,
+    val notifText: TextView):
+    ViewBinding
+{
+    override val root = rootView
+    companion object {
+        fun bind(rootView: View) = NotifDialogBinding(
+            rootView as LinearLayout,
+            rootView.findViewById(R.id.notif_able)!!,
+            rootView.findViewById(R.id.notif_perm)!!,
+            rootView.findViewById(R.id.notif_text)!!)
+
+        fun inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            attachToParent: Boolean): NotifDialogBinding
+        {
+            val root = inflater.inflate(R.layout.notif_dialog, parent, false)
             if (attachToParent) parent?.addView(root)
             return bind(root)
         }

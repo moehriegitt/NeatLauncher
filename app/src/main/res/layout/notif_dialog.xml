@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/popupLayoutPadding"
+    android:orientation="vertical"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="@dimen/popupScrollPadding"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/notif_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notif_dots_intro"
+                style="@style/AppTheme.PopupShort"
+                />
+
+            <TextView
+                android:id="@+id/notif_perm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notif_start_perm"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
+                android:id="@+id/notif_able"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notif_start_settings"
+                style="@style/AppTheme.PopupItem"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

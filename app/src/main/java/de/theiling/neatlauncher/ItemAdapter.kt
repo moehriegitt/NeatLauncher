@@ -3,6 +3,7 @@ package de.theiling.neatlauncher
 import android.icu.lang.UCharacter.foldCase
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.style.SuperscriptSpan
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -47,11 +48,24 @@ class ItemAdapter(
         val a = partial[pos]
         holder.preSep?.visibility = if (a.preSep) View.VISIBLE else View.GONE
 
+        val dot = notificationData.count(a.item).notIf{ it <= 0 }?.toDot() ?: ""
         if (a.match != null) {
             val t = SpannableStringBuilder(a.match.haystack)
+            if (dot != "") {
+                val l = t.length
+                t.append(dot)
+                t.setSpan(SuperscriptSpan(), l, l + dot.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
             for (s in a.match.spans) {
                 t.setSpan(UnderlineSpan(), s.start, s.end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
+            holder.nameView.text = t
+        }
+        else if (dot != "") {
+            val t = SpannableStringBuilder(a.item.label)
+            val l = t.length
+            t.append(dot)
+            t.setSpan(SuperscriptSpan(), l, l + dot.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             holder.nameView.text = t
         }
         else {

@@ -68,6 +68,14 @@
                 />
 
             <TextView
+                android:id="@+id/notif_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notifications_title"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
                 android:id="@+id/weather_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

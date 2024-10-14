@@ -172,6 +172,21 @@ abstract class PrefBool(
         }
 }
 
+abstract class PrefSimpleBool(
+    val c: Context,
+    private val prefKey: String,
+    private val defVal: Boolean)
+{
+    var x = if (pref(c).getBoolean(prefKey, defVal)) 1 else 0
+        set(new) {
+            val newI = if (new > 0) 1 else 0
+            if (field != newI) {
+                field = newI
+                prefPutBool(pref(c), prefKey, field > 0, defVal)
+            }
+        }
+}
+
 abstract class StateDate(
     private val c: Context,
     private val prefKey: String)
@@ -212,6 +227,8 @@ class EnumTweath(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.twea
 
 class BoolContact(c: Context, onChange: (Int) -> Unit): PrefBool(c,
     R.string.contact_choice_title, R.array.contact_choice, "readContacts", true, onChange)
+
+class BoolNotif(c: Context): PrefSimpleBool(c, "readNotif", true)
 
 class EnumWstart(c: Context, onChange: (Int) -> Unit): PrefWeekday(c,
     R.string.wstart_choice_title, "weekStart", weekday_mon, onChange)

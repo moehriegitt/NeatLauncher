@@ -82,6 +82,10 @@
     \n
     Q: How to make current weather location a permanent entry?\n
     A: Long click on ‘Current location’, then give it a name.\n
+    \n
+    Q: How to get notification dots next to app names?\n
+    A: In the system settings: reception of notifications needs to be granted to
+    NeatLauncher, and notification dots need to be enabled.\n
     </string>
 
     <string name="readme_screenshots">Screenshots</string>
@@ -141,9 +145,6 @@
 
     <string name="main_opt_title">Settings</string>
     <string name="about_title">About NeatLauncher</string>
-
-    <string name="read_contacts_no_perm">No permission to read contact list</string>
-    <string name="location_no_perm">No permission to access location</string>
 
     <string name="save_restore">Save / Restore Preferences</string>
     <string name="pref_save">Save Preferences</string>
@@ -279,6 +280,27 @@
 
     <string name="weather_symbol_title">Weather Symbols</string>
 
+    <string name="location_no_perm">No permission to access location</string>
+
+    <string name="notif_no_perm">No permission to receive notifications</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="notif_dots_title">Notification Dots</string>
+
+    <string name="notif_dots_intro">
+        To show notification dots on app names, NeatLauncher needs permission
+        to receive notifications (currently %s).  Further, notification dots need to
+        be enabled in the system settings, typically in ‘Notifications | Notification
+        Dot on App Icon’ (currently %s).
+    </string>
+    <string name="notif_start_perm">Notification permissions</string>
+    <string name="notif_start_settings">System Settings</string>
+
+    <string name="notif_grant0">denied</string>
+    <string name="notif_grant1">granted</string>
+    <string name="notif_dots0">disabled</string>
+    <string name="notif_dots1">enabled</string>
+
+    <string name="read_contacts_no_perm">No permission to read contact list</string>
     <string name="contact_choice_title">Contacts</string>
     <string-array name="contact_choice">
         <item>Do not read list</item>

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -25,6 +26,7 @@ import android.provider.AlarmClock
 import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.provider.Settings
+import android.service.notification.NotificationListenerService
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateFormat
@@ -43,7 +45,6 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -63,6 +64,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import kotlin.math.abs
+import kotlin.system.exitProcess
 
 // non-configurable timing settings for weather updates
 const val weatherUpdateMillis = 60L * 60_000L
@@ -112,6 +114,10 @@ class MainActivity:
     private var homeCanUp = false
     private var homeCanDown = false
     private var drawerCanDown = false
+
+    // Whether last time we checked, we have notification reception permission
+    private var hadNotifPerm = false
+    private var notifWasEnabled = false
 
     private val minuteTick = object: BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
@@ -169,15 +175,16 @@ class MainActivity:
     private lateinit var ttypeChoice: EnumTtype
     private lateinit var tempChoice: EnumTemp
     private lateinit var contactChoice: BoolContact
+    private lateinit var notifCache: BoolNotif
     private lateinit var weekStart: EnumWstart
     private lateinit var weatherType: EnumTweath
     private lateinit var weatherTryLast: StateWeatherTryLast
     private lateinit var weatherTryNext: StateWeatherTryNext
 
     private fun problemReport(e: Throwable) {
-        shortToast("E $e ${e.functionName}")
+        // shortToast("E $e ${e.functionName}") // redundant info
         startActivity(Intent(Intent.ACTION_SEND).apply {
-            setType("text/plain")
+            type = "text/plain"
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             putExtra(Intent.EXTRA_TEXT,
                 "To: ${getString(R.string.problem_email)}\n" +
@@ -195,11 +202,11 @@ class MainActivity:
 
         // Uncaught exception global handler: last resort error report:
         oldUncaught = Thread.getDefaultUncaughtExceptionHandler()
-        Thread.setDefaultUncaughtExceptionHandler() { t, e ->
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
             try {
                 problemReport(e)
             } finally {
-                oldUncaught?.uncaughtException(t,e) ?: System.exit(1)
+                oldUncaught?.uncaughtException(t,e) ?: exitProcess(1)
             }
         }
 
@@ -222,6 +229,7 @@ class MainActivity:
         weatherType = EnumTweath(c) { onWeatherData() }
         weatherTryLast = StateWeatherTryLast(c)
         weatherTryNext = StateWeatherTryNext(c)
+        notifCache = BoolNotif(c)
 
         contactChoice = BoolContact(c) {
             if (it >= 0) { // -1 resets but does not trigger itemsNotifyChange()
@@ -317,6 +325,9 @@ class MainActivity:
             weatherDialog(viewGroup)
             true
         }
+
+        // Start notifications, and also restart them when they are re-enabled:
+        notifInit()
     }
 
     override fun onCreateOptionsMenu(m: Menu): Boolean {
@@ -362,14 +373,14 @@ class MainActivity:
         val granted = grantResults.isNotEmpty() &&
             (grantResults[0] == PackageManager.PERMISSION_GRANTED)
         when (requestCode) {
-           1717 -> if (granted) itemsNotifyChange(2) else {
-               shortToast(getString(R.string.read_contacts_no_perm))
-               contactChoice.x = -1  // don't try again
-           }
-           1818 -> if (granted) locRequest() else {
-               shortToast(getString(R.string.location_no_perm))
-               weather.current.isActive = false
-           }
+            1717 -> if (granted) itemsNotifyChange(2) else {
+                shortToast(getString(R.string.read_contacts_no_perm))
+                contactChoice.x = -1  // don't try again
+            }
+            1818 -> if (granted) locRequest() else {
+                shortToast(getString(R.string.location_no_perm))
+                weather.current.isActive = false
+            }
         }
     }
 
@@ -424,6 +435,7 @@ class MainActivity:
     }
 
     private fun onMinuteTick() {
+        checkNotifPermChange()
         clockValid = false
         weatherUpdate(false)
         clockRedraw(false)
@@ -461,8 +473,6 @@ class MainActivity:
 
     // auxiliary oneliners
     private val c get() = applicationContext
-    private fun shortToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
-    private fun longToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
     private val langCode get() = Locale.getDefault().language
     private val viewGroup: ViewGroup get() = findViewById(android.R.id.content)
     private val defaultDisplay get() = displayManager.getDisplay(Display.DEFAULT_DISPLAY)
@@ -544,7 +554,9 @@ class MainActivity:
     }
 
     private fun homeNotifyChange() {
-        val pinItems = items.filter { (it.pinned != 0) }
+        val pinItems = items.filter {
+            (it.pinned != 0) || (notificationData.count(it) > 0)
+        }
         leftItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_LEFT) != 0 })
         rightItem = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_RIGHT) != 0 })
         downItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_DOWN) != 0 })
@@ -554,7 +566,9 @@ class MainActivity:
         bgrdItem  = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_BGRD) != 0 })
         weathItem = theSingle(pinItems.filter { (it.pinned and ITEM_PIN_WEATH) != 0 })
         homeItems.clear()
-        pinItems.filterTo(homeItems) { (it.pinned and ITEM_PIN_HOME) != 0 }
+        pinItems.filterTo(homeItems) {
+            ((it.pinned and ITEM_PIN_HOME) != 0) || (notificationData.count(it) > 0)
+        }
         homeAdapter.getFilter().filter("")
         resetMode()
     }
@@ -1111,11 +1125,13 @@ class MainActivity:
         z.timeChoice.   setOnClickDismiss(d) { choiceDialog(view, timeChoice) }
         z.dateChoice.   setOnClickDismiss(d) { choiceDialog(view, dateChoice) }
         z.contactChoice.setOnClickDismiss(d) { choiceDialog(view, contactChoice) }
+        z.notifChoice.  setOnClickDismiss(d) { notifDialog(view) }
         z.weatherMenu.  setOnClickDismiss(d) { weatherDialog(view) }
         z.mainFaq.      setOnClickDismiss(d) { faqDialog(view) }
         z.mainInfo.     setOnClickDismiss(d) { itemInfoLaunch(c.packageName) }
         z.mainAbout.    setOnClickDismiss(d) { aboutDialog(view) }
         z.saveRestore.  setOnClickDismiss(d) { saveRestoreDialog(view) }
+        z.notifChoice.visibility = visibleIf(haveNotif)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             z.language.setOnClickDismiss(d) { appLanguageLaunch(c.packageName) }
         } else {
@@ -1130,6 +1146,80 @@ class MainActivity:
         val d = dialogInit(view, z.root, getString(R.string.save_restore)).create()
         z.prefSave.setOnClickDismiss(d) { savePrefs() }
         z.prefLoad.setOnClickDismiss(d) { loadPrefs() }
+        d.show()
+    }
+
+    // Notifications (for Dots)
+    private val notificationComponent get() = ComponentName(c, NotificationService::class.java)
+
+    private val haveNotif get() = (Build.VERSION.SDK_INT >= 27)
+
+    private val haveNotifPerm: Boolean get() {
+        if (!haveNotif) return false
+        val m = c.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        return m.isNotificationListenerAccessGranted(notificationComponent)
+    }
+
+    private val notifEnabled: Boolean get() {
+        if (!haveNotif) return false
+        val tag = NotificationService.BADGING_URI.lastPathSegment
+        return Settings.Secure.getInt(contentResolver, tag, 1) == 1
+    }
+
+    private fun startNotifPerm() = startActivity(
+        // General overview page:
+        if (Build.VERSION.SDK_INT < 30)
+            Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+        // Specific settings for this App:
+        else Intent(Settings.ACTION_NOTIFICATION_LISTENER_DETAIL_SETTINGS).apply {
+            putExtra(Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME,
+                notificationComponent.flattenToString())
+        }
+    )
+
+    private fun notifRebind() {
+        if (notifEnabled) {
+            NotificationListenerService.requestRebind(notificationComponent)
+        }
+    }
+
+    private fun notifNotifyChange() {
+        homeNotifyChange()
+    }
+
+    private fun notifInit() {
+        if (Build.VERSION.SDK_INT >= 27) {
+            // show a message if we cannot receive notifications
+            if ((notifCache.x > 0) && notifEnabled && !haveNotifPerm) {
+                shortToast(getString(R.string.notif_no_perm))
+                notifCache.x = 0
+            }
+            notificationData.onChange = { notifNotifyChange() }
+        }
+        hadNotifPerm = haveNotifPerm
+        notifWasEnabled = notifEnabled
+    }
+
+    // The notification service seems to be a bit unreliable.  But let's try anyway...
+    private fun checkNotifPermChange() {
+        val hp = haveNotifPerm
+        val ep = notifEnabled
+        if ((hp == hadNotifPerm) && (ep == notifWasEnabled)) return
+        hadNotifPerm = hp
+        notifWasEnabled= ep
+        if (!hp) return
+        notifCache.x = 1
+        notifRebind()
+    }
+
+    private fun notifDialog(view: View) {
+        val z = NotifDialogBinding.inflate(LayoutInflater.from(view.context))
+        val d = dialogInit(view, z.root, getString(R.string.notif_dots_title)).create()
+        z.notifText.text = getString(R.string.notif_dots_intro,
+            getString(if (haveNotifPerm) R.string.notif_grant1 else R.string.notif_grant0),
+            getString(if (notifEnabled)  R.string.notif_dots1  else R.string.notif_dots0))
+        z.notifPerm.setOnClickDismiss(d) { startNotifPerm() }
+        z.notifAble.setOnClickDismiss(d) { startActivity(Intent(Settings.ACTION_SETTINGS)) }
         d.show()
     }
 

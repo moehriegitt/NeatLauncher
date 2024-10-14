@@ -79,6 +79,10 @@
     \n
     F: Wie mache aus dem aktuellen Standort einen eigenen Eintrag?\n
     A: Lange auf „Aktueller Standort“ klicken und dann einen Namen vergeben.\n
+    \n
+    F: Wie kriege ich Benachrichtigungspunkte neben den App-Namen?\n
+    A: In then Systemeinstellungen muß NeatLauncher der Empfang von Benachrichtigunen
+    erlaubt sein, und die Benachrichtigungspunkte müssen eingeschaltet sein.\n
     </string>
 
     <string name="readme_screenshots">Screenshots</string>
@@ -138,9 +142,6 @@
 
     <string name="main_opt_title">Einstellungen</string>
     <string name="about_title">Infos über NeatLauncher</string>
-
-    <string name="read_contacts_no_perm">Lesen der Kontaktliste verweigert</string>
-    <string name="location_no_perm">Standortbestimmung verweigert</string>
 
     <string name="save_restore">Einstellungen sichern / rücksichern</string>
     <string name="pref_save">Einstellungen sichern</string>
@@ -246,6 +247,28 @@
 
     <string name="weather_symbol_title">Wetterzeichen</string>
 
+    <string name="location_no_perm">Standortbestimmung verweigert</string>
+
+    <string name="notif_no_perm">Benachrichtigungsempfang verweigert</string>
+    <string name="notifications_title">Benachrichtigungen</string>
+    <string name="notif_dots_title">Benachrichtigungspunkte</string>
+
+    <string name="notif_dots_intro">
+        Zur Anzeige von Benachrichtigungspunkten an App-Namen muß der
+        NeatLauncher die Erlaubnis haben, Benachrichtigungen zu empfangen
+        (momentan %s).  Außerdem müssen Benachrichtigungspunkte eingeschaltat
+        sein, typischerweise in „Benachrichtigungen | Benachrichtigungspunkt auf
+        App-Symbol“ (momentan %s).
+    </string>
+    <string name="notif_start_perm">Benachrichtigungserlaubnis</string>
+    <string name="notif_start_settings">Systemeinstellungen</string>
+
+    <string name="notif_grant0">verweigert</string>
+    <string name="notif_grant1">erlaubt</string>
+    <string name="notif_dots0">ausgeschaltet</string>
+    <string name="notif_dots1">eingeschaltet</string>
+
+    <string name="read_contacts_no_perm">Lesen der Kontaktliste verweigert</string>
     <string name="contact_choice_title">Kontakte</string>
     <string-array name="contact_choice">
         <item>Liste nicht auslesen</item>

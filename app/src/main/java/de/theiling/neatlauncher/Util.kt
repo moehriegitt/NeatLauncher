@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.util.TypedValue
 import android.view.View
 import android.widget.CompoundButton
+import android.widget.Toast
 import java.net.URLEncoder
 import java.text.DateFormatSymbols
 import java.util.Calendar
@@ -164,13 +165,12 @@ fun Double.toDecString(count: Int) =
 
 // For more concise compound comparison functions based on ?:, we
 // want to map 0 to null.
+inline fun <T> T.notIf(cond: (T) -> Boolean) = if (cond(this)) null else this
 inline fun <T> T.nonEqual(n: T) = if (this == n) null else this
 
 // Cannot use <T> because 'zero' is not generic.
 inline val Int.non0 get() = this.nonEqual(0)
 inline val String.non0 get() = this.nonEqual("")
-
-// Similar for empty strings:
 
 val Throwable.functionName: String get() {
     for (f in stackTrace) {
@@ -185,3 +185,6 @@ val Throwable.throwLocation: String get() {
     val l = i.throwLineNumber
     return "$f:$l"
 }
+
+fun Context.shortToast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
+fun Context.longToast (s: String) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
