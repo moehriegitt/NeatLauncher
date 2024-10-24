@@ -15,10 +15,16 @@ class SearchUrl(
                 container.setDefault(this, v)
             }
         }
+
+    override fun equals(that: Any?): Boolean {
+        if (!(that is SearchUrl)) return false
+        return this.url == that.url
+    }
 }
 
 class SearchEngine(private val c: Context)
 {
+    var version = 0
     val them = mutableListOf<SearchUrl>()
 
     private var defaultMaybe: SearchUrl? = null
@@ -36,7 +42,7 @@ class SearchEngine(private val c: Context)
             defaultMaybe = null
         }
         if (them.isEmpty()) {
-            addPredefined()
+            addPredefined(true)
         }
     }
 
@@ -54,6 +60,7 @@ class SearchEngine(private val c: Context)
 
     fun savePref() {
         val s = buildString {
+            append("ver\n$version\n")
             for (a in them) {
                 append("nam\n${a.name}\nurl\n${a.url}\n")
                 if (a.isDefault) {
@@ -76,21 +83,32 @@ class SearchEngine(private val c: Context)
                     "nam" -> name = v
                     "url" -> add(name, v)
                     "def" -> if (them.any()) them[them.lastIndex].isDefault = true
+                    "ver" -> version = v.toInt()
                 }
                 k = null
             }
         }
-        if (them.isEmpty()) {
-            addPredefined()
-        }
+        addPredefined(them.isEmpty())
     }
 
-    private fun addPredefined() {
-        add("Startpage",  "https://www.startpage.com/sp/search?pl=opensearch&query=%s")
-        add("Duckduckgo", "https://duckduckgo.com/?q=%s")
-        add("Spot",       "https://spot.murena.io/?q=%s")
-        add("Qwant",      "https://www.qwant.com/?q=%s")
-        add("Mojeek",     "https://www.mojeek.com/search?q=%s")
-        add("Wiktionary", "https://en.m.wiktionary.org/w/index.php?search=%L")
+    private fun addPredefined(force: Boolean) {
+        val oldVersion = version
+        val empty = them.isEmpty()
+        version = 1
+        if (force) {
+            add("Startpage",  "https://www.startpage.com/sp/search?pl=opensearch&query=%s")
+            add("Duckduckgo", "https://duckduckgo.com/?q=%s")
+            add("Spot",       "https://spot.murena.io/?q=%s")
+            add("Qwant",      "https://www.qwant.com/?q=%s")
+            add("Mojeek",     "https://www.mojeek.com/search?q=%s")
+            add("Wiktionary", "https://en.m.wiktionary.org/w/index.php?search=%L")
+        }
+        if (force || (oldVersion < 1)) {
+            add("Geo",        "geo:0,0?q=%s")
+            add("Wikipedia",  "https://en.m.wikipedia.org/w/index.php?search=%s")
+        }
+        if (force || (oldVersion != version)) {
+            savePref()
+        }
     }
 }

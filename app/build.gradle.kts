@@ -11,7 +11,7 @@ android {
         applicationId = "de.theiling.neatlauncher"
         minSdk = 24
         targetSdk = 34
-        versionCode = 5
+        versionCode = 6
         versionName = "1.4"
     }
     buildTypes {

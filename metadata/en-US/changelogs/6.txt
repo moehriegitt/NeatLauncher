@@ -1,0 +1,6 @@
+Feature release
+
+- Notification dot/badge support
+- Improved sorting of weather location search results
+- Exception handler to help debug crashes (composes a bug report text message: please send by email)
+- More default search URLs: Map location, Wikipedia
