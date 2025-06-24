@@ -12,6 +12,7 @@ use Carp;
 use Data::Dumper;
 use XML::LibXML;
 use MIME::Base64;
+use MIME::QuotedPrint;
 use Text::Diff;
 
 $Data::Dumper::Indent = 1;
@@ -262,6 +263,9 @@ sub parse_submission($)
     my $te = lc($head{content_transfer_encoding} // 'none');
     if ($te eq 'base64') {
         $data = decode_base64($body);
+    }
+    elsif ($te eq 'quoted-printable') {
+        $data = decode_qp($body);
     }
     elsif ($te eq 'none') {
         $data = $body;

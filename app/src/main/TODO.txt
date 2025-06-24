@@ -1,12 +1,39 @@
 # TODOs
 
-## For next feature release
+## For any release
 
   * update docs
 
   * update screenshots
 
+## For next bugfix release
+
+  * the search engine list resets itself when searching and even when executing anything (even when saving)
+
+  * sometimes the headline of weather is not displayed.  Dunno when, maybe if all days are old?
+    One user had this problem, probably after a while (>24h?) of no network contact.
+    Longer titles were displayed in part, missing some text on the left(!), indicating a
+    shifted table.  Why was it so wide then?  How to reproduce and test?
+
+## For next feature release
+
+  * 'copy' choice to weather location
+
+  * Ecosia web search
+
+  * Https and Http 'searches'
+
+  * current weather info (in title line, probably)
+
+  * 'Refresh' button to weather
+
+  * auto-save option
+
+  * french and polish translations
+
 ## Possibly for later releases
+
+  * give feedback why weather is not displayed; black box is bad
 
   * have a generic rain display (instead of only on analog clock)
 

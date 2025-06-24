@@ -181,7 +181,7 @@ class MainActivity:
     private lateinit var weatherTryLast: StateWeatherTryLast
     private lateinit var weatherTryNext: StateWeatherTryNext
 
-    private fun problemReport(e: Throwable) {
+    private fun problemReport(w: String, e: Throwable) {
         // shortToast("E $e ${e.functionName}") // redundant info
         startActivity(Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
@@ -189,7 +189,7 @@ class MainActivity:
             putExtra(Intent.EXTRA_TEXT,
                 "To: ${getString(R.string.problem_email)}\n" +
                 "Subject: NeatLauncher Problem\n\n" +
-                "$e\n${e.functionName}\n${e.throwLocation}\n" +
+                "$w: $e\n${e.functionName}\n${e.throwLocation}\n" +
                 "This happened when:")
         })
     }
@@ -204,7 +204,7 @@ class MainActivity:
         oldUncaught = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             try {
-                problemReport(e)
+                problemReport("DEF", e)
             } finally {
                 oldUncaught?.uncaughtException(t,e) ?: exitProcess(1)
             }
@@ -650,7 +650,7 @@ class MainActivity:
                     } catch (e: SecurityException) {
                         /* nothing */
                     } catch (e: Exception) {
-                        problemReport(e)
+                        problemReport("SH1", e)
                     }
                 }
             }
@@ -680,7 +680,7 @@ class MainActivity:
                 shortToast(getString(R.string.read_contacts_no_perm))
                 contactChoice.x = -1   // don't try again
             } catch (e: Exception) {
-                problemReport(e)
+                problemReport("CT1", e)
             }
         }
     }
@@ -729,7 +729,7 @@ class MainActivity:
     } catch (e: SecurityException) {
         false
     } catch (e: Exception) {
-        problemReport(e)
+        problemReport("SH2", e)
         false
     }
 
@@ -1377,7 +1377,7 @@ class MainActivity:
                         z.latitude.text.toString().toDouble(),
                         z.longitude.text.toString().toDouble())
                 } catch (e: Exception) {
-                    problemReport(e)
+                    problemReport("LO1", e)
                 }
             }
             weatherNotify()
@@ -1566,7 +1566,7 @@ class MainActivity:
             shortToast(getString(R.string.location_no_perm))
             weather.current.isActive = false
         } catch (e: Exception) {
-            problemReport(e)
+            problemReport("LO2", e)
         }
     }
 }

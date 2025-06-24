@@ -16,9 +16,13 @@ class SearchUrl(
             }
         }
 
-    override fun equals(that: Any?): Boolean {
-        if (!(that is SearchUrl)) return false
-        return this.url == that.url
+    override fun equals(other: Any?): Boolean {
+        if (other !is SearchUrl) return false
+        return this.url == other.url
+    }
+
+    override fun hashCode(): Int {
+        return url.hashCode()
     }
 }
 
@@ -42,7 +46,7 @@ class SearchEngine(private val c: Context)
             defaultMaybe = null
         }
         if (them.isEmpty()) {
-            addPredefined(true)
+            addPredefined()
         }
     }
 
@@ -88,14 +92,17 @@ class SearchEngine(private val c: Context)
                 k = null
             }
         }
-        addPredefined(them.isEmpty())
+        // if (them.isEmpty()) {
+        //    c.shortToast("Search Engine list is empty, reloading.")
+        // }
+        addPredefined()
     }
 
-    private fun addPredefined(force: Boolean) {
+    private fun addPredefined() {
         val oldVersion = version
-        val empty = them.isEmpty()
+        var act = them.isEmpty()
         version = 1
-        if (force) {
+        if (act) {
             add("Startpage",  "https://www.startpage.com/sp/search?pl=opensearch&query=%s")
             add("Duckduckgo", "https://duckduckgo.com/?q=%s")
             add("Spot",       "https://spot.murena.io/?q=%s")
@@ -103,11 +110,13 @@ class SearchEngine(private val c: Context)
             add("Mojeek",     "https://www.mojeek.com/search?q=%s")
             add("Wiktionary", "https://en.m.wiktionary.org/w/index.php?search=%L")
         }
-        if (force || (oldVersion < 1)) {
+        act = act || (oldVersion < 1)
+        if (act) {
             add("Geo",        "geo:0,0?q=%s")
             add("Wikipedia",  "https://en.m.wikipedia.org/w/index.php?search=%s")
         }
-        if (force || (oldVersion != version)) {
+        act = act || (oldVersion != version)
+        if (act) {
             savePref()
         }
     }
