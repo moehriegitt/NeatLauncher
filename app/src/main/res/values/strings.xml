@@ -86,6 +86,10 @@
     Q: How to get notification dots next to app names?\n
     A: In the system settings: reception of notifications needs to be granted to
     NeatLauncher, and notification dots need to be enabled.\n
+    \n
+    Q: The screen does not update when scrolling!?\n
+    A: In the ‘App Info’, switch ‘App Battery Usage’ to ‘Unrestricted’.
+    (Battery drain seems unchanged.)\n
     </string>
 
     <string name="readme_screenshots">Screenshots</string>

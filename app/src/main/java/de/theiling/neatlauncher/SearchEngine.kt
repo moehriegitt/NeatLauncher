@@ -92,9 +92,6 @@ class SearchEngine(private val c: Context)
                 k = null
             }
         }
-        // if (them.isEmpty()) {
-        //    c.shortToast("Search Engine list is empty, reloading.")
-        // }
         addPredefined()
     }
 

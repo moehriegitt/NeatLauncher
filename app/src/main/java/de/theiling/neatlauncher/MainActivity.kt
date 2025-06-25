@@ -1263,6 +1263,8 @@ class MainActivity:
         // rows min/max temp
         z.gridBu.text = "$tempChoice"
         z.gridCu.text = "$tempChoice"
+        z.gridEu.text = ""
+        var visible = false
         for (i in 0..6) {
             val ci = (cal.clone() as Calendar).apply { add(Calendar.DAY_OF_MONTH, i) }
             val wi = (ci[Calendar.DAY_OF_WEEK] + 7 - Calendar.MONDAY) % 7  // day of week w/ 0=Mon
@@ -1271,9 +1273,10 @@ class MainActivity:
             z.gridB[i].text = if (d == null) "" else d.tMax(ttypeChoice)[tempChoice].ceilString()
             z.gridC[i].text = if (d == null) "" else d.tMin(ttypeChoice)[tempChoice].floorString()
             z.gridE[i].text = if (d == null) "" else d.code.toString()
+            visible = visible || (d != null)
         }
 
-        return true
+        return visible
     }
 
     private fun weatherClear()
@@ -1282,9 +1285,9 @@ class MainActivity:
         weatherData = null
     }
 
-    private fun weatherUpdate(forceLoad: Boolean)
+    private fun weatherUpdate(forceClear: Boolean)
     {
-        val loadRequest = forceLoad || weatherCurrentUpdate
+        val loadRequest = forceClear || weatherCurrentUpdate
         var doLoad = loadRequest
 
         val now = Date()
@@ -1310,7 +1313,7 @@ class MainActivity:
         }
 
         // if the location switched, remove weather data until we have fresh data
-        if (forceLoad) {
+        if (forceClear) {
             weatherClear()
             onWeatherData()
         }
@@ -1461,7 +1464,10 @@ class MainActivity:
         for (e in l) {
             val (r,loc) = e
             r.isChecked = loc.isActive
-            r.setOnClickDismiss(d) { loc.isActive = true }
+            r.setOnClickDismiss(d) {
+                weatherCurrentUpdate = true // always update when clicked on
+                loc.isActive = true
+            }
             r.setOnLongClickDismiss(d) { locDialog(view, loc) }
         }
 

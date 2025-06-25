@@ -81,8 +81,12 @@
     A: Lange auf „Aktueller Standort“ klicken und dann einen Namen vergeben.\n
     \n
     F: Wie kriege ich Benachrichtigungspunkte neben den App-Namen?\n
-    A: In then Systemeinstellungen muß NeatLauncher der Empfang von Benachrichtigunen
+    A: In then Systemeinstellungen muß NeatLauncher der Empfang von Benachrichtigungen
     erlaubt sein, und die Benachrichtigungspunkte müssen eingeschaltet sein.\n
+    \n
+    F: Kein Bildschirmaufbau beim Scrollen!?\n
+    A: In „App-Verwaltung“, versuch „Batterienutzung“ auf „Unbeschränkt“ umzustellen.
+    (Batterieverbrauch scheint gleich zu bleiben.)\n
     </string>
 
     <string name="readme_screenshots">Screenshots</string>

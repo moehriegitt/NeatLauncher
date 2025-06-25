@@ -1,6 +1,7 @@
 package de.theiling.neatlauncher
 
 import android.app.Notification.FLAG_FOREGROUND_SERVICE
+import android.app.Notification.FLAG_GROUP_SUMMARY
 import android.content.Intent
 import android.database.ContentObserver
 import android.net.Uri
@@ -65,6 +66,7 @@ class NotificationService: NotificationListenerService() {
             if (!s.isClearable) continue
             val n = s.notification
             if ((n.flags and FLAG_FOREGROUND_SERVICE) == FLAG_FOREGROUND_SERVICE) continue
+            if ((n.flags and FLAG_GROUP_SUMMARY) == FLAG_GROUP_SUMMARY) continue
             val count = n.number.notIf{ it <= 0 } ?: 1
             newMap.compute(s.packageName) { _, pre -> (pre ?: 0) + count }
         }
