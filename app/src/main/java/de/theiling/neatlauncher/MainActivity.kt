@@ -139,6 +139,16 @@ class MainActivity:
             if (e1 != null) {
                 val dx = e2.x - e1.x
                 val dy = e2.y - e1.y
+
+                // DPad devices seem to emulate movement on hat axes.  Ignore
+                // fling down events for those in some cases that need the DPad
+                // for navigate (when searching).  This is a bit heuristical and
+                // may have false positives, but we can still press back or home.
+                val hy =
+                    e2.getAxisValue(MotionEvent.AXIS_HAT_Y) -
+                    e1.getAxisValue(MotionEvent.AXIS_HAT_Y)
+                val isDPad = (Math.abs(hy) > 1e-8)
+
                 if (abs(dx) > abs(dy)) {
                     if (abs(vx) > 100) {
                         allowClick = false
@@ -148,8 +158,7 @@ class MainActivity:
                 } else {
                     if (abs(vy) > 100) {
                         allowClick = false
-                        if (dy > 0) { onFlingDown() } else { onFlingUp() }
-                        return true
+                        return if (dy > 0) onFlingDown(isDPad) else onFlingUp()
                     }
                 }
             }
@@ -409,7 +418,7 @@ class MainActivity:
         leftItem?.let { itemLaunch(it) } ?:
             startActivity(Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA))
 
-    private fun onFlingUp() {
+    private fun onFlingUp(): Boolean {
         when (getMode()) {
             modePrimary() -> if (!homeCanUp) {
                 upItem?.let { itemLaunch(it) } ?: run {
@@ -417,21 +426,29 @@ class MainActivity:
                     setMode(modeSecondary())
                 }
             }
-            else -> Unit
+            else -> return false
         }
+        return true
     }
 
-    private fun onFlingDown() {
+    private fun onFlingDown(isDPad: Boolean): Boolean {
         when (getMode()) {
-            modePrimary() -> if (!homeCanDown) {
+            modePrimary() -> {
+                if (homeCanDown) return false
                 downItem?.let { itemLaunch(it) } ?:
                     startActivity(Intent(Settings.ACTION_SETTINGS))
             }
-            modeSecondary() -> if (!drawerCanDown) {
+            modeSecondary() -> {
+                if (drawerCanDown) return false
+                // On DPads, fling down (i.e., pushing 'UP') in a search moves
+                // to the first search result.  Don't comprimise that, but
+                // ignore that fling.
+                if (isDPad && (searchStr != "")) return false
                 resetView(false)
             }
-            else -> Unit
+            else -> return false
         }
+        return true
     }
 
     private fun onMinuteTick() {
