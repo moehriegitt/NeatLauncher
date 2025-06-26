@@ -17,15 +17,7 @@
 
 ## For next feature release
 
-  * 'copy' choice to weather location
-
-  * Ecosia web search
-
-  * Https and Http 'searches'
-
   * current weather info (in title line, probably)
-
-  * 'Refresh' button to weather
 
   * auto-save option
 
@@ -34,6 +26,8 @@
 ## Possibly for later releases
 
   * give feedback why weather is not displayed; black box is bad
+
+  * list upcoming events from calendar
 
   * have a generic rain display (instead of only on analog clock)
 
@@ -47,3 +41,7 @@
   * translate to Czech
   * translate to Tircunan (Latin and Ukaliq scripts)
   * translate to Inuktitut (Latin, Syllabics, and Ukaliq scripts)
+
+## Postponed indefinitely
+
+  * generic Android widget support
