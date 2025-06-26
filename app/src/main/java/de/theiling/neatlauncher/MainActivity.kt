@@ -1382,22 +1382,32 @@ class MainActivity:
         }
     }
 
+    private fun locUpdateEntry(e: WeatherLoc, z: LocDialogBinding)
+    {
+        e.name = z.editLabel.text.toString()
+        e.order = z.editOrder.text.toString()
+        try {
+            e.setLoc(
+                z.latitude.text.toString().toDouble(),
+                z.longitude.text.toString().toDouble())
+        } catch (ex: Exception) {
+            problemReport("LO1", ex)
+        }
+    }
+
     private fun locDialog(view: View, e: WeatherLoc)
     {
         val z = LocDialogBinding.inflate(LayoutInflater.from(view.context))
         val d = dialogInit(view, z.root, getString(R.string.location_title)) {
-            if (z.editDel.isChecked) {
-                weather.delete(e)
-            }
-            else {
-                e.name = z.editLabel.text.toString()
-                e.order = z.editOrder.text.toString()
-                try {
-                    e.setLoc(
-                        z.latitude.text.toString().toDouble(),
-                        z.longitude.text.toString().toDouble())
-                } catch (e: Exception) {
-                    problemReport("LO1", e)
+            when {
+                z.editDel.isChecked -> {
+                    weather.delete(e)
+                }
+                z.editNew.isChecked -> {
+                    locUpdateEntry(weather.add(e.name, e.lat, e.lon, e.isActive), z)
+                }
+                else -> {
+                    locUpdateEntry(e, z)
                 }
             }
             weatherNotify()
@@ -1408,6 +1418,7 @@ class MainActivity:
         }
 
         z.editLabel.setText(e.name)
+        z.editLabel.hint = e.name
         z.editOrder.setText(e.orderOrEmpty)
         z.latitude.setText(e.lat.toDecString(5))
         z.longitude.setText(e.lon.toDecString(5))
