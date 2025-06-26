@@ -313,10 +313,10 @@ erforderlich: es gibt keine Symbole)
 </tr>
 <tr class="odd0"><th class="small">faq_text-</th><th></th>
 <td class="langnew " >
-<textarea name="faq_text-.*" class="req" tabindex="20018" placeholder="faq_text-" rows="17"></textarea>
+<textarea name="faq_text-.*" class="req" tabindex="20018" placeholder="faq_text-" rows="20"></textarea>
 </td>
 <td lang="en" class="langdefault " >
-<textarea name="faq_text-._" class="req" tabindex="30018" placeholder="faq_text-" rows="17">Q: How to configure a thing?
+<textarea name="faq_text-._" class="req" tabindex="30018" placeholder="faq_text-" rows="20">Q: How to configure a thing?
 A: Try long clicking on it.
 
 Q: How to disable swipes or other actions?
@@ -332,10 +332,13 @@ Q: How to make current weather location a permanent entry?
 A: Long click on ‘Current location’, then give it a name.
 
 Q: How to get notification dots next to app names?
-A: In the system settings: reception of notifications needs to be granted to     NeatLauncher, and notification dots need to be enabled.</textarea>
+A: In the system settings: reception of notifications needs to be granted to     NeatLauncher, and notification dots need to be enabled.
+
+Q: The screen does not update when scrolling!?
+A: In the ‘App Info’, switch ‘App Battery Usage’ to ‘Unrestricted’.     (Battery drain seems unchanged.)</textarea>
 </td>
 <td lang="de" class="langde " >
-<textarea name="faq_text-.de" class="req" tabindex="50018" placeholder="faq_text-" rows="17">F: Wie stelle ich was ein?
+<textarea name="faq_text-.de" class="req" tabindex="50018" placeholder="faq_text-" rows="20">F: Wie stelle ich was ein?
 A: Versuch mal lange draufzuklicken.
 
 F: Wie kann ich einen Wisch oder andere Aktionen ausschalten?
@@ -351,7 +354,10 @@ F: Wie mache aus dem aktuellen Standort einen eigenen Eintrag?
 A: Lange auf „Aktueller Standort“ klicken und dann einen Namen vergeben.
 
 F: Wie kriege ich Benachrichtigungspunkte neben den App-Namen?
-A: In then Systemeinstellungen muß NeatLauncher der Empfang von Benachrichtigunen     erlaubt sein, und die Benachrichtigungspunkte müssen eingeschaltet sein.</textarea>
+A: In then Systemeinstellungen muß NeatLauncher der Empfang von Benachrichtigungen     erlaubt sein, und die Benachrichtigungspunkte müssen eingeschaltet sein.
+
+F: Kein Bildschirmaufbau beim Scrollen!?
+A: In „App-Verwaltung“, versuch „Batterienutzung“ auf „Unbeschränkt“ umzustellen.     (Batterieverbrauch scheint gleich zu bleiben.)</textarea>
 </td>
 </tr>
 <tr class="odd1"><th class="small">readme_screenshots</th><th></th>
@@ -1704,8 +1710,8 @@ NeatLauncher needs permission
 to receive notifications (currently %s). Further,
 notification dots need to
 be enabled in the system settings, typically in
-'Notifications | Notification
-Dot on App Icon' (currently %s).</textarea>
+‘Notifications | Notification
+Dot on App Icon’ (currently %s).</textarea>
 </td>
 <td lang="de" class="langde " >
 <textarea name="notif_dots_intro.de" class="req" tabindex="50152" placeholder="notif_dots_intro" rows="9">Zur Anzeige von Benachrichtigungspunkten an
@@ -1714,9 +1720,9 @@ NeatLauncher die Erlaubnis haben,
 Benachrichtigungen zu empfangen
 (momentan %s). Außerdem müssen
 Benachrichtigungspunkte eingeschaltat
-sein, typischerweise in 'Benachrichtigungen |
+sein, typischerweise in „Benachrichtigungen |
 Benachrichtigungspunkt auf
-App-Symbol' (momentan %s).</textarea>
+App-Symbol“ (momentan %s).</textarea>
 </td>
 </tr>
 <tr class="odd1"><th class="small">notif_start_perm</th><th></th>
@@ -1739,24 +1745,24 @@ App-Symbol' (momentan %s).</textarea>
 <input name="notif_start_settings.de" class="req" tabindex="50154" placeholder="notif_start_settings" type="text" value="Systemeinstellungen" />
 </td>
 </tr>
-<tr class="odd1"><th class="small">notif_granted0</th><th></th>
+<tr class="odd1"><th class="small">notif_grant0</th><th></th>
 <td class="langnew " >
-<input name="notif_granted0.*" class="req" tabindex="20155" placeholder="notif_granted0" type="text" value=""/></td>
+<input name="notif_grant0.*" class="req" tabindex="20155" placeholder="notif_grant0" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="notif_granted0._" class="req" tabindex="30155" placeholder="notif_granted0" type="text" value="denied" />
+<input name="notif_grant0._" class="req" tabindex="30155" placeholder="notif_grant0" type="text" value="denied" />
 </td>
 <td lang="de" class="langde " >
-<input name="notif_granted0.de" class="req" tabindex="50155" placeholder="notif_granted0" type="text" value="verweigert" />
+<input name="notif_grant0.de" class="req" tabindex="50155" placeholder="notif_grant0" type="text" value="verweigert" />
 </td>
 </tr>
-<tr class="odd0"><th class="small">notif_granted1</th><th></th>
+<tr class="odd0"><th class="small">notif_grant1</th><th></th>
 <td class="langnew " >
-<input name="notif_granted1.*" class="req" tabindex="20156" placeholder="notif_granted1" type="text" value=""/></td>
+<input name="notif_grant1.*" class="req" tabindex="20156" placeholder="notif_grant1" type="text" value=""/></td>
 <td lang="en" class="langdefault " >
-<input name="notif_granted1._" class="req" tabindex="30156" placeholder="notif_granted1" type="text" value="granted" />
+<input name="notif_grant1._" class="req" tabindex="30156" placeholder="notif_grant1" type="text" value="granted" />
 </td>
 <td lang="de" class="langde " >
-<input name="notif_granted1.de" class="req" tabindex="50156" placeholder="notif_granted1" type="text" value="erlaubt" />
+<input name="notif_grant1.de" class="req" tabindex="50156" placeholder="notif_grant1" type="text" value="erlaubt" />
 </td>
 </tr>
 <tr class="odd1"><th class="small">notif_dots0</th><th></th>
