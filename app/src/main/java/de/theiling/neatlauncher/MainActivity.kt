@@ -52,6 +52,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import kotlin.math.round
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -1267,12 +1268,19 @@ class MainActivity:
         val day = dat.day.filter { cal.time <= it.last }
         if (day.isEmpty()) return false
 
+        // current weather
+        val now = dat.step.firstOrNull { (cal.time >= it.start) && (cal.time <= it.last) }
+        val nowStr =
+            if (now == null) ""
+            else " ${now.code}${round(now.t(ttypeChoice)[tempChoice]).toInt()}$tempChoice"
+
         // title
-        z.weatherLoc.visibility = visibleIf(!act.isCurrent)
+        z.weatherLoc.visibility = visibleIf(!act.isCurrent || (nowStr != ""))
         z.weatherLoc.text =
             act.name +
             (if (cal.timeZone.getOffset(cal.time.time) != dat.timeZone.getOffset(cal.time.time))
-                " ${dat.timeZone.id}" else "")
+                " ${dat.timeZone.id}" else "") +
+            nowStr
 
         // set time zone to get week days right in table (may be out of sync with date display!)
         cal.timeZone = dat.timeZone

@@ -8,16 +8,21 @@
 
 ## Bugs to be fixed
 
-  * sometimes the headline of weather is not displayed.  Dunno when, maybe if all days are old?
+  * Sometimes the headline of weather is not displayed.  Dunno when, maybe if all days are old?
     One user had this problem, probably after a while (>24h?) of no network contact.
     Longer titles were displayed in part, missing some text on the left(!), indicating a
     shifted table.  Why was it so wide then?  How to reproduce and test?  The table was
     not invisible, but also nothing was shown.  Or was there info in the future?
     [not yet reproduced]
 
-## For next feature release
+  * Weather 'Current Location' does not work too well.  When switched on, no location is queried,
+    so nothing is shown.  I am not sure when it actually queries the current location, really.
+    Sometimes, after a while, weather info does show up.  I've also seen it switch to the data
+    of the last selected location instead.  The request for location is actually sent in the App,
+    so not sure how to fix this.
+    [not yet explicable]
 
-  * current weather info (in title line, probably)
+## For next feature release
 
   * auto-save option
 

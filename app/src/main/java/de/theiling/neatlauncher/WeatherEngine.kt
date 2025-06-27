@@ -320,6 +320,11 @@ data class WeatherStep(
     fun compareTo(other: WeatherStep): Int =
         this.end.compareTo(other.end).non0 ?: // earlier end time first
         other.durSec.compareTo(this.durSec) // short ones first
+
+    fun t(unit: EnumTtype) = when (unit.x) {
+        ttype_actu -> tAbs
+        else       -> tApp
+    }
 }
 
 /* A weather day has additional min/max ranges,
