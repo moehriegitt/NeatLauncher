@@ -1035,7 +1035,7 @@ sub make_xlat($)
 {
     my ($C) = @_;
     my $title = get_string($C, 'app_name', '');
-    my $xlat_email = get_string($C, 'xlat_email', '') // die "No xlat_email";
+    my $xlat_email = trim(get_string($C, 'xlat_email', '') // die "No xlat_email");
 
     my $wdc = get_string_array($C, 'weekday_choice_key');
     my $xlatabl = get_attr(get_string_array($C, 'weekday_choice_key'), 'translatable', '');
