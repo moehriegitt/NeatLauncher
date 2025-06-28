@@ -48,6 +48,14 @@
         <item>tpar</item>
     </string-array>
 
+    <string-array name="five_choice_key" translatable="false">
+        <item>x0</item>
+        <item>x1</item>
+        <item>x2</item>
+        <item>x3</item>
+        <item>x4</item>
+    </string-array>
+
     <string-array name="tweath_choice_key" translatable="false">
         <item>tabl</item>
         <item>clok</item>

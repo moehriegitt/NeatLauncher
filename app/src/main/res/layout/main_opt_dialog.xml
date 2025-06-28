@@ -84,6 +84,14 @@
                 />
 
             <TextView
+                android:id="@+id/swipe_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/swipe_choice_title"
+                style="@style/AppTheme.PopupItem"
+                />
+
+            <TextView
                 android:id="@+id/language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -150,14 +150,23 @@ class MainActivity:
                     e1.getAxisValue(MotionEvent.AXIS_HAT_Y)
                 val isDPad = (Math.abs(hy) > 1e-8)
 
+                val dpi = resources.displayMetrics.densityDpi
+                val sense = (dpi * when (swipeChoice.x) {
+                    five_x0 -> 1024
+                    five_x1 -> 512
+                    five_x2 -> 256
+                    five_x3 -> 128
+                    else -> 0
+                }) / 768
+
                 if (abs(dx) > abs(dy)) {
-                    if (abs(vx) > 100) {
+                    if ((abs(vx) > 100) && (abs(dx) > sense)) {
                         allowClick = false
                         if (dx > 0) { onFlingRight() } else { onFlingLeft() }
                         return true
                     }
                 } else {
-                    if (abs(vy) > 100) {
+                    if ((abs(vy) > 100) && (abs(dy) > sense)) {
                         allowClick = false
                         return if (dy > 0) onFlingDown(isDPad) else onFlingUp()
                     }
@@ -180,6 +189,7 @@ class MainActivity:
     private lateinit var dateChoice: EnumDate
     private lateinit var timeChoice: EnumTime
     private lateinit var backChoice: EnumBack
+    private lateinit var swipeChoice: EnumSwipe
     private lateinit var colorChoice: EnumColor
     private lateinit var fontChoice: EnumFont
     private lateinit var ttypeChoice: EnumTtype
@@ -231,6 +241,7 @@ class MainActivity:
         dateChoice = EnumDate(c) { clockRedraw(true) }
         timeChoice = EnumTime(c) { clockRedraw(true) }
         backChoice = EnumBack(c) { restart() }  // recreate() is not reset enough (bug?)
+        swipeChoice = EnumSwipe(c) { }
         colorChoice = EnumColor(c) { recreate() }
         fontChoice = EnumFont(c) { recreate() }
         tempChoice = EnumTemp(c) { weatherRedraw() }
@@ -1138,6 +1149,7 @@ class MainActivity:
         val z = MainOptDialogBinding.inflate(LayoutInflater.from(view.context))
         val d = dialogInit(view, z.root, getString(R.string.main_opt_title)).create()
         z.backChoice.   setOnClickDismiss(d) { choiceDialog(view, backChoice) }
+        z.swipeChoice.  setOnClickDismiss(d) { choiceDialog(view, swipeChoice) }
         z.colorChoice.  setOnClickDismiss(d) { choiceDialog(view, colorChoice) }
         z.fontChoice.   setOnClickDismiss(d) { choiceDialog(view, fontChoice) }
         z.timeChoice.   setOnClickDismiss(d) { choiceDialog(view, timeChoice) }

@@ -322,6 +322,7 @@ class MainOptDialogBinding(
     val mainInfo: TextView,
     val notifChoice: TextView,
     val saveRestore: TextView,
+    val swipeChoice: TextView,
     val timeChoice: TextView,
     val weatherMenu: TextView):
     ViewBinding
@@ -341,6 +342,7 @@ class MainOptDialogBinding(
             rootView.findViewById(R.id.main_info)!!,
             rootView.findViewById(R.id.notif_choice)!!,
             rootView.findViewById(R.id.save_restore)!!,
+            rootView.findViewById(R.id.swipe_choice)!!,
             rootView.findViewById(R.id.time_choice)!!,
             rootView.findViewById(R.id.weather_menu)!!)
 
