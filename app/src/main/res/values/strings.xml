@@ -173,8 +173,6 @@
     <string name="search_location_title">Search Location</string>
     <string name="geo_link">Show on Map</string>
 
-    <string name="pin_menu">Pinned Apps</string>
-
     <string name="error_msg">Error: %s</string>
     <string name="searching_msg">Searching...</string>
     <string name="search_empty">Nothing was found.</string>
@@ -363,7 +361,7 @@
     </string-array>
 
     <string name="swipe_choice_title">Swipe Sensitivity</string>
-    <string-array name="five_choice">
+    <string-array name="swipe_choice">
         <item>Low</item>
         <item>Medium-Low</item>
         <item>Medium</item>

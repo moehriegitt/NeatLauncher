@@ -4,3 +4,4 @@ Feature release.
 - add swipe sensibility control
 - display current weather
 - fix rendering problem of weather table
+- translation: Polish (thanks to Julian Nowaczyk)

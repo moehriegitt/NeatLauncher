@@ -170,8 +170,6 @@
     <string name="search_location_title">Ortssuche</string>
     <string name="geo_link">Auf Karte zeigen</string>
 
-    <string name="pin_menu">Schnellzugriffe</string>
-
     <string name="error_msg">Fehler: %s</string>
     <string name="searching_msg">Suche läuft...</string>
     <string name="search_empty">Es wurde nichts gefunden.</string>
@@ -331,7 +329,7 @@
     </string-array>
 
     <string name="swipe_choice_title">Wischempfindlichkeit</string>
-    <string-array name="five_choice">
+    <string-array name="swipe_choice">
         <item>Niedrig</item>
         <item>Mittel-Niedrig</item>
         <item>Mittel</item>

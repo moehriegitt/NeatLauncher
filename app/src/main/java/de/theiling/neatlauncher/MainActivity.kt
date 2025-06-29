@@ -152,10 +152,10 @@ class MainActivity:
 
                 val dpi = resources.displayMetrics.densityDpi
                 val sense = (dpi * when (swipeChoice.x) {
-                    five_x0 -> 1024
-                    five_x1 -> 512
-                    five_x2 -> 256
-                    five_x3 -> 128
+                    swipe_x0 -> 1024
+                    swipe_x1 -> 512
+                    swipe_x2 -> 256
+                    swipe_x3 -> 128
                     else -> 0
                 }) / 768
 

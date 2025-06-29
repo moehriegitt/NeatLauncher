@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NeatLauncher</string>
+
+    <string name="package_n_version">Pakiet i wersja</string>
+    <string name="package_version_code">%s v%s (kod wersji %d)</string>
+    <string name="author_name">Autor: %s</string>
+    <string name="license_name">Licencja: %s</string>
+    <string name="source_link">Kod źródłowy: %s</string>
+    <string name="package_link">Repozytorium: %s</string>
+    <string name="xlat_title">Tłumaczenie</string>
+    <string name="license_other">Inne licencje</string>
+    <string name="font_ubuntu">Czcionka Ubuntu</string>
+    <string name="service_open_meteo">Serwis Open-Meteo</string>
+    <string name="open_meteo_link">Dane pogodowe: Open-Meteo.com</string>
+
+    <string name="readme_short_description">Prosty i wygodny launcher bez ikon.</string>
+
+    <string name="readme_description">Opis</string>
+
+    <string name="readme_full_description">
+    Launcher, który zastąpi pstrokate, wypełnione bezsensownymi
+    ikonami, rozpraszające i niewydajne launchery.
+
+    Klarowność osiągnięta przez elegancki i wydajny design oparty na
+    tekście. Z konfigurowalnym dostępem do programów, skrótów czy
+    kontaktów, przez listę, lub gesty.
+
+    Wspiera zarówno skróty statyczne jak i dynamiczne.
+
+    Funkcję wyszukiwania można opcjonalnie zintegrować z listą
+    kontaktów, lub z wybraną wyszukiwarką internetową.
+
+    Próbuje zapewnić wystarczającą konfigurowalność bez czynienia
+    testowania przypadków skrajnych żmudnymi, aby zapewnić
+    funkcjonalność i stabilność.
+
+    Informacje pogodowe (Używa sieci i usług lokalizacyjnych)
+
+    Nowa aplikacja zbudowana od zera. Inspirowana Unlauncher-em (fork
+    Slimlaunchera), Nolauncher-em i opiniami użytkowników.
+    </string>
+
+    <string name="readme_features">Funkcje</string>
+
+    <string name="readme_feature_list">
+    - jednolity i elegancki tekstowy design
+    - konfugurowalny szybki dostęp i gesty na ekranie głównym
+    - obsługa skrótów (domyślnie przytrzymanie)
+    - ukrywanie aplikacji (z zachowaniem wyszukiwania)
+    - aplikacje mogą mieć zmieniane nazwy i być przestawiane
+    - doskonałe wyszukiwane aplikacji
+    - integracja z listą kontaktów w wyszukiwaniu
+    - integracja z wybraną wyszukiwarką internetową
+    - opcje zegara
+    - opcje formatu daty
+    - pogoda (przez open-meteo.com)
+    - konfigurowalne kolory
+    - może używać tapety systemowej
+    - wolne, otwarto źródłowe oprogramowanie
+    - brak obsługi paczek ikon (wcale nie ma ikon)
+    - brak obsługi widżetów
+    </string>
+
+    <string name="faq_text">
+    P: Jak coś skonfigurować?\n
+    O: Spróbuj przytrzymać.\n
+    \n
+    P: Jak wyłączyć przeciągnięcia lub inne akcje?\n
+    O: Przypinając do „Nic”.\n
+    \n
+    P: Jak ustawić wyszukiwarkę jako domyślną?\n
+    O: Przytrzymaj ją aby ją skonfigurować.\n
+    \n
+    P: Jak otworzyć klawiaturę gdy szuflada z aplikacjami się otwiera?\n
+    O: Kliknij na „Szukaj” zamiast otwierania jej za pomocą gestu.\n
+    \n
+    P: Jak ustawić obecną lokalizację jako permanentną?\n
+    O: Przytrzymaj „Obecna lokalizacja”, potem nadaj jej nazwę.\n
+    \n
+    P: Jak ustawić plakietki powiadomień?\n
+    O: W ustawieniach systemowych NeatLauncher musi mieć przyznane uprawnienia
+    do odczytu powiadomień, oraz plakietki powiadomień muszą być włączone.\n
+    \n
+    P: Ekran nie odświeża się podczas przewijania!?\n
+    O: W „Informacjach o aplikacji” spróbuj zmienić „Użycie baterii” na „Nieograniczone”.
+    (Użycie baterii wydaje się pozostawać takie samo.)
+    </string>
+
+    <string name="readme_screenshots">Zrzuty ekranu</string>
+
+    <string name="main_search_hint">Szukaj</string>
+
+    <string name="item_nothing">Nic</string>
+    <string name="item_photo">Zdjęcie</string>
+    <string name="item_video">Wideo</string>
+    <string name="item_home">Dom</string>
+    <string name="item_dial">Wybrać numer</string>
+    <string name="item_camera">Aparat</string>
+    <string name="item_settings">Ustawienia</string>
+    <string name="item_phone">Telefon</string>
+
+    <string name="item_start">Uruchom</string>
+    <string name="item_info">Informacje o aplikacji</string>
+    <string name="item_rename">Zmień nazwę</string>
+    <string name="item_pin">Przypnij</string>
+    <string name="item_rid">Odepnij</string>
+    <string name="item_hide">Ukryj</string>
+    <string name="item_show">Pokaż</string>
+    <string name="item_remove">Usuń</string>
+
+    <string name="item_title_shortcuts">Skróty</string>
+
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Anuluj</string>
+
+    <string name="rename_title">Zmień nazwę</string>
+    <string name="edit_order_title">Sortuj jako</string>
+    <string name="edit_order_hint">nazwa</string>
+
+    <string name="pin_heading">Przypnij do listy</string>
+    <string name="pin_home">Lista</string>
+    <string name="pin_left">Przeciągnięcie w lewo</string>
+    <string name="pin_right">Przeciągnięcie w prawo</string>
+    <string name="pin_down">Przeciągnięcie w dół</string>
+    <string name="pin_up">Przeciągnięcie w górę</string>
+    <string name="pin_bgrd">Przytrzymanie tła</string>
+    <string name="pin_time">Naciśnięcie zegara</string>
+    <string name="pin_date">Naciśnięcie daty</string>
+    <string name="pin_weath">Naciśnięcie pogody</string>
+
+    <string name="error_starting">Błąd przy uruchamianiu %s</string>
+    <string name="error_removing">Błąd przy usuwaniu %s</string>
+
+    <string name="ok_remove_shortcut">Usuń skrót %s</string>
+
+    <string name="search_opt_title">Wyszukiwarka</string>
+    <string name="search_name_hint">Nazwa</string>
+    <string name="search_url_hint">URL</string>
+    <string name="search_make_default">Domyślna wyszukiwarka</string>
+    <string name="search_keep">Zachowaj</string>
+    <string name="search_copy">Kopiuj</string>
+    <string name="search_delete">Usuń</string>
+
+    <string name="main_opt_title">Ustawienia</string>
+    <string name="about_title">O NeatLauncher</string>
+
+    <string name="save_restore">Zapisz / Załaduj ustawienia</string>
+    <string name="pref_save">Zapisz ustawienia</string>
+    <string name="pref_load">Załaduj ustawienia</string>
+    <string name="ok_load">Zakończono ładowanie pomyślnie.</string>
+    <string name="err_load">Błąd ładowania ustawień.</string>
+    <string name="ok_save">Zapisano.</string>
+    <string name="err_save">Błąd zapisu.</string>
+
+    <string name="main_faq">Często zadawane pytania / Pomoc</string>
+    <string name="main_language">Język</string>
+    <string name="main_info">Informacje o Aplikacji</string>
+
+    <string name="do_hide">%s: ukryj (Nadal będzie można wyszukać)</string>
+    <string name="do_show">%s: pokaż</string>
+    <string name="do_unpin">%s: odepnij</string>
+
+    <string name="weather_title">Pogoda</string>
+    <string name="no_weather">Brak pogody</string>
+    <string name="current_location">Obecna lokalizacja</string>
+    <string name="search_location_hint">Szukaj nowego miejsca</string>
+    <string name="search_location_title">Szukaj miejsca</string>
+    <string name="geo_link">Pokaż na mapie.</string>
+
+    <string name="error_msg">Błąd: %s</string>
+    <string name="searching_msg">Szukanie...</string>
+    <string name="search_empty">Nic nie znaleziono.</string>
+    <string name="switched_to_location">Lokalizacja pogody to: %s</string>
+    <string name="switched_to_current_location">Lokalizacja pogody to tu.</string>
+    <string name="switched_off_weather">Wyłączono pogodę.</string>
+    <string name="location_title">Ustawienia lokalizacji.</string>
+    <string name="loc_cur_title">Obecna lokalizacja.</string>
+    <string name="wstart_choice_title">Pierwszy dzień tygodnia</string>
+
+    <string name="tweath_choice_title">Wybór prognozy</string>
+    <string-array name="tweath_choice">
+        <item>Tabela tygodnia</item>
+        <item>Deszcz na zegarze analogowym</item>
+        <item>Oba</item>
+    </string-array>
+
+    <string name="temp_choice_title">Jednostka</string>
+
+    <string name="ttype_choice_title">Temperatura</string>
+    <string-array name="ttype_choice">
+        <item>Rzeczywista</item>
+        <item>Odczuwalna</item>
+    </string-array>
+
+    <string name="coord_title">Współrzędne</string>
+    <string name="latitude">Szerokość</string>
+    <string name="longitude">Długość</string>
+
+    <string-array name="weather_code">
+        <item>Chmury</item>
+        <item>Mgła</item>
+        <item>Mżawka</item>
+        <item>Deszcz</item>
+        <item>Śnieg</item>
+        <item>Burza</item>
+    </string-array>
+
+    <string-array name="weather_level">
+        <item>brak</item>
+        <item>lekka</item>
+        <item>średnia</item>
+        <item>mocna</item>
+    </string-array>
+
+    <string name="weather_icy">mroźnie</string>
+    <string name="weather_shower">deszcz</string>
+
+    <string-array name="weather_code_descr">
+        <item>0; bezchmurno</item>
+        <item>1; głównie jasno</item>
+        <item>2; częściowo pochmurno</item>
+        <item>3; pochmurno</item>
+        <item>45; mgła</item>
+        <item>48; osadzająca się szadź</item>
+        <item>51; mżawka, lekka</item>
+        <item>53; mżawka, umiarkowana</item>
+        <item>55; mżawka, gęsta</item>
+        <item>56; mżawka marznąca, lekka</item>
+        <item>57; mżawka marznąca, gęsta</item>
+        <item>61; deszcz, lekki</item>
+        <item>63; deszcz, umiarkowany</item>
+        <item>65; deszcz, ulewny</item>
+        <item>66; marznący deszcz, lekki</item>
+        <item>67; marznący deszcz, ulewny</item>
+        <item>71; opady śniegu, niewielkie</item>
+        <item>73; opady śniegu, umiarkowane</item>
+        <item>75; opady śniegu, intensywne</item>
+        <item>77; śnieg ziarnisty</item>
+        <item>80; przelotne opady deszczu, niewielkie</item>
+        <item>81; przelotne opady deszczu, umiarkowane</item>
+        <item>82; przelotne opady deszczu, gwałtowne</item>
+        <item>85; przelotne opady śniegu, niewielkie</item>
+        <item>86; przelotne opady śniegu, intensywne</item>
+        <item>95; burza</item>
+        <item>96; burza z gradem</item>
+        <item>99; silna burza z gradem</item>
+    </string-array>
+
+    <string name="weather_symbol_title">Symbole pogody</string>
+
+    <string name="location_no_perm">Brak dostępu do lokalizacji</string>
+
+    <string name="notif_no_perm">Brak dostępu do powiadomień</string>
+    <string name="notifications_title">Powiadomienia</string>
+    <string name="notif_dots_title">Kropki powiadomień</string>
+
+    <string name="notif_dots_intro">
+    Aby pokazywać kropki powiadomień przy nazwach aplikacji
+    Musisz udzielić NeatLauncher-owi uprawnień (obecnie %s).
+    Dodatkowo kropki powiadomień muszą być włączone w ustawieniach,
+    typowo „Powiadomienia | Plakietki z powiadomieniem na ikonie aplikacji” (obecnie %s)
+    </string>
+    <string name="notif_start_perm">Uprawnienia do powiadomień</string>
+    <string name="notif_start_settings">Ustawienia systemowe</string>
+
+    <string name="notif_grant0">odrzucone</string>
+    <string name="notif_grant1">przyznane</string>
+    <string name="notif_dots0">wyłączone</string>
+    <string name="notif_dots1">włączone</string>
+
+    <string name="read_contacts_no_perm">Brak uprawnień do listy kontaktów</string>
+    <string name="contact_choice_title">Kontakty</string>
+    <string-array name="contact_choice">
+        <item>Nie czytaj listy kontaktów.</item>
+        <item>Czytaj listę kontaktów.</item>
+    </string-array>
+
+    <string name="date_choice_title">Data</string>
+    <string-array name="date_choice">
+        <item>Ustawienie systemowe</item>
+        <item>Bez daty</item>
+        <item>2024-01-01</item>
+        <item>Pon 2024-01-01</item>
+        <item>Poniedziałek</item>
+    </string-array>
+
+    <string name="time_choice_title">Zegar</string>
+    <string-array name="time_choice">
+        <item>Ustawienie systemowe</item>
+        <item>Bez zegara</item>
+        <item>8:30</item>
+        <item>08:30</item>
+        <item>8:30 am</item>
+        <item>08:30 am</item>
+        <item>Analogowy</item>
+        <item>Słowny</item>
+        <item>Siatka (nieobsługiwana)</item>
+    </string-array>
+
+    <string name="color_choice_title">Kolor</string>
+    <string-array name="color_choice">
+        <item>Bezbarwny</item>
+        <item>Bursztynowy</item>
+        <item>Dyniowy</item>
+        <item>Czerwony</item>
+        <item>Liliowy</item>
+        <item>Niebieski</item>
+        <item>Cyjan</item>
+    </string-array>
+
+    <string name="font_choice_title">Czcionka</string>
+    <string-array name="font_choice">
+        <item>Bezszeryfowa</item>
+        <item>Szeryfowa</item>
+        <item>Monospace</item>
+        <item>Kursywa</item>
+        <item>Ubuntu</item>
+    </string-array>
+
+    <string name="back_choice_title">Tło</string>
+    <string-array name="back_choice">
+        <item>Jednolite</item>
+        <item>Półprzeźroczyste</item>
+        <item>Przeźroczyste</item>
+    </string-array>
+
+    <string name="swipe_choice_title">Czułość na przeciąganie</string>
+    <string-array name="swipe_choice">
+        <item>Niska</item>
+        <item>Średnio-niska</item>
+        <item>Średnia</item>
+        <item>Średnio-wysoka</item>
+        <item>Wysoka</item>
+    </string-array>
+
+    <string name="time_grid_base">
+    </string>
+
+    <string-array name="time_grid_except">
+    </string-array>
+
+    <string-array name="time_grid_min">
+        <item>=</item>
+        <item>= pięć</item>
+        <item>= dziesięć</item>
+        <item>= piętnaście</item>
+        <item>= dwadzieścia</item>
+        <item>= dwadzieścia pięć</item>
+        <item>= trzydzieści</item>
+        <item>za dwadzieścia pięć +</item>
+        <item>za dwadzieścia +</item>
+        <item>za piętnaście +</item>
+        <item>za dziesięć +</item>
+        <item>za pięć +</item>
+    </string-array>
+
+    <string-array name="time_grid_hour">
+        <item>dwunasta</item>
+        <item>pierwsza</item>
+        <item>druga</item>
+        <item>trzecia</item>
+        <item>czwarta</item>
+        <item>piąta</item>
+        <item>szósta</item>
+        <item>siódma</item>
+        <item>ósma</item>
+        <item>dziewiąta</item>
+        <item>dziesiąta</item>
+        <item>jedenasta</item>
+    </string-array>
+
+    <string-array name="time_word_except">
+    </string-array>
+
+    <string-array name="time_word_min">
+    </string-array>
+
+    <string-array name="time_word_hour">
+    </string-array>
+</resources>

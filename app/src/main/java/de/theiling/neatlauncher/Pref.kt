@@ -211,7 +211,7 @@ class EnumBack(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.back_c
     R.array.back_choice, R.array.back_choice_key, "backChoice", back_opaq, onChange)
 
 class EnumSwipe(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.swipe_choice_title,
-    R.array.five_choice, R.array.five_choice_key, "swipeChoice", five_x2, onChange)
+    R.array.swipe_choice, R.array.swipe_choice_key, "swipeChoice", swipe_x2, onChange)
 
 class EnumFont(c: Context, onChange: (Int) -> Unit): PrefEnum(c, R.string.font_choice_title,
     R.array.font_choice, R.array.font_choice_key, "fontChoice", font_ubun, onChange)
