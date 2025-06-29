@@ -1288,6 +1288,8 @@ class MainActivity:
 
         // title
         z.weatherLoc.visibility = visibleIf(!act.isCurrent || (nowStr != ""))
+        z.weatherLoc.text = ""
+        z.weatherGrid.requestLayout() // make sure to shrink the grid back after wide name
         z.weatherLoc.text =
             act.name +
             (if (cal.timeZone.getOffset(cal.time.time) != dat.timeZone.getOffset(cal.time.time))

@@ -8,12 +8,10 @@
 
 ## Bugs to be fixed
 
-  * Sometimes the headline of weather is not displayed.  Dunno when, maybe if all days are old?
-    One user had this problem, probably after a while (>24h?) of no network contact.
-    Longer titles were displayed in part, missing some text on the left(!), indicating a
-    shifted table.  Why was it so wide then?  How to reproduce and test?  The table was
-    not invisible, but also nothing was shown.  Or was there info in the future?
-    [not yet reproduced]
+  * Sometimes the headline of weather is not displayed.  It was scrolled out to the
+    left.  This happens when a long name makes the widget wide and it can then be scrolled
+    manually (and accidentally).  Even when a shorter headline is used afterwards, the
+    widget does not shrink back, at least until the app is restarted.
 
   * Weather 'Current Location' does not work too well.  When switched on, no location is queried,
     so nothing is shown.  I am not sure when it actually queries the current location, really.
@@ -26,9 +24,11 @@
 
   * auto-save option
 
-  * french and polish translations
+  * polish translation
 
 ## Possibly for later releases
+
+  * french translation (current version lacks proof-reading)
 
   * give feedback why weather is not displayed; black box is bad
 
