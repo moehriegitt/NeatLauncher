@@ -8,10 +8,7 @@
 
 ## Bugs to be fixed
 
-  * Sometimes the headline of weather is not displayed.  It was scrolled out to the
-    left.  This happens when a long name makes the widget wide and it can then be scrolled
-    manually (and accidentally).  Even when a shorter headline is used afterwards, the
-    widget does not shrink back, at least until the app is restarted.
+## Inconveniences to be investigated
 
   * Weather 'Current Location' does not work too well.  When switched on, no location is queried,
     so nothing is shown.  I am not sure when it actually queries the current location, really.

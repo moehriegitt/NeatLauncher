@@ -1,3 +1,6 @@
 Feature release.
 
 - allow copying of weather location ('New' radio button)
+- add swipe sensibility control
+- display current weather
+- fix rendering problem of weather table
