@@ -84,7 +84,7 @@
     do odczytu powiadomień, oraz plakietki powiadomień muszą być włączone.\n
     \n
     P: Ekran nie odświeża się podczas przewijania!?\n
-    O: W „Informacjach o aplikacji” spróbuj zmienić „Użycie baterii” na „Nieograniczone”.
+    O: W „Informacjach o aplikacji”, spróbuj zmienić „Użycie baterii” na „Bez ograniczeń”.
     (Użycie baterii wydaje się pozostawać takie samo.)
     </string>
 
@@ -257,8 +257,8 @@
     <string name="notif_dots_title">Kropki powiadomień</string>
 
     <string name="notif_dots_intro">
-    Aby pokazywać kropki powiadomień przy nazwach aplikacji
-    Musisz udzielić NeatLauncher-owi uprawnień (obecnie %s).
+    Aby pokazywać kropki powiadomień przy nazwach aplikacji,
+    musisz udzielić NeatLauncher-owi uprawnień (obecnie %s).
     Dodatkowo kropki powiadomień muszą być włączone w ustawieniach,
     typowo „Powiadomienia | Plakietki z powiadomieniem na ikonie aplikacji” (obecnie %s)
     </string>
@@ -328,11 +328,11 @@
 
     <string name="swipe_choice_title">Czułość na przeciąganie</string>
     <string-array name="swipe_choice">
+        <item>Bardzo niska</item>
         <item>Niska</item>
-        <item>Średnio-niska</item>
         <item>Średnia</item>
-        <item>Średnio-wysoka</item>
         <item>Wysoka</item>
+        <item>Bardzo wysoka</item>
     </string-array>
 
     <string name="time_grid_base">

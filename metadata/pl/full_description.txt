@@ -1,0 +1,33 @@
+Launcher, który zastąpi pstrokate, wypełnione bezsensownymi ikonami, rozpraszające i niewydajne launchery.
+
+Klarowność osiągnięta przez elegancki i wydajny design oparty na tekście. Z konfigurowalnym dostępem do programów, skrótów czy kontaktów, przez listę, lub gesty.
+
+Wspiera zarówno skróty statyczne jak i dynamiczne.
+
+Funkcję wyszukiwania można opcjonalnie zintegrować z listą kontaktów, lub z wybraną wyszukiwarką internetową.
+
+Próbuje zapewnić wystarczającą konfigurowalność bez czynienia testowania przypadków skrajnych żmudnymi, aby zapewnić funkcjonalność i stabilność.
+
+Informacje pogodowe (Używa sieci i usług lokalizacyjnych)
+
+Nowa aplikacja zbudowana od zera. Inspirowana Unlauncher-em (fork Slimlaunchera), Nolauncher-em i opiniami użytkowników.
+
+Funkcje:
+
+  - jednolity i elegancki tekstowy design
+  - konfugurowalny szybki dostęp i gesty na ekranie głównym
+  - obsługa skrótów (domyślnie przytrzymanie)
+  - ukrywanie aplikacji (z zachowaniem wyszukiwania)
+  - aplikacje mogą mieć zmieniane nazwy i być przestawiane
+  - doskonałe wyszukiwane aplikacji
+  - integracja z listą kontaktów w wyszukiwaniu
+  - integracja z wybraną wyszukiwarką internetową
+  - opcje zegara
+  - opcje formatu daty
+  - pogoda (przez open-meteo.com)
+  - konfigurowalne kolory
+  - może używać tapety systemowej
+  - wolne, otwarto źródłowe oprogramowanie
+  - brak obsługi paczek ikon (wcale nie ma ikon)
+  - brak obsługi widżetów
+

@@ -362,11 +362,11 @@
 
     <string name="swipe_choice_title">Swipe Sensitivity</string>
     <string-array name="swipe_choice">
+        <item>Very low</item>
         <item>Low</item>
-        <item>Medium-Low</item>
         <item>Medium</item>
-        <item>Medium-High</item>
         <item>High</item>
+        <item>Very high</item>
     </string-array>
 
     <!--

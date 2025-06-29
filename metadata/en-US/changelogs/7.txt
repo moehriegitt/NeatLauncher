@@ -1,0 +1,8 @@
+Bug fix release.
+
+- updated crash report
+- fix: search engine config reset to default for no obvious reason
+- improve: if same weather loc is re-selected, then reload
+- improve: add FAQ on how to hopefully avoid missing screen updates in scrolling
+- fix: notification counter was too large (from group summaries) [Github#14]
+- fix: DPad UP press during search erroneously went back to pinned item list [Github#15]

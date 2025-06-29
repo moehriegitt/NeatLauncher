@@ -6,6 +6,10 @@
 
   * update screenshots
 
+  * check changelogs are added to VC
+
+  * check metadata for new languages is added to VC
+
 ## Bugs to be fixed
 
 ## Inconveniences to be investigated

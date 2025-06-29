@@ -330,11 +330,11 @@
 
     <string name="swipe_choice_title">Wischempfindlichkeit</string>
     <string-array name="swipe_choice">
+        <item>Sehr niedrig</item>
         <item>Niedrig</item>
-        <item>Mittel-Niedrig</item>
         <item>Mittel</item>
-        <item>Mittel-Hoch</item>
         <item>Hoch</item>
+        <item>Sehr hoch</item>
     </string-array>
 
     <string name="time_grid_base">

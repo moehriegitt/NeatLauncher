@@ -148,7 +148,7 @@ class MainActivity:
                 val hy =
                     e2.getAxisValue(MotionEvent.AXIS_HAT_Y) -
                     e1.getAxisValue(MotionEvent.AXIS_HAT_Y)
-                val isDPad = (Math.abs(hy) > 1e-8)
+                val isDPad = (abs(hy) > 1e-8)
 
                 val dpi = resources.displayMetrics.densityDpi
                 val sense = (dpi * when (swipeChoice.x) {
@@ -1270,6 +1270,7 @@ class MainActivity:
         else -> false
     }
 
+    @SuppressLint("SetTextI18n")
     private fun weatherRender(): Boolean {
         if (!haveWeatherTable) return false
         val act = weather.active ?: return false
