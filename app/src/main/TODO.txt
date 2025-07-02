@@ -25,13 +25,9 @@
 
   * auto-save option
 
-  * polish translation
-
 ## Possibly for later releases
 
-  * french translation (current version lacks proof-reading)
-
-  * give feedback why weather is not displayed; black box is bad
+  * french translation (current draft lacks proof-reading)
 
   * list upcoming events from calendar
 

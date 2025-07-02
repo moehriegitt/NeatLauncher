@@ -1114,8 +1114,7 @@ sub make_xlat($)
         my $ql = quote_html($l);
         $t .= qq(<input type="checkbox" id="l$ql" checked="checked" /><label for="l$ql">$ql</label>\&nbsp;\n);
     }
-    $t .= qq(<form action="mailto:$xlat_email?subject=$title Translations"
-        method="POST" enctype="application/x-www-form-urlencoded">\n);
+    $t .= qq(<form action="xlat.cgix" method="POST" enctype="application/x-www-form-urlencoded">\n);
 
     $t .= qq(<input type="hidden" name="githash" value="XXGITHASH" />\n);
     $t .= qq(<table>\n);
