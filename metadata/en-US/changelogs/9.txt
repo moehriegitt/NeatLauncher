@@ -1,0 +1,3 @@
+Bug fix release.
+
+- fix: typos
