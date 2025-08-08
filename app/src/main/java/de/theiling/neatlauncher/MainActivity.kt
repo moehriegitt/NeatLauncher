@@ -857,7 +857,26 @@ class MainActivity:
         try {
             when (item.type) {
                 ITEM_TYPE_APP -> packageIntent(item.pack)?.let { startActivity(it) }
-                ITEM_TYPE_INT -> if (item.act != "") startActivity(Intent(item.act))
+                ITEM_TYPE_INT -> {
+                    when (item.act) {
+                        "OPEN_NOTIFICATIONS" -> {
+                            try {
+                                val statusBarService = getSystemService("statusbar")
+                                val statusBarManager = Class.forName("android.app.StatusBarManager")
+                                val expandNotificationsPanel = statusBarManager.getMethod("expandNotificationsPanel")
+                                expandNotificationsPanel.invoke(statusBarService)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                shortToast(getString(R.string.open_notifications_failed))
+                            }
+                        }
+                        "" -> {
+                        }
+                        else -> {
+                            startActivity(Intent(item.act))
+                        }
+                    }
+                }
                 ITEM_TYPE_SHORT,
                 ITEM_TYPE_PIN -> if (Build.VERSION.SDK_INT >= 25) {
                     val uha = getUserHandle(item.uid)
