@@ -101,6 +101,9 @@
     <string name="item_camera">Kamera</string>
     <string name="item_settings">Einstellungen</string>
     <string name="item_phone">Telefon</string>
+    
+    <string name="item_open_notifications">Benachrichtigungen öffnen</string>
+    <string name="open_notifications_failed">Konnte Benachrichtigungen nicht öffnen</string>
 
     <string name="item_start">Starten</string>
     <string name="item_info">App-Info</string>
