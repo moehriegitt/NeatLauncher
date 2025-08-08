@@ -630,6 +630,7 @@ class MainActivity:
 
         // Standard Actions
         items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_nothing), "", "", myUid))
+        items.add(Item(c, ITEM_TYPE_INT, null, getString(R.string.item_open_notifications), "", "OPEN_NOTIFICATIONS", myUid))
 
         // Arbitrary list of standard intents.  FIXME: this needs some love.
         val intents = listOf(
