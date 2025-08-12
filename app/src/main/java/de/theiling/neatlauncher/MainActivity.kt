@@ -700,8 +700,8 @@ class MainActivity:
                         ContactsContract.Contacts.DISPLAY_NAME),
                     null, null, null)?.use { cu ->
                     while (cu.moveToNext()) {
-                        val uri = cu.getString(0)
-                        val name = cu.getString(1)
+                        val uri = cu.getString(0) ?: ""
+                        val name = cu.getString(1) ?: "(unknown)"
                         items.add(Item(c, ITEM_TYPE_CONTACT, null, name, "", uri, 0))
                     }
                 }
